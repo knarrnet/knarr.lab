@@ -1,0 +1,26 @@
+# Python
+__pycache__/
+*.py[cod]
+*.egg-info/
+.venv/
+venv/
+
+# IDE
+.vscode/
+.idea/
+*.swp
+
+# OS
+.DS_Store
+Thumbs.db
+
+# Docker
+.knarr-src/
+
+# Large data (use git-lfs or separate hosting for large datasets)
+# experiments/*/data/logs/*.log
+# experiments/*/data/artifacts/*.db
+
+# Secrets
+*.env
+secrets.toml

@@ -1,0 +1,54 @@
+experiment:
+  id: "NNN"
+  slug: "your-experiment-slug"
+  title: "Experiment Title"
+  status: planned  # planned | running | concluded | failed | abandoned
+  created: 2026-01-01
+  started: null
+  completed: null
+  author: anonymous
+
+hypothesis: >
+  One-sentence summary of what you expect to happen.
+
+success_criteria:
+  - "Criterion 1"
+  - "Criterion 2"
+
+infrastructure:
+  knarr_version: "0.41.0"
+  nodes: 5
+  models:
+    - name: "model-name"
+      size: "1B"
+      nodes: ["alpha", "bravo"]
+  gpu:
+    count: 1
+    type: "RTX 3090"
+    vram_gb: 24
+  duration_hours: 8
+
+parameters:
+  credit_policy:
+    initial_credit: 15
+    min_balance: -8
+  mail:
+    price: 0
+  settlement:
+    soft_threshold: 0.8
+    soft_target: 0.5
+    min_amount: 1.0
+  skill_distribution:
+    # node: [skills]
+    alpha: ["echo", "faq"]
+    bravo: ["echo", "market-intel"]
+
+metrics:
+  primary: "metric_name"
+  secondary:
+    - "metric_2"
+    - "metric_3"
+
+tags:
+  - "tag1"
+  - "tag2"

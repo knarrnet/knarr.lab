@@ -1,0 +1,20 @@
+# Experiment-specific overrides
+# Extends infrastructure/docker-compose.yml
+#
+# Usage:
+#   docker compose -f ../../infrastructure/docker-compose.yml \
+#                  -f docker-compose.override.yml up -d
+
+services:
+  # Override node count, models, resources here
+  # Example:
+  #
+  # alpha:
+  #   environment:
+  #     - MODEL=qwen3.5-4b
+  #     - TEMPERATURE=0.3
+  #   deploy:
+  #     resources:
+  #       limits:
+  #         memory: 2g
+  {}

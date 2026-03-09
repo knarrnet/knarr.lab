@@ -1,0 +1,13 @@
+[node]
+host = "0.0.0.0"
+port = 9000
+advertise_host = "bootstrap"
+
+[network]
+upnp = false
+
+[cockpit]
+port = 8080
+bind = "0.0.0.0"
+auth_token = "lab-token"
+tls = "both"

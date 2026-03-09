@@ -1,0 +1,38 @@
+# knarr.lab — Base swarm infrastructure
+#
+# This is the shared foundation. Experiments override this with
+# docker-compose.override.yml to define their specific topology.
+#
+# Usage:
+#   docker compose -f infrastructure/docker-compose.yml \
+#                  -f experiments/NNN-slug/docker-compose.override.yml up -d
+
+x-node-defaults: &node-defaults
+  image: ${KNARR_IMAGE:-knarr-lab:latest}
+  networks:
+    - swarm
+  depends_on:
+    bootstrap:
+      condition: service_healthy
+  restart: unless-stopped
+
+services:
+
+  bootstrap:
+    image: ${KNARR_IMAGE:-knarr-lab:latest}
+    hostname: bootstrap
+    command: ["knarr", "serve", "--advertise-host", "bootstrap"]
+    volumes:
+      - ./configs/bootstrap.toml:/app/knarr.toml:ro
+    networks:
+      - swarm
+    healthcheck:
+      test: ["CMD", "curl", "-skf", "-H", "Authorization: Bearer ${AUTH_TOKEN:-lab-token}", "https://localhost:8081/api/status"]
+      interval: 5s
+      timeout: 5s
+      retries: 12
+      start_period: 5s
+
+networks:
+  swarm:
+    driver: bridge
