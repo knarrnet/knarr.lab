@@ -1,0 +1,1699 @@
+2026-03-09 10:15:11,747 WARNING knarr.core.migrations: Migration v0_23_0 applied with 5 skipped statement(s) (idempotent)
+2026-03-09 10:15:11,755 INFO knarr.core.migrations: Migration applied: v0_25_0
+2026-03-09 10:15:11,763 INFO knarr.core.migrations: Migration applied: v0_26_0
+2026-03-09 10:15:11,769 INFO knarr.core.migrations: Migration applied: v0_28_0
+2026-03-09 10:15:11,770 WARNING knarr.core.migrations: Migration v0_29_1 applied with 4 skipped statement(s) (idempotent)
+2026-03-09 10:15:11,776 INFO knarr.core.migrations: Migration applied: v0_31_0
+2026-03-09 10:15:11,778 INFO knarr.core.migrations: Migration applied: v0_32_0
+2026-03-09 10:15:11,780 INFO knarr.core.migrations: Migration applied: v0_33_0
+2026-03-09 10:15:11,786 INFO knarr.core.migrations: Migration applied: v0_34_0
+2026-03-09 10:15:11,789 INFO knarr.core.migrations: Migration applied: v0_35_0
+2026-03-09 10:15:11,793 WARNING knarr.core.migrations: Migration v0_36_0 applied with 1 skipped statement(s) (idempotent)
+2026-03-09 10:15:11,798 WARNING knarr.core.migrations: Migration v0_37_0 applied with 1 skipped statement(s) (idempotent)
+2026-03-09 10:15:11,801 INFO knarr.core.migrations: Migration applied: v0_38_0
+2026-03-09 10:15:11,806 INFO knarr.core.migrations: Migration applied: v0_39_0
+2026-03-09 10:15:11,806 INFO knarr.dht.storage: Applied 14 schema migration(s)
+2026-03-09 10:15:11,808 INFO knarr.dht.node: Generated new persistent node identity
+2026-03-09 10:15:12,264 INFO knarr.dht.node: Solana wallet: 7iRCCTeMQ9E7MUdSoHnitui8KnsPWZhuKhSsjs3BMmvR (auto-derived)
+2026-03-09 10:15:12,270 INFO knarr.dht.node: DHT node f6b6c31956e3ed45602442d305f05022102abf251babf58b2c4ce90617b49bc3 serving on ('0.0.0.0', 9000)
+2026-03-09 10:15:12,301 INFO knarr.mail.tls: Generated TLS certificate (valid 365 days)
+2026-03-09 10:15:12,303 INFO knarr.dht.sidecar: Asset sidecar listening on 0.0.0.0:9001 (HTTPS)
+2026-03-09 10:15:12,303 INFO knarr.dht.node: GroupEngine initialized: 0 groups from config
+2026-03-09 10:15:12,304 WARNING knarr.dht.plugins: Skipping 06-thrall: plugin.toml not found.
+2026-03-09 10:15:12,304 INFO knarr.dht.node: Reloaded 0 own skills from storage
+Node ID: f6b6c31956e3ed45602442d305f05022102abf251babf58b2c4ce90617b49bc3
+Listening: 0.0.0.0:9000
+Advertising: bootstrap
+2026-03-09 10:15:12,315 INFO knarr.dht.node: PEER_CACHE trying 1 cached peers
+2026-03-09 10:15:12,315 INFO knarr.dht.node: PEER_CACHE no cached peer responded, falling back to bootstrap
+2026-03-09 10:15:12,315 INFO knarr.dht.node: Registered fast handler for skill 'knarr-mail'
+2026-03-09 10:15:12,333 INFO knarr.dht.node: Announced skill 'knarr-mail' to 1 peers
+2026-03-09 10:15:12,333 INFO knarr.dht.node: System skill registered: knarr-mail
+2026-03-09 10:15:12,336 INFO knarr.dht.node: Registered fast handler for skill 'knarr-static'
+2026-03-09 10:15:12,351 INFO knarr.dht.node: Announced skill 'knarr-static' to 1 peers
+2026-03-09 10:15:12,352 INFO knarr.dht.node: System skill registered: knarr-static
+2026-03-09 10:15:12,352 WARNING knarr.cli.main: === OPERATOR ACTION REQUIRED ===
+Your node identity and wallet keys have been created at: /app
+Back up the following files to a secure off-site location:
+
+  IDENTITY (irreplaceable — your reputation, credit, and trust):
+    /app/key.pem
+    /app/cert.pem
+
+  WALLETS (on-chain asset custody):
+    /app/secrets.toml
+    /app/plugin_state/06-thrall/thrall_identity.key
+
+Loss of identity files means loss of all credit relationships and network reputation.
+Loss of wallet files means loss of on-chain assets.
+=== END ===
+2026-03-09 10:15:12,354 INFO knarr.mail.tls: Generated cockpit ECDSA certificate (valid 365 days)
+2026-03-09 10:15:12,355 INFO knarr.dashboard.server: Cockpit dashboard listening on 0.0.0.0:8080 (HTTP) + :8081 (HTTPS)
+=== IDENTITY BACKUP ===
+key.pem backed up to /app/data/key.pem
+node.db at /app/data/node.db
+========================
+2026-03-09 10:16:14,868 WARNING knarr.dht.node: PRUNE_SKIP peer_count=1 at_or_below_floor=8
+2026-03-09 10:17:17,438 WARNING knarr.dht.node: PRUNE_SKIP peer_count=4 at_or_below_floor=8
+2026-03-09 10:18:20,038 WARNING knarr.dht.node: PRUNE_SKIP peer_count=4 at_or_below_floor=8
+2026-03-09 10:19:22,636 WARNING knarr.dht.node: PRUNE_SKIP peer_count=4 at_or_below_floor=8
+2026-03-09 10:20:01,682 WARNING knarr.mail.sync: Failed to decrypt mail item 300ac0c7: An error occurred trying to decrypt the message
+2026-03-09 10:20:01,717 INFO knarr.dht.node: Task completed: skill=knarr-mail task=97d5febf wall=18ms
+2026-03-09 10:20:12,587 INFO knarr.dht.node: Task completed: skill=knarr-mail task=10b02893 wall=18ms
+2026-03-09 10:20:25,244 WARNING knarr.dht.node: PRUNE_SKIP peer_count=4 at_or_below_floor=8
+2026-03-09 10:20:30,024 WARNING knarr.dht.node: PULL_TIMEOUT pull_from_correspondents exceeded 5s deadline
+2026-03-09 10:20:52,040 INFO knarr.dht.node: REPUBLISH_CYCLE skills=1 peers=4 fanout=3
+2026-03-09 10:21:27,811 WARNING knarr.dht.node: PRUNE_SKIP peer_count=4 at_or_below_floor=8
+2026-03-09 10:22:30,419 WARNING knarr.dht.node: PRUNE_SKIP peer_count=4 at_or_below_floor=8
+2026-03-09 10:23:33,053 WARNING knarr.dht.node: PRUNE_SKIP peer_count=4 at_or_below_floor=8
+2026-03-09 10:24:19,726 WARNING knarr.mail.sync: Failed to decrypt mail item ca0f2a9e: An error occurred trying to decrypt the message
+2026-03-09 10:24:20,087 INFO knarr.dht.node: Task completed: skill=knarr-mail task=c202751c wall=17ms
+2026-03-09 10:24:30,308 INFO knarr.dht.node: Task completed: skill=knarr-mail task=4d1879b9 wall=17ms
+2026-03-09 10:24:34,935 WARNING knarr.dht.node: PRUNE_SKIP peer_count=4 at_or_below_floor=8
+2026-03-09 10:25:38,295 WARNING knarr.dht.node: PRUNE_SKIP peer_count=4 at_or_below_floor=8
+2026-03-09 10:25:47,851 WARNING knarr.dht.node: PULL_TIMEOUT pull_from_correspondents exceeded 5s deadline
+2026-03-09 10:26:01,299 INFO knarr.dht.node: REPUBLISH_CYCLE skills=1 peers=4 fanout=3
+2026-03-09 10:26:28,005 INFO knarr.dht.node: Task completed: skill=knarr-mail task=6b3cc943 wall=17ms
+2026-03-09 10:26:40,912 WARNING knarr.dht.node: PRUNE_SKIP peer_count=4 at_or_below_floor=8
+2026-03-09 10:27:43,549 WARNING knarr.dht.node: PRUNE_SKIP peer_count=4 at_or_below_floor=8
+2026-03-09 10:28:46,202 WARNING knarr.dht.node: PRUNE_SKIP peer_count=4 at_or_below_floor=8
+2026-03-09 10:29:48,814 WARNING knarr.dht.node: PRUNE_SKIP peer_count=4 at_or_below_floor=8
+2026-03-09 10:30:51,500 WARNING knarr.dht.node: PRUNE_SKIP peer_count=4 at_or_below_floor=8
+2026-03-09 10:31:05,841 WARNING knarr.dht.node: PULL_TIMEOUT pull_from_correspondents exceeded 5s deadline
+2026-03-09 10:31:14,404 INFO knarr.dht.node: REPUBLISH_CYCLE skills=1 peers=4 fanout=3
+2026-03-09 10:31:54,153 WARNING knarr.dht.node: PRUNE_SKIP peer_count=4 at_or_below_floor=8
+2026-03-09 10:32:56,805 WARNING knarr.dht.node: PRUNE_SKIP peer_count=4 at_or_below_floor=8
+2026-03-09 10:33:16,412 WARNING knarr.mail.sync: Failed to decrypt mail item caab05fe: An error occurred trying to decrypt the message
+2026-03-09 10:33:19,439 INFO knarr.dht.node: Task completed: skill=knarr-mail task=17b9d1c4 wall=18ms
+2026-03-09 10:33:59,466 WARNING knarr.dht.node: PRUNE_SKIP peer_count=4 at_or_below_floor=8
+2026-03-09 10:35:02,194 WARNING knarr.dht.node: PRUNE_SKIP peer_count=4 at_or_below_floor=8
+2026-03-09 10:35:28,916 INFO knarr.dht.node: Task completed: skill=knarr-mail task=a7e28de7 wall=17ms
+2026-03-09 10:35:35,222 INFO knarr.dht.node: Task completed: skill=knarr-mail task=3b47dea5 wall=18ms
+2026-03-09 10:36:04,896 WARNING knarr.dht.node: PRUNE_SKIP peer_count=4 at_or_below_floor=8
+2026-03-09 10:36:08,017 INFO knarr.dht.node: REPUBLISH_CYCLE skills=1 peers=4 fanout=3
+2026-03-09 10:36:24,012 WARNING knarr.dht.node: PULL_TIMEOUT pull_from_correspondents exceeded 5s deadline
+2026-03-09 10:37:07,612 WARNING knarr.dht.node: PRUNE_SKIP peer_count=4 at_or_below_floor=8
+2026-03-09 10:37:38,208 INFO knarr.dht.node: Task completed: skill=knarr-mail task=b81432e9 wall=18ms
+2026-03-09 10:38:10,345 WARNING knarr.dht.node: PRUNE_SKIP peer_count=4 at_or_below_floor=8
+2026-03-09 10:39:13,035 WARNING knarr.dht.node: PRUNE_SKIP peer_count=4 at_or_below_floor=8
+2026-03-09 10:39:44,750 INFO knarr.dht.node: Task completed: skill=knarr-mail task=dffcd437 wall=18ms
+2026-03-09 10:39:46,784 INFO knarr.dht.node: Task completed: skill=knarr-mail task=0926e4c7 wall=17ms
+2026-03-09 10:40:15,812 WARNING knarr.dht.node: PRUNE_SKIP peer_count=4 at_or_below_floor=8
+2026-03-09 10:41:18,572 WARNING knarr.dht.node: PRUNE_SKIP peer_count=4 at_or_below_floor=8
+2026-03-09 10:41:36,768 INFO knarr.dht.node: REPUBLISH_CYCLE skills=1 peers=4 fanout=3
+2026-03-09 10:41:43,790 WARNING knarr.dht.node: PULL_TIMEOUT pull_from_correspondents exceeded 5s deadline
+2026-03-09 10:42:15,803 INFO knarr.dht.node: Task completed: skill=knarr-mail task=2669e5f4 wall=18ms
+2026-03-09 10:42:21,320 WARNING knarr.dht.node: PRUNE_SKIP peer_count=4 at_or_below_floor=8
+2026-03-09 10:42:23,014 INFO knarr.dht.node: Task completed: skill=knarr-mail task=ef859d78 wall=18ms
+2026-03-09 10:43:24,111 WARNING knarr.dht.node: PRUNE_SKIP peer_count=4 at_or_below_floor=8
+2026-03-09 10:44:25,790 WARNING knarr.mail.sync: Failed to decrypt mail item 12d4e215: An error occurred trying to decrypt the message
+2026-03-09 10:44:26,921 WARNING knarr.dht.node: PRUNE_SKIP peer_count=4 at_or_below_floor=8
+2026-03-09 10:44:31,355 INFO knarr.dht.node: Task completed: skill=knarr-mail task=63a74b4a wall=17ms
+2026-03-09 10:45:29,682 INFO knarr.dht.node: PRUNE_SKILLS removed=1
+2026-03-09 10:45:29,682 WARNING knarr.dht.node: PRUNE_SKIP peer_count=4 at_or_below_floor=8
+2026-03-09 10:46:32,461 WARNING knarr.dht.node: PRUNE_SKIP peer_count=4 at_or_below_floor=8
+2026-03-09 10:47:02,517 WARNING knarr.dht.node: PULL_TIMEOUT pull_from_correspondents exceeded 5s deadline
+2026-03-09 10:47:17,523 INFO knarr.dht.node: REPUBLISH_CYCLE skills=1 peers=4 fanout=3
+2026-03-09 10:47:35,294 INFO knarr.dht.node: PRUNE_SKILLS removed=5
+2026-03-09 10:47:35,294 WARNING knarr.dht.node: PRUNE_SKIP peer_count=4 at_or_below_floor=8
+2026-03-09 10:48:38,150 WARNING knarr.dht.node: PRUNE_SKIP peer_count=4 at_or_below_floor=8
+2026-03-09 10:49:40,942 WARNING knarr.dht.node: PRUNE_SKIP peer_count=4 at_or_below_floor=8
+2026-03-09 10:50:43,929 WARNING knarr.dht.node: PRUNE_SKIP peer_count=4 at_or_below_floor=8
+2026-03-09 10:51:46,734 WARNING knarr.dht.node: PRUNE_SKIP peer_count=4 at_or_below_floor=8
+2026-03-09 10:52:10,835 INFO knarr.dht.node: REPUBLISH_CYCLE skills=1 peers=4 fanout=3
+2026-03-09 10:52:21,610 WARNING knarr.dht.node: PULL_TIMEOUT pull_from_correspondents exceeded 5s deadline
+2026-03-09 10:52:49,764 WARNING knarr.dht.node: PRUNE_SKIP peer_count=4 at_or_below_floor=8
+2026-03-09 10:53:52,574 WARNING knarr.dht.node: PRUNE_SKIP peer_count=4 at_or_below_floor=8
+2026-03-09 10:54:55,570 WARNING knarr.dht.node: PRUNE_SKIP peer_count=4 at_or_below_floor=8
+2026-03-09 10:55:58,419 WARNING knarr.dht.node: PRUNE_SKIP peer_count=4 at_or_below_floor=8
+2026-03-09 10:57:01,404 WARNING knarr.dht.node: PRUNE_SKIP peer_count=4 at_or_below_floor=8
+2026-03-09 10:57:41,019 WARNING knarr.dht.node: PULL_TIMEOUT pull_from_correspondents exceeded 5s deadline
+2026-03-09 10:57:45,320 INFO knarr.dht.node: REPUBLISH_CYCLE skills=1 peers=4 fanout=3
+2026-03-09 10:58:04,289 WARNING knarr.dht.node: PRUNE_SKIP peer_count=4 at_or_below_floor=8
+2026-03-09 10:59:07,270 WARNING knarr.dht.node: PRUNE_SKIP peer_count=4 at_or_below_floor=8
+2026-03-09 11:00:10,217 WARNING knarr.dht.node: PRUNE_SKIP peer_count=4 at_or_below_floor=8
+2026-03-09 11:01:13,176 WARNING knarr.dht.node: PRUNE_SKIP peer_count=4 at_or_below_floor=8
+2026-03-09 11:02:16,132 WARNING knarr.dht.node: PRUNE_SKIP peer_count=4 at_or_below_floor=8
+2026-03-09 11:02:54,118 INFO knarr.dht.node: REPUBLISH_CYCLE skills=1 peers=4 fanout=3
+2026-03-09 11:03:00,626 WARNING knarr.dht.node: PULL_TIMEOUT pull_from_correspondents exceeded 5s deadline
+2026-03-09 11:03:19,150 WARNING knarr.dht.node: PRUNE_SKIP peer_count=4 at_or_below_floor=8
+2026-03-09 11:04:22,083 WARNING knarr.dht.node: PRUNE_SKIP peer_count=4 at_or_below_floor=8
+2026-03-09 11:04:32,410 INFO knarr.dht.node: Task completed: skill=knarr-mail task=b9fa667d wall=17ms
+2026-03-09 11:05:25,055 WARNING knarr.dht.node: PRUNE_SKIP peer_count=4 at_or_below_floor=8
+2026-03-09 11:06:28,024 WARNING knarr.dht.node: PRUNE_SKIP peer_count=4 at_or_below_floor=8
+2026-03-09 11:07:31,062 WARNING knarr.dht.node: PRUNE_SKIP peer_count=4 at_or_below_floor=8
+2026-03-09 11:08:19,690 INFO knarr.dht.node: REPUBLISH_CYCLE skills=1 peers=4 fanout=3
+2026-03-09 11:08:20,345 WARNING knarr.dht.node: PULL_TIMEOUT pull_from_correspondents exceeded 5s deadline
+2026-03-09 11:08:34,039 WARNING knarr.dht.node: PRUNE_SKIP peer_count=4 at_or_below_floor=8
+2026-03-09 11:08:55,826 INFO knarr.dht.node: Task completed: skill=knarr-mail task=52808af6 wall=18ms
+2026-03-09 11:09:37,053 WARNING knarr.dht.node: PRUNE_SKIP peer_count=4 at_or_below_floor=8
+2026-03-09 11:10:40,065 WARNING knarr.dht.node: PRUNE_SKIP peer_count=4 at_or_below_floor=8
+2026-03-09 11:11:43,115 WARNING knarr.dht.node: PRUNE_SKIP peer_count=4 at_or_below_floor=8
+2026-03-09 11:12:46,142 WARNING knarr.dht.node: PRUNE_SKIP peer_count=4 at_or_below_floor=8
+2026-03-09 11:13:15,717 INFO knarr.dht.node: REPUBLISH_CYCLE skills=1 peers=4 fanout=3
+2026-03-09 11:13:41,770 WARNING knarr.dht.node: PULL_TIMEOUT pull_from_correspondents exceeded 5s deadline
+2026-03-09 11:13:49,220 WARNING knarr.dht.node: PRUNE_SKIP peer_count=4 at_or_below_floor=8
+2026-03-09 11:14:52,207 WARNING knarr.dht.node: PRUNE_SKIP peer_count=4 at_or_below_floor=8
+2026-03-09 11:15:55,287 WARNING knarr.dht.node: PRUNE_SKIP peer_count=4 at_or_below_floor=8
+2026-03-09 11:16:58,305 WARNING knarr.dht.node: PRUNE_SKIP peer_count=4 at_or_below_floor=8
+2026-03-09 11:18:01,369 WARNING knarr.dht.node: PRUNE_SKIP peer_count=4 at_or_below_floor=8
+2026-03-09 11:18:27,580 INFO knarr.dht.node: REPUBLISH_CYCLE skills=1 peers=4 fanout=3
+2026-03-09 11:19:01,742 WARNING knarr.dht.node: PULL_TIMEOUT pull_from_correspondents exceeded 5s deadline
+2026-03-09 11:19:04,395 WARNING knarr.dht.node: PRUNE_SKIP peer_count=4 at_or_below_floor=8
+2026-03-09 11:20:03,027 INFO knarr.dht.node: Task completed: skill=knarr-mail task=aa680dd7 wall=16ms
+2026-03-09 11:20:07,506 WARNING knarr.dht.node: PRUNE_SKIP peer_count=4 at_or_below_floor=8
+2026-03-09 11:21:10,579 WARNING knarr.dht.node: PRUNE_SKIP peer_count=4 at_or_below_floor=8
+2026-03-09 11:22:13,704 WARNING knarr.dht.node: PRUNE_SKIP peer_count=4 at_or_below_floor=8
+2026-03-09 11:23:13,264 INFO knarr.dht.node: REPUBLISH_CYCLE skills=1 peers=4 fanout=3
+2026-03-09 11:23:16,799 WARNING knarr.dht.node: PRUNE_SKIP peer_count=4 at_or_below_floor=8
+2026-03-09 11:24:19,962 WARNING knarr.dht.node: PRUNE_SKIP peer_count=4 at_or_below_floor=8
+2026-03-09 11:24:22,093 WARNING knarr.dht.node: PULL_TIMEOUT pull_from_correspondents exceeded 5s deadline
+2026-03-09 11:24:35,388 INFO knarr.dht.node: Task completed: skill=knarr-mail task=65bebec6 wall=17ms
+2026-03-09 11:25:23,071 WARNING knarr.dht.node: PRUNE_SKIP peer_count=4 at_or_below_floor=8
+2026-03-09 11:26:26,238 WARNING knarr.dht.node: PRUNE_SKIP peer_count=4 at_or_below_floor=8
+2026-03-09 11:27:29,371 WARNING knarr.dht.node: PRUNE_SKIP peer_count=4 at_or_below_floor=8
+2026-03-09 11:28:32,568 WARNING knarr.dht.node: PRUNE_SKIP peer_count=4 at_or_below_floor=8
+2026-03-09 11:28:53,840 INFO knarr.dht.node: REPUBLISH_CYCLE skills=1 peers=4 fanout=3
+2026-03-09 11:29:35,726 WARNING knarr.dht.node: PRUNE_SKIP peer_count=4 at_or_below_floor=8
+2026-03-09 11:29:42,625 WARNING knarr.dht.node: PULL_TIMEOUT pull_from_correspondents exceeded 5s deadline
+2026-03-09 11:30:38,921 WARNING knarr.dht.node: PRUNE_SKIP peer_count=4 at_or_below_floor=8
+2026-03-09 11:31:23,934 INFO knarr.dht.node: Task completed: skill=knarr-mail task=e1f7b059 wall=18ms
+2026-03-09 11:31:42,088 WARNING knarr.dht.node: PRUNE_SKIP peer_count=4 at_or_below_floor=8
+2026-03-09 11:32:45,303 WARNING knarr.dht.node: PRUNE_SKIP peer_count=4 at_or_below_floor=8
+2026-03-09 11:33:48,506 WARNING knarr.dht.node: PRUNE_SKIP peer_count=4 at_or_below_floor=8
+2026-03-09 11:34:21,361 INFO knarr.dht.node: REPUBLISH_CYCLE skills=1 peers=4 fanout=3
+2026-03-09 11:34:51,754 WARNING knarr.dht.node: PRUNE_SKIP peer_count=4 at_or_below_floor=8
+2026-03-09 11:35:03,450 WARNING knarr.dht.node: PULL_TIMEOUT pull_from_correspondents exceeded 5s deadline
+2026-03-09 11:35:55,030 WARNING knarr.dht.node: PRUNE_SKIP peer_count=4 at_or_below_floor=8
+2026-03-09 11:36:58,296 WARNING knarr.dht.node: PRUNE_SKIP peer_count=4 at_or_below_floor=8
+2026-03-09 11:38:01,568 WARNING knarr.dht.node: PRUNE_SKIP peer_count=4 at_or_below_floor=8
+2026-03-09 11:38:15,594 INFO knarr.dht.node: Task completed: skill=knarr-mail task=ff6df5e5 wall=17ms
+2026-03-09 11:39:04,903 WARNING knarr.dht.node: PRUNE_SKIP peer_count=4 at_or_below_floor=8
+2026-03-09 11:39:58,362 INFO knarr.dht.node: REPUBLISH_CYCLE skills=1 peers=4 fanout=3
+2026-03-09 11:40:08,209 WARNING knarr.dht.node: PRUNE_SKIP peer_count=4 at_or_below_floor=8
+2026-03-09 11:40:24,694 WARNING knarr.dht.node: PULL_TIMEOUT pull_from_correspondents exceeded 5s deadline
+2026-03-09 11:41:11,530 WARNING knarr.dht.node: PRUNE_SKIP peer_count=4 at_or_below_floor=8
+2026-03-09 11:42:14,848 WARNING knarr.dht.node: PRUNE_SKIP peer_count=4 at_or_below_floor=8
+2026-03-09 11:43:18,159 WARNING knarr.dht.node: PRUNE_SKIP peer_count=4 at_or_below_floor=8
+2026-03-09 11:44:21,493 WARNING knarr.dht.node: PRUNE_SKIP peer_count=4 at_or_below_floor=8
+2026-03-09 11:45:24,832 WARNING knarr.dht.node: PRUNE_SKIP peer_count=4 at_or_below_floor=8
+2026-03-09 11:45:43,913 INFO knarr.dht.node: REPUBLISH_CYCLE skills=1 peers=4 fanout=3
+2026-03-09 11:45:47,751 WARNING knarr.dht.node: PULL_TIMEOUT pull_from_correspondents exceeded 5s deadline
+2026-03-09 11:46:28,185 WARNING knarr.dht.node: PRUNE_SKIP peer_count=4 at_or_below_floor=8
+2026-03-09 11:47:31,530 WARNING knarr.dht.node: PRUNE_SKIP peer_count=4 at_or_below_floor=8
+2026-03-09 11:48:34,880 WARNING knarr.dht.node: PRUNE_SKIP peer_count=4 at_or_below_floor=8
+2026-03-09 11:49:38,240 WARNING knarr.dht.node: PRUNE_SKIP peer_count=4 at_or_below_floor=8
+2026-03-09 11:50:41,612 WARNING knarr.dht.node: PRUNE_SKIP peer_count=4 at_or_below_floor=8
+2026-03-09 11:51:09,347 WARNING knarr.dht.node: PULL_TIMEOUT pull_from_correspondents exceeded 5s deadline
+2026-03-09 11:51:26,628 INFO knarr.dht.node: REPUBLISH_CYCLE skills=1 peers=4 fanout=3
+2026-03-09 11:51:45,006 WARNING knarr.dht.node: PRUNE_SKIP peer_count=4 at_or_below_floor=8
+2026-03-09 11:52:48,363 WARNING knarr.dht.node: PRUNE_SKIP peer_count=4 at_or_below_floor=8
+2026-03-09 11:53:49,919 INFO knarr.dht.node: Task completed: skill=knarr-mail task=67ad4102 wall=18ms
+2026-03-09 11:53:51,762 WARNING knarr.dht.node: PRUNE_SKIP peer_count=4 at_or_below_floor=8
+2026-03-09 11:53:54,143 INFO knarr.dht.node: Task completed: skill=knarr-mail task=b0c80651 wall=17ms
+2026-03-09 11:54:55,112 WARNING knarr.dht.node: PRUNE_SKIP peer_count=4 at_or_below_floor=8
+2026-03-09 11:55:58,522 WARNING knarr.dht.node: PRUNE_SKIP peer_count=4 at_or_below_floor=8
+2026-03-09 11:55:59,630 INFO knarr.dht.node: Task completed: skill=knarr-mail task=458745e5 wall=17ms
+2026-03-09 11:56:17,456 INFO knarr.dht.node: REPUBLISH_CYCLE skills=1 peers=4 fanout=3
+2026-03-09 11:56:30,994 WARNING knarr.dht.node: PULL_TIMEOUT pull_from_correspondents exceeded 5s deadline
+2026-03-09 11:57:01,880 WARNING knarr.dht.node: PRUNE_SKIP peer_count=4 at_or_below_floor=8
+2026-03-09 11:58:05,266 WARNING knarr.dht.node: PRUNE_SKIP peer_count=4 at_or_below_floor=8
+2026-03-09 11:59:08,665 WARNING knarr.dht.node: PRUNE_SKIP peer_count=4 at_or_below_floor=8
+2026-03-09 12:00:12,082 WARNING knarr.dht.node: PRUNE_SKIP peer_count=4 at_or_below_floor=8
+2026-03-09 12:01:15,456 WARNING knarr.dht.node: PRUNE_SKIP peer_count=4 at_or_below_floor=8
+2026-03-09 12:01:34,181 INFO knarr.dht.node: REPUBLISH_CYCLE skills=1 peers=4 fanout=3
+2026-03-09 12:01:52,808 WARNING knarr.dht.node: PULL_TIMEOUT pull_from_correspondents exceeded 5s deadline
+2026-03-09 12:02:18,890 WARNING knarr.dht.node: PRUNE_SKIP peer_count=4 at_or_below_floor=8
+2026-03-09 12:02:46,989 ERROR knarr.dht.node: Error handling connection: DHTNode._write_receipt() missing 1 required positional argument: 'payload'
+2026-03-09 12:03:22,232 WARNING knarr.dht.node: PRUNE_SKIP peer_count=4 at_or_below_floor=8
+2026-03-09 12:04:25,684 WARNING knarr.dht.node: PRUNE_SKIP peer_count=4 at_or_below_floor=8
+2026-03-09 12:05:01,882 INFO knarr.dht.node: Task completed: skill=knarr-mail task=90f7800d wall=17ms
+2026-03-09 12:05:29,097 WARNING knarr.dht.node: PRUNE_SKIP peer_count=4 at_or_below_floor=8
+2026-03-09 12:06:32,570 WARNING knarr.dht.node: PRUNE_SKIP peer_count=4 at_or_below_floor=8
+2026-03-09 12:06:45,509 INFO knarr.dht.node: REPUBLISH_CYCLE skills=1 peers=4 fanout=3
+2026-03-09 12:07:14,644 WARNING knarr.dht.node: PULL_TIMEOUT pull_from_correspondents exceeded 5s deadline
+2026-03-09 12:07:14,668 INFO knarr.dht.node: Task completed: skill=knarr-mail task=300baeac wall=17ms
+2026-03-09 12:07:35,969 WARNING knarr.dht.node: PRUNE_SKIP peer_count=4 at_or_below_floor=8
+2026-03-09 12:08:39,478 WARNING knarr.dht.node: PRUNE_SKIP peer_count=4 at_or_below_floor=8
+2026-03-09 12:09:22,078 INFO knarr.dht.node: Task completed: skill=knarr-mail task=685d2c4b wall=17ms
+2026-03-09 12:09:42,861 WARNING knarr.dht.node: PRUNE_SKIP peer_count=4 at_or_below_floor=8
+2026-03-09 12:10:46,447 WARNING knarr.dht.node: PRUNE_SKIP peer_count=4 at_or_below_floor=8
+2026-03-09 12:11:45,383 INFO knarr.dht.node: REPUBLISH_CYCLE skills=1 peers=4 fanout=3
+2026-03-09 12:11:49,886 WARNING knarr.dht.node: PRUNE_SKIP peer_count=4 at_or_below_floor=8
+2026-03-09 12:11:54,231 INFO knarr.dht.node: Task completed: skill=knarr-mail task=de911b9b wall=17ms
+2026-03-09 12:12:36,836 WARNING knarr.dht.node: PULL_TIMEOUT pull_from_correspondents exceeded 5s deadline
+2026-03-09 12:12:53,371 WARNING knarr.dht.node: PRUNE_SKIP peer_count=4 at_or_below_floor=8
+2026-03-09 12:13:56,884 WARNING knarr.dht.node: PRUNE_SKIP peer_count=4 at_or_below_floor=8
+2026-03-09 12:14:08,322 INFO knarr.dht.node: Task completed: skill=knarr-mail task=2c212415 wall=18ms
+2026-03-09 12:15:00,409 WARNING knarr.dht.node: PRUNE_SKIP peer_count=4 at_or_below_floor=8
+2026-03-09 12:16:03,928 WARNING knarr.dht.node: PRUNE_SKIP peer_count=4 at_or_below_floor=8
+2026-03-09 12:16:43,598 INFO knarr.dht.node: REPUBLISH_CYCLE skills=1 peers=4 fanout=3
+2026-03-09 12:17:07,475 WARNING knarr.dht.node: PRUNE_SKIP peer_count=4 at_or_below_floor=8
+2026-03-09 12:18:00,983 WARNING knarr.dht.node: PULL_TIMEOUT pull_from_correspondents exceeded 5s deadline
+2026-03-09 12:18:11,015 WARNING knarr.dht.node: PRUNE_SKIP peer_count=4 at_or_below_floor=8
+2026-03-09 12:19:14,566 WARNING knarr.dht.node: PRUNE_SKIP peer_count=4 at_or_below_floor=8
+2026-03-09 12:20:18,124 WARNING knarr.dht.node: PRUNE_SKIP peer_count=4 at_or_below_floor=8
+2026-03-09 12:21:21,697 WARNING knarr.dht.node: PRUNE_SKIP peer_count=4 at_or_below_floor=8
+2026-03-09 12:21:33,707 INFO knarr.dht.node: REPUBLISH_CYCLE skills=1 peers=4 fanout=3
+2026-03-09 12:22:25,425 WARNING knarr.dht.node: PRUNE_SKIP peer_count=4 at_or_below_floor=8
+2026-03-09 12:23:23,693 WARNING knarr.dht.node: PULL_TIMEOUT pull_from_correspondents exceeded 5s deadline
+2026-03-09 12:23:28,939 WARNING knarr.dht.node: PRUNE_SKIP peer_count=4 at_or_below_floor=8
+2026-03-09 12:23:46,962 INFO knarr.dht.node: Task completed: skill=knarr-mail task=df648106 wall=18ms
+2026-03-09 12:24:32,704 WARNING knarr.dht.node: PRUNE_SKIP peer_count=4 at_or_below_floor=8
+2026-03-09 12:25:36,248 WARNING knarr.dht.node: PRUNE_SKIP peer_count=4 at_or_below_floor=8
+2026-03-09 12:25:57,539 INFO knarr.dht.node: Task completed: skill=knarr-mail task=893465df wall=18ms
+2026-03-09 12:26:21,577 INFO knarr.dht.node: REPUBLISH_CYCLE skills=1 peers=4 fanout=3
+2026-03-09 12:26:40,039 WARNING knarr.dht.node: PRUNE_SKIP peer_count=4 at_or_below_floor=8
+2026-03-09 12:27:43,571 WARNING knarr.dht.node: PRUNE_SKIP peer_count=4 at_or_below_floor=8
+2026-03-09 12:28:07,129 INFO knarr.dht.node: Task completed: skill=knarr-mail task=e4ae1be2 wall=18ms
+2026-03-09 12:28:46,730 WARNING knarr.dht.node: PULL_TIMEOUT pull_from_correspondents exceeded 5s deadline
+2026-03-09 12:28:47,198 WARNING knarr.dht.node: PRUNE_SKIP peer_count=4 at_or_below_floor=8
+2026-03-09 12:29:50,868 WARNING knarr.dht.node: PRUNE_SKIP peer_count=4 at_or_below_floor=8
+2026-03-09 12:30:54,569 WARNING knarr.dht.node: PRUNE_SKIP peer_count=4 at_or_below_floor=8
+2026-03-09 12:31:58,143 INFO knarr.dht.node: REPUBLISH_CYCLE skills=1 peers=4 fanout=3
+2026-03-09 12:31:58,177 WARNING knarr.dht.node: PRUNE_SKIP peer_count=4 at_or_below_floor=8
+2026-03-09 12:32:30,172 ERROR knarr.dht.node: Error handling connection: DHTNode._write_receipt() missing 1 required positional argument: 'payload'
+2026-03-09 12:33:01,896 WARNING knarr.dht.node: PRUNE_SKIP peer_count=4 at_or_below_floor=8
+2026-03-09 12:34:05,512 WARNING knarr.dht.node: PRUNE_SKIP peer_count=4 at_or_below_floor=8
+2026-03-09 12:34:09,817 WARNING knarr.dht.node: PULL_TIMEOUT pull_from_correspondents exceeded 5s deadline
+2026-03-09 12:35:09,257 WARNING knarr.dht.node: PRUNE_SKIP peer_count=4 at_or_below_floor=8
+2026-03-09 12:36:12,902 WARNING knarr.dht.node: PRUNE_SKIP peer_count=4 at_or_below_floor=8
+2026-03-09 12:37:16,650 WARNING knarr.dht.node: PRUNE_SKIP peer_count=4 at_or_below_floor=8
+2026-03-09 12:37:30,722 INFO knarr.dht.node: REPUBLISH_CYCLE skills=1 peers=4 fanout=3
+2026-03-09 12:38:20,267 WARNING knarr.dht.node: PRUNE_SKIP peer_count=4 at_or_below_floor=8
+2026-03-09 12:39:24,031 WARNING knarr.dht.node: PRUNE_SKIP peer_count=4 at_or_below_floor=8
+2026-03-09 12:39:25,018 ERROR knarr.dht.node: Error handling connection: DHTNode._write_receipt() missing 1 required positional argument: 'payload'
+2026-03-09 12:39:33,121 WARNING knarr.dht.node: PULL_TIMEOUT pull_from_correspondents exceeded 5s deadline
+2026-03-09 12:40:27,701 WARNING knarr.dht.node: PRUNE_SKIP peer_count=4 at_or_below_floor=8
+2026-03-09 12:41:31,470 WARNING knarr.dht.node: PRUNE_SKIP peer_count=4 at_or_below_floor=8
+2026-03-09 12:41:35,757 ERROR knarr.dht.node: Error handling connection: DHTNode._write_receipt() missing 1 required positional argument: 'payload'
+2026-03-09 12:42:23,408 INFO knarr.dht.node: REPUBLISH_CYCLE skills=1 peers=4 fanout=3
+2026-03-09 12:42:35,134 WARNING knarr.dht.node: PRUNE_SKIP peer_count=4 at_or_below_floor=8
+2026-03-09 12:43:38,907 WARNING knarr.dht.node: PRUNE_SKIP peer_count=4 at_or_below_floor=8
+2026-03-09 12:44:42,535 WARNING knarr.dht.node: PRUNE_SKIP peer_count=4 at_or_below_floor=8
+2026-03-09 12:44:56,407 WARNING knarr.dht.node: PULL_TIMEOUT pull_from_correspondents exceeded 5s deadline
+2026-03-09 12:45:45,174 WARNING knarr.dht.node: PRUNE_SKIP peer_count=4 at_or_below_floor=8
+2026-03-09 12:46:49,941 WARNING knarr.dht.node: PRUNE_SKIP peer_count=4 at_or_below_floor=8
+2026-03-09 12:47:36,327 INFO knarr.dht.node: REPUBLISH_CYCLE skills=1 peers=4 fanout=3
+2026-03-09 12:47:53,708 WARNING knarr.dht.node: PRUNE_SKIP peer_count=4 at_or_below_floor=8
+2026-03-09 12:48:57,412 WARNING knarr.dht.node: PRUNE_SKIP peer_count=4 at_or_below_floor=8
+2026-03-09 12:50:01,178 WARNING knarr.dht.node: PRUNE_SKIP peer_count=4 at_or_below_floor=8
+2026-03-09 12:50:21,735 WARNING knarr.dht.node: PULL_TIMEOUT pull_from_correspondents exceeded 5s deadline
+2026-03-09 12:51:04,920 WARNING knarr.dht.node: PRUNE_SKIP peer_count=4 at_or_below_floor=8
+2026-03-09 12:52:08,723 WARNING knarr.dht.node: PRUNE_SKIP peer_count=4 at_or_below_floor=8
+2026-03-09 12:52:59,852 INFO knarr.dht.node: REPUBLISH_CYCLE skills=1 peers=4 fanout=3
+2026-03-09 12:53:12,535 WARNING knarr.dht.node: PRUNE_SKIP peer_count=4 at_or_below_floor=8
+2026-03-09 12:54:16,327 WARNING knarr.dht.node: PRUNE_SKIP peer_count=4 at_or_below_floor=8
+2026-03-09 12:55:20,046 WARNING knarr.dht.node: PRUNE_SKIP peer_count=4 at_or_below_floor=8
+2026-03-09 12:55:45,364 WARNING knarr.dht.node: PULL_TIMEOUT pull_from_correspondents exceeded 5s deadline
+2026-03-09 12:56:23,891 WARNING knarr.dht.node: PRUNE_SKIP peer_count=4 at_or_below_floor=8
+2026-03-09 12:57:27,674 WARNING knarr.dht.node: PRUNE_SKIP peer_count=4 at_or_below_floor=8
+2026-03-09 12:57:37,238 ERROR knarr.dht.node: Error handling connection: DHTNode._write_receipt() missing 1 required positional argument: 'payload'
+2026-03-09 12:58:07,368 INFO knarr.dht.node: REPUBLISH_CYCLE skills=1 peers=4 fanout=3
+2026-03-09 12:58:31,516 WARNING knarr.dht.node: PRUNE_SKIP peer_count=4 at_or_below_floor=8
+2026-03-09 12:59:11,769 WARNING knarr.dht.node: PEER_SWEEP_TIMEOUT peer heartbeat sweep exceeded 10.0s
+2026-03-09 12:59:35,325 WARNING knarr.dht.node: PRUNE_SKIP peer_count=4 at_or_below_floor=8
+2026-03-09 13:00:39,177 WARNING knarr.dht.node: PRUNE_SKIP peer_count=4 at_or_below_floor=8
+2026-03-09 13:01:09,237 WARNING knarr.dht.node: PULL_TIMEOUT pull_from_correspondents exceeded 5s deadline
+2026-03-09 13:01:42,979 WARNING knarr.dht.node: PRUNE_SKIP peer_count=4 at_or_below_floor=8
+2026-03-09 13:02:46,840 WARNING knarr.dht.node: PRUNE_SKIP peer_count=4 at_or_below_floor=8
+2026-03-09 13:03:50,682 WARNING knarr.dht.node: PRUNE_SKIP peer_count=4 at_or_below_floor=8
+2026-03-09 13:03:55,490 INFO knarr.dht.node: REPUBLISH_CYCLE skills=1 peers=4 fanout=3
+2026-03-09 13:04:54,562 WARNING knarr.dht.node: PRUNE_SKIP peer_count=4 at_or_below_floor=8
+2026-03-09 13:05:58,494 WARNING knarr.dht.node: PRUNE_SKIP peer_count=4 at_or_below_floor=8
+2026-03-09 13:06:33,374 WARNING knarr.dht.node: PULL_TIMEOUT pull_from_correspondents exceeded 5s deadline
+2026-03-09 13:07:02,359 WARNING knarr.dht.node: PRUNE_SKIP peer_count=4 at_or_below_floor=8
+2026-03-09 13:08:06,272 WARNING knarr.dht.node: PRUNE_SKIP peer_count=4 at_or_below_floor=8
+2026-03-09 13:09:10,158 WARNING knarr.dht.node: PRUNE_SKIP peer_count=4 at_or_below_floor=8
+2026-03-09 13:09:29,115 INFO knarr.dht.node: REPUBLISH_CYCLE skills=1 peers=4 fanout=3
+2026-03-09 13:10:14,076 WARNING knarr.dht.node: PRUNE_SKIP peer_count=4 at_or_below_floor=8
+2026-03-09 13:11:11,170 ERROR knarr.dht.node: Error handling connection: DHTNode._write_receipt() missing 1 required positional argument: 'payload'
+2026-03-09 13:11:17,974 WARNING knarr.dht.node: PRUNE_SKIP peer_count=4 at_or_below_floor=8
+2026-03-09 13:11:57,638 WARNING knarr.dht.node: PULL_TIMEOUT pull_from_correspondents exceeded 5s deadline
+2026-03-09 13:12:21,912 WARNING knarr.dht.node: PRUNE_SKIP peer_count=4 at_or_below_floor=8
+2026-03-09 13:13:25,811 WARNING knarr.dht.node: PRUNE_SKIP peer_count=4 at_or_below_floor=8
+2026-03-09 13:14:29,750 WARNING knarr.dht.node: PRUNE_SKIP peer_count=4 at_or_below_floor=8
+2026-03-09 13:15:02,108 INFO knarr.dht.node: REPUBLISH_CYCLE skills=1 peers=4 fanout=3
+2026-03-09 13:15:33,530 INFO knarr.dht.node: Task completed: skill=knarr-mail task=44b25832 wall=17ms
+2026-03-09 13:15:33,681 WARNING knarr.dht.node: PRUNE_SKIP peer_count=4 at_or_below_floor=8
+2026-03-09 13:16:37,619 WARNING knarr.dht.node: PRUNE_SKIP peer_count=4 at_or_below_floor=8
+2026-03-09 13:17:22,128 WARNING knarr.dht.node: PULL_TIMEOUT pull_from_correspondents exceeded 5s deadline
+2026-03-09 13:17:41,561 WARNING knarr.dht.node: PRUNE_SKIP peer_count=4 at_or_below_floor=8
+2026-03-09 13:17:44,927 INFO knarr.dht.node: Task completed: skill=knarr-mail task=9a1ac792 wall=17ms
+2026-03-09 13:18:45,492 WARNING knarr.dht.node: PRUNE_SKIP peer_count=4 at_or_below_floor=8
+2026-03-09 13:19:49,444 WARNING knarr.dht.node: PRUNE_SKIP peer_count=4 at_or_below_floor=8
+2026-03-09 13:20:18,768 INFO knarr.dht.node: Task completed: skill=knarr-mail task=88746cdb wall=18ms
+2026-03-09 13:20:42,022 INFO knarr.dht.node: REPUBLISH_CYCLE skills=1 peers=4 fanout=3
+2026-03-09 13:20:53,379 WARNING knarr.dht.node: PRUNE_SKIP peer_count=4 at_or_below_floor=8
+2026-03-09 13:21:57,333 WARNING knarr.dht.node: PRUNE_SKIP peer_count=4 at_or_below_floor=8
+2026-03-09 13:22:30,316 ERROR knarr.dht.node: Error handling connection: DHTNode._write_receipt() missing 1 required positional argument: 'payload'
+2026-03-09 13:22:48,576 WARNING knarr.dht.node: PULL_TIMEOUT pull_from_correspondents exceeded 5s deadline
+2026-03-09 13:23:01,282 WARNING knarr.dht.node: PRUNE_SKIP peer_count=4 at_or_below_floor=8
+2026-03-09 13:24:05,238 WARNING knarr.dht.node: PRUNE_SKIP peer_count=4 at_or_below_floor=8
+2026-03-09 13:25:09,183 WARNING knarr.dht.node: PRUNE_SKIP peer_count=4 at_or_below_floor=8
+2026-03-09 13:25:41,564 INFO knarr.dht.node: REPUBLISH_CYCLE skills=1 peers=4 fanout=3
+2026-03-09 13:26:13,156 WARNING knarr.dht.node: PRUNE_SKIP peer_count=4 at_or_below_floor=8
+2026-03-09 13:27:17,105 WARNING knarr.dht.node: PRUNE_SKIP peer_count=4 at_or_below_floor=8
+2026-03-09 13:28:13,172 WARNING knarr.dht.node: PULL_TIMEOUT pull_from_correspondents exceeded 5s deadline
+2026-03-09 13:28:21,088 WARNING knarr.dht.node: PRUNE_SKIP peer_count=4 at_or_below_floor=8
+2026-03-09 13:29:25,040 WARNING knarr.dht.node: PRUNE_SKIP peer_count=4 at_or_below_floor=8
+2026-03-09 13:30:29,023 WARNING knarr.dht.node: PRUNE_SKIP peer_count=4 at_or_below_floor=8
+2026-03-09 13:31:09,572 INFO knarr.dht.node: REPUBLISH_CYCLE skills=1 peers=4 fanout=3
+2026-03-09 13:31:32,985 WARNING knarr.dht.node: PRUNE_SKIP peer_count=4 at_or_below_floor=8
+2026-03-09 13:32:36,968 WARNING knarr.dht.node: PRUNE_SKIP peer_count=4 at_or_below_floor=8
+2026-03-09 13:33:37,804 WARNING knarr.dht.node: PULL_TIMEOUT pull_from_correspondents exceeded 5s deadline
+2026-03-09 13:33:40,930 WARNING knarr.dht.node: PRUNE_SKIP peer_count=4 at_or_below_floor=8
+2026-03-09 13:34:44,971 WARNING knarr.dht.node: PRUNE_SKIP peer_count=4 at_or_below_floor=8
+2026-03-09 13:35:48,937 WARNING knarr.dht.node: PRUNE_SKIP peer_count=4 at_or_below_floor=8
+2026-03-09 13:36:13,592 ERROR knarr.dht.node: Error handling connection: DHTNode._write_receipt() missing 1 required positional argument: 'payload'
+2026-03-09 13:36:53,007 WARNING knarr.dht.node: PRUNE_SKIP peer_count=4 at_or_below_floor=8
+2026-03-09 13:36:55,468 INFO knarr.dht.node: REPUBLISH_CYCLE skills=1 peers=4 fanout=3
+2026-03-09 13:37:57,014 WARNING knarr.dht.node: PRUNE_SKIP peer_count=4 at_or_below_floor=8
+2026-03-09 13:39:01,099 WARNING knarr.dht.node: PRUNE_SKIP peer_count=4 at_or_below_floor=8
+2026-03-09 13:39:02,756 WARNING knarr.dht.node: PULL_TIMEOUT pull_from_correspondents exceeded 5s deadline
+2026-03-09 13:40:05,136 WARNING knarr.dht.node: PRUNE_SKIP peer_count=4 at_or_below_floor=8
+2026-03-09 13:41:09,233 WARNING knarr.dht.node: PRUNE_SKIP peer_count=4 at_or_below_floor=8
+2026-03-09 13:42:13,278 WARNING knarr.dht.node: PRUNE_SKIP peer_count=4 at_or_below_floor=8
+2026-03-09 13:42:24,264 INFO knarr.dht.node: REPUBLISH_CYCLE skills=1 peers=4 fanout=3
+2026-03-09 13:43:17,391 WARNING knarr.dht.node: PRUNE_SKIP peer_count=4 at_or_below_floor=8
+2026-03-09 13:44:21,432 WARNING knarr.dht.node: PRUNE_SKIP peer_count=4 at_or_below_floor=8
+2026-03-09 13:44:27,869 WARNING knarr.dht.node: PULL_TIMEOUT pull_from_correspondents exceeded 5s deadline
+2026-03-09 13:45:25,565 WARNING knarr.dht.node: PRUNE_SKIP peer_count=4 at_or_below_floor=8
+2026-03-09 13:46:29,656 WARNING knarr.dht.node: PRUNE_SKIP peer_count=4 at_or_below_floor=8
+2026-03-09 13:47:33,772 WARNING knarr.dht.node: PRUNE_SKIP peer_count=4 at_or_below_floor=8
+2026-03-09 13:48:15,843 INFO knarr.dht.node: REPUBLISH_CYCLE skills=1 peers=4 fanout=3
+2026-03-09 13:48:37,837 WARNING knarr.dht.node: PRUNE_SKIP peer_count=4 at_or_below_floor=8
+2026-03-09 13:49:41,968 WARNING knarr.dht.node: PRUNE_SKIP peer_count=4 at_or_below_floor=8
+2026-03-09 13:49:53,187 WARNING knarr.dht.node: PULL_TIMEOUT pull_from_correspondents exceeded 5s deadline
+2026-03-09 13:50:46,045 WARNING knarr.dht.node: PRUNE_SKIP peer_count=4 at_or_below_floor=8
+2026-03-09 13:51:50,175 WARNING knarr.dht.node: PRUNE_SKIP peer_count=4 at_or_below_floor=8
+2026-03-09 13:52:54,247 WARNING knarr.dht.node: PRUNE_SKIP peer_count=4 at_or_below_floor=8
+2026-03-09 13:53:41,559 ERROR knarr.dht.node: Error handling connection: DHTNode._write_receipt() missing 1 required positional argument: 'payload'
+2026-03-09 13:53:58,399 WARNING knarr.dht.node: PRUNE_SKIP peer_count=4 at_or_below_floor=8
+2026-03-09 13:54:01,150 INFO knarr.dht.node: REPUBLISH_CYCLE skills=1 peers=4 fanout=3
+2026-03-09 13:55:02,582 WARNING knarr.dht.node: PRUNE_SKIP peer_count=4 at_or_below_floor=8
+2026-03-09 13:55:20,620 WARNING knarr.dht.node: PULL_TIMEOUT pull_from_correspondents exceeded 5s deadline
+2026-03-09 13:56:06,703 WARNING knarr.dht.node: PRUNE_SKIP peer_count=4 at_or_below_floor=8
+2026-03-09 13:56:45,991 INFO knarr.dht.node: Task completed: skill=knarr-mail task=35c96177 wall=18ms
+2026-03-09 13:57:10,916 WARNING knarr.dht.node: PRUNE_SKIP peer_count=4 at_or_below_floor=8
+2026-03-09 13:58:15,058 WARNING knarr.dht.node: PRUNE_SKIP peer_count=4 at_or_below_floor=8
+2026-03-09 13:59:19,293 WARNING knarr.dht.node: PRUNE_SKIP peer_count=4 at_or_below_floor=8
+2026-03-09 13:59:34,710 INFO knarr.dht.node: REPUBLISH_CYCLE skills=1 peers=4 fanout=3
+2026-03-09 14:00:23,437 WARNING knarr.dht.node: PRUNE_SKIP peer_count=4 at_or_below_floor=8
+2026-03-09 14:00:46,328 WARNING knarr.dht.node: PULL_TIMEOUT pull_from_correspondents exceeded 5s deadline
+2026-03-09 14:01:27,672 WARNING knarr.dht.node: PRUNE_SKIP peer_count=4 at_or_below_floor=8
+2026-03-09 14:02:31,830 WARNING knarr.dht.node: PRUNE_SKIP peer_count=4 at_or_below_floor=8
+2026-03-09 14:03:36,065 WARNING knarr.dht.node: PRUNE_SKIP peer_count=4 at_or_below_floor=8
+2026-03-09 14:04:40,234 WARNING knarr.dht.node: PRUNE_SKIP peer_count=4 at_or_below_floor=8
+2026-03-09 14:05:19,373 INFO knarr.dht.node: REPUBLISH_CYCLE skills=1 peers=4 fanout=3
+2026-03-09 14:05:44,448 WARNING knarr.dht.node: PRUNE_SKIP peer_count=4 at_or_below_floor=8
+2026-03-09 14:06:12,115 WARNING knarr.dht.node: PULL_TIMEOUT pull_from_correspondents exceeded 5s deadline
+2026-03-09 14:06:48,655 WARNING knarr.dht.node: PRUNE_SKIP peer_count=4 at_or_below_floor=8
+2026-03-09 14:07:52,911 WARNING knarr.dht.node: PRUNE_SKIP peer_count=4 at_or_below_floor=8
+2026-03-09 14:08:58,068 WARNING knarr.dht.node: PRUNE_SKIP peer_count=4 at_or_below_floor=8
+2026-03-09 14:10:01,383 WARNING knarr.dht.node: PRUNE_SKIP peer_count=4 at_or_below_floor=8
+2026-03-09 14:10:19,839 INFO knarr.dht.node: REPUBLISH_CYCLE skills=1 peers=4 fanout=3
+2026-03-09 14:11:05,578 WARNING knarr.dht.node: PRUNE_SKIP peer_count=4 at_or_below_floor=8
+2026-03-09 14:11:38,047 WARNING knarr.dht.node: PULL_TIMEOUT pull_from_correspondents exceeded 5s deadline
+2026-03-09 14:12:09,847 WARNING knarr.dht.node: PRUNE_SKIP peer_count=4 at_or_below_floor=8
+2026-03-09 14:13:13,904 WARNING knarr.dht.node: PRUNE_SKIP peer_count=4 at_or_below_floor=8
+2026-03-09 14:14:15,854 WARNING knarr.dht.node: PRUNE_SKIP peer_count=4 at_or_below_floor=8
+2026-03-09 14:15:17,348 WARNING knarr.dht.node: PRUNE_SKIP peer_count=4 at_or_below_floor=8
+2026-03-09 14:15:53,671 INFO knarr.dht.node: REPUBLISH_CYCLE skills=1 peers=4 fanout=3
+2026-03-09 14:16:18,473 WARNING knarr.dht.node: PRUNE_SKIP peer_count=4 at_or_below_floor=8
+2026-03-09 14:16:54,175 WARNING knarr.dht.node: PULL_TIMEOUT pull_from_correspondents exceeded 5s deadline
+2026-03-09 14:17:19,737 WARNING knarr.dht.node: PRUNE_SKIP peer_count=4 at_or_below_floor=8
+2026-03-09 14:18:20,759 WARNING knarr.dht.node: PRUNE_SKIP peer_count=4 at_or_below_floor=8
+2026-03-09 14:19:22,004 WARNING knarr.dht.node: PRUNE_SKIP peer_count=4 at_or_below_floor=8
+2026-03-09 14:20:22,479 WARNING knarr.dht.node: PRUNE_SKIP peer_count=4 at_or_below_floor=8
+2026-03-09 14:21:13,016 INFO knarr.dht.node: REPUBLISH_CYCLE skills=1 peers=4 fanout=3
+2026-03-09 14:21:22,746 WARNING knarr.dht.node: PRUNE_SKIP peer_count=4 at_or_below_floor=8
+2026-03-09 14:22:02,774 WARNING knarr.dht.node: PULL_TIMEOUT pull_from_correspondents exceeded 5s deadline
+2026-03-09 14:22:23,047 WARNING knarr.dht.node: PRUNE_SKIP peer_count=4 at_or_below_floor=8
+2026-03-09 14:22:50,911 ERROR knarr.dht.node: Error handling connection: DHTNode._write_receipt() missing 1 required positional argument: 'payload'
+2026-03-09 14:23:23,366 WARNING knarr.dht.node: PRUNE_SKIP peer_count=4 at_or_below_floor=8
+2026-03-09 14:24:23,641 WARNING knarr.dht.node: PRUNE_SKIP peer_count=4 at_or_below_floor=8
+2026-03-09 14:25:23,844 WARNING knarr.dht.node: PRUNE_SKIP peer_count=4 at_or_below_floor=8
+2026-03-09 14:26:24,083 WARNING knarr.dht.node: PRUNE_SKIP peer_count=4 at_or_below_floor=8
+2026-03-09 14:26:40,171 INFO knarr.dht.node: REPUBLISH_CYCLE skills=1 peers=4 fanout=3
+2026-03-09 14:27:08,886 WARNING knarr.dht.node: PULL_TIMEOUT pull_from_correspondents exceeded 5s deadline
+2026-03-09 14:27:24,270 WARNING knarr.dht.node: PRUNE_SKIP peer_count=4 at_or_below_floor=8
+2026-03-09 14:28:24,405 WARNING knarr.dht.node: PRUNE_SKIP peer_count=4 at_or_below_floor=8
+2026-03-09 14:29:24,533 WARNING knarr.dht.node: PRUNE_SKIP peer_count=4 at_or_below_floor=8
+2026-03-09 14:30:24,635 WARNING knarr.dht.node: PRUNE_SKIP peer_count=4 at_or_below_floor=8
+2026-03-09 14:31:24,732 WARNING knarr.dht.node: PRUNE_SKIP peer_count=4 at_or_below_floor=8
+2026-03-09 14:32:10,422 INFO knarr.dht.node: REPUBLISH_CYCLE skills=1 peers=4 fanout=3
+2026-03-09 14:32:14,237 WARNING knarr.dht.node: PULL_TIMEOUT pull_from_correspondents exceeded 5s deadline
+2026-03-09 14:32:24,825 WARNING knarr.dht.node: PRUNE_SKIP peer_count=4 at_or_below_floor=8
+2026-03-09 14:33:24,917 WARNING knarr.dht.node: PRUNE_SKIP peer_count=4 at_or_below_floor=8
+2026-03-09 14:34:25,003 WARNING knarr.dht.node: PRUNE_SKIP peer_count=4 at_or_below_floor=8
+2026-03-09 14:35:25,089 WARNING knarr.dht.node: PRUNE_SKIP peer_count=4 at_or_below_floor=8
+2026-03-09 14:35:43,878 ERROR knarr.dht.node: Error handling connection: DHTNode._write_receipt() missing 1 required positional argument: 'payload'
+2026-03-09 14:36:25,170 WARNING knarr.dht.node: PRUNE_SKIP peer_count=4 at_or_below_floor=8
+2026-03-09 14:37:19,451 WARNING knarr.dht.node: PULL_TIMEOUT pull_from_correspondents exceeded 5s deadline
+2026-03-09 14:37:25,257 WARNING knarr.dht.node: PRUNE_SKIP peer_count=4 at_or_below_floor=8
+2026-03-09 14:37:34,431 INFO knarr.dht.node: REPUBLISH_CYCLE skills=1 peers=4 fanout=3
+2026-03-09 14:38:25,336 WARNING knarr.dht.node: PRUNE_SKIP peer_count=4 at_or_below_floor=8
+2026-03-09 14:39:25,407 WARNING knarr.dht.node: PRUNE_SKIP peer_count=4 at_or_below_floor=8
+2026-03-09 14:40:25,485 WARNING knarr.dht.node: PRUNE_SKIP peer_count=4 at_or_below_floor=8
+2026-03-09 14:41:25,566 WARNING knarr.dht.node: PRUNE_SKIP peer_count=4 at_or_below_floor=8
+2026-03-09 14:42:24,626 WARNING knarr.dht.node: PULL_TIMEOUT pull_from_correspondents exceeded 5s deadline
+2026-03-09 14:42:25,655 WARNING knarr.dht.node: PRUNE_SKIP peer_count=4 at_or_below_floor=8
+2026-03-09 14:42:57,224 INFO knarr.dht.node: REPUBLISH_CYCLE skills=1 peers=4 fanout=3
+2026-03-09 14:43:25,743 WARNING knarr.dht.node: PRUNE_SKIP peer_count=4 at_or_below_floor=8
+2026-03-09 14:44:25,835 WARNING knarr.dht.node: PRUNE_SKIP peer_count=4 at_or_below_floor=8
+2026-03-09 14:45:25,950 WARNING knarr.dht.node: PRUNE_SKIP peer_count=4 at_or_below_floor=8
+2026-03-09 14:46:26,057 WARNING knarr.dht.node: PRUNE_SKIP peer_count=4 at_or_below_floor=8
+2026-03-09 14:47:26,129 WARNING knarr.dht.node: PRUNE_SKIP peer_count=4 at_or_below_floor=8
+2026-03-09 14:47:29,881 WARNING knarr.dht.node: PULL_TIMEOUT pull_from_correspondents exceeded 5s deadline
+2026-03-09 14:48:00,589 INFO knarr.dht.node: REPUBLISH_CYCLE skills=1 peers=4 fanout=3
+2026-03-09 14:48:26,221 WARNING knarr.dht.node: PRUNE_SKIP peer_count=4 at_or_below_floor=8
+2026-03-09 14:49:26,293 WARNING knarr.dht.node: PRUNE_SKIP peer_count=4 at_or_below_floor=8
+2026-03-09 14:50:26,361 WARNING knarr.dht.node: PRUNE_SKIP peer_count=4 at_or_below_floor=8
+2026-03-09 14:51:26,459 WARNING knarr.dht.node: PRUNE_SKIP peer_count=4 at_or_below_floor=8
+2026-03-09 14:52:26,556 WARNING knarr.dht.node: PRUNE_SKIP peer_count=4 at_or_below_floor=8
+2026-03-09 14:52:35,096 WARNING knarr.dht.node: PULL_TIMEOUT pull_from_correspondents exceeded 5s deadline
+2026-03-09 14:53:06,700 INFO knarr.dht.node: REPUBLISH_CYCLE skills=1 peers=4 fanout=3
+2026-03-09 14:53:15,015 ERROR knarr.dht.node: Error handling connection: DHTNode._write_receipt() missing 1 required positional argument: 'payload'
+2026-03-09 14:53:26,665 WARNING knarr.dht.node: PRUNE_SKIP peer_count=4 at_or_below_floor=8
+2026-03-09 14:54:26,766 WARNING knarr.dht.node: PRUNE_SKIP peer_count=4 at_or_below_floor=8
+2026-03-09 14:55:26,883 WARNING knarr.dht.node: PRUNE_SKIP peer_count=4 at_or_below_floor=8
+2026-03-09 14:56:26,980 WARNING knarr.dht.node: PRUNE_SKIP peer_count=4 at_or_below_floor=8
+2026-03-09 14:57:27,098 WARNING knarr.dht.node: PRUNE_SKIP peer_count=4 at_or_below_floor=8
+2026-03-09 14:57:40,474 WARNING knarr.dht.node: PULL_TIMEOUT pull_from_correspondents exceeded 5s deadline
+2026-03-09 14:58:27,221 WARNING knarr.dht.node: PRUNE_SKIP peer_count=4 at_or_below_floor=8
+2026-03-09 14:58:33,670 INFO knarr.dht.node: REPUBLISH_CYCLE skills=1 peers=4 fanout=3
+2026-03-09 14:59:23,193 ERROR knarr.dht.node: Error handling connection: DHTNode._write_receipt() missing 1 required positional argument: 'payload'
+2026-03-09 14:59:27,333 WARNING knarr.dht.node: PRUNE_SKIP peer_count=4 at_or_below_floor=8
+2026-03-09 15:00:27,452 WARNING knarr.dht.node: PRUNE_SKIP peer_count=4 at_or_below_floor=8
+2026-03-09 15:01:27,595 WARNING knarr.dht.node: PRUNE_SKIP peer_count=4 at_or_below_floor=8
+2026-03-09 15:02:27,726 WARNING knarr.dht.node: PRUNE_SKIP peer_count=4 at_or_below_floor=8
+2026-03-09 15:02:45,880 WARNING knarr.dht.node: PULL_TIMEOUT pull_from_correspondents exceeded 5s deadline
+2026-03-09 15:03:25,369 INFO knarr.dht.node: REPUBLISH_CYCLE skills=1 peers=4 fanout=3
+2026-03-09 15:03:27,869 WARNING knarr.dht.node: PRUNE_SKIP peer_count=4 at_or_below_floor=8
+2026-03-09 15:04:27,999 WARNING knarr.dht.node: PRUNE_SKIP peer_count=4 at_or_below_floor=8
+2026-03-09 15:05:28,151 WARNING knarr.dht.node: PRUNE_SKIP peer_count=4 at_or_below_floor=8
+2026-03-09 15:06:27,243 ERROR knarr.dht.node: Error handling connection: DHTNode._write_receipt() missing 1 required positional argument: 'payload'
+2026-03-09 15:06:28,282 WARNING knarr.dht.node: PRUNE_SKIP peer_count=4 at_or_below_floor=8
+2026-03-09 15:07:28,446 WARNING knarr.dht.node: PRUNE_SKIP peer_count=4 at_or_below_floor=8
+2026-03-09 15:07:51,372 WARNING knarr.dht.node: PULL_TIMEOUT pull_from_correspondents exceeded 5s deadline
+2026-03-09 15:08:21,218 INFO knarr.dht.node: REPUBLISH_CYCLE skills=1 peers=4 fanout=3
+2026-03-09 15:08:28,565 WARNING knarr.dht.node: PRUNE_SKIP peer_count=4 at_or_below_floor=8
+2026-03-09 15:09:28,701 WARNING knarr.dht.node: PRUNE_SKIP peer_count=4 at_or_below_floor=8
+2026-03-09 15:10:28,818 WARNING knarr.dht.node: PRUNE_SKIP peer_count=4 at_or_below_floor=8
+2026-03-09 15:11:05,594 ERROR knarr.dht.node: Error handling connection: DHTNode._write_receipt() missing 1 required positional argument: 'payload'
+2026-03-09 15:11:28,953 WARNING knarr.dht.node: PRUNE_SKIP peer_count=4 at_or_below_floor=8
+2026-03-09 15:12:29,073 WARNING knarr.dht.node: PRUNE_SKIP peer_count=4 at_or_below_floor=8
+2026-03-09 15:12:56,803 WARNING knarr.dht.node: PULL_TIMEOUT pull_from_correspondents exceeded 5s deadline
+2026-03-09 15:13:20,699 INFO knarr.dht.node: REPUBLISH_CYCLE skills=1 peers=4 fanout=3
+2026-03-09 15:13:29,217 WARNING knarr.dht.node: PRUNE_SKIP peer_count=4 at_or_below_floor=8
+2026-03-09 15:14:29,344 WARNING knarr.dht.node: PRUNE_SKIP peer_count=4 at_or_below_floor=8
+2026-03-09 15:15:29,502 WARNING knarr.dht.node: PRUNE_SKIP peer_count=4 at_or_below_floor=8
+2026-03-09 15:16:10,950 ERROR knarr.dht.node: Error handling connection: DHTNode._write_receipt() missing 1 required positional argument: 'payload'
+2026-03-09 15:16:29,663 WARNING knarr.dht.node: PRUNE_SKIP peer_count=4 at_or_below_floor=8
+2026-03-09 15:17:29,806 WARNING knarr.dht.node: PRUNE_SKIP peer_count=4 at_or_below_floor=8
+2026-03-09 15:18:02,305 WARNING knarr.dht.node: PULL_TIMEOUT pull_from_correspondents exceeded 5s deadline
+2026-03-09 15:18:29,941 WARNING knarr.dht.node: PRUNE_SKIP peer_count=4 at_or_below_floor=8
+2026-03-09 15:18:46,564 INFO knarr.dht.node: REPUBLISH_CYCLE skills=1 peers=4 fanout=3
+2026-03-09 15:19:30,099 WARNING knarr.dht.node: PRUNE_SKIP peer_count=4 at_or_below_floor=8
+2026-03-09 15:20:30,220 WARNING knarr.dht.node: PRUNE_SKIP peer_count=4 at_or_below_floor=8
+2026-03-09 15:21:30,354 WARNING knarr.dht.node: PRUNE_SKIP peer_count=4 at_or_below_floor=8
+2026-03-09 15:22:30,491 WARNING knarr.dht.node: PRUNE_SKIP peer_count=4 at_or_below_floor=8
+2026-03-09 15:23:07,771 WARNING knarr.dht.node: PULL_TIMEOUT pull_from_correspondents exceeded 5s deadline
+2026-03-09 15:23:30,619 WARNING knarr.dht.node: PRUNE_SKIP peer_count=4 at_or_below_floor=8
+2026-03-09 15:23:52,407 INFO knarr.dht.node: REPUBLISH_CYCLE skills=1 peers=4 fanout=3
+2026-03-09 15:24:30,759 WARNING knarr.dht.node: PRUNE_SKIP peer_count=4 at_or_below_floor=8
+2026-03-09 15:25:30,915 WARNING knarr.dht.node: PRUNE_SKIP peer_count=4 at_or_below_floor=8
+2026-03-09 15:26:31,055 WARNING knarr.dht.node: PRUNE_SKIP peer_count=4 at_or_below_floor=8
+2026-03-09 15:27:31,220 WARNING knarr.dht.node: PRUNE_SKIP peer_count=4 at_or_below_floor=8
+2026-03-09 15:28:13,337 WARNING knarr.dht.node: PULL_TIMEOUT pull_from_correspondents exceeded 5s deadline
+2026-03-09 15:28:31,367 WARNING knarr.dht.node: PRUNE_SKIP peer_count=4 at_or_below_floor=8
+2026-03-09 15:28:37,445 INFO knarr.dht.node: REPUBLISH_CYCLE skills=1 peers=4 fanout=3
+2026-03-09 15:29:31,551 WARNING knarr.dht.node: PRUNE_SKIP peer_count=4 at_or_below_floor=8
+2026-03-09 15:30:18,496 WARNING knarr.dht.node: PEER_SWEEP_TIMEOUT peer heartbeat sweep exceeded 10.0s
+2026-03-09 15:30:31,733 WARNING knarr.dht.node: PRUNE_SKIP peer_count=4 at_or_below_floor=8
+2026-03-09 15:31:31,887 WARNING knarr.dht.node: PRUNE_SKIP peer_count=4 at_or_below_floor=8
+2026-03-09 15:32:13,691 ERROR knarr.dht.node: Error handling connection: DHTNode._write_receipt() missing 1 required positional argument: 'payload'
+2026-03-09 15:32:32,075 WARNING knarr.dht.node: PRUNE_SKIP peer_count=4 at_or_below_floor=8
+2026-03-09 15:33:19,000 WARNING knarr.dht.node: PULL_TIMEOUT pull_from_correspondents exceeded 5s deadline
+2026-03-09 15:33:31,408 INFO knarr.dht.node: REPUBLISH_CYCLE skills=1 peers=4 fanout=3
+2026-03-09 15:33:32,253 WARNING knarr.dht.node: PRUNE_SKIP peer_count=4 at_or_below_floor=8
+2026-03-09 15:34:32,435 WARNING knarr.dht.node: PRUNE_SKIP peer_count=4 at_or_below_floor=8
+2026-03-09 15:35:32,627 WARNING knarr.dht.node: PRUNE_SKIP peer_count=4 at_or_below_floor=8
+2026-03-09 15:36:32,826 WARNING knarr.dht.node: PRUNE_SKIP peer_count=4 at_or_below_floor=8
+2026-03-09 15:37:32,999 WARNING knarr.dht.node: PRUNE_SKIP peer_count=4 at_or_below_floor=8
+2026-03-09 15:38:12,973 INFO knarr.dht.node: REPUBLISH_CYCLE skills=1 peers=4 fanout=3
+2026-03-09 15:38:24,729 WARNING knarr.dht.node: PULL_TIMEOUT pull_from_correspondents exceeded 5s deadline
+2026-03-09 15:38:33,194 WARNING knarr.dht.node: PRUNE_SKIP peer_count=4 at_or_below_floor=8
+2026-03-09 15:39:33,366 WARNING knarr.dht.node: PRUNE_SKIP peer_count=4 at_or_below_floor=8
+2026-03-09 15:40:33,562 WARNING knarr.dht.node: PRUNE_SKIP peer_count=4 at_or_below_floor=8
+2026-03-09 15:41:33,730 WARNING knarr.dht.node: PRUNE_SKIP peer_count=4 at_or_below_floor=8
+2026-03-09 15:42:33,919 WARNING knarr.dht.node: PRUNE_SKIP peer_count=4 at_or_below_floor=8
+2026-03-09 15:43:19,997 INFO knarr.dht.node: REPUBLISH_CYCLE skills=1 peers=4 fanout=3
+2026-03-09 15:43:30,404 WARNING knarr.dht.node: PULL_TIMEOUT pull_from_correspondents exceeded 5s deadline
+2026-03-09 15:43:34,087 WARNING knarr.dht.node: PRUNE_SKIP peer_count=4 at_or_below_floor=8
+2026-03-09 15:44:08,111 ERROR knarr.dht.node: Error handling connection: DHTNode._write_receipt() missing 1 required positional argument: 'payload'
+2026-03-09 15:44:34,260 WARNING knarr.dht.node: PRUNE_SKIP peer_count=4 at_or_below_floor=8
+2026-03-09 15:45:34,440 WARNING knarr.dht.node: PRUNE_SKIP peer_count=4 at_or_below_floor=8
+2026-03-09 15:46:34,625 WARNING knarr.dht.node: PRUNE_SKIP peer_count=4 at_or_below_floor=8
+2026-03-09 15:47:34,826 WARNING knarr.dht.node: PRUNE_SKIP peer_count=4 at_or_below_floor=8
+2026-03-09 15:47:56,848 INFO knarr.dht.node: REPUBLISH_CYCLE skills=1 peers=4 fanout=3
+2026-03-09 15:48:35,051 WARNING knarr.dht.node: PRUNE_SKIP peer_count=4 at_or_below_floor=8
+2026-03-09 15:48:36,158 WARNING knarr.dht.node: PULL_TIMEOUT pull_from_correspondents exceeded 5s deadline
+2026-03-09 15:49:35,247 WARNING knarr.dht.node: PRUNE_SKIP peer_count=4 at_or_below_floor=8
+2026-03-09 15:50:35,454 WARNING knarr.dht.node: PRUNE_SKIP peer_count=4 at_or_below_floor=8
+2026-03-09 15:51:35,692 WARNING knarr.dht.node: PRUNE_SKIP peer_count=4 at_or_below_floor=8
+2026-03-09 15:52:35,903 WARNING knarr.dht.node: PRUNE_SKIP peer_count=4 at_or_below_floor=8
+2026-03-09 15:53:00,210 INFO knarr.dht.node: REPUBLISH_CYCLE skills=1 peers=4 fanout=3
+2026-03-09 15:53:36,117 WARNING knarr.dht.node: PRUNE_SKIP peer_count=4 at_or_below_floor=8
+2026-03-09 15:53:42,025 WARNING knarr.dht.node: PULL_TIMEOUT pull_from_correspondents exceeded 5s deadline
+2026-03-09 15:54:36,376 WARNING knarr.dht.node: PRUNE_SKIP peer_count=4 at_or_below_floor=8
+2026-03-09 15:55:36,594 WARNING knarr.dht.node: PRUNE_SKIP peer_count=4 at_or_below_floor=8
+2026-03-09 15:56:26,192 ERROR knarr.dht.node: Error handling connection: DHTNode._write_receipt() missing 1 required positional argument: 'payload'
+2026-03-09 15:56:36,847 WARNING knarr.dht.node: PRUNE_SKIP peer_count=4 at_or_below_floor=8
+2026-03-09 15:57:37,073 WARNING knarr.dht.node: PRUNE_SKIP peer_count=4 at_or_below_floor=8
+2026-03-09 15:57:52,856 INFO knarr.dht.node: REPUBLISH_CYCLE skills=1 peers=4 fanout=3
+2026-03-09 15:58:37,320 WARNING knarr.dht.node: PRUNE_SKIP peer_count=4 at_or_below_floor=8
+2026-03-09 15:58:48,076 WARNING knarr.dht.node: PULL_TIMEOUT pull_from_correspondents exceeded 5s deadline
+2026-03-09 15:59:37,570 WARNING knarr.dht.node: PRUNE_SKIP peer_count=4 at_or_below_floor=8
+2026-03-09 16:00:09,775 ERROR knarr.dht.node: Error handling connection: DHTNode._write_receipt() missing 1 required positional argument: 'payload'
+2026-03-09 16:00:37,807 WARNING knarr.dht.node: PRUNE_SKIP peer_count=4 at_or_below_floor=8
+2026-03-09 16:01:38,036 WARNING knarr.dht.node: PRUNE_SKIP peer_count=4 at_or_below_floor=8
+2026-03-09 16:02:38,264 WARNING knarr.dht.node: PRUNE_SKIP peer_count=4 at_or_below_floor=8
+2026-03-09 16:02:55,316 INFO knarr.dht.node: REPUBLISH_CYCLE skills=1 peers=4 fanout=3
+2026-03-09 16:03:38,492 WARNING knarr.dht.node: PRUNE_SKIP peer_count=4 at_or_below_floor=8
+2026-03-09 16:03:54,030 WARNING knarr.dht.node: PULL_TIMEOUT pull_from_correspondents exceeded 5s deadline
+2026-03-09 16:04:38,735 WARNING knarr.dht.node: PRUNE_SKIP peer_count=4 at_or_below_floor=8
+2026-03-09 16:05:38,972 WARNING knarr.dht.node: PRUNE_SKIP peer_count=4 at_or_below_floor=8
+2026-03-09 16:06:39,216 WARNING knarr.dht.node: PRUNE_SKIP peer_count=4 at_or_below_floor=8
+2026-03-09 16:07:39,442 WARNING knarr.dht.node: PRUNE_SKIP peer_count=4 at_or_below_floor=8
+2026-03-09 16:07:47,078 INFO knarr.dht.node: REPUBLISH_CYCLE skills=1 peers=4 fanout=3
+2026-03-09 16:08:39,701 WARNING knarr.dht.node: PRUNE_SKIP peer_count=4 at_or_below_floor=8
+2026-03-09 16:09:00,034 WARNING knarr.dht.node: PULL_TIMEOUT pull_from_correspondents exceeded 5s deadline
+2026-03-09 16:09:38,693 ERROR knarr.dht.node: Error handling connection: DHTNode._write_receipt() missing 1 required positional argument: 'payload'
+2026-03-09 16:09:39,939 WARNING knarr.dht.node: PRUNE_SKIP peer_count=4 at_or_below_floor=8
+2026-03-09 16:10:40,179 WARNING knarr.dht.node: PRUNE_SKIP peer_count=4 at_or_below_floor=8
+2026-03-09 16:11:40,406 WARNING knarr.dht.node: PRUNE_SKIP peer_count=4 at_or_below_floor=8
+2026-03-09 16:12:30,651 INFO knarr.dht.node: REPUBLISH_CYCLE skills=1 peers=4 fanout=3
+2026-03-09 16:12:40,657 WARNING knarr.dht.node: PRUNE_SKIP peer_count=4 at_or_below_floor=8
+2026-03-09 16:13:40,885 WARNING knarr.dht.node: PRUNE_SKIP peer_count=4 at_or_below_floor=8
+2026-03-09 16:14:06,028 WARNING knarr.dht.node: PULL_TIMEOUT pull_from_correspondents exceeded 5s deadline
+2026-03-09 16:14:41,140 WARNING knarr.dht.node: PRUNE_SKIP peer_count=4 at_or_below_floor=8
+2026-03-09 16:15:41,376 WARNING knarr.dht.node: PRUNE_SKIP peer_count=4 at_or_below_floor=8
+2026-03-09 16:16:41,649 WARNING knarr.dht.node: PRUNE_SKIP peer_count=4 at_or_below_floor=8
+2026-03-09 16:17:25,129 INFO knarr.dht.node: REPUBLISH_CYCLE skills=1 peers=4 fanout=3
+2026-03-09 16:17:41,931 WARNING knarr.dht.node: PRUNE_SKIP peer_count=4 at_or_below_floor=8
+2026-03-09 16:17:47,606 ERROR knarr.dht.node: Error handling connection: DHTNode._write_receipt() missing 1 required positional argument: 'payload'
+2026-03-09 16:18:42,188 WARNING knarr.dht.node: PRUNE_SKIP peer_count=4 at_or_below_floor=8
+2026-03-09 16:19:12,083 WARNING knarr.dht.node: PULL_TIMEOUT pull_from_correspondents exceeded 5s deadline
+2026-03-09 16:19:42,432 WARNING knarr.dht.node: PRUNE_SKIP peer_count=4 at_or_below_floor=8
+2026-03-09 16:20:42,703 WARNING knarr.dht.node: PRUNE_SKIP peer_count=4 at_or_below_floor=8
+2026-03-09 16:21:42,965 WARNING knarr.dht.node: PRUNE_SKIP peer_count=4 at_or_below_floor=8
+2026-03-09 16:22:12,288 INFO knarr.dht.node: REPUBLISH_CYCLE skills=1 peers=4 fanout=3
+2026-03-09 16:22:43,217 WARNING knarr.dht.node: PRUNE_SKIP peer_count=4 at_or_below_floor=8
+2026-03-09 16:23:43,452 WARNING knarr.dht.node: PRUNE_SKIP peer_count=4 at_or_below_floor=8
+2026-03-09 16:24:18,189 WARNING knarr.dht.node: PULL_TIMEOUT pull_from_correspondents exceeded 5s deadline
+2026-03-09 16:24:43,722 WARNING knarr.dht.node: PRUNE_SKIP peer_count=4 at_or_below_floor=8
+2026-03-09 16:25:43,994 WARNING knarr.dht.node: PRUNE_SKIP peer_count=4 at_or_below_floor=8
+2026-03-09 16:26:44,285 WARNING knarr.dht.node: PRUNE_SKIP peer_count=4 at_or_below_floor=8
+2026-03-09 16:26:58,505 INFO knarr.dht.node: REPUBLISH_CYCLE skills=1 peers=4 fanout=3
+2026-03-09 16:27:44,560 WARNING knarr.dht.node: PRUNE_SKIP peer_count=4 at_or_below_floor=8
+2026-03-09 16:28:44,881 WARNING knarr.dht.node: PRUNE_SKIP peer_count=4 at_or_below_floor=8
+2026-03-09 16:29:24,482 WARNING knarr.dht.node: PULL_TIMEOUT pull_from_correspondents exceeded 5s deadline
+2026-03-09 16:29:45,143 WARNING knarr.dht.node: PRUNE_SKIP peer_count=4 at_or_below_floor=8
+2026-03-09 16:30:45,424 WARNING knarr.dht.node: PRUNE_SKIP peer_count=4 at_or_below_floor=8
+2026-03-09 16:31:45,712 WARNING knarr.dht.node: PRUNE_SKIP peer_count=4 at_or_below_floor=8
+2026-03-09 16:31:55,112 INFO knarr.dht.node: REPUBLISH_CYCLE skills=1 peers=4 fanout=3
+2026-03-09 16:32:45,994 WARNING knarr.dht.node: PRUNE_SKIP peer_count=4 at_or_below_floor=8
+2026-03-09 16:33:46,256 WARNING knarr.dht.node: PRUNE_SKIP peer_count=4 at_or_below_floor=8
+2026-03-09 16:34:30,682 WARNING knarr.dht.node: PULL_TIMEOUT pull_from_correspondents exceeded 5s deadline
+2026-03-09 16:34:46,550 WARNING knarr.dht.node: PRUNE_SKIP peer_count=4 at_or_below_floor=8
+2026-03-09 16:35:46,825 WARNING knarr.dht.node: PRUNE_SKIP peer_count=4 at_or_below_floor=8
+2026-03-09 16:36:26,970 INFO knarr.dht.node: REPUBLISH_CYCLE skills=1 peers=4 fanout=3
+2026-03-09 16:36:47,121 WARNING knarr.dht.node: PRUNE_SKIP peer_count=4 at_or_below_floor=8
+2026-03-09 16:36:49,172 ERROR knarr.dht.node: Error handling connection: DHTNode._write_receipt() missing 1 required positional argument: 'payload'
+2026-03-09 16:37:47,419 WARNING knarr.dht.node: PRUNE_SKIP peer_count=4 at_or_below_floor=8
+2026-03-09 16:38:47,698 WARNING knarr.dht.node: PRUNE_SKIP peer_count=4 at_or_below_floor=8
+2026-03-09 16:39:36,875 WARNING knarr.dht.node: PULL_TIMEOUT pull_from_correspondents exceeded 5s deadline
+2026-03-09 16:39:47,973 WARNING knarr.dht.node: PRUNE_SKIP peer_count=4 at_or_below_floor=8
+2026-03-09 16:40:48,257 WARNING knarr.dht.node: PRUNE_SKIP peer_count=4 at_or_below_floor=8
+2026-03-09 16:41:34,007 INFO knarr.dht.node: REPUBLISH_CYCLE skills=1 peers=4 fanout=3
+2026-03-09 16:41:48,522 WARNING knarr.dht.node: PRUNE_SKIP peer_count=4 at_or_below_floor=8
+2026-03-09 16:42:48,798 WARNING knarr.dht.node: PRUNE_SKIP peer_count=4 at_or_below_floor=8
+2026-03-09 16:43:29,956 ERROR knarr.dht.node: Error handling connection: DHTNode._write_receipt() missing 1 required positional argument: 'payload'
+2026-03-09 16:43:49,092 WARNING knarr.dht.node: PRUNE_SKIP peer_count=4 at_or_below_floor=8
+2026-03-09 16:44:43,069 WARNING knarr.dht.node: PULL_TIMEOUT pull_from_correspondents exceeded 5s deadline
+2026-03-09 16:44:49,373 WARNING knarr.dht.node: PRUNE_SKIP peer_count=4 at_or_below_floor=8
+2026-03-09 16:45:49,649 WARNING knarr.dht.node: PRUNE_SKIP peer_count=4 at_or_below_floor=8
+2026-03-09 16:46:28,684 INFO knarr.dht.node: REPUBLISH_CYCLE skills=1 peers=4 fanout=3
+2026-03-09 16:46:49,929 WARNING knarr.dht.node: PRUNE_SKIP peer_count=4 at_or_below_floor=8
+2026-03-09 16:47:50,246 WARNING knarr.dht.node: PRUNE_SKIP peer_count=4 at_or_below_floor=8
+2026-03-09 16:48:50,875 WARNING knarr.dht.node: PRUNE_SKIP peer_count=4 at_or_below_floor=8
+2026-03-09 16:49:49,601 WARNING knarr.dht.node: PULL_TIMEOUT pull_from_correspondents exceeded 5s deadline
+2026-03-09 16:49:51,133 WARNING knarr.dht.node: PRUNE_SKIP peer_count=4 at_or_below_floor=8
+2026-03-09 16:50:51,411 WARNING knarr.dht.node: PRUNE_SKIP peer_count=4 at_or_below_floor=8
+2026-03-09 16:51:20,912 INFO knarr.dht.node: REPUBLISH_CYCLE skills=1 peers=4 fanout=3
+2026-03-09 16:51:51,734 WARNING knarr.dht.node: PRUNE_SKIP peer_count=4 at_or_below_floor=8
+2026-03-09 16:52:52,019 WARNING knarr.dht.node: PRUNE_SKIP peer_count=4 at_or_below_floor=8
+2026-03-09 16:53:52,357 WARNING knarr.dht.node: PRUNE_SKIP peer_count=4 at_or_below_floor=8
+2026-03-09 16:54:52,651 WARNING knarr.dht.node: PRUNE_SKIP peer_count=4 at_or_below_floor=8
+2026-03-09 16:54:55,892 WARNING knarr.dht.node: PULL_TIMEOUT pull_from_correspondents exceeded 5s deadline
+2026-03-09 16:55:52,989 WARNING knarr.dht.node: PRUNE_SKIP peer_count=4 at_or_below_floor=8
+2026-03-09 16:56:30,013 INFO knarr.dht.node: REPUBLISH_CYCLE skills=1 peers=4 fanout=3
+2026-03-09 16:56:53,285 WARNING knarr.dht.node: PRUNE_SKIP peer_count=4 at_or_below_floor=8
+2026-03-09 16:57:53,635 WARNING knarr.dht.node: PRUNE_SKIP peer_count=4 at_or_below_floor=8
+2026-03-09 16:58:53,949 WARNING knarr.dht.node: PRUNE_SKIP peer_count=4 at_or_below_floor=8
+2026-03-09 16:59:55,267 WARNING knarr.dht.node: PRUNE_SKIP peer_count=4 at_or_below_floor=8
+2026-03-09 17:00:03,814 WARNING knarr.dht.node: PULL_TIMEOUT pull_from_correspondents exceeded 5s deadline
+2026-03-09 17:00:56,418 WARNING knarr.dht.node: PRUNE_SKIP peer_count=4 at_or_below_floor=8
+2026-03-09 17:01:27,274 INFO knarr.dht.node: REPUBLISH_CYCLE skills=1 peers=4 fanout=3
+2026-03-09 17:01:57,723 WARNING knarr.dht.node: PRUNE_SKIP peer_count=4 at_or_below_floor=8
+2026-03-09 17:02:58,958 WARNING knarr.dht.node: PRUNE_SKIP peer_count=4 at_or_below_floor=8
+2026-03-09 17:04:00,259 WARNING knarr.dht.node: PRUNE_SKIP peer_count=4 at_or_below_floor=8
+2026-03-09 17:04:53,185 ERROR knarr.dht.node: Error handling connection: DHTNode._write_receipt() missing 1 required positional argument: 'payload'
+2026-03-09 17:04:55,824 ERROR knarr.dht.node: Error handling connection: DHTNode._write_receipt() missing 1 required positional argument: 'payload'
+2026-03-09 17:05:01,547 WARNING knarr.dht.node: PRUNE_SKIP peer_count=4 at_or_below_floor=8
+2026-03-09 17:05:14,978 WARNING knarr.dht.node: PULL_TIMEOUT pull_from_correspondents exceeded 5s deadline
+2026-03-09 17:06:02,869 WARNING knarr.dht.node: PRUNE_SKIP peer_count=4 at_or_below_floor=8
+2026-03-09 17:06:33,870 INFO knarr.dht.node: REPUBLISH_CYCLE skills=1 peers=4 fanout=3
+2026-03-09 17:07:04,142 WARNING knarr.dht.node: PRUNE_SKIP peer_count=4 at_or_below_floor=8
+2026-03-09 17:08:05,439 WARNING knarr.dht.node: PRUNE_SKIP peer_count=4 at_or_below_floor=8
+2026-03-09 17:09:06,781 WARNING knarr.dht.node: PRUNE_SKIP peer_count=4 at_or_below_floor=8
+2026-03-09 17:10:08,105 WARNING knarr.dht.node: PRUNE_SKIP peer_count=4 at_or_below_floor=8
+2026-03-09 17:10:26,342 WARNING knarr.dht.node: PULL_TIMEOUT pull_from_correspondents exceeded 5s deadline
+2026-03-09 17:11:09,457 WARNING knarr.dht.node: PRUNE_SKIP peer_count=4 at_or_below_floor=8
+2026-03-09 17:11:49,631 INFO knarr.dht.node: REPUBLISH_CYCLE skills=1 peers=4 fanout=3
+2026-03-09 17:12:10,812 WARNING knarr.dht.node: PRUNE_SKIP peer_count=4 at_or_below_floor=8
+2026-03-09 17:13:12,202 WARNING knarr.dht.node: PRUNE_SKIP peer_count=4 at_or_below_floor=8
+2026-03-09 17:14:13,611 WARNING knarr.dht.node: PRUNE_SKIP peer_count=4 at_or_below_floor=8
+2026-03-09 17:15:14,987 WARNING knarr.dht.node: PRUNE_SKIP peer_count=4 at_or_below_floor=8
+2026-03-09 17:15:38,074 WARNING knarr.dht.node: PULL_TIMEOUT pull_from_correspondents exceeded 5s deadline
+2026-03-09 17:16:16,456 WARNING knarr.dht.node: PRUNE_SKIP peer_count=4 at_or_below_floor=8
+2026-03-09 17:17:17,870 WARNING knarr.dht.node: PRUNE_SKIP peer_count=4 at_or_below_floor=8
+2026-03-09 17:17:19,739 INFO knarr.dht.node: REPUBLISH_CYCLE skills=1 peers=4 fanout=3
+2026-03-09 17:18:19,309 WARNING knarr.dht.node: PRUNE_SKIP peer_count=4 at_or_below_floor=8
+2026-03-09 17:19:20,744 WARNING knarr.dht.node: PRUNE_SKIP peer_count=4 at_or_below_floor=8
+2026-03-09 17:20:22,235 WARNING knarr.dht.node: PRUNE_SKIP peer_count=4 at_or_below_floor=8
+2026-03-09 17:20:50,369 WARNING knarr.dht.node: PULL_TIMEOUT pull_from_correspondents exceeded 5s deadline
+2026-03-09 17:21:23,671 WARNING knarr.dht.node: PRUNE_SKIP peer_count=4 at_or_below_floor=8
+2026-03-09 17:22:25,213 WARNING knarr.dht.node: PRUNE_SKIP peer_count=4 at_or_below_floor=8
+2026-03-09 17:22:30,180 INFO knarr.dht.node: REPUBLISH_CYCLE skills=1 peers=4 fanout=3
+2026-03-09 17:23:26,695 WARNING knarr.dht.node: PRUNE_SKIP peer_count=4 at_or_below_floor=8
+2026-03-09 17:24:28,215 WARNING knarr.dht.node: PRUNE_SKIP peer_count=4 at_or_below_floor=8
+2026-03-09 17:24:30,041 ERROR knarr.dht.node: Error handling connection: DHTNode._write_receipt() missing 1 required positional argument: 'payload'
+2026-03-09 17:25:29,796 WARNING knarr.dht.node: PRUNE_SKIP peer_count=4 at_or_below_floor=8
+2026-03-09 17:26:02,463 WARNING knarr.dht.node: PULL_TIMEOUT pull_from_correspondents exceeded 5s deadline
+2026-03-09 17:26:31,314 WARNING knarr.dht.node: PRUNE_SKIP peer_count=4 at_or_below_floor=8
+2026-03-09 17:27:32,828 WARNING knarr.dht.node: PRUNE_SKIP peer_count=4 at_or_below_floor=8
+2026-03-09 17:27:48,973 INFO knarr.dht.node: REPUBLISH_CYCLE skills=1 peers=4 fanout=3
+2026-03-09 17:28:34,416 WARNING knarr.dht.node: PRUNE_SKIP peer_count=4 at_or_below_floor=8
+2026-03-09 17:29:35,949 WARNING knarr.dht.node: PRUNE_SKIP peer_count=4 at_or_below_floor=8
+2026-03-09 17:30:37,551 WARNING knarr.dht.node: PRUNE_SKIP peer_count=4 at_or_below_floor=8
+2026-03-09 17:31:15,759 WARNING knarr.dht.node: PULL_TIMEOUT pull_from_correspondents exceeded 5s deadline
+2026-03-09 17:31:39,105 WARNING knarr.dht.node: PRUNE_SKIP peer_count=4 at_or_below_floor=8
+2026-03-09 17:32:40,708 WARNING knarr.dht.node: PRUNE_SKIP peer_count=4 at_or_below_floor=8
+2026-03-09 17:32:52,340 INFO knarr.dht.node: REPUBLISH_CYCLE skills=1 peers=4 fanout=3
+2026-03-09 17:33:42,282 WARNING knarr.dht.node: PRUNE_SKIP peer_count=4 at_or_below_floor=8
+2026-03-09 17:34:43,900 WARNING knarr.dht.node: PRUNE_SKIP peer_count=4 at_or_below_floor=8
+2026-03-09 17:34:52,504 ERROR knarr.dht.node: Error handling connection: DHTNode._write_receipt() missing 1 required positional argument: 'payload'
+2026-03-09 17:35:45,492 WARNING knarr.dht.node: PRUNE_SKIP peer_count=4 at_or_below_floor=8
+2026-03-09 17:35:45,698 ERROR knarr.dht.node: Error handling connection: DHTNode._write_receipt() missing 1 required positional argument: 'payload'
+2026-03-09 17:36:28,588 WARNING knarr.dht.node: PULL_TIMEOUT pull_from_correspondents exceeded 5s deadline
+2026-03-09 17:36:47,132 WARNING knarr.dht.node: PRUNE_SKIP peer_count=4 at_or_below_floor=8
+2026-03-09 17:37:48,652 INFO knarr.dht.node: REPUBLISH_CYCLE skills=1 peers=4 fanout=3
+2026-03-09 17:37:48,733 WARNING knarr.dht.node: PRUNE_SKIP peer_count=4 at_or_below_floor=8
+2026-03-09 17:38:50,380 WARNING knarr.dht.node: PRUNE_SKIP peer_count=4 at_or_below_floor=8
+2026-03-09 17:39:52,046 WARNING knarr.dht.node: PRUNE_SKIP peer_count=4 at_or_below_floor=8
+2026-03-09 17:40:53,718 WARNING knarr.dht.node: PRUNE_SKIP peer_count=4 at_or_below_floor=8
+2026-03-09 17:41:41,601 WARNING knarr.dht.node: PULL_TIMEOUT pull_from_correspondents exceeded 5s deadline
+2026-03-09 17:41:55,355 WARNING knarr.dht.node: PRUNE_SKIP peer_count=4 at_or_below_floor=8
+2026-03-09 17:42:43,339 INFO knarr.dht.node: REPUBLISH_CYCLE skills=1 peers=4 fanout=3
+2026-03-09 17:42:57,046 WARNING knarr.dht.node: PRUNE_SKIP peer_count=4 at_or_below_floor=8
+2026-03-09 17:43:58,733 WARNING knarr.dht.node: PRUNE_SKIP peer_count=4 at_or_below_floor=8
+2026-03-09 17:45:00,432 WARNING knarr.dht.node: PRUNE_SKIP peer_count=4 at_or_below_floor=8
+2026-03-09 17:46:02,103 WARNING knarr.dht.node: PRUNE_SKIP peer_count=4 at_or_below_floor=8
+2026-03-09 17:46:54,856 WARNING knarr.dht.node: PULL_TIMEOUT pull_from_correspondents exceeded 5s deadline
+2026-03-09 17:47:03,831 WARNING knarr.dht.node: PRUNE_SKIP peer_count=4 at_or_below_floor=8
+2026-03-09 17:47:33,250 INFO knarr.dht.node: REPUBLISH_CYCLE skills=1 peers=4 fanout=3
+2026-03-09 17:48:05,524 WARNING knarr.dht.node: PRUNE_SKIP peer_count=4 at_or_below_floor=8
+2026-03-09 17:49:07,257 WARNING knarr.dht.node: PRUNE_SKIP peer_count=4 at_or_below_floor=8
+2026-03-09 17:50:08,985 WARNING knarr.dht.node: PRUNE_SKIP peer_count=4 at_or_below_floor=8
+2026-03-09 17:51:10,664 WARNING knarr.dht.node: PRUNE_SKIP peer_count=4 at_or_below_floor=8
+2026-03-09 17:52:08,230 WARNING knarr.dht.node: PULL_TIMEOUT pull_from_correspondents exceeded 5s deadline
+2026-03-09 17:52:12,427 WARNING knarr.dht.node: PRUNE_SKIP peer_count=4 at_or_below_floor=8
+2026-03-09 17:52:49,676 INFO knarr.dht.node: REPUBLISH_CYCLE skills=1 peers=4 fanout=3
+2026-03-09 17:53:08,333 ERROR knarr.dht.node: Error handling connection: DHTNode._write_receipt() missing 1 required positional argument: 'payload'
+2026-03-09 17:53:14,202 WARNING knarr.dht.node: PRUNE_SKIP peer_count=4 at_or_below_floor=8
+2026-03-09 17:54:15,949 WARNING knarr.dht.node: PRUNE_SKIP peer_count=4 at_or_below_floor=8
+2026-03-09 17:55:17,746 WARNING knarr.dht.node: PRUNE_SKIP peer_count=4 at_or_below_floor=8
+2026-03-09 17:56:19,511 WARNING knarr.dht.node: PRUNE_SKIP peer_count=4 at_or_below_floor=8
+2026-03-09 17:57:21,690 WARNING knarr.dht.node: PRUNE_SKIP peer_count=4 at_or_below_floor=8
+2026-03-09 17:57:22,283 WARNING knarr.dht.node: PULL_TIMEOUT pull_from_correspondents exceeded 5s deadline
+2026-03-09 17:58:19,530 INFO knarr.dht.node: REPUBLISH_CYCLE skills=1 peers=4 fanout=3
+2026-03-09 17:58:23,209 WARNING knarr.dht.node: PRUNE_SKIP peer_count=4 at_or_below_floor=8
+2026-03-09 17:59:24,988 WARNING knarr.dht.node: PRUNE_SKIP peer_count=4 at_or_below_floor=8
+2026-03-09 17:59:43,910 ERROR knarr.dht.node: Error handling connection: DHTNode._write_receipt() missing 1 required positional argument: 'payload'
+2026-03-09 18:00:26,817 WARNING knarr.dht.node: PRUNE_SKIP peer_count=4 at_or_below_floor=8
+2026-03-09 18:01:28,648 WARNING knarr.dht.node: PRUNE_SKIP peer_count=4 at_or_below_floor=8
+2026-03-09 18:02:30,485 WARNING knarr.dht.node: PRUNE_SKIP peer_count=4 at_or_below_floor=8
+2026-03-09 18:02:36,765 WARNING knarr.dht.node: PULL_TIMEOUT pull_from_correspondents exceeded 5s deadline
+2026-03-09 18:02:53,528 ERROR knarr.dht.node: Error handling connection: DHTNode._write_receipt() missing 1 required positional argument: 'payload'
+2026-03-09 18:03:25,600 INFO knarr.dht.node: REPUBLISH_CYCLE skills=1 peers=4 fanout=3
+2026-03-09 18:03:32,369 WARNING knarr.dht.node: PRUNE_SKIP peer_count=4 at_or_below_floor=8
+2026-03-09 18:04:34,204 WARNING knarr.dht.node: PRUNE_SKIP peer_count=4 at_or_below_floor=8
+2026-03-09 18:05:36,089 WARNING knarr.dht.node: PRUNE_SKIP peer_count=4 at_or_below_floor=8
+2026-03-09 18:06:37,951 WARNING knarr.dht.node: PRUNE_SKIP peer_count=4 at_or_below_floor=8
+2026-03-09 18:07:39,885 WARNING knarr.dht.node: PRUNE_SKIP peer_count=4 at_or_below_floor=8
+2026-03-09 18:07:51,032 WARNING knarr.dht.node: PULL_TIMEOUT pull_from_correspondents exceeded 5s deadline
+2026-03-09 18:08:33,134 INFO knarr.dht.node: REPUBLISH_CYCLE skills=1 peers=4 fanout=3
+2026-03-09 18:08:41,849 WARNING knarr.dht.node: PRUNE_SKIP peer_count=4 at_or_below_floor=8
+2026-03-09 18:09:43,728 WARNING knarr.dht.node: PRUNE_SKIP peer_count=4 at_or_below_floor=8
+2026-03-09 18:10:45,811 WARNING knarr.dht.node: PRUNE_SKIP peer_count=4 at_or_below_floor=8
+2026-03-09 18:11:47,721 WARNING knarr.dht.node: PRUNE_SKIP peer_count=4 at_or_below_floor=8
+2026-03-09 18:12:49,746 WARNING knarr.dht.node: PRUNE_SKIP peer_count=4 at_or_below_floor=8
+2026-03-09 18:13:05,628 WARNING knarr.dht.node: PULL_TIMEOUT pull_from_correspondents exceeded 5s deadline
+2026-03-09 18:13:51,713 WARNING knarr.dht.node: PRUNE_SKIP peer_count=4 at_or_below_floor=8
+2026-03-09 18:14:05,455 INFO knarr.dht.node: REPUBLISH_CYCLE skills=1 peers=4 fanout=3
+2026-03-09 18:14:53,762 WARNING knarr.dht.node: PRUNE_SKIP peer_count=4 at_or_below_floor=8
+2026-03-09 18:15:07,733 ERROR knarr.dht.node: Error handling connection: DHTNode._write_receipt() missing 1 required positional argument: 'payload'
+2026-03-09 18:15:55,727 WARNING knarr.dht.node: PRUNE_SKIP peer_count=4 at_or_below_floor=8
+2026-03-09 18:16:57,777 WARNING knarr.dht.node: PRUNE_SKIP peer_count=4 at_or_below_floor=8
+2026-03-09 18:17:59,782 WARNING knarr.dht.node: PRUNE_SKIP peer_count=4 at_or_below_floor=8
+2026-03-09 18:18:05,673 ERROR knarr.dht.node: Error handling connection: DHTNode._write_receipt() missing 1 required positional argument: 'payload'
+2026-03-09 18:18:20,508 WARNING knarr.dht.node: PULL_TIMEOUT pull_from_correspondents exceeded 5s deadline
+2026-03-09 18:19:01,823 WARNING knarr.dht.node: PRUNE_SKIP peer_count=4 at_or_below_floor=8
+2026-03-09 18:19:23,800 ERROR knarr.dht.node: Error handling connection: DHTNode._write_receipt() missing 1 required positional argument: 'payload'
+2026-03-09 18:19:42,075 INFO knarr.dht.node: REPUBLISH_CYCLE skills=1 peers=4 fanout=3
+2026-03-09 18:20:03,852 WARNING knarr.dht.node: PRUNE_SKIP peer_count=4 at_or_below_floor=8
+2026-03-09 18:21:05,951 WARNING knarr.dht.node: PRUNE_SKIP peer_count=4 at_or_below_floor=8
+2026-03-09 18:22:07,961 WARNING knarr.dht.node: PRUNE_SKIP peer_count=4 at_or_below_floor=8
+2026-03-09 18:23:10,024 WARNING knarr.dht.node: PRUNE_SKIP peer_count=4 at_or_below_floor=8
+2026-03-09 18:23:35,542 WARNING knarr.dht.node: PULL_TIMEOUT pull_from_correspondents exceeded 5s deadline
+2026-03-09 18:24:12,078 WARNING knarr.dht.node: PRUNE_SKIP peer_count=4 at_or_below_floor=8
+2026-03-09 18:24:39,550 INFO knarr.dht.node: REPUBLISH_CYCLE skills=1 peers=4 fanout=3
+2026-03-09 18:25:14,206 WARNING knarr.dht.node: PRUNE_SKIP peer_count=4 at_or_below_floor=8
+2026-03-09 18:26:16,214 WARNING knarr.dht.node: PRUNE_SKIP peer_count=4 at_or_below_floor=8
+2026-03-09 18:27:18,826 WARNING knarr.dht.node: PRUNE_SKIP peer_count=4 at_or_below_floor=8
+2026-03-09 18:28:20,376 WARNING knarr.dht.node: PRUNE_SKIP peer_count=4 at_or_below_floor=8
+2026-03-09 18:28:50,720 WARNING knarr.dht.node: PULL_TIMEOUT pull_from_correspondents exceeded 5s deadline
+2026-03-09 18:29:22,552 WARNING knarr.dht.node: PRUNE_SKIP peer_count=4 at_or_below_floor=8
+2026-03-09 18:29:57,589 INFO knarr.dht.node: REPUBLISH_CYCLE skills=1 peers=4 fanout=3
+2026-03-09 18:30:24,618 WARNING knarr.dht.node: PRUNE_SKIP peer_count=4 at_or_below_floor=8
+2026-03-09 18:31:26,713 WARNING knarr.dht.node: PRUNE_SKIP peer_count=4 at_or_below_floor=8
+2026-03-09 18:32:28,817 WARNING knarr.dht.node: PRUNE_SKIP peer_count=4 at_or_below_floor=8
+2026-03-09 18:33:30,995 WARNING knarr.dht.node: PRUNE_SKIP peer_count=4 at_or_below_floor=8
+2026-03-09 18:34:07,119 WARNING knarr.dht.node: PULL_TIMEOUT pull_from_correspondents exceeded 5s deadline
+2026-03-09 18:34:33,088 WARNING knarr.dht.node: PRUNE_SKIP peer_count=4 at_or_below_floor=8
+2026-03-09 18:35:00,053 INFO knarr.dht.node: REPUBLISH_CYCLE skills=1 peers=4 fanout=3
+2026-03-09 18:35:35,217 WARNING knarr.dht.node: PRUNE_SKIP peer_count=4 at_or_below_floor=8
+2026-03-09 18:36:37,834 WARNING knarr.dht.node: PRUNE_SKIP peer_count=4 at_or_below_floor=8
+2026-03-09 18:37:39,472 WARNING knarr.dht.node: PRUNE_SKIP peer_count=4 at_or_below_floor=8
+2026-03-09 18:38:41,642 WARNING knarr.dht.node: PRUNE_SKIP peer_count=4 at_or_below_floor=8
+2026-03-09 18:39:22,604 WARNING knarr.dht.node: PULL_TIMEOUT pull_from_correspondents exceeded 5s deadline
+2026-03-09 18:39:43,794 WARNING knarr.dht.node: PRUNE_SKIP peer_count=4 at_or_below_floor=8
+2026-03-09 18:40:06,776 INFO knarr.dht.node: REPUBLISH_CYCLE skills=1 peers=4 fanout=3
+2026-03-09 18:40:45,969 WARNING knarr.dht.node: PRUNE_SKIP peer_count=4 at_or_below_floor=8
+2026-03-09 18:41:48,152 WARNING knarr.dht.node: PRUNE_SKIP peer_count=4 at_or_below_floor=8
+2026-03-09 18:42:50,294 WARNING knarr.dht.node: PRUNE_SKIP peer_count=4 at_or_below_floor=8
+2026-03-09 18:43:50,167 ERROR knarr.dht.node: Error handling connection: DHTNode._write_receipt() missing 1 required positional argument: 'payload'
+2026-03-09 18:43:52,540 WARNING knarr.dht.node: PRUNE_SKIP peer_count=4 at_or_below_floor=8
+2026-03-09 18:44:24,455 ERROR knarr.dht.node: Error handling connection: DHTNode._write_receipt() missing 1 required positional argument: 'payload'
+2026-03-09 18:44:38,348 WARNING knarr.dht.node: PULL_TIMEOUT pull_from_correspondents exceeded 5s deadline
+2026-03-09 18:44:54,759 WARNING knarr.dht.node: PRUNE_SKIP peer_count=4 at_or_below_floor=8
+2026-03-09 18:44:56,980 INFO knarr.dht.node: REPUBLISH_CYCLE skills=1 peers=4 fanout=3
+2026-03-09 18:45:56,957 WARNING knarr.dht.node: PRUNE_SKIP peer_count=4 at_or_below_floor=8
+2026-03-09 18:46:59,170 WARNING knarr.dht.node: PRUNE_SKIP peer_count=4 at_or_below_floor=8
+2026-03-09 18:48:01,397 WARNING knarr.dht.node: PRUNE_SKIP peer_count=4 at_or_below_floor=8
+2026-03-09 18:49:03,610 WARNING knarr.dht.node: PRUNE_SKIP peer_count=4 at_or_below_floor=8
+2026-03-09 18:49:42,378 INFO knarr.dht.node: REPUBLISH_CYCLE skills=1 peers=4 fanout=3
+2026-03-09 18:49:54,242 WARNING knarr.dht.node: PULL_TIMEOUT pull_from_correspondents exceeded 5s deadline
+2026-03-09 18:50:05,879 WARNING knarr.dht.node: PRUNE_SKIP peer_count=4 at_or_below_floor=8
+2026-03-09 18:51:08,109 WARNING knarr.dht.node: PRUNE_SKIP peer_count=4 at_or_below_floor=8
+2026-03-09 18:52:10,384 WARNING knarr.dht.node: PRUNE_SKIP peer_count=4 at_or_below_floor=8
+2026-03-09 18:53:12,760 WARNING knarr.dht.node: PRUNE_SKIP peer_count=4 at_or_below_floor=8
+2026-03-09 18:53:46,160 ERROR knarr.dht.node: Error handling connection: DHTNode._write_receipt() missing 1 required positional argument: 'payload'
+2026-03-09 18:54:15,041 WARNING knarr.dht.node: PRUNE_SKIP peer_count=4 at_or_below_floor=8
+2026-03-09 18:55:09,068 INFO knarr.dht.node: REPUBLISH_CYCLE skills=1 peers=4 fanout=3
+2026-03-09 18:55:10,600 WARNING knarr.dht.node: PULL_TIMEOUT pull_from_correspondents exceeded 5s deadline
+2026-03-09 18:55:17,452 WARNING knarr.dht.node: PRUNE_SKIP peer_count=4 at_or_below_floor=8
+2026-03-09 18:56:19,802 WARNING knarr.dht.node: PRUNE_SKIP peer_count=4 at_or_below_floor=8
+2026-03-09 18:57:22,171 WARNING knarr.dht.node: PRUNE_SKIP peer_count=4 at_or_below_floor=8
+2026-03-09 18:58:24,540 WARNING knarr.dht.node: PRUNE_SKIP peer_count=4 at_or_below_floor=8
+2026-03-09 18:59:26,913 WARNING knarr.dht.node: PRUNE_SKIP peer_count=4 at_or_below_floor=8
+2026-03-09 19:00:12,753 INFO knarr.dht.node: REPUBLISH_CYCLE skills=1 peers=4 fanout=3
+2026-03-09 19:00:27,225 WARNING knarr.dht.node: PULL_TIMEOUT pull_from_correspondents exceeded 5s deadline
+2026-03-09 19:00:29,291 WARNING knarr.dht.node: PRUNE_SKIP peer_count=4 at_or_below_floor=8
+2026-03-09 19:01:31,695 WARNING knarr.dht.node: PRUNE_SKIP peer_count=4 at_or_below_floor=8
+2026-03-09 19:02:34,131 WARNING knarr.dht.node: PRUNE_SKIP peer_count=4 at_or_below_floor=8
+2026-03-09 19:03:36,513 WARNING knarr.dht.node: PRUNE_SKIP peer_count=4 at_or_below_floor=8
+2026-03-09 19:04:38,947 WARNING knarr.dht.node: PRUNE_SKIP peer_count=4 at_or_below_floor=8
+2026-03-09 19:05:41,895 WARNING knarr.dht.node: PRUNE_SKIP peer_count=4 at_or_below_floor=8
+2026-03-09 19:05:45,304 WARNING knarr.dht.node: PULL_TIMEOUT pull_from_correspondents exceeded 5s deadline
+2026-03-09 19:05:50,428 INFO knarr.dht.node: REPUBLISH_CYCLE skills=1 peers=4 fanout=3
+2026-03-09 19:06:44,998 WARNING knarr.dht.node: PRUNE_SKIP peer_count=4 at_or_below_floor=8
+2026-03-09 19:07:47,446 WARNING knarr.dht.node: PRUNE_SKIP peer_count=4 at_or_below_floor=8
+2026-03-09 19:08:49,873 WARNING knarr.dht.node: PRUNE_SKIP peer_count=4 at_or_below_floor=8
+2026-03-09 19:09:52,325 WARNING knarr.dht.node: PRUNE_SKIP peer_count=4 at_or_below_floor=8
+2026-03-09 19:10:47,717 INFO knarr.dht.node: REPUBLISH_CYCLE skills=1 peers=4 fanout=3
+2026-03-09 19:10:54,777 WARNING knarr.dht.node: PRUNE_SKIP peer_count=4 at_or_below_floor=8
+2026-03-09 19:11:02,264 WARNING knarr.dht.node: PULL_TIMEOUT pull_from_correspondents exceeded 5s deadline
+2026-03-09 19:11:57,258 WARNING knarr.dht.node: PRUNE_SKIP peer_count=4 at_or_below_floor=8
+2026-03-09 19:12:59,720 WARNING knarr.dht.node: PRUNE_SKIP peer_count=4 at_or_below_floor=8
+2026-03-09 19:14:02,218 WARNING knarr.dht.node: PRUNE_SKIP peer_count=4 at_or_below_floor=8
+2026-03-09 19:15:04,686 WARNING knarr.dht.node: PRUNE_SKIP peer_count=4 at_or_below_floor=8
+2026-03-09 19:16:00,470 INFO knarr.dht.node: REPUBLISH_CYCLE skills=1 peers=4 fanout=3
+2026-03-09 19:16:07,197 WARNING knarr.dht.node: PRUNE_SKIP peer_count=4 at_or_below_floor=8
+2026-03-09 19:16:19,462 WARNING knarr.dht.node: PULL_TIMEOUT pull_from_correspondents exceeded 5s deadline
+2026-03-09 19:17:09,682 WARNING knarr.dht.node: PRUNE_SKIP peer_count=4 at_or_below_floor=8
+2026-03-09 19:18:12,212 WARNING knarr.dht.node: PRUNE_SKIP peer_count=4 at_or_below_floor=8
+2026-03-09 19:19:14,708 WARNING knarr.dht.node: PRUNE_SKIP peer_count=4 at_or_below_floor=8
+2026-03-09 19:19:42,828 ERROR knarr.dht.node: Error handling connection: DHTNode._write_receipt() missing 1 required positional argument: 'payload'
+2026-03-09 19:20:17,230 WARNING knarr.dht.node: PRUNE_SKIP peer_count=4 at_or_below_floor=8
+2026-03-09 19:21:19,748 WARNING knarr.dht.node: PRUNE_SKIP peer_count=4 at_or_below_floor=8
+2026-03-09 19:21:36,535 INFO knarr.dht.node: REPUBLISH_CYCLE skills=1 peers=4 fanout=3
+2026-03-09 19:21:36,789 WARNING knarr.dht.node: PULL_TIMEOUT pull_from_correspondents exceeded 5s deadline
+2026-03-09 19:22:22,291 WARNING knarr.dht.node: PRUNE_SKIP peer_count=4 at_or_below_floor=8
+2026-03-09 19:23:20,980 ERROR knarr.dht.node: Error handling connection: DHTNode._write_receipt() missing 1 required positional argument: 'payload'
+2026-03-09 19:23:24,845 WARNING knarr.dht.node: PRUNE_SKIP peer_count=4 at_or_below_floor=8
+2026-03-09 19:24:27,419 WARNING knarr.dht.node: PRUNE_SKIP peer_count=4 at_or_below_floor=8
+2026-03-09 19:25:29,991 WARNING knarr.dht.node: PRUNE_SKIP peer_count=4 at_or_below_floor=8
+2026-03-09 19:26:19,724 INFO knarr.dht.node: REPUBLISH_CYCLE skills=1 peers=4 fanout=3
+2026-03-09 19:26:32,568 WARNING knarr.dht.node: PRUNE_SKIP peer_count=4 at_or_below_floor=8
+2026-03-09 19:26:54,392 WARNING knarr.dht.node: PULL_TIMEOUT pull_from_correspondents exceeded 5s deadline
+2026-03-09 19:27:35,143 WARNING knarr.dht.node: PRUNE_SKIP peer_count=4 at_or_below_floor=8
+2026-03-09 19:27:42,782 WARNING knarr.dht.node: PEER_SWEEP_TIMEOUT peer heartbeat sweep exceeded 10.0s
+2026-03-09 19:28:37,769 WARNING knarr.dht.node: PRUNE_SKIP peer_count=4 at_or_below_floor=8
+2026-03-09 19:29:40,357 WARNING knarr.dht.node: PRUNE_SKIP peer_count=4 at_or_below_floor=8
+2026-03-09 19:30:43,004 WARNING knarr.dht.node: PRUNE_SKIP peer_count=4 at_or_below_floor=8
+2026-03-09 19:31:45,173 INFO knarr.dht.node: REPUBLISH_CYCLE skills=1 peers=4 fanout=3
+2026-03-09 19:31:45,606 WARNING knarr.dht.node: PRUNE_SKIP peer_count=4 at_or_below_floor=8
+2026-03-09 19:32:12,215 WARNING knarr.dht.node: PULL_TIMEOUT pull_from_correspondents exceeded 5s deadline
+2026-03-09 19:32:48,278 WARNING knarr.dht.node: PRUNE_SKIP peer_count=4 at_or_below_floor=8
+2026-03-09 19:33:50,861 WARNING knarr.dht.node: PRUNE_SKIP peer_count=4 at_or_below_floor=8
+2026-03-09 19:33:51,290 ERROR knarr.dht.node: Error handling connection: DHTNode._write_receipt() missing 1 required positional argument: 'payload'
+2026-03-09 19:34:53,576 WARNING knarr.dht.node: PRUNE_SKIP peer_count=4 at_or_below_floor=8
+2026-03-09 19:35:56,184 WARNING knarr.dht.node: PRUNE_SKIP peer_count=4 at_or_below_floor=8
+2026-03-09 19:36:49,905 INFO knarr.dht.node: REPUBLISH_CYCLE skills=1 peers=4 fanout=3
+2026-03-09 19:36:58,898 WARNING knarr.dht.node: PRUNE_SKIP peer_count=4 at_or_below_floor=8
+2026-03-09 19:37:04,077 ERROR knarr.dht.node: Error handling connection: DHTNode._write_receipt() missing 1 required positional argument: 'payload'
+2026-03-09 19:37:31,603 WARNING knarr.dht.node: PULL_TIMEOUT pull_from_correspondents exceeded 5s deadline
+2026-03-09 19:38:01,679 WARNING knarr.dht.node: PRUNE_SKIP peer_count=4 at_or_below_floor=8
+2026-03-09 19:39:04,377 WARNING knarr.dht.node: PRUNE_SKIP peer_count=4 at_or_below_floor=8
+2026-03-09 19:40:07,139 WARNING knarr.dht.node: PRUNE_SKIP peer_count=4 at_or_below_floor=8
+2026-03-09 19:41:09,904 WARNING knarr.dht.node: PRUNE_SKIP peer_count=4 at_or_below_floor=8
+2026-03-09 19:42:12,668 WARNING knarr.dht.node: PRUNE_SKIP peer_count=4 at_or_below_floor=8
+2026-03-09 19:42:28,714 INFO knarr.dht.node: REPUBLISH_CYCLE skills=1 peers=4 fanout=3
+2026-03-09 19:42:50,269 WARNING knarr.dht.node: PULL_TIMEOUT pull_from_correspondents exceeded 5s deadline
+2026-03-09 19:43:15,447 WARNING knarr.dht.node: PRUNE_SKIP peer_count=4 at_or_below_floor=8
+2026-03-09 19:43:33,278 ERROR knarr.dht.node: Error handling connection: DHTNode._write_receipt() missing 1 required positional argument: 'payload'
+2026-03-09 19:44:18,218 WARNING knarr.dht.node: PRUNE_SKIP peer_count=4 at_or_below_floor=8
+2026-03-09 19:45:21,037 WARNING knarr.dht.node: PRUNE_SKIP peer_count=4 at_or_below_floor=8
+2026-03-09 19:46:23,830 WARNING knarr.dht.node: PRUNE_SKIP peer_count=4 at_or_below_floor=8
+2026-03-09 19:47:26,638 WARNING knarr.dht.node: PRUNE_SKIP peer_count=4 at_or_below_floor=8
+2026-03-09 19:47:56,995 INFO knarr.dht.node: REPUBLISH_CYCLE skills=1 peers=4 fanout=3
+2026-03-09 19:48:08,977 WARNING knarr.dht.node: PULL_TIMEOUT pull_from_correspondents exceeded 5s deadline
+2026-03-09 19:48:29,453 WARNING knarr.dht.node: PRUNE_SKIP peer_count=4 at_or_below_floor=8
+2026-03-09 19:49:32,312 WARNING knarr.dht.node: PRUNE_SKIP peer_count=4 at_or_below_floor=8
+2026-03-09 19:50:35,123 WARNING knarr.dht.node: PRUNE_SKIP peer_count=4 at_or_below_floor=8
+2026-03-09 19:51:37,975 WARNING knarr.dht.node: PRUNE_SKIP peer_count=4 at_or_below_floor=8
+2026-03-09 19:52:28,083 ERROR knarr.dht.node: Error handling connection: DHTNode._write_receipt() missing 1 required positional argument: 'payload'
+2026-03-09 19:52:40,814 WARNING knarr.dht.node: PRUNE_SKIP peer_count=4 at_or_below_floor=8
+2026-03-09 19:53:27,986 WARNING knarr.dht.node: PULL_TIMEOUT pull_from_correspondents exceeded 5s deadline
+2026-03-09 19:53:33,814 INFO knarr.dht.node: REPUBLISH_CYCLE skills=1 peers=4 fanout=3
+2026-03-09 19:53:43,650 WARNING knarr.dht.node: PRUNE_SKIP peer_count=4 at_or_below_floor=8
+2026-03-09 19:53:54,575 ERROR knarr.dht.node: Error handling connection: DHTNode._write_receipt() missing 1 required positional argument: 'payload'
+2026-03-09 19:54:46,523 WARNING knarr.dht.node: PRUNE_SKIP peer_count=4 at_or_below_floor=8
+2026-03-09 19:55:49,406 WARNING knarr.dht.node: PRUNE_SKIP peer_count=4 at_or_below_floor=8
+2026-03-09 19:56:52,260 WARNING knarr.dht.node: PRUNE_SKIP peer_count=4 at_or_below_floor=8
+2026-03-09 19:57:55,153 WARNING knarr.dht.node: PRUNE_SKIP peer_count=4 at_or_below_floor=8
+2026-03-09 19:58:47,072 WARNING knarr.dht.node: PULL_TIMEOUT pull_from_correspondents exceeded 5s deadline
+2026-03-09 19:58:58,022 WARNING knarr.dht.node: PRUNE_SKIP peer_count=4 at_or_below_floor=8
+2026-03-09 19:59:08,352 INFO knarr.dht.node: REPUBLISH_CYCLE skills=1 peers=4 fanout=3
+2026-03-09 20:00:00,936 WARNING knarr.dht.node: PRUNE_SKIP peer_count=4 at_or_below_floor=8
+2026-03-09 20:01:03,822 WARNING knarr.dht.node: PRUNE_SKIP peer_count=4 at_or_below_floor=8
+2026-03-09 20:02:06,729 WARNING knarr.dht.node: PRUNE_SKIP peer_count=4 at_or_below_floor=8
+2026-03-09 20:03:09,636 WARNING knarr.dht.node: PRUNE_SKIP peer_count=4 at_or_below_floor=8
+2026-03-09 20:04:06,404 WARNING knarr.dht.node: PULL_TIMEOUT pull_from_correspondents exceeded 5s deadline
+2026-03-09 20:04:12,566 WARNING knarr.dht.node: PRUNE_SKIP peer_count=4 at_or_below_floor=8
+2026-03-09 20:04:54,043 INFO knarr.dht.node: REPUBLISH_CYCLE skills=1 peers=4 fanout=3
+2026-03-09 20:05:15,482 WARNING knarr.dht.node: PRUNE_SKIP peer_count=4 at_or_below_floor=8
+2026-03-09 20:06:18,430 WARNING knarr.dht.node: PRUNE_SKIP peer_count=4 at_or_below_floor=8
+2026-03-09 20:06:30,196 ERROR knarr.dht.node: Error handling connection: DHTNode._write_receipt() missing 1 required positional argument: 'payload'
+2026-03-09 20:07:10,403 ERROR knarr.dht.node: Error handling connection: DHTNode._write_receipt() missing 1 required positional argument: 'payload'
+2026-03-09 20:07:21,325 WARNING knarr.dht.node: PRUNE_SKIP peer_count=4 at_or_below_floor=8
+2026-03-09 20:08:24,307 WARNING knarr.dht.node: PRUNE_SKIP peer_count=4 at_or_below_floor=8
+2026-03-09 20:09:27,269 WARNING knarr.dht.node: PRUNE_SKIP peer_count=4 at_or_below_floor=8
+2026-03-09 20:09:27,311 WARNING knarr.dht.node: PULL_TIMEOUT pull_from_correspondents exceeded 5s deadline
+2026-03-09 20:10:06,272 INFO knarr.dht.node: REPUBLISH_CYCLE skills=1 peers=4 fanout=3
+2026-03-09 20:10:30,244 WARNING knarr.dht.node: PRUNE_SKIP peer_count=4 at_or_below_floor=8
+2026-03-09 20:11:33,236 WARNING knarr.dht.node: PRUNE_SKIP peer_count=4 at_or_below_floor=8
+2026-03-09 20:12:36,211 WARNING knarr.dht.node: PRUNE_SKIP peer_count=4 at_or_below_floor=8
+2026-03-09 20:13:39,227 WARNING knarr.dht.node: PRUNE_SKIP peer_count=4 at_or_below_floor=8
+2026-03-09 20:14:41,387 WARNING knarr.dht.node: PRUNE_SKIP peer_count=4 at_or_below_floor=8
+2026-03-09 20:14:46,215 WARNING knarr.dht.node: PULL_TIMEOUT pull_from_correspondents exceeded 5s deadline
+2026-03-09 20:14:46,803 ERROR knarr.dht.node: Error handling connection: DHTNode._write_receipt() missing 1 required positional argument: 'payload'
+2026-03-09 20:15:20,337 INFO knarr.dht.node: REPUBLISH_CYCLE skills=1 peers=4 fanout=3
+2026-03-09 20:15:45,408 WARNING knarr.dht.node: PRUNE_SKIP peer_count=4 at_or_below_floor=8
+2026-03-09 20:16:48,390 WARNING knarr.dht.node: PRUNE_SKIP peer_count=4 at_or_below_floor=8
+2026-03-09 20:17:51,419 WARNING knarr.dht.node: PRUNE_SKIP peer_count=4 at_or_below_floor=8
+2026-03-09 20:18:54,494 WARNING knarr.dht.node: PRUNE_SKIP peer_count=4 at_or_below_floor=8
+2026-03-09 20:19:57,556 WARNING knarr.dht.node: PRUNE_SKIP peer_count=4 at_or_below_floor=8
+2026-03-09 20:20:07,163 WARNING knarr.dht.node: PULL_TIMEOUT pull_from_correspondents exceeded 5s deadline
+2026-03-09 20:20:54,417 INFO knarr.dht.node: REPUBLISH_CYCLE skills=1 peers=4 fanout=3
+2026-03-09 20:21:00,593 WARNING knarr.dht.node: PRUNE_SKIP peer_count=4 at_or_below_floor=8
+2026-03-09 20:21:37,569 ERROR knarr.dht.node: Error handling connection: DHTNode._write_receipt() missing 1 required positional argument: 'payload'
+2026-03-09 20:22:03,720 WARNING knarr.dht.node: PRUNE_SKIP peer_count=4 at_or_below_floor=8
+2026-03-09 20:23:06,775 WARNING knarr.dht.node: PRUNE_SKIP peer_count=4 at_or_below_floor=8
+2026-03-09 20:24:09,956 WARNING knarr.dht.node: PRUNE_SKIP peer_count=4 at_or_below_floor=8
+2026-03-09 20:25:13,024 WARNING knarr.dht.node: PRUNE_SKIP peer_count=4 at_or_below_floor=8
+2026-03-09 20:25:27,428 WARNING knarr.dht.node: PULL_TIMEOUT pull_from_correspondents exceeded 5s deadline
+2026-03-09 20:25:42,478 INFO knarr.dht.node: REPUBLISH_CYCLE skills=1 peers=4 fanout=3
+2026-03-09 20:26:16,293 WARNING knarr.dht.node: PRUNE_SKIP peer_count=4 at_or_below_floor=8
+2026-03-09 20:27:19,363 WARNING knarr.dht.node: PRUNE_SKIP peer_count=4 at_or_below_floor=8
+2026-03-09 20:28:22,638 WARNING knarr.dht.node: PRUNE_SKIP peer_count=4 at_or_below_floor=8
+2026-03-09 20:28:39,334 ERROR knarr.dht.node: Error handling connection: DHTNode._write_receipt() missing 1 required positional argument: 'payload'
+2026-03-09 20:29:25,734 WARNING knarr.dht.node: PRUNE_SKIP peer_count=4 at_or_below_floor=8
+2026-03-09 20:30:28,986 WARNING knarr.dht.node: PRUNE_SKIP peer_count=4 at_or_below_floor=8
+2026-03-09 20:30:36,089 INFO knarr.dht.node: REPUBLISH_CYCLE skills=1 peers=4 fanout=3
+2026-03-09 20:30:48,185 WARNING knarr.dht.node: PULL_TIMEOUT pull_from_correspondents exceeded 5s deadline
+2026-03-09 20:31:32,105 WARNING knarr.dht.node: PRUNE_SKIP peer_count=4 at_or_below_floor=8
+2026-03-09 20:32:35,361 WARNING knarr.dht.node: PRUNE_SKIP peer_count=4 at_or_below_floor=8
+2026-03-09 20:33:38,512 WARNING knarr.dht.node: PRUNE_SKIP peer_count=4 at_or_below_floor=8
+2026-03-09 20:34:41,756 WARNING knarr.dht.node: PRUNE_SKIP peer_count=4 at_or_below_floor=8
+2026-03-09 20:35:44,966 WARNING knarr.dht.node: PRUNE_SKIP peer_count=4 at_or_below_floor=8
+2026-03-09 20:36:08,944 WARNING knarr.dht.node: PULL_TIMEOUT pull_from_correspondents exceeded 5s deadline
+2026-03-09 20:36:19,405 INFO knarr.dht.node: REPUBLISH_CYCLE skills=1 peers=4 fanout=3
+2026-03-09 20:36:48,231 WARNING knarr.dht.node: PRUNE_SKIP peer_count=4 at_or_below_floor=8
+2026-03-09 20:37:51,395 WARNING knarr.dht.node: PRUNE_SKIP peer_count=4 at_or_below_floor=8
+2026-03-09 20:38:54,703 WARNING knarr.dht.node: PRUNE_SKIP peer_count=4 at_or_below_floor=8
+2026-03-09 20:39:57,922 WARNING knarr.dht.node: PRUNE_SKIP peer_count=4 at_or_below_floor=8
+2026-03-09 20:41:01,223 WARNING knarr.dht.node: PRUNE_SKIP peer_count=4 at_or_below_floor=8
+2026-03-09 20:41:16,370 ERROR knarr.dht.node: Error handling connection: DHTNode._write_receipt() missing 1 required positional argument: 'payload'
+2026-03-09 20:41:31,572 WARNING knarr.dht.node: PULL_TIMEOUT pull_from_correspondents exceeded 5s deadline
+2026-03-09 20:41:52,204 INFO knarr.dht.node: REPUBLISH_CYCLE skills=1 peers=4 fanout=3
+2026-03-09 20:42:04,454 WARNING knarr.dht.node: PRUNE_SKIP peer_count=4 at_or_below_floor=8
+2026-03-09 20:42:23,667 ERROR knarr.dht.node: Error handling connection: DHTNode._write_receipt() missing 1 required positional argument: 'payload'
+2026-03-09 20:43:07,762 WARNING knarr.dht.node: PRUNE_SKIP peer_count=4 at_or_below_floor=8
+2026-03-09 20:44:11,002 WARNING knarr.dht.node: PRUNE_SKIP peer_count=4 at_or_below_floor=8
+2026-03-09 20:45:14,331 WARNING knarr.dht.node: PRUNE_SKIP peer_count=4 at_or_below_floor=8
+2026-03-09 20:46:17,594 WARNING knarr.dht.node: PRUNE_SKIP peer_count=4 at_or_below_floor=8
+2026-03-09 20:46:43,411 INFO knarr.dht.node: REPUBLISH_CYCLE skills=1 peers=4 fanout=3
+2026-03-09 20:46:52,726 WARNING knarr.dht.node: PULL_TIMEOUT pull_from_correspondents exceeded 5s deadline
+2026-03-09 20:47:20,924 WARNING knarr.dht.node: PRUNE_SKIP peer_count=4 at_or_below_floor=8
+2026-03-09 20:48:24,172 WARNING knarr.dht.node: PRUNE_SKIP peer_count=4 at_or_below_floor=8
+2026-03-09 20:49:27,539 WARNING knarr.dht.node: PRUNE_SKIP peer_count=4 at_or_below_floor=8
+2026-03-09 20:50:30,823 WARNING knarr.dht.node: PRUNE_SKIP peer_count=4 at_or_below_floor=8
+2026-03-09 20:51:33,861 INFO knarr.dht.node: REPUBLISH_CYCLE skills=1 peers=4 fanout=3
+2026-03-09 20:51:34,168 WARNING knarr.dht.node: PRUNE_SKIP peer_count=4 at_or_below_floor=8
+2026-03-09 20:52:14,092 WARNING knarr.dht.node: PULL_TIMEOUT pull_from_correspondents exceeded 5s deadline
+2026-03-09 20:52:37,452 WARNING knarr.dht.node: PRUNE_SKIP peer_count=4 at_or_below_floor=8
+2026-03-09 20:53:40,759 WARNING knarr.dht.node: PRUNE_SKIP peer_count=4 at_or_below_floor=8
+2026-03-09 20:54:44,127 WARNING knarr.dht.node: PRUNE_SKIP peer_count=4 at_or_below_floor=8
+2026-03-09 20:55:43,293 ERROR knarr.dht.node: Error handling connection: DHTNode._write_receipt() missing 1 required positional argument: 'payload'
+2026-03-09 20:55:47,493 WARNING knarr.dht.node: PRUNE_SKIP peer_count=4 at_or_below_floor=8
+2026-03-09 20:56:50,846 WARNING knarr.dht.node: PRUNE_SKIP peer_count=4 at_or_below_floor=8
+2026-03-09 20:56:56,333 INFO knarr.dht.node: REPUBLISH_CYCLE skills=1 peers=4 fanout=3
+2026-03-09 20:57:35,602 WARNING knarr.dht.node: PULL_TIMEOUT pull_from_correspondents exceeded 5s deadline
+2026-03-09 20:57:54,234 WARNING knarr.dht.node: PRUNE_SKIP peer_count=4 at_or_below_floor=8
+2026-03-09 20:58:57,607 WARNING knarr.dht.node: PRUNE_SKIP peer_count=4 at_or_below_floor=8
+2026-03-09 21:00:01,025 WARNING knarr.dht.node: PRUNE_SKIP peer_count=4 at_or_below_floor=8
+2026-03-09 21:00:05,224 ERROR knarr.dht.node: Error handling connection: DHTNode._write_receipt() missing 1 required positional argument: 'payload'
+2026-03-09 21:01:04,404 WARNING knarr.dht.node: PRUNE_SKIP peer_count=4 at_or_below_floor=8
+2026-03-09 21:02:07,842 WARNING knarr.dht.node: PRUNE_SKIP peer_count=4 at_or_below_floor=8
+2026-03-09 21:02:24,892 INFO knarr.dht.node: REPUBLISH_CYCLE skills=1 peers=4 fanout=3
+2026-03-09 21:02:57,407 WARNING knarr.dht.node: PULL_TIMEOUT pull_from_correspondents exceeded 5s deadline
+2026-03-09 21:03:11,253 WARNING knarr.dht.node: PRUNE_SKIP peer_count=4 at_or_below_floor=8
+2026-03-09 21:04:14,706 WARNING knarr.dht.node: PRUNE_SKIP peer_count=4 at_or_below_floor=8
+2026-03-09 21:05:18,122 WARNING knarr.dht.node: PRUNE_SKIP peer_count=4 at_or_below_floor=8
+2026-03-09 21:06:21,586 WARNING knarr.dht.node: PRUNE_SKIP peer_count=4 at_or_below_floor=8
+2026-03-09 21:07:25,019 WARNING knarr.dht.node: PRUNE_SKIP peer_count=4 at_or_below_floor=8
+2026-03-09 21:07:26,588 INFO knarr.dht.node: REPUBLISH_CYCLE skills=1 peers=4 fanout=3
+2026-03-09 21:08:19,388 WARNING knarr.dht.node: PULL_TIMEOUT pull_from_correspondents exceeded 5s deadline
+2026-03-09 21:08:28,464 WARNING knarr.dht.node: PRUNE_SKIP peer_count=4 at_or_below_floor=8
+2026-03-09 21:09:31,943 WARNING knarr.dht.node: PRUNE_SKIP peer_count=4 at_or_below_floor=8
+2026-03-09 21:10:35,443 WARNING knarr.dht.node: PRUNE_SKIP peer_count=4 at_or_below_floor=8
+2026-03-09 21:11:38,986 WARNING knarr.dht.node: PRUNE_SKIP peer_count=4 at_or_below_floor=8
+2026-03-09 21:12:42,472 WARNING knarr.dht.node: PRUNE_SKIP peer_count=4 at_or_below_floor=8
+2026-03-09 21:12:49,955 INFO knarr.dht.node: REPUBLISH_CYCLE skills=1 peers=4 fanout=3
+2026-03-09 21:13:43,385 WARNING knarr.dht.node: PULL_TIMEOUT pull_from_correspondents exceeded 5s deadline
+2026-03-09 21:13:46,003 WARNING knarr.dht.node: PRUNE_SKIP peer_count=4 at_or_below_floor=8
+2026-03-09 21:14:49,536 WARNING knarr.dht.node: PRUNE_SKIP peer_count=4 at_or_below_floor=8
+2026-03-09 21:15:53,105 WARNING knarr.dht.node: PRUNE_SKIP peer_count=4 at_or_below_floor=8
+2026-03-09 21:16:26,388 ERROR knarr.dht.node: Error handling connection: DHTNode._write_receipt() missing 1 required positional argument: 'payload'
+2026-03-09 21:16:56,653 WARNING knarr.dht.node: PRUNE_SKIP peer_count=4 at_or_below_floor=8
+2026-03-09 21:18:00,204 WARNING knarr.dht.node: PRUNE_SKIP peer_count=4 at_or_below_floor=8
+2026-03-09 21:18:15,697 INFO knarr.dht.node: REPUBLISH_CYCLE skills=1 peers=4 fanout=3
+2026-03-09 21:18:43,257 ERROR knarr.dht.node: Error handling connection: DHTNode._write_receipt() missing 1 required positional argument: 'payload'
+2026-03-09 21:19:03,761 WARNING knarr.dht.node: PRUNE_SKIP peer_count=4 at_or_below_floor=8
+2026-03-09 21:19:05,929 WARNING knarr.dht.node: PULL_TIMEOUT pull_from_correspondents exceeded 5s deadline
+2026-03-09 21:20:07,344 WARNING knarr.dht.node: PRUNE_SKIP peer_count=4 at_or_below_floor=8
+2026-03-09 21:21:10,917 WARNING knarr.dht.node: PRUNE_SKIP peer_count=4 at_or_below_floor=8
+2026-03-09 21:22:14,500 WARNING knarr.dht.node: PRUNE_SKIP peer_count=4 at_or_below_floor=8
+2026-03-09 21:23:18,077 WARNING knarr.dht.node: PRUNE_SKIP peer_count=4 at_or_below_floor=8
+2026-03-09 21:23:18,345 INFO knarr.dht.node: REPUBLISH_CYCLE skills=1 peers=4 fanout=3
+2026-03-09 21:24:21,677 WARNING knarr.dht.node: PRUNE_SKIP peer_count=4 at_or_below_floor=8
+2026-03-09 21:24:28,620 WARNING knarr.dht.node: PULL_TIMEOUT pull_from_correspondents exceeded 5s deadline
+2026-03-09 21:25:25,292 WARNING knarr.dht.node: PRUNE_SKIP peer_count=4 at_or_below_floor=8
+2026-03-09 21:26:28,873 WARNING knarr.dht.node: PRUNE_SKIP peer_count=4 at_or_below_floor=8
+2026-03-09 21:27:32,500 WARNING knarr.dht.node: PRUNE_SKIP peer_count=4 at_or_below_floor=8
+2026-03-09 21:28:32,467 INFO knarr.dht.node: REPUBLISH_CYCLE skills=1 peers=4 fanout=3
+2026-03-09 21:28:36,090 WARNING knarr.dht.node: PRUNE_SKIP peer_count=4 at_or_below_floor=8
+2026-03-09 21:29:39,730 WARNING knarr.dht.node: PRUNE_SKIP peer_count=4 at_or_below_floor=8
+2026-03-09 21:29:51,454 WARNING knarr.dht.node: PULL_TIMEOUT pull_from_correspondents exceeded 5s deadline
+2026-03-09 21:30:43,313 WARNING knarr.dht.node: PRUNE_SKIP peer_count=4 at_or_below_floor=8
+2026-03-09 21:31:46,959 WARNING knarr.dht.node: PRUNE_SKIP peer_count=4 at_or_below_floor=8
+2026-03-09 21:32:50,553 WARNING knarr.dht.node: PRUNE_SKIP peer_count=4 at_or_below_floor=8
+2026-03-09 21:33:41,717 INFO knarr.dht.node: REPUBLISH_CYCLE skills=1 peers=4 fanout=3
+2026-03-09 21:33:54,204 WARNING knarr.dht.node: PRUNE_SKIP peer_count=4 at_or_below_floor=8
+2026-03-09 21:34:57,810 WARNING knarr.dht.node: PRUNE_SKIP peer_count=4 at_or_below_floor=8
+2026-03-09 21:35:14,329 WARNING knarr.dht.node: PULL_TIMEOUT pull_from_correspondents exceeded 5s deadline
+2026-03-09 21:36:01,464 WARNING knarr.dht.node: PRUNE_SKIP peer_count=4 at_or_below_floor=8
+2026-03-09 21:36:30,676 ERROR knarr.dht.node: Error handling connection: DHTNode._write_receipt() missing 1 required positional argument: 'payload'
+2026-03-09 21:36:59,462 ERROR knarr.dht.node: Error handling connection: DHTNode._write_receipt() missing 1 required positional argument: 'payload'
+2026-03-09 21:37:05,068 WARNING knarr.dht.node: PRUNE_SKIP peer_count=4 at_or_below_floor=8
+2026-03-09 21:38:08,731 WARNING knarr.dht.node: PRUNE_SKIP peer_count=4 at_or_below_floor=8
+2026-03-09 21:38:40,868 INFO knarr.dht.node: REPUBLISH_CYCLE skills=1 peers=4 fanout=3
+2026-03-09 21:39:12,339 WARNING knarr.dht.node: PRUNE_SKIP peer_count=4 at_or_below_floor=8
+2026-03-09 21:40:16,013 WARNING knarr.dht.node: PRUNE_SKIP peer_count=4 at_or_below_floor=8
+2026-03-09 21:40:37,337 WARNING knarr.dht.node: PULL_TIMEOUT pull_from_correspondents exceeded 5s deadline
+2026-03-09 21:41:19,625 WARNING knarr.dht.node: PRUNE_SKIP peer_count=4 at_or_below_floor=8
+2026-03-09 21:42:23,325 WARNING knarr.dht.node: PRUNE_SKIP peer_count=4 at_or_below_floor=8
+2026-03-09 21:43:26,956 WARNING knarr.dht.node: PRUNE_SKIP peer_count=4 at_or_below_floor=8
+2026-03-09 21:43:56,069 INFO knarr.dht.node: REPUBLISH_CYCLE skills=1 peers=4 fanout=3
+2026-03-09 21:44:30,702 WARNING knarr.dht.node: PRUNE_SKIP peer_count=4 at_or_below_floor=8
+2026-03-09 21:45:34,332 WARNING knarr.dht.node: PRUNE_SKIP peer_count=4 at_or_below_floor=8
+2026-03-09 21:46:02,263 WARNING knarr.dht.node: PULL_TIMEOUT pull_from_correspondents exceeded 5s deadline
+2026-03-09 21:46:38,085 WARNING knarr.dht.node: PRUNE_SKIP peer_count=4 at_or_below_floor=8
+2026-03-09 21:47:41,735 WARNING knarr.dht.node: PRUNE_SKIP peer_count=4 at_or_below_floor=8
+2026-03-09 21:48:45,557 WARNING knarr.dht.node: PRUNE_SKIP peer_count=4 at_or_below_floor=8
+2026-03-09 21:48:48,110 INFO knarr.dht.node: REPUBLISH_CYCLE skills=1 peers=4 fanout=3
+2026-03-09 21:49:49,243 WARNING knarr.dht.node: PRUNE_SKIP peer_count=4 at_or_below_floor=8
+2026-03-09 21:50:52,998 WARNING knarr.dht.node: PRUNE_SKIP peer_count=4 at_or_below_floor=8
+2026-03-09 21:51:25,713 WARNING knarr.dht.node: PULL_TIMEOUT pull_from_correspondents exceeded 5s deadline
+2026-03-09 21:51:56,744 WARNING knarr.dht.node: PRUNE_SKIP peer_count=4 at_or_below_floor=8
+2026-03-09 21:53:00,524 WARNING knarr.dht.node: PRUNE_SKIP peer_count=4 at_or_below_floor=8
+2026-03-09 21:54:04,300 WARNING knarr.dht.node: PRUNE_SKIP peer_count=4 at_or_below_floor=8
+2026-03-09 21:54:13,223 INFO knarr.dht.node: REPUBLISH_CYCLE skills=1 peers=4 fanout=3
+2026-03-09 21:55:08,104 WARNING knarr.dht.node: PRUNE_SKIP peer_count=4 at_or_below_floor=8
+2026-03-09 21:56:11,893 WARNING knarr.dht.node: PRUNE_SKIP peer_count=4 at_or_below_floor=8
+2026-03-09 21:56:49,451 WARNING knarr.dht.node: PULL_TIMEOUT pull_from_correspondents exceeded 5s deadline
+2026-03-09 21:57:15,717 WARNING knarr.dht.node: PRUNE_SKIP peer_count=4 at_or_below_floor=8
+2026-03-09 21:57:22,841 ERROR knarr.dht.node: Error handling connection: DHTNode._write_receipt() missing 1 required positional argument: 'payload'
+2026-03-09 21:58:19,547 WARNING knarr.dht.node: PRUNE_SKIP peer_count=4 at_or_below_floor=8
+2026-03-09 21:59:23,365 WARNING knarr.dht.node: PRUNE_SKIP peer_count=4 at_or_below_floor=8
+2026-03-09 21:59:30,173 INFO knarr.dht.node: REPUBLISH_CYCLE skills=1 peers=4 fanout=3
+2026-03-09 22:00:27,360 WARNING knarr.dht.node: PRUNE_SKIP peer_count=4 at_or_below_floor=8
+2026-03-09 22:01:31,134 WARNING knarr.dht.node: PRUNE_SKIP peer_count=4 at_or_below_floor=8
+2026-03-09 22:02:13,549 WARNING knarr.dht.node: PULL_TIMEOUT pull_from_correspondents exceeded 5s deadline
+2026-03-09 22:02:35,151 WARNING knarr.dht.node: PRUNE_SKIP peer_count=4 at_or_below_floor=8
+2026-03-09 22:03:38,947 WARNING knarr.dht.node: PRUNE_SKIP peer_count=4 at_or_below_floor=8
+2026-03-09 22:04:21,861 ERROR knarr.dht.node: Error handling connection: DHTNode._write_receipt() missing 1 required positional argument: 'payload'
+2026-03-09 22:04:42,971 WARNING knarr.dht.node: PRUNE_SKIP peer_count=4 at_or_below_floor=8
+2026-03-09 22:05:15,687 INFO knarr.dht.node: REPUBLISH_CYCLE skills=1 peers=4 fanout=3
+2026-03-09 22:05:46,787 WARNING knarr.dht.node: PRUNE_SKIP peer_count=4 at_or_below_floor=8
+2026-03-09 22:06:50,789 WARNING knarr.dht.node: PRUNE_SKIP peer_count=4 at_or_below_floor=8
+2026-03-09 22:07:37,949 WARNING knarr.dht.node: PULL_TIMEOUT pull_from_correspondents exceeded 5s deadline
+2026-03-09 22:07:54,681 WARNING knarr.dht.node: PRUNE_SKIP peer_count=4 at_or_below_floor=8
+2026-03-09 22:08:58,665 WARNING knarr.dht.node: PRUNE_SKIP peer_count=4 at_or_below_floor=8
+2026-03-09 22:10:02,579 WARNING knarr.dht.node: PRUNE_SKIP peer_count=4 at_or_below_floor=8
+2026-03-09 22:10:39,807 INFO knarr.dht.node: REPUBLISH_CYCLE skills=1 peers=4 fanout=3
+2026-03-09 22:11:06,607 WARNING knarr.dht.node: PRUNE_SKIP peer_count=4 at_or_below_floor=8
+2026-03-09 22:12:10,509 WARNING knarr.dht.node: PRUNE_SKIP peer_count=4 at_or_below_floor=8
+2026-03-09 22:13:02,499 WARNING knarr.dht.node: PULL_TIMEOUT pull_from_correspondents exceeded 5s deadline
+2026-03-09 22:13:14,537 WARNING knarr.dht.node: PRUNE_SKIP peer_count=4 at_or_below_floor=8
+2026-03-09 22:14:18,463 WARNING knarr.dht.node: PRUNE_SKIP peer_count=4 at_or_below_floor=8
+2026-03-09 22:15:22,502 WARNING knarr.dht.node: PRUNE_SKIP peer_count=4 at_or_below_floor=8
+2026-03-09 22:15:38,923 INFO knarr.dht.node: REPUBLISH_CYCLE skills=1 peers=4 fanout=3
+2026-03-09 22:16:26,435 WARNING knarr.dht.node: PRUNE_SKIP peer_count=4 at_or_below_floor=8
+2026-03-09 22:17:30,475 WARNING knarr.dht.node: PRUNE_SKIP peer_count=4 at_or_below_floor=8
+2026-03-09 22:18:29,159 WARNING knarr.dht.node: PULL_TIMEOUT pull_from_correspondents exceeded 5s deadline
+2026-03-09 22:18:34,419 WARNING knarr.dht.node: PRUNE_SKIP peer_count=4 at_or_below_floor=8
+2026-03-09 22:19:38,468 WARNING knarr.dht.node: PRUNE_SKIP peer_count=4 at_or_below_floor=8
+2026-03-09 22:20:42,422 WARNING knarr.dht.node: PRUNE_SKIP peer_count=4 at_or_below_floor=8
+2026-03-09 22:21:29,422 INFO knarr.dht.node: REPUBLISH_CYCLE skills=1 peers=4 fanout=3
+2026-03-09 22:21:46,477 WARNING knarr.dht.node: PRUNE_SKIP peer_count=4 at_or_below_floor=8
+2026-03-09 22:22:50,426 WARNING knarr.dht.node: PRUNE_SKIP peer_count=4 at_or_below_floor=8
+2026-03-09 22:23:54,026 WARNING knarr.dht.node: PULL_TIMEOUT pull_from_correspondents exceeded 5s deadline
+2026-03-09 22:23:54,487 WARNING knarr.dht.node: PRUNE_SKIP peer_count=4 at_or_below_floor=8
+2026-03-09 22:24:58,455 WARNING knarr.dht.node: PRUNE_SKIP peer_count=4 at_or_below_floor=8
+2026-03-09 22:26:02,531 WARNING knarr.dht.node: PRUNE_SKIP peer_count=4 at_or_below_floor=8
+2026-03-09 22:27:06,497 WARNING knarr.dht.node: PRUNE_SKIP peer_count=4 at_or_below_floor=8
+2026-03-09 22:27:18,961 INFO knarr.dht.node: REPUBLISH_CYCLE skills=1 peers=4 fanout=3
+2026-03-09 22:28:10,557 WARNING knarr.dht.node: PRUNE_SKIP peer_count=4 at_or_below_floor=8
+2026-03-09 22:29:14,567 WARNING knarr.dht.node: PRUNE_SKIP peer_count=4 at_or_below_floor=8
+2026-03-09 22:29:18,889 WARNING knarr.dht.node: PULL_TIMEOUT pull_from_correspondents exceeded 5s deadline
+2026-03-09 22:30:18,631 WARNING knarr.dht.node: PRUNE_SKIP peer_count=4 at_or_below_floor=8
+2026-03-09 22:31:22,671 WARNING knarr.dht.node: PRUNE_SKIP peer_count=4 at_or_below_floor=8
+2026-03-09 22:32:10,290 INFO knarr.dht.node: REPUBLISH_CYCLE skills=1 peers=4 fanout=3
+2026-03-09 22:32:26,768 WARNING knarr.dht.node: PRUNE_SKIP peer_count=4 at_or_below_floor=8
+2026-03-09 22:33:30,832 WARNING knarr.dht.node: PRUNE_SKIP peer_count=4 at_or_below_floor=8
+2026-03-09 22:34:34,943 WARNING knarr.dht.node: PRUNE_SKIP peer_count=4 at_or_below_floor=8
+2026-03-09 22:34:44,053 WARNING knarr.dht.node: PULL_TIMEOUT pull_from_correspondents exceeded 5s deadline
+2026-03-09 22:35:39,018 WARNING knarr.dht.node: PRUNE_SKIP peer_count=4 at_or_below_floor=8
+2026-03-09 22:36:43,144 WARNING knarr.dht.node: PRUNE_SKIP peer_count=4 at_or_below_floor=8
+2026-03-09 22:37:12,743 INFO knarr.dht.node: REPUBLISH_CYCLE skills=1 peers=4 fanout=3
+2026-03-09 22:37:47,245 WARNING knarr.dht.node: PRUNE_SKIP peer_count=4 at_or_below_floor=8
+2026-03-09 22:38:51,389 WARNING knarr.dht.node: PRUNE_SKIP peer_count=4 at_or_below_floor=8
+2026-03-09 22:38:53,795 ERROR knarr.dht.node: Error handling connection: DHTNode._write_receipt() missing 1 required positional argument: 'payload'
+2026-03-09 22:39:55,484 WARNING knarr.dht.node: PRUNE_SKIP peer_count=4 at_or_below_floor=8
+2026-03-09 22:40:09,377 WARNING knarr.dht.node: PULL_TIMEOUT pull_from_correspondents exceeded 5s deadline
+2026-03-09 22:40:59,635 WARNING knarr.dht.node: PRUNE_SKIP peer_count=4 at_or_below_floor=8
+2026-03-09 22:42:03,747 WARNING knarr.dht.node: PRUNE_SKIP peer_count=4 at_or_below_floor=8
+2026-03-09 22:42:43,658 INFO knarr.dht.node: REPUBLISH_CYCLE skills=1 peers=4 fanout=3
+2026-03-09 22:43:07,915 WARNING knarr.dht.node: PRUNE_SKIP peer_count=4 at_or_below_floor=8
+2026-03-09 22:44:12,036 WARNING knarr.dht.node: PRUNE_SKIP peer_count=4 at_or_below_floor=8
+2026-03-09 22:45:16,212 WARNING knarr.dht.node: PRUNE_SKIP peer_count=4 at_or_below_floor=8
+2026-03-09 22:45:34,884 WARNING knarr.dht.node: PULL_TIMEOUT pull_from_correspondents exceeded 5s deadline
+2026-03-09 22:46:20,479 WARNING knarr.dht.node: PRUNE_SKIP peer_count=4 at_or_below_floor=8
+2026-03-09 22:47:24,645 WARNING knarr.dht.node: PRUNE_SKIP peer_count=4 at_or_below_floor=8
+2026-03-09 22:47:45,542 INFO knarr.dht.node: REPUBLISH_CYCLE skills=1 peers=4 fanout=3
+2026-03-09 22:48:28,871 WARNING knarr.dht.node: PRUNE_SKIP peer_count=4 at_or_below_floor=8
+2026-03-09 22:49:33,046 WARNING knarr.dht.node: PRUNE_SKIP peer_count=4 at_or_below_floor=8
+2026-03-09 22:50:20,801 ERROR knarr.dht.node: Error handling connection: DHTNode._write_receipt() missing 1 required positional argument: 'payload'
+2026-03-09 22:50:37,275 WARNING knarr.dht.node: PRUNE_SKIP peer_count=4 at_or_below_floor=8
+2026-03-09 22:51:02,806 WARNING knarr.dht.node: PULL_TIMEOUT pull_from_correspondents exceeded 5s deadline
+2026-03-09 22:51:41,471 WARNING knarr.dht.node: PRUNE_SKIP peer_count=4 at_or_below_floor=8
+2026-03-09 22:52:45,730 WARNING knarr.dht.node: PRUNE_SKIP peer_count=4 at_or_below_floor=8
+2026-03-09 22:53:30,357 INFO knarr.dht.node: REPUBLISH_CYCLE skills=1 peers=4 fanout=3
+2026-03-09 22:53:49,920 WARNING knarr.dht.node: PRUNE_SKIP peer_count=4 at_or_below_floor=8
+2026-03-09 22:54:54,158 WARNING knarr.dht.node: PRUNE_SKIP peer_count=4 at_or_below_floor=8
+2026-03-09 22:55:39,544 ERROR knarr.dht.node: Error handling connection: DHTNode._write_receipt() missing 1 required positional argument: 'payload'
+2026-03-09 22:55:58,393 WARNING knarr.dht.node: PRUNE_SKIP peer_count=4 at_or_below_floor=8
+2026-03-09 22:56:15,302 ERROR knarr.dht.node: Error handling connection: DHTNode._write_receipt() missing 1 required positional argument: 'payload'
+2026-03-09 22:56:28,682 WARNING knarr.dht.node: PULL_TIMEOUT pull_from_correspondents exceeded 5s deadline
+2026-03-09 22:57:02,626 WARNING knarr.dht.node: PRUNE_SKIP peer_count=4 at_or_below_floor=8
+2026-03-09 22:58:06,867 WARNING knarr.dht.node: PRUNE_SKIP peer_count=4 at_or_below_floor=8
+2026-03-09 22:58:24,466 INFO knarr.dht.node: REPUBLISH_CYCLE skills=1 peers=4 fanout=3
+2026-03-09 22:59:11,098 WARNING knarr.dht.node: PRUNE_SKIP peer_count=4 at_or_below_floor=8
+2026-03-09 23:00:15,349 WARNING knarr.dht.node: PRUNE_SKIP peer_count=4 at_or_below_floor=8
+2026-03-09 23:01:19,579 WARNING knarr.dht.node: PRUNE_SKIP peer_count=4 at_or_below_floor=8
+2026-03-09 23:01:54,709 WARNING knarr.dht.node: PULL_TIMEOUT pull_from_correspondents exceeded 5s deadline
+2026-03-09 23:02:23,841 WARNING knarr.dht.node: PRUNE_SKIP peer_count=4 at_or_below_floor=8
+2026-03-09 23:03:28,085 WARNING knarr.dht.node: PRUNE_SKIP peer_count=4 at_or_below_floor=8
+2026-03-09 23:04:13,792 INFO knarr.dht.node: REPUBLISH_CYCLE skills=1 peers=4 fanout=3
+2026-03-09 23:04:32,344 WARNING knarr.dht.node: PRUNE_SKIP peer_count=4 at_or_below_floor=8
+2026-03-09 23:05:36,586 WARNING knarr.dht.node: PRUNE_SKIP peer_count=4 at_or_below_floor=8
+2026-03-09 23:06:40,849 WARNING knarr.dht.node: PRUNE_SKIP peer_count=4 at_or_below_floor=8
+2026-03-09 23:07:20,712 WARNING knarr.dht.node: PULL_TIMEOUT pull_from_correspondents exceeded 5s deadline
+2026-03-09 23:07:45,097 WARNING knarr.dht.node: PRUNE_SKIP peer_count=4 at_or_below_floor=8
+2026-03-09 23:08:49,368 WARNING knarr.dht.node: PRUNE_SKIP peer_count=4 at_or_below_floor=8
+2026-03-09 23:09:53,618 WARNING knarr.dht.node: PRUNE_SKIP peer_count=4 at_or_below_floor=8
+2026-03-09 23:10:05,207 INFO knarr.dht.node: REPUBLISH_CYCLE skills=1 peers=4 fanout=3
+2026-03-09 23:10:57,891 WARNING knarr.dht.node: PRUNE_SKIP peer_count=4 at_or_below_floor=8
+2026-03-09 23:12:02,136 WARNING knarr.dht.node: PRUNE_SKIP peer_count=4 at_or_below_floor=8
+2026-03-09 23:12:46,844 WARNING knarr.dht.node: PULL_TIMEOUT pull_from_correspondents exceeded 5s deadline
+2026-03-09 23:13:06,413 WARNING knarr.dht.node: PRUNE_SKIP peer_count=4 at_or_below_floor=8
+2026-03-09 23:14:10,671 WARNING knarr.dht.node: PRUNE_SKIP peer_count=4 at_or_below_floor=8
+2026-03-09 23:15:14,952 WARNING knarr.dht.node: PRUNE_SKIP peer_count=4 at_or_below_floor=8
+2026-03-09 23:15:47,365 INFO knarr.dht.node: REPUBLISH_CYCLE skills=1 peers=4 fanout=3
+2026-03-09 23:16:19,215 WARNING knarr.dht.node: PRUNE_SKIP peer_count=4 at_or_below_floor=8
+2026-03-09 23:17:23,539 WARNING knarr.dht.node: PRUNE_SKIP peer_count=4 at_or_below_floor=8
+2026-03-09 23:18:12,981 WARNING knarr.dht.node: PULL_TIMEOUT pull_from_correspondents exceeded 5s deadline
+2026-03-09 23:18:27,816 WARNING knarr.dht.node: PRUNE_SKIP peer_count=4 at_or_below_floor=8
+2026-03-09 23:19:32,044 WARNING knarr.dht.node: PRUNE_SKIP peer_count=4 at_or_below_floor=8
+2026-03-09 23:20:35,243 WARNING knarr.dht.node: PRUNE_SKIP peer_count=4 at_or_below_floor=8
+2026-03-09 23:20:45,301 INFO knarr.dht.node: REPUBLISH_CYCLE skills=1 peers=4 fanout=3
+2026-03-09 23:21:37,391 WARNING knarr.dht.node: PRUNE_SKIP peer_count=4 at_or_below_floor=8
+2026-03-09 23:22:38,940 WARNING knarr.dht.node: PRUNE_SKIP peer_count=4 at_or_below_floor=8
+2026-03-09 23:23:32,320 WARNING knarr.dht.node: PULL_TIMEOUT pull_from_correspondents exceeded 5s deadline
+2026-03-09 23:23:40,227 WARNING knarr.dht.node: PRUNE_SKIP peer_count=4 at_or_below_floor=8
+2026-03-09 23:24:41,336 WARNING knarr.dht.node: PRUNE_SKIP peer_count=4 at_or_below_floor=8
+2026-03-09 23:25:42,507 WARNING knarr.dht.node: PRUNE_SKIP peer_count=4 at_or_below_floor=8
+2026-03-09 23:26:17,839 INFO knarr.dht.node: REPUBLISH_CYCLE skills=1 peers=4 fanout=3
+2026-03-09 23:26:43,566 WARNING knarr.dht.node: PRUNE_SKIP peer_count=4 at_or_below_floor=8
+2026-03-09 23:27:21,203 ERROR knarr.dht.node: Error handling connection: DHTNode._write_receipt() missing 1 required positional argument: 'payload'
+2026-03-09 23:27:44,681 WARNING knarr.dht.node: PRUNE_SKIP peer_count=4 at_or_below_floor=8
+2026-03-09 23:28:42,595 WARNING knarr.dht.node: PULL_TIMEOUT pull_from_correspondents exceeded 5s deadline
+2026-03-09 23:28:45,727 WARNING knarr.dht.node: PRUNE_SKIP peer_count=4 at_or_below_floor=8
+2026-03-09 23:29:46,838 WARNING knarr.dht.node: PRUNE_SKIP peer_count=4 at_or_below_floor=8
+2026-03-09 23:30:40,467 ERROR knarr.dht.node: Error handling connection: DHTNode._write_receipt() missing 1 required positional argument: 'payload'
+2026-03-09 23:30:47,502 WARNING knarr.dht.node: PRUNE_SKIP peer_count=4 at_or_below_floor=8
+2026-03-09 23:31:46,755 INFO knarr.dht.node: REPUBLISH_CYCLE skills=1 peers=4 fanout=3
+2026-03-09 23:31:47,889 WARNING knarr.dht.node: PRUNE_SKIP peer_count=4 at_or_below_floor=8
+2026-03-09 23:32:48,238 WARNING knarr.dht.node: PRUNE_SKIP peer_count=4 at_or_below_floor=8
+2026-03-09 23:33:48,621 WARNING knarr.dht.node: PRUNE_SKIP peer_count=4 at_or_below_floor=8
+2026-03-09 23:33:50,265 WARNING knarr.dht.node: PULL_TIMEOUT pull_from_correspondents exceeded 5s deadline
+2026-03-09 23:34:48,987 WARNING knarr.dht.node: PRUNE_SKIP peer_count=4 at_or_below_floor=8
+2026-03-09 23:35:49,277 WARNING knarr.dht.node: PRUNE_SKIP peer_count=4 at_or_below_floor=8
+2026-03-09 23:36:49,538 WARNING knarr.dht.node: PRUNE_SKIP peer_count=4 at_or_below_floor=8
+2026-03-09 23:37:13,302 INFO knarr.dht.node: REPUBLISH_CYCLE skills=1 peers=4 fanout=3
+2026-03-09 23:37:49,843 WARNING knarr.dht.node: PRUNE_SKIP peer_count=4 at_or_below_floor=8
+2026-03-09 23:38:50,118 WARNING knarr.dht.node: PRUNE_SKIP peer_count=4 at_or_below_floor=8
+2026-03-09 23:38:56,546 WARNING knarr.dht.node: PULL_TIMEOUT pull_from_correspondents exceeded 5s deadline
+2026-03-09 23:39:50,344 WARNING knarr.dht.node: PRUNE_SKIP peer_count=4 at_or_below_floor=8
+2026-03-09 23:40:50,546 WARNING knarr.dht.node: PRUNE_SKIP peer_count=4 at_or_below_floor=8
+2026-03-09 23:41:50,749 WARNING knarr.dht.node: PRUNE_SKIP peer_count=4 at_or_below_floor=8
+2026-03-09 23:42:36,151 INFO knarr.dht.node: REPUBLISH_CYCLE skills=1 peers=4 fanout=3
+2026-03-09 23:42:50,915 WARNING knarr.dht.node: PRUNE_SKIP peer_count=4 at_or_below_floor=8
+2026-03-09 23:43:51,086 WARNING knarr.dht.node: PRUNE_SKIP peer_count=4 at_or_below_floor=8
+2026-03-09 23:44:02,304 WARNING knarr.dht.node: PULL_TIMEOUT pull_from_correspondents exceeded 5s deadline
+2026-03-09 23:44:51,243 WARNING knarr.dht.node: PRUNE_SKIP peer_count=4 at_or_below_floor=8
+2026-03-09 23:45:51,407 WARNING knarr.dht.node: PRUNE_SKIP peer_count=4 at_or_below_floor=8
+2026-03-09 23:46:51,551 WARNING knarr.dht.node: PRUNE_SKIP peer_count=4 at_or_below_floor=8
+2026-03-09 23:47:21,833 INFO knarr.dht.node: REPUBLISH_CYCLE skills=1 peers=4 fanout=3
+2026-03-09 23:47:51,694 WARNING knarr.dht.node: PRUNE_SKIP peer_count=4 at_or_below_floor=8
+2026-03-09 23:48:51,826 WARNING knarr.dht.node: PRUNE_SKIP peer_count=4 at_or_below_floor=8
+2026-03-09 23:49:07,822 WARNING knarr.dht.node: PULL_TIMEOUT pull_from_correspondents exceeded 5s deadline
+2026-03-09 23:49:51,961 WARNING knarr.dht.node: PRUNE_SKIP peer_count=4 at_or_below_floor=8
+2026-03-09 23:50:52,091 WARNING knarr.dht.node: PRUNE_SKIP peer_count=4 at_or_below_floor=8
+2026-03-09 23:51:52,213 WARNING knarr.dht.node: PRUNE_SKIP peer_count=4 at_or_below_floor=8
+2026-03-09 23:52:23,370 INFO knarr.dht.node: REPUBLISH_CYCLE skills=1 peers=4 fanout=3
+2026-03-09 23:52:52,340 WARNING knarr.dht.node: PRUNE_SKIP peer_count=4 at_or_below_floor=8
+2026-03-09 23:53:52,456 WARNING knarr.dht.node: PRUNE_SKIP peer_count=4 at_or_below_floor=8
+2026-03-09 23:54:13,270 WARNING knarr.dht.node: PULL_TIMEOUT pull_from_correspondents exceeded 5s deadline
+2026-03-09 23:54:52,572 WARNING knarr.dht.node: PRUNE_SKIP peer_count=4 at_or_below_floor=8
+2026-03-09 23:55:52,682 WARNING knarr.dht.node: PRUNE_SKIP peer_count=4 at_or_below_floor=8
+2026-03-09 23:56:52,794 WARNING knarr.dht.node: PRUNE_SKIP peer_count=4 at_or_below_floor=8
+2026-03-09 23:57:23,426 INFO knarr.dht.node: REPUBLISH_CYCLE skills=1 peers=4 fanout=3
+2026-03-09 23:57:52,898 WARNING knarr.dht.node: PRUNE_SKIP peer_count=4 at_or_below_floor=8
+2026-03-09 23:58:53,008 WARNING knarr.dht.node: PRUNE_SKIP peer_count=4 at_or_below_floor=8
+2026-03-09 23:59:18,598 WARNING knarr.dht.node: PULL_TIMEOUT pull_from_correspondents exceeded 5s deadline
+2026-03-09 23:59:53,111 WARNING knarr.dht.node: PRUNE_SKIP peer_count=4 at_or_below_floor=8
+2026-03-10 00:00:53,216 WARNING knarr.dht.node: PRUNE_SKIP peer_count=4 at_or_below_floor=8
+2026-03-10 00:01:53,321 WARNING knarr.dht.node: PRUNE_SKIP peer_count=4 at_or_below_floor=8
+2026-03-10 00:02:01,788 INFO knarr.dht.node: REPUBLISH_CYCLE skills=1 peers=4 fanout=3
+2026-03-10 00:02:53,428 WARNING knarr.dht.node: PRUNE_SKIP peer_count=4 at_or_below_floor=8
+2026-03-10 00:03:53,540 WARNING knarr.dht.node: PRUNE_SKIP peer_count=4 at_or_below_floor=8
+2026-03-10 00:04:23,925 WARNING knarr.dht.node: PULL_TIMEOUT pull_from_correspondents exceeded 5s deadline
+2026-03-10 00:04:53,657 WARNING knarr.dht.node: PRUNE_SKIP peer_count=4 at_or_below_floor=8
+2026-03-10 00:05:05,209 ERROR knarr.dht.node: Error handling connection: DHTNode._write_receipt() missing 1 required positional argument: 'payload'
+2026-03-10 00:05:53,765 WARNING knarr.dht.node: PRUNE_SKIP peer_count=4 at_or_below_floor=8
+2026-03-10 00:06:42,941 INFO knarr.dht.node: REPUBLISH_CYCLE skills=1 peers=4 fanout=3
+2026-03-10 00:06:53,879 WARNING knarr.dht.node: PRUNE_SKIP peer_count=4 at_or_below_floor=8
+2026-03-10 00:07:53,986 WARNING knarr.dht.node: PRUNE_SKIP peer_count=4 at_or_below_floor=8
+2026-03-10 00:08:54,106 WARNING knarr.dht.node: PRUNE_SKIP peer_count=4 at_or_below_floor=8
+2026-03-10 00:09:29,260 WARNING knarr.dht.node: PULL_TIMEOUT pull_from_correspondents exceeded 5s deadline
+2026-03-10 00:09:54,225 WARNING knarr.dht.node: PRUNE_SKIP peer_count=4 at_or_below_floor=8
+2026-03-10 00:10:54,344 WARNING knarr.dht.node: PRUNE_SKIP peer_count=4 at_or_below_floor=8
+2026-03-10 00:11:48,165 INFO knarr.dht.node: REPUBLISH_CYCLE skills=1 peers=4 fanout=3
+2026-03-10 00:11:54,464 WARNING knarr.dht.node: PRUNE_SKIP peer_count=4 at_or_below_floor=8
+2026-03-10 00:12:54,590 WARNING knarr.dht.node: PRUNE_SKIP peer_count=4 at_or_below_floor=8
+2026-03-10 00:13:54,714 WARNING knarr.dht.node: PRUNE_SKIP peer_count=4 at_or_below_floor=8
+2026-03-10 00:14:34,677 WARNING knarr.dht.node: PULL_TIMEOUT pull_from_correspondents exceeded 5s deadline
+2026-03-10 00:14:54,849 WARNING knarr.dht.node: PRUNE_SKIP peer_count=4 at_or_below_floor=8
+2026-03-10 00:15:54,967 WARNING knarr.dht.node: PRUNE_SKIP peer_count=4 at_or_below_floor=8
+2026-03-10 00:16:34,823 INFO knarr.dht.node: REPUBLISH_CYCLE skills=1 peers=4 fanout=3
+2026-03-10 00:16:55,104 WARNING knarr.dht.node: PRUNE_SKIP peer_count=4 at_or_below_floor=8
+2026-03-10 00:17:55,229 WARNING knarr.dht.node: PRUNE_SKIP peer_count=4 at_or_below_floor=8
+2026-03-10 00:18:55,371 WARNING knarr.dht.node: PRUNE_SKIP peer_count=4 at_or_below_floor=8
+2026-03-10 00:19:40,103 WARNING knarr.dht.node: PULL_TIMEOUT pull_from_correspondents exceeded 5s deadline
+2026-03-10 00:19:55,515 WARNING knarr.dht.node: PRUNE_SKIP peer_count=4 at_or_below_floor=8
+2026-03-10 00:20:55,649 WARNING knarr.dht.node: PRUNE_SKIP peer_count=4 at_or_below_floor=8
+2026-03-10 00:21:15,091 INFO knarr.dht.node: REPUBLISH_CYCLE skills=1 peers=4 fanout=3
+2026-03-10 00:21:55,801 WARNING knarr.dht.node: PRUNE_SKIP peer_count=4 at_or_below_floor=8
+2026-03-10 00:22:55,944 WARNING knarr.dht.node: PRUNE_SKIP peer_count=4 at_or_below_floor=8
+2026-03-10 00:23:56,106 WARNING knarr.dht.node: PRUNE_SKIP peer_count=4 at_or_below_floor=8
+2026-03-10 00:24:45,687 WARNING knarr.dht.node: PULL_TIMEOUT pull_from_correspondents exceeded 5s deadline
+2026-03-10 00:24:56,248 WARNING knarr.dht.node: PRUNE_SKIP peer_count=4 at_or_below_floor=8
+2026-03-10 00:25:29,355 ERROR knarr.dht.node: Error handling connection: DHTNode._write_receipt() missing 1 required positional argument: 'payload'
+2026-03-10 00:25:56,398 WARNING knarr.dht.node: PRUNE_SKIP peer_count=4 at_or_below_floor=8
+2026-03-10 00:26:31,374 INFO knarr.dht.node: REPUBLISH_CYCLE skills=1 peers=4 fanout=3
+2026-03-10 00:26:56,540 WARNING knarr.dht.node: PRUNE_SKIP peer_count=4 at_or_below_floor=8
+2026-03-10 00:27:56,701 WARNING knarr.dht.node: PRUNE_SKIP peer_count=4 at_or_below_floor=8
+2026-03-10 00:28:56,844 WARNING knarr.dht.node: PRUNE_SKIP peer_count=4 at_or_below_floor=8
+2026-03-10 00:29:51,227 WARNING knarr.dht.node: PULL_TIMEOUT pull_from_correspondents exceeded 5s deadline
+2026-03-10 00:29:57,007 WARNING knarr.dht.node: PRUNE_SKIP peer_count=4 at_or_below_floor=8
+2026-03-10 00:30:57,157 WARNING knarr.dht.node: PRUNE_SKIP peer_count=4 at_or_below_floor=8
+2026-03-10 00:31:54,003 INFO knarr.dht.node: REPUBLISH_CYCLE skills=1 peers=4 fanout=3
+2026-03-10 00:31:57,337 WARNING knarr.dht.node: PRUNE_SKIP peer_count=4 at_or_below_floor=8
+2026-03-10 00:32:57,485 WARNING knarr.dht.node: PRUNE_SKIP peer_count=4 at_or_below_floor=8
+2026-03-10 00:33:57,674 WARNING knarr.dht.node: PRUNE_SKIP peer_count=4 at_or_below_floor=8
+2026-03-10 00:34:56,846 WARNING knarr.dht.node: PULL_TIMEOUT pull_from_correspondents exceeded 5s deadline
+2026-03-10 00:34:57,848 WARNING knarr.dht.node: PRUNE_SKIP peer_count=4 at_or_below_floor=8
+2026-03-10 00:35:58,029 WARNING knarr.dht.node: PRUNE_SKIP peer_count=4 at_or_below_floor=8
+2026-03-10 00:36:55,655 INFO knarr.dht.node: REPUBLISH_CYCLE skills=1 peers=4 fanout=3
+2026-03-10 00:36:58,189 WARNING knarr.dht.node: PRUNE_SKIP peer_count=4 at_or_below_floor=8
+2026-03-10 00:37:58,395 WARNING knarr.dht.node: PRUNE_SKIP peer_count=4 at_or_below_floor=8
+2026-03-10 00:38:58,561 WARNING knarr.dht.node: PRUNE_SKIP peer_count=4 at_or_below_floor=8
+2026-03-10 00:39:58,750 WARNING knarr.dht.node: PRUNE_SKIP peer_count=4 at_or_below_floor=8
+2026-03-10 00:40:02,533 WARNING knarr.dht.node: PULL_TIMEOUT pull_from_correspondents exceeded 5s deadline
+2026-03-10 00:40:40,621 ERROR knarr.dht.node: Error handling connection: DHTNode._write_receipt() missing 1 required positional argument: 'payload'
+2026-03-10 00:40:58,915 WARNING knarr.dht.node: PRUNE_SKIP peer_count=4 at_or_below_floor=8
+2026-03-10 00:41:59,100 WARNING knarr.dht.node: PRUNE_SKIP peer_count=4 at_or_below_floor=8
+2026-03-10 00:42:15,379 INFO knarr.dht.node: REPUBLISH_CYCLE skills=1 peers=4 fanout=3
+2026-03-10 00:42:59,270 WARNING knarr.dht.node: PRUNE_SKIP peer_count=4 at_or_below_floor=8
+2026-03-10 00:43:59,464 WARNING knarr.dht.node: PRUNE_SKIP peer_count=4 at_or_below_floor=8
+2026-03-10 00:44:59,633 WARNING knarr.dht.node: PRUNE_SKIP peer_count=4 at_or_below_floor=8
+2026-03-10 00:45:08,198 WARNING knarr.dht.node: PULL_TIMEOUT pull_from_correspondents exceeded 5s deadline
+2026-03-10 00:45:59,824 WARNING knarr.dht.node: PRUNE_SKIP peer_count=4 at_or_below_floor=8
+2026-03-10 00:47:00,009 WARNING knarr.dht.node: PRUNE_SKIP peer_count=4 at_or_below_floor=8
+2026-03-10 00:47:17,948 INFO knarr.dht.node: REPUBLISH_CYCLE skills=1 peers=4 fanout=3
+2026-03-10 00:48:00,201 WARNING knarr.dht.node: PRUNE_SKIP peer_count=4 at_or_below_floor=8
+2026-03-10 00:49:00,371 WARNING knarr.dht.node: PRUNE_SKIP peer_count=4 at_or_below_floor=8
+2026-03-10 00:50:00,566 WARNING knarr.dht.node: PRUNE_SKIP peer_count=4 at_or_below_floor=8
+2026-03-10 00:50:13,905 WARNING knarr.dht.node: PULL_TIMEOUT pull_from_correspondents exceeded 5s deadline
+2026-03-10 00:51:00,744 WARNING knarr.dht.node: PRUNE_SKIP peer_count=4 at_or_below_floor=8
+2026-03-10 00:52:00,939 WARNING knarr.dht.node: PRUNE_SKIP peer_count=4 at_or_below_floor=8
+2026-03-10 00:52:11,304 INFO knarr.dht.node: REPUBLISH_CYCLE skills=1 peers=4 fanout=3
+2026-03-10 00:53:01,126 WARNING knarr.dht.node: PRUNE_SKIP peer_count=4 at_or_below_floor=8
+2026-03-10 00:53:23,426 ERROR knarr.dht.node: Error handling connection: DHTNode._write_receipt() missing 1 required positional argument: 'payload'
+2026-03-10 00:53:35,349 ERROR knarr.dht.node: Error handling connection: DHTNode._write_receipt() missing 1 required positional argument: 'payload'
+2026-03-10 00:54:01,331 WARNING knarr.dht.node: PRUNE_SKIP peer_count=4 at_or_below_floor=8
+2026-03-10 00:55:01,511 WARNING knarr.dht.node: PRUNE_SKIP peer_count=4 at_or_below_floor=8
+2026-03-10 00:55:19,707 WARNING knarr.dht.node: PULL_TIMEOUT pull_from_correspondents exceeded 5s deadline
+2026-03-10 00:56:01,706 WARNING knarr.dht.node: PRUNE_SKIP peer_count=4 at_or_below_floor=8
+2026-03-10 00:56:51,277 INFO knarr.dht.node: REPUBLISH_CYCLE skills=1 peers=4 fanout=3
+2026-03-10 00:57:01,903 WARNING knarr.dht.node: PRUNE_SKIP peer_count=4 at_or_below_floor=8
+2026-03-10 00:58:02,100 WARNING knarr.dht.node: PRUNE_SKIP peer_count=4 at_or_below_floor=8
+2026-03-10 00:59:02,293 WARNING knarr.dht.node: PRUNE_SKIP peer_count=4 at_or_below_floor=8
+2026-03-10 01:00:02,502 WARNING knarr.dht.node: PRUNE_SKIP peer_count=4 at_or_below_floor=8
+2026-03-10 01:00:25,455 WARNING knarr.dht.node: PULL_TIMEOUT pull_from_correspondents exceeded 5s deadline
+2026-03-10 01:01:02,716 WARNING knarr.dht.node: PRUNE_SKIP peer_count=4 at_or_below_floor=8
+2026-03-10 01:01:43,310 INFO knarr.dht.node: REPUBLISH_CYCLE skills=1 peers=4 fanout=3
+2026-03-10 01:02:02,920 WARNING knarr.dht.node: PRUNE_SKIP peer_count=4 at_or_below_floor=8
+2026-03-10 01:03:03,144 WARNING knarr.dht.node: PRUNE_SKIP peer_count=4 at_or_below_floor=8
+2026-03-10 01:04:03,352 WARNING knarr.dht.node: PRUNE_SKIP peer_count=4 at_or_below_floor=8
+2026-03-10 01:05:03,584 WARNING knarr.dht.node: PRUNE_SKIP peer_count=4 at_or_below_floor=8
+2026-03-10 01:05:31,336 WARNING knarr.dht.node: PULL_TIMEOUT pull_from_correspondents exceeded 5s deadline
+2026-03-10 01:06:03,797 WARNING knarr.dht.node: PRUNE_SKIP peer_count=4 at_or_below_floor=8
+2026-03-10 01:06:56,400 INFO knarr.dht.node: REPUBLISH_CYCLE skills=1 peers=4 fanout=3
+2026-03-10 01:07:04,042 WARNING knarr.dht.node: PRUNE_SKIP peer_count=4 at_or_below_floor=8
+2026-03-10 01:08:04,273 WARNING knarr.dht.node: PRUNE_SKIP peer_count=4 at_or_below_floor=8
+2026-03-10 01:09:04,488 WARNING knarr.dht.node: PRUNE_SKIP peer_count=4 at_or_below_floor=8
+2026-03-10 01:10:04,728 WARNING knarr.dht.node: PRUNE_SKIP peer_count=4 at_or_below_floor=8
+2026-03-10 01:10:37,244 WARNING knarr.dht.node: PULL_TIMEOUT pull_from_correspondents exceeded 5s deadline
+2026-03-10 01:11:04,948 WARNING knarr.dht.node: PRUNE_SKIP peer_count=4 at_or_below_floor=8
+2026-03-10 01:11:32,896 INFO knarr.dht.node: REPUBLISH_CYCLE skills=1 peers=4 fanout=3
+2026-03-10 01:12:05,176 WARNING knarr.dht.node: PRUNE_SKIP peer_count=4 at_or_below_floor=8
+2026-03-10 01:13:05,392 WARNING knarr.dht.node: PRUNE_SKIP peer_count=4 at_or_below_floor=8
+2026-03-10 01:14:05,628 WARNING knarr.dht.node: PRUNE_SKIP peer_count=4 at_or_below_floor=8
+2026-03-10 01:14:28,271 ERROR knarr.dht.node: Error handling connection: DHTNode._write_receipt() missing 1 required positional argument: 'payload'
+2026-03-10 01:15:05,845 WARNING knarr.dht.node: PRUNE_SKIP peer_count=4 at_or_below_floor=8
+2026-03-10 01:15:43,158 WARNING knarr.dht.node: PULL_TIMEOUT pull_from_correspondents exceeded 5s deadline
+2026-03-10 01:16:06,069 WARNING knarr.dht.node: PRUNE_SKIP peer_count=4 at_or_below_floor=8
+2026-03-10 01:16:33,142 INFO knarr.dht.node: REPUBLISH_CYCLE skills=1 peers=4 fanout=3
+2026-03-10 01:16:58,453 ERROR knarr.dht.node: Error handling connection: DHTNode._write_receipt() missing 1 required positional argument: 'payload'
+2026-03-10 01:17:06,311 WARNING knarr.dht.node: PRUNE_SKIP peer_count=4 at_or_below_floor=8
+2026-03-10 01:17:53,836 ERROR knarr.dht.node: Error handling connection: DHTNode._write_receipt() missing 1 required positional argument: 'payload'
+2026-03-10 01:18:06,553 WARNING knarr.dht.node: PRUNE_SKIP peer_count=4 at_or_below_floor=8
+2026-03-10 01:19:06,797 WARNING knarr.dht.node: PRUNE_SKIP peer_count=4 at_or_below_floor=8
+2026-03-10 01:20:07,045 WARNING knarr.dht.node: PRUNE_SKIP peer_count=4 at_or_below_floor=8
+2026-03-10 01:20:49,143 WARNING knarr.dht.node: PULL_TIMEOUT pull_from_correspondents exceeded 5s deadline
+2026-03-10 01:21:07,310 WARNING knarr.dht.node: PRUNE_SKIP peer_count=4 at_or_below_floor=8
+2026-03-10 01:21:12,289 INFO knarr.dht.node: REPUBLISH_CYCLE skills=1 peers=4 fanout=3
+2026-03-10 01:22:07,551 WARNING knarr.dht.node: PRUNE_SKIP peer_count=4 at_or_below_floor=8
+2026-03-10 01:23:07,781 WARNING knarr.dht.node: PRUNE_SKIP peer_count=4 at_or_below_floor=8
+2026-03-10 01:24:08,014 WARNING knarr.dht.node: PRUNE_SKIP peer_count=4 at_or_below_floor=8
+2026-03-10 01:24:26,864 ERROR knarr.dht.node: Error handling connection: DHTNode._write_receipt() missing 1 required positional argument: 'payload'
+2026-03-10 01:25:08,253 WARNING knarr.dht.node: PRUNE_SKIP peer_count=4 at_or_below_floor=8
+2026-03-10 01:25:55,247 WARNING knarr.dht.node: PULL_TIMEOUT pull_from_correspondents exceeded 5s deadline
+2026-03-10 01:26:08,501 WARNING knarr.dht.node: PRUNE_SKIP peer_count=4 at_or_below_floor=8
+2026-03-10 01:26:18,419 INFO knarr.dht.node: REPUBLISH_CYCLE skills=1 peers=4 fanout=3
+2026-03-10 01:27:08,742 WARNING knarr.dht.node: PRUNE_SKIP peer_count=4 at_or_below_floor=8
+2026-03-10 01:28:08,996 WARNING knarr.dht.node: PRUNE_SKIP peer_count=4 at_or_below_floor=8
+2026-03-10 01:29:09,274 WARNING knarr.dht.node: PRUNE_SKIP peer_count=4 at_or_below_floor=8
+2026-03-10 01:29:41,399 ERROR knarr.dht.node: Error handling connection: DHTNode._write_receipt() missing 1 required positional argument: 'payload'
+2026-03-10 01:30:09,510 WARNING knarr.dht.node: PRUNE_SKIP peer_count=4 at_or_below_floor=8
+2026-03-10 01:31:01,333 WARNING knarr.dht.node: PULL_TIMEOUT pull_from_correspondents exceeded 5s deadline
+2026-03-10 01:31:07,935 INFO knarr.dht.node: REPUBLISH_CYCLE skills=1 peers=4 fanout=3
+2026-03-10 01:31:09,813 WARNING knarr.dht.node: PRUNE_SKIP peer_count=4 at_or_below_floor=8
+2026-03-10 01:32:10,089 WARNING knarr.dht.node: PRUNE_SKIP peer_count=4 at_or_below_floor=8
+2026-03-10 01:33:10,371 WARNING knarr.dht.node: PRUNE_SKIP peer_count=4 at_or_below_floor=8
+2026-03-10 01:34:10,634 WARNING knarr.dht.node: PRUNE_SKIP peer_count=4 at_or_below_floor=8
+2026-03-10 01:35:11,229 WARNING knarr.dht.node: PRUNE_SKIP peer_count=4 at_or_below_floor=8
+2026-03-10 01:36:07,771 WARNING knarr.dht.node: PULL_TIMEOUT pull_from_correspondents exceeded 5s deadline
+2026-03-10 01:36:11,480 WARNING knarr.dht.node: PRUNE_SKIP peer_count=4 at_or_below_floor=8
+2026-03-10 01:36:36,548 INFO knarr.dht.node: REPUBLISH_CYCLE skills=1 peers=4 fanout=3
+2026-03-10 01:37:11,757 WARNING knarr.dht.node: PRUNE_SKIP peer_count=4 at_or_below_floor=8
+2026-03-10 01:38:12,018 WARNING knarr.dht.node: PRUNE_SKIP peer_count=4 at_or_below_floor=8
+2026-03-10 01:39:12,292 WARNING knarr.dht.node: PRUNE_SKIP peer_count=4 at_or_below_floor=8
+2026-03-10 01:40:12,556 WARNING knarr.dht.node: PRUNE_SKIP peer_count=4 at_or_below_floor=8
+2026-03-10 01:41:12,818 WARNING knarr.dht.node: PRUNE_SKIP peer_count=4 at_or_below_floor=8
+2026-03-10 01:41:13,895 WARNING knarr.dht.node: PULL_TIMEOUT pull_from_correspondents exceeded 5s deadline
+2026-03-10 01:41:50,315 INFO knarr.dht.node: REPUBLISH_CYCLE skills=1 peers=4 fanout=3
+2026-03-10 01:42:13,101 WARNING knarr.dht.node: PRUNE_SKIP peer_count=4 at_or_below_floor=8
+2026-03-10 01:43:13,375 WARNING knarr.dht.node: PRUNE_SKIP peer_count=4 at_or_below_floor=8
+2026-03-10 01:44:13,641 WARNING knarr.dht.node: PRUNE_SKIP peer_count=4 at_or_below_floor=8
+2026-03-10 01:45:13,947 WARNING knarr.dht.node: PRUNE_SKIP peer_count=4 at_or_below_floor=8
+2026-03-10 01:46:14,240 WARNING knarr.dht.node: PRUNE_SKIP peer_count=4 at_or_below_floor=8
+2026-03-10 01:46:20,099 WARNING knarr.dht.node: PULL_TIMEOUT pull_from_correspondents exceeded 5s deadline
+2026-03-10 01:47:08,740 INFO knarr.dht.node: REPUBLISH_CYCLE skills=1 peers=4 fanout=3
+2026-03-10 01:47:14,539 WARNING knarr.dht.node: PRUNE_SKIP peer_count=4 at_or_below_floor=8
+2026-03-10 01:48:14,824 WARNING knarr.dht.node: PRUNE_SKIP peer_count=4 at_or_below_floor=8
+2026-03-10 01:49:15,139 WARNING knarr.dht.node: PRUNE_SKIP peer_count=4 at_or_below_floor=8
+2026-03-10 01:50:15,435 WARNING knarr.dht.node: PRUNE_SKIP peer_count=4 at_or_below_floor=8
+2026-03-10 01:51:15,740 WARNING knarr.dht.node: PRUNE_SKIP peer_count=4 at_or_below_floor=8
+2026-03-10 01:51:26,369 WARNING knarr.dht.node: PULL_TIMEOUT pull_from_correspondents exceeded 5s deadline
+2026-03-10 01:51:43,355 INFO knarr.dht.node: REPUBLISH_CYCLE skills=1 peers=4 fanout=3
+2026-03-10 01:52:16,031 WARNING knarr.dht.node: PRUNE_SKIP peer_count=4 at_or_below_floor=8
+2026-03-10 01:53:16,353 WARNING knarr.dht.node: PRUNE_SKIP peer_count=4 at_or_below_floor=8
+2026-03-10 01:54:16,663 WARNING knarr.dht.node: PRUNE_SKIP peer_count=4 at_or_below_floor=8
+2026-03-10 01:55:16,978 WARNING knarr.dht.node: PRUNE_SKIP peer_count=4 at_or_below_floor=8
+2026-03-10 01:56:17,276 WARNING knarr.dht.node: PRUNE_SKIP peer_count=4 at_or_below_floor=8
+2026-03-10 01:56:21,973 INFO knarr.dht.node: REPUBLISH_CYCLE skills=1 peers=4 fanout=3
+2026-03-10 01:56:32,838 WARNING knarr.dht.node: PULL_TIMEOUT pull_from_correspondents exceeded 5s deadline
+2026-03-10 01:57:17,583 WARNING knarr.dht.node: PRUNE_SKIP peer_count=4 at_or_below_floor=8
+2026-03-10 01:57:49,287 ERROR knarr.dht.node: Error handling connection: DHTNode._write_receipt() missing 1 required positional argument: 'payload'
+2026-03-10 01:58:17,886 WARNING knarr.dht.node: PRUNE_SKIP peer_count=4 at_or_below_floor=8
+2026-03-10 01:59:18,229 WARNING knarr.dht.node: PRUNE_SKIP peer_count=4 at_or_below_floor=8
+2026-03-10 02:00:18,527 WARNING knarr.dht.node: PRUNE_SKIP peer_count=4 at_or_below_floor=8
+2026-03-10 02:01:18,845 WARNING knarr.dht.node: PRUNE_SKIP peer_count=4 at_or_below_floor=8
+2026-03-10 02:01:19,748 INFO knarr.dht.node: REPUBLISH_CYCLE skills=1 peers=4 fanout=3
+2026-03-10 02:01:39,180 WARNING knarr.dht.node: PULL_TIMEOUT pull_from_correspondents exceeded 5s deadline
+2026-03-10 02:02:19,169 WARNING knarr.dht.node: PRUNE_SKIP peer_count=4 at_or_below_floor=8
+2026-03-10 02:03:19,515 WARNING knarr.dht.node: PRUNE_SKIP peer_count=4 at_or_below_floor=8
+2026-03-10 02:04:19,833 WARNING knarr.dht.node: PRUNE_SKIP peer_count=4 at_or_below_floor=8
+2026-03-10 02:05:20,582 WARNING knarr.dht.node: PRUNE_SKIP peer_count=4 at_or_below_floor=8
+2026-03-10 02:05:53,177 INFO knarr.dht.node: REPUBLISH_CYCLE skills=1 peers=4 fanout=3
+2026-03-10 02:06:21,693 WARNING knarr.dht.node: PRUNE_SKIP peer_count=4 at_or_below_floor=8
+2026-03-10 02:06:47,211 WARNING knarr.dht.node: PULL_TIMEOUT pull_from_correspondents exceeded 5s deadline
+2026-03-10 02:07:22,825 WARNING knarr.dht.node: PRUNE_SKIP peer_count=4 at_or_below_floor=8
+2026-03-10 02:08:23,960 WARNING knarr.dht.node: PRUNE_SKIP peer_count=4 at_or_below_floor=8
+2026-03-10 02:09:25,092 WARNING knarr.dht.node: PRUNE_SKIP peer_count=4 at_or_below_floor=8
+2026-03-10 02:10:26,242 WARNING knarr.dht.node: PRUNE_SKIP peer_count=4 at_or_below_floor=8
+2026-03-10 02:10:36,358 INFO knarr.dht.node: REPUBLISH_CYCLE skills=1 peers=4 fanout=3
+2026-03-10 02:11:27,523 WARNING knarr.dht.node: PRUNE_SKIP peer_count=4 at_or_below_floor=8
+2026-03-10 02:11:57,823 WARNING knarr.dht.node: PULL_TIMEOUT pull_from_correspondents exceeded 5s deadline
+2026-03-10 02:12:28,692 WARNING knarr.dht.node: PRUNE_SKIP peer_count=4 at_or_below_floor=8
+2026-03-10 02:13:29,890 WARNING knarr.dht.node: PRUNE_SKIP peer_count=4 at_or_below_floor=8
+2026-03-10 02:14:31,306 WARNING knarr.dht.node: PRUNE_SKIP peer_count=4 at_or_below_floor=8
+2026-03-10 02:15:11,955 INFO knarr.dht.node: REPUBLISH_CYCLE skills=1 peers=4 fanout=3
+2026-03-10 02:15:32,611 WARNING knarr.dht.node: PRUNE_SKIP peer_count=4 at_or_below_floor=8
+2026-03-10 02:16:34,002 WARNING knarr.dht.node: PRUNE_SKIP peer_count=4 at_or_below_floor=8
+2026-03-10 02:17:09,146 WARNING knarr.dht.node: PULL_TIMEOUT pull_from_correspondents exceeded 5s deadline
+2026-03-10 02:17:35,328 WARNING knarr.dht.node: PRUNE_SKIP peer_count=4 at_or_below_floor=8
+2026-03-10 02:18:36,676 WARNING knarr.dht.node: PRUNE_SKIP peer_count=4 at_or_below_floor=8
+2026-03-10 02:19:38,074 WARNING knarr.dht.node: PRUNE_SKIP peer_count=4 at_or_below_floor=8
+2026-03-10 02:20:20,432 INFO knarr.dht.node: REPUBLISH_CYCLE skills=1 peers=4 fanout=3
+2026-03-10 02:20:39,467 WARNING knarr.dht.node: PRUNE_SKIP peer_count=4 at_or_below_floor=8
+2026-03-10 02:21:40,842 WARNING knarr.dht.node: PRUNE_SKIP peer_count=4 at_or_below_floor=8
+2026-03-10 02:22:20,812 WARNING knarr.dht.node: PULL_TIMEOUT pull_from_correspondents exceeded 5s deadline
+2026-03-10 02:22:42,240 WARNING knarr.dht.node: PRUNE_SKIP peer_count=4 at_or_below_floor=8
+2026-03-10 02:23:43,660 WARNING knarr.dht.node: PRUNE_SKIP peer_count=4 at_or_below_floor=8
+2026-03-10 02:24:45,211 WARNING knarr.dht.node: PRUNE_SKIP peer_count=4 at_or_below_floor=8
+2026-03-10 02:25:46,626 WARNING knarr.dht.node: PRUNE_SKIP peer_count=4 at_or_below_floor=8
+2026-03-10 02:25:53,400 INFO knarr.dht.node: REPUBLISH_CYCLE skills=1 peers=4 fanout=3
+2026-03-10 02:26:48,210 WARNING knarr.dht.node: PRUNE_SKIP peer_count=4 at_or_below_floor=8
+2026-03-10 02:27:33,703 WARNING knarr.dht.node: PULL_TIMEOUT pull_from_correspondents exceeded 5s deadline
+2026-03-10 02:27:49,653 WARNING knarr.dht.node: PRUNE_SKIP peer_count=4 at_or_below_floor=8
+2026-03-10 02:28:51,224 WARNING knarr.dht.node: PRUNE_SKIP peer_count=4 at_or_below_floor=8
+2026-03-10 02:29:52,695 WARNING knarr.dht.node: PRUNE_SKIP peer_count=4 at_or_below_floor=8
+2026-03-10 02:30:54,286 WARNING knarr.dht.node: PRUNE_SKIP peer_count=4 at_or_below_floor=8
+2026-03-10 02:31:06,413 INFO knarr.dht.node: REPUBLISH_CYCLE skills=1 peers=4 fanout=3
+2026-03-10 02:31:55,786 WARNING knarr.dht.node: PRUNE_SKIP peer_count=4 at_or_below_floor=8
+2026-03-10 02:32:46,179 WARNING knarr.dht.node: PULL_TIMEOUT pull_from_correspondents exceeded 5s deadline
+2026-03-10 02:32:57,347 WARNING knarr.dht.node: PRUNE_SKIP peer_count=4 at_or_below_floor=8
+2026-03-10 02:33:58,900 WARNING knarr.dht.node: PRUNE_SKIP peer_count=4 at_or_below_floor=8
+2026-03-10 02:35:00,538 WARNING knarr.dht.node: PRUNE_SKIP peer_count=4 at_or_below_floor=8
+2026-03-10 02:36:02,069 WARNING knarr.dht.node: PRUNE_SKIP peer_count=4 at_or_below_floor=8
+2026-03-10 02:36:42,208 INFO knarr.dht.node: REPUBLISH_CYCLE skills=1 peers=4 fanout=3
+2026-03-10 02:37:03,691 WARNING knarr.dht.node: PRUNE_SKIP peer_count=4 at_or_below_floor=8
+2026-03-10 02:37:58,879 WARNING knarr.dht.node: PULL_TIMEOUT pull_from_correspondents exceeded 5s deadline
+2026-03-10 02:38:05,262 WARNING knarr.dht.node: PRUNE_SKIP peer_count=4 at_or_below_floor=8
+2026-03-10 02:39:06,954 WARNING knarr.dht.node: PRUNE_SKIP peer_count=4 at_or_below_floor=8
+2026-03-10 02:40:08,556 WARNING knarr.dht.node: PRUNE_SKIP peer_count=4 at_or_below_floor=8
+2026-03-10 02:41:10,275 WARNING knarr.dht.node: PRUNE_SKIP peer_count=4 at_or_below_floor=8
+2026-03-10 02:42:02,828 ERROR knarr.dht.node: Error handling connection: DHTNode._write_receipt() missing 1 required positional argument: 'payload'
+2026-03-10 02:42:08,739 INFO knarr.dht.node: REPUBLISH_CYCLE skills=1 peers=4 fanout=3
+2026-03-10 02:42:11,883 WARNING knarr.dht.node: PRUNE_SKIP peer_count=4 at_or_below_floor=8
+2026-03-10 02:43:11,994 WARNING knarr.dht.node: PULL_TIMEOUT pull_from_correspondents exceeded 5s deadline
+2026-03-10 02:43:13,604 WARNING knarr.dht.node: PRUNE_SKIP peer_count=4 at_or_below_floor=8
+2026-03-10 02:44:15,227 WARNING knarr.dht.node: PRUNE_SKIP peer_count=4 at_or_below_floor=8
+2026-03-10 02:45:16,928 WARNING knarr.dht.node: PRUNE_SKIP peer_count=4 at_or_below_floor=8
+2026-03-10 02:46:18,582 WARNING knarr.dht.node: PRUNE_SKIP peer_count=4 at_or_below_floor=8
+2026-03-10 02:47:20,285 WARNING knarr.dht.node: PRUNE_SKIP peer_count=4 at_or_below_floor=8
+2026-03-10 02:47:45,450 INFO knarr.dht.node: REPUBLISH_CYCLE skills=1 peers=4 fanout=3
+2026-03-10 02:48:21,960 WARNING knarr.dht.node: PRUNE_SKIP peer_count=4 at_or_below_floor=8
+2026-03-10 02:48:25,131 WARNING knarr.dht.node: PULL_TIMEOUT pull_from_correspondents exceeded 5s deadline
+2026-03-10 02:49:23,673 WARNING knarr.dht.node: PRUNE_SKIP peer_count=4 at_or_below_floor=8
+2026-03-10 02:50:25,364 WARNING knarr.dht.node: PRUNE_SKIP peer_count=4 at_or_below_floor=8
+2026-03-10 02:50:28,506 ERROR knarr.dht.node: Error handling connection: DHTNode._write_receipt() missing 1 required positional argument: 'payload'
+2026-03-10 02:51:27,080 WARNING knarr.dht.node: PRUNE_SKIP peer_count=4 at_or_below_floor=8
+2026-03-10 02:52:28,770 WARNING knarr.dht.node: PRUNE_SKIP peer_count=4 at_or_below_floor=8
+2026-03-10 02:52:45,366 INFO knarr.dht.node: REPUBLISH_CYCLE skills=1 peers=4 fanout=3
+2026-03-10 02:53:30,499 WARNING knarr.dht.node: PRUNE_SKIP peer_count=4 at_or_below_floor=8
+2026-03-10 02:53:38,462 WARNING knarr.dht.node: PULL_TIMEOUT pull_from_correspondents exceeded 5s deadline
+2026-03-10 02:54:32,233 WARNING knarr.dht.node: PRUNE_SKIP peer_count=4 at_or_below_floor=8
+2026-03-10 02:55:33,968 WARNING knarr.dht.node: PRUNE_SKIP peer_count=4 at_or_below_floor=8
+2026-03-10 02:55:44,815 ERROR knarr.dht.node: Error handling connection: DHTNode._write_receipt() missing 1 required positional argument: 'payload'
+2026-03-10 02:56:35,720 WARNING knarr.dht.node: PRUNE_SKIP peer_count=4 at_or_below_floor=8
+2026-03-10 02:57:37,476 WARNING knarr.dht.node: PRUNE_SKIP peer_count=4 at_or_below_floor=8
+2026-03-10 02:57:40,956 INFO knarr.dht.node: REPUBLISH_CYCLE skills=1 peers=4 fanout=3
+2026-03-10 02:58:39,250 WARNING knarr.dht.node: PRUNE_SKIP peer_count=4 at_or_below_floor=8
+2026-03-10 02:58:52,858 WARNING knarr.dht.node: PULL_TIMEOUT pull_from_correspondents exceeded 5s deadline
+2026-03-10 02:59:41,039 WARNING knarr.dht.node: PRUNE_SKIP peer_count=4 at_or_below_floor=8
+2026-03-10 03:00:42,799 WARNING knarr.dht.node: PRUNE_SKIP peer_count=4 at_or_below_floor=8
+2026-03-10 03:01:44,613 WARNING knarr.dht.node: PRUNE_SKIP peer_count=4 at_or_below_floor=8
+2026-03-10 03:02:46,422 WARNING knarr.dht.node: PRUNE_SKIP peer_count=4 at_or_below_floor=8
+2026-03-10 03:03:09,393 INFO knarr.dht.node: REPUBLISH_CYCLE skills=1 peers=4 fanout=3
+2026-03-10 03:03:48,249 WARNING knarr.dht.node: PRUNE_SKIP peer_count=4 at_or_below_floor=8
+2026-03-10 03:04:06,662 WARNING knarr.dht.node: PULL_TIMEOUT pull_from_correspondents exceeded 5s deadline
+2026-03-10 03:04:50,044 WARNING knarr.dht.node: PRUNE_SKIP peer_count=4 at_or_below_floor=8
+2026-03-10 03:05:51,920 WARNING knarr.dht.node: PRUNE_SKIP peer_count=4 at_or_below_floor=8
+2026-03-10 03:06:53,736 WARNING knarr.dht.node: PRUNE_SKIP peer_count=4 at_or_below_floor=8
+2026-03-10 03:07:55,618 WARNING knarr.dht.node: PRUNE_SKIP peer_count=4 at_or_below_floor=8
+2026-03-10 03:08:33,379 INFO knarr.dht.node: REPUBLISH_CYCLE skills=1 peers=4 fanout=3
+2026-03-10 03:08:57,545 WARNING knarr.dht.node: PRUNE_SKIP peer_count=4 at_or_below_floor=8
+2026-03-10 03:09:20,832 WARNING knarr.dht.node: PULL_TIMEOUT pull_from_correspondents exceeded 5s deadline
+2026-03-10 03:09:59,452 WARNING knarr.dht.node: PRUNE_SKIP peer_count=4 at_or_below_floor=8
+2026-03-10 03:11:01,353 WARNING knarr.dht.node: PRUNE_SKIP peer_count=4 at_or_below_floor=8
+2026-03-10 03:12:03,297 WARNING knarr.dht.node: PRUNE_SKIP peer_count=4 at_or_below_floor=8
+2026-03-10 03:13:05,224 WARNING knarr.dht.node: PRUNE_SKIP peer_count=4 at_or_below_floor=8
+2026-03-10 03:13:50,463 INFO knarr.dht.node: REPUBLISH_CYCLE skills=1 peers=4 fanout=3
+2026-03-10 03:14:07,174 WARNING knarr.dht.node: PRUNE_SKIP peer_count=4 at_or_below_floor=8
+2026-03-10 03:14:35,217 WARNING knarr.dht.node: PULL_TIMEOUT pull_from_correspondents exceeded 5s deadline
+2026-03-10 03:15:09,125 WARNING knarr.dht.node: PRUNE_SKIP peer_count=4 at_or_below_floor=8
+2026-03-10 03:16:11,135 WARNING knarr.dht.node: PRUNE_SKIP peer_count=4 at_or_below_floor=8
+2026-03-10 03:17:13,089 WARNING knarr.dht.node: PRUNE_SKIP peer_count=4 at_or_below_floor=8
+2026-03-10 03:17:38,019 ERROR knarr.dht.node: Error handling connection: DHTNode._write_receipt() missing 1 required positional argument: 'payload'
+2026-03-10 03:18:15,078 WARNING knarr.dht.node: PRUNE_SKIP peer_count=4 at_or_below_floor=8
+2026-03-10 03:19:17,043 WARNING knarr.dht.node: PRUNE_SKIP peer_count=4 at_or_below_floor=8
+2026-03-10 03:19:21,842 INFO knarr.dht.node: REPUBLISH_CYCLE skills=1 peers=4 fanout=3
+2026-03-10 03:19:49,915 WARNING knarr.dht.node: PULL_TIMEOUT pull_from_correspondents exceeded 5s deadline
+2026-03-10 03:20:19,045 WARNING knarr.dht.node: PRUNE_SKIP peer_count=4 at_or_below_floor=8
+2026-03-10 03:21:21,026 WARNING knarr.dht.node: PRUNE_SKIP peer_count=4 at_or_below_floor=8
+2026-03-10 03:22:23,073 WARNING knarr.dht.node: PRUNE_SKIP peer_count=4 at_or_below_floor=8
+2026-03-10 03:23:01,710 ERROR knarr.dht.node: Error handling connection: DHTNode._write_receipt() missing 1 required positional argument: 'payload'
+2026-03-10 03:23:25,063 WARNING knarr.dht.node: PRUNE_SKIP peer_count=4 at_or_below_floor=8
+2026-03-10 03:24:27,105 WARNING knarr.dht.node: PRUNE_SKIP peer_count=4 at_or_below_floor=8
+2026-03-10 03:24:42,869 INFO knarr.dht.node: REPUBLISH_CYCLE skills=1 peers=4 fanout=3
+2026-03-10 03:25:04,750 WARNING knarr.dht.node: PULL_TIMEOUT pull_from_correspondents exceeded 5s deadline
+2026-03-10 03:25:29,111 WARNING knarr.dht.node: PRUNE_SKIP peer_count=4 at_or_below_floor=8
+2026-03-10 03:26:31,182 WARNING knarr.dht.node: PRUNE_SKIP peer_count=4 at_or_below_floor=8
+2026-03-10 03:27:33,199 WARNING knarr.dht.node: PRUNE_SKIP peer_count=4 at_or_below_floor=8
+2026-03-10 03:27:47,085 ERROR knarr.dht.node: Error handling connection: DHTNode._write_receipt() missing 1 required positional argument: 'payload'
+2026-03-10 03:28:35,282 WARNING knarr.dht.node: PRUNE_SKIP peer_count=4 at_or_below_floor=8
+2026-03-10 03:29:37,325 WARNING knarr.dht.node: PRUNE_SKIP peer_count=4 at_or_below_floor=8
+2026-03-10 03:29:45,866 INFO knarr.dht.node: REPUBLISH_CYCLE skills=1 peers=4 fanout=3
+2026-03-10 03:30:20,823 WARNING knarr.dht.node: PULL_TIMEOUT pull_from_correspondents exceeded 5s deadline
+2026-03-10 03:30:39,408 WARNING knarr.dht.node: PRUNE_SKIP peer_count=4 at_or_below_floor=8
+2026-03-10 03:31:41,459 WARNING knarr.dht.node: PRUNE_SKIP peer_count=4 at_or_below_floor=8
+2026-03-10 03:32:43,569 WARNING knarr.dht.node: PRUNE_SKIP peer_count=4 at_or_below_floor=8
+2026-03-10 03:33:45,635 WARNING knarr.dht.node: PRUNE_SKIP peer_count=4 at_or_below_floor=8
+2026-03-10 03:34:47,751 WARNING knarr.dht.node: PRUNE_SKIP peer_count=4 at_or_below_floor=8
+2026-03-10 03:35:18,688 INFO knarr.dht.node: REPUBLISH_CYCLE skills=1 peers=4 fanout=3
+2026-03-10 03:35:36,030 WARNING knarr.dht.node: PULL_TIMEOUT pull_from_correspondents exceeded 5s deadline
+2026-03-10 03:35:49,837 WARNING knarr.dht.node: PRUNE_SKIP peer_count=4 at_or_below_floor=8
+2026-03-10 03:36:51,955 WARNING knarr.dht.node: PRUNE_SKIP peer_count=4 at_or_below_floor=8
+2026-03-10 03:37:54,055 WARNING knarr.dht.node: PRUNE_SKIP peer_count=4 at_or_below_floor=8
+2026-03-10 03:38:56,190 WARNING knarr.dht.node: PRUNE_SKIP peer_count=4 at_or_below_floor=8
+2026-03-10 03:39:58,320 WARNING knarr.dht.node: PRUNE_SKIP peer_count=4 at_or_below_floor=8
+2026-03-10 03:40:43,145 INFO knarr.dht.node: REPUBLISH_CYCLE skills=1 peers=4 fanout=3
+2026-03-10 03:40:51,444 WARNING knarr.dht.node: PULL_TIMEOUT pull_from_correspondents exceeded 5s deadline
+2026-03-10 03:41:00,469 WARNING knarr.dht.node: PRUNE_SKIP peer_count=4 at_or_below_floor=8
+2026-03-10 03:41:14,559 ERROR knarr.dht.node: Error handling connection: DHTNode._write_receipt() missing 1 required positional argument: 'payload'
+2026-03-10 03:42:02,626 WARNING knarr.dht.node: PRUNE_SKIP peer_count=4 at_or_below_floor=8
+2026-03-10 03:43:04,776 WARNING knarr.dht.node: PRUNE_SKIP peer_count=4 at_or_below_floor=8
+2026-03-10 03:44:06,929 WARNING knarr.dht.node: PRUNE_SKIP peer_count=4 at_or_below_floor=8
+2026-03-10 03:45:09,116 WARNING knarr.dht.node: PRUNE_SKIP peer_count=4 at_or_below_floor=8
+2026-03-10 03:45:59,734 INFO knarr.dht.node: REPUBLISH_CYCLE skills=1 peers=4 fanout=3
+2026-03-10 03:46:07,081 WARNING knarr.dht.node: PULL_TIMEOUT pull_from_correspondents exceeded 5s deadline
+2026-03-10 03:46:11,321 WARNING knarr.dht.node: PRUNE_SKIP peer_count=4 at_or_below_floor=8
+2026-03-10 03:47:13,490 WARNING knarr.dht.node: PRUNE_SKIP peer_count=4 at_or_below_floor=8
+2026-03-10 03:48:15,725 WARNING knarr.dht.node: PRUNE_SKIP peer_count=4 at_or_below_floor=8
+2026-03-10 03:48:39,673 ERROR knarr.dht.node: Error handling connection: DHTNode._write_receipt() missing 1 required positional argument: 'payload'
+2026-03-10 03:49:17,904 WARNING knarr.dht.node: PRUNE_SKIP peer_count=4 at_or_below_floor=8
+2026-03-10 03:50:20,157 WARNING knarr.dht.node: PRUNE_SKIP peer_count=4 at_or_below_floor=8
+2026-03-10 03:51:22,366 WARNING knarr.dht.node: PRUNE_SKIP peer_count=4 at_or_below_floor=8
+2026-03-10 03:51:22,916 WARNING knarr.dht.node: PULL_TIMEOUT pull_from_correspondents exceeded 5s deadline
+2026-03-10 03:51:37,733 INFO knarr.dht.node: REPUBLISH_CYCLE skills=1 peers=4 fanout=3
+2026-03-10 03:52:24,636 WARNING knarr.dht.node: PRUNE_SKIP peer_count=4 at_or_below_floor=8
+2026-03-10 03:53:26,866 WARNING knarr.dht.node: PRUNE_SKIP peer_count=4 at_or_below_floor=8
+2026-03-10 03:54:29,241 WARNING knarr.dht.node: PRUNE_SKIP peer_count=4 at_or_below_floor=8
+2026-03-10 03:55:31,462 WARNING knarr.dht.node: PRUNE_SKIP peer_count=4 at_or_below_floor=8
+2026-03-10 03:56:30,108 ERROR knarr.dht.node: Error handling connection: DHTNode._write_receipt() missing 1 required positional argument: 'payload'
+2026-03-10 03:56:33,886 WARNING knarr.dht.node: PRUNE_SKIP peer_count=4 at_or_below_floor=8
+2026-03-10 03:56:39,228 WARNING knarr.dht.node: PULL_TIMEOUT pull_from_correspondents exceeded 5s deadline
+2026-03-10 03:56:41,348 INFO knarr.dht.node: REPUBLISH_CYCLE skills=1 peers=4 fanout=3
+2026-03-10 03:57:36,147 WARNING knarr.dht.node: PRUNE_SKIP peer_count=4 at_or_below_floor=8
+2026-03-10 03:58:38,546 WARNING knarr.dht.node: PRUNE_SKIP peer_count=4 at_or_below_floor=8
+2026-03-10 03:59:40,826 WARNING knarr.dht.node: PRUNE_SKIP peer_count=4 at_or_below_floor=8
+2026-03-10 04:00:43,229 WARNING knarr.dht.node: PRUNE_SKIP peer_count=4 at_or_below_floor=8
+2026-03-10 04:01:45,549 WARNING knarr.dht.node: PRUNE_SKIP peer_count=4 at_or_below_floor=8
+2026-03-10 04:01:56,833 WARNING knarr.dht.node: PULL_TIMEOUT pull_from_correspondents exceeded 5s deadline
+2026-03-10 04:02:03,892 INFO knarr.dht.node: REPUBLISH_CYCLE skills=1 peers=4 fanout=3
+2026-03-10 04:02:47,978 WARNING knarr.dht.node: PRUNE_SKIP peer_count=4 at_or_below_floor=8
+2026-03-10 04:03:50,318 WARNING knarr.dht.node: PRUNE_SKIP peer_count=4 at_or_below_floor=8
+2026-03-10 04:04:52,707 WARNING knarr.dht.node: PRUNE_SKIP peer_count=4 at_or_below_floor=8
+2026-03-10 04:05:55,082 WARNING knarr.dht.node: PRUNE_SKIP peer_count=4 at_or_below_floor=8
+2026-03-10 04:06:49,657 INFO knarr.dht.node: REPUBLISH_CYCLE skills=1 peers=4 fanout=3
+2026-03-10 04:06:57,542 WARNING knarr.dht.node: PRUNE_SKIP peer_count=4 at_or_below_floor=8
+2026-03-10 04:07:13,613 WARNING knarr.dht.node: PULL_TIMEOUT pull_from_correspondents exceeded 5s deadline
+2026-03-10 04:07:59,906 WARNING knarr.dht.node: PRUNE_SKIP peer_count=4 at_or_below_floor=8
+2026-03-10 04:09:02,332 WARNING knarr.dht.node: PRUNE_SKIP peer_count=4 at_or_below_floor=8
+2026-03-10 04:10:04,734 WARNING knarr.dht.node: PRUNE_SKIP peer_count=4 at_or_below_floor=8
+2026-03-10 04:11:07,180 WARNING knarr.dht.node: PRUNE_SKIP peer_count=4 at_or_below_floor=8
+2026-03-10 04:12:06,275 ERROR knarr.dht.node: Error handling connection: DHTNode._write_receipt() missing 1 required positional argument: 'payload'
+2026-03-10 04:12:09,592 WARNING knarr.dht.node: PRUNE_SKIP peer_count=4 at_or_below_floor=8
+2026-03-10 04:12:29,623 INFO knarr.dht.node: REPUBLISH_CYCLE skills=1 peers=4 fanout=3
+2026-03-10 04:12:30,501 WARNING knarr.dht.node: PULL_TIMEOUT pull_from_correspondents exceeded 5s deadline
+2026-03-10 04:13:12,052 WARNING knarr.dht.node: PRUNE_SKIP peer_count=4 at_or_below_floor=8
+2026-03-10 04:14:14,487 WARNING knarr.dht.node: PRUNE_SKIP peer_count=4 at_or_below_floor=8
+2026-03-10 04:15:16,961 WARNING knarr.dht.node: PRUNE_SKIP peer_count=4 at_or_below_floor=8
+2026-03-10 04:16:19,410 WARNING knarr.dht.node: PRUNE_SKIP peer_count=4 at_or_below_floor=8
+2026-03-10 04:16:27,244 ERROR knarr.dht.node: Error handling connection: DHTNode._write_receipt() missing 1 required positional argument: 'payload'
+2026-03-10 04:17:21,896 WARNING knarr.dht.node: PRUNE_SKIP peer_count=4 at_or_below_floor=8
+2026-03-10 04:17:47,590 WARNING knarr.dht.node: PULL_TIMEOUT pull_from_correspondents exceeded 5s deadline
+2026-03-10 04:17:49,332 INFO knarr.dht.node: REPUBLISH_CYCLE skills=1 peers=4 fanout=3
+2026-03-10 04:18:24,345 WARNING knarr.dht.node: PRUNE_SKIP peer_count=4 at_or_below_floor=8
+2026-03-10 04:19:26,852 WARNING knarr.dht.node: PRUNE_SKIP peer_count=4 at_or_below_floor=8
+2026-03-10 04:19:38,745 ERROR knarr.dht.node: Error handling connection: DHTNode._write_receipt() missing 1 required positional argument: 'payload'
+2026-03-10 04:20:29,308 WARNING knarr.dht.node: PRUNE_SKIP peer_count=4 at_or_below_floor=8
+2026-03-10 04:21:31,823 WARNING knarr.dht.node: PRUNE_SKIP peer_count=4 at_or_below_floor=8
+2026-03-10 04:22:34,309 WARNING knarr.dht.node: PRUNE_SKIP peer_count=4 at_or_below_floor=8
+2026-03-10 04:23:04,806 WARNING knarr.dht.node: PULL_TIMEOUT pull_from_correspondents exceeded 5s deadline
+2026-03-10 04:23:25,749 INFO knarr.dht.node: REPUBLISH_CYCLE skills=1 peers=4 fanout=3
+2026-03-10 04:23:36,820 WARNING knarr.dht.node: PRUNE_SKIP peer_count=4 at_or_below_floor=8
+2026-03-10 04:24:39,326 WARNING knarr.dht.node: PRUNE_SKIP peer_count=4 at_or_below_floor=8
+2026-03-10 04:25:41,851 WARNING knarr.dht.node: PRUNE_SKIP peer_count=4 at_or_below_floor=8
+2026-03-10 04:26:44,386 WARNING knarr.dht.node: PRUNE_SKIP peer_count=4 at_or_below_floor=8
+2026-03-10 04:27:46,943 WARNING knarr.dht.node: PRUNE_SKIP peer_count=4 at_or_below_floor=8
+2026-03-10 04:28:22,258 WARNING knarr.dht.node: PULL_TIMEOUT pull_from_correspondents exceeded 5s deadline
+2026-03-10 04:28:35,172 INFO knarr.dht.node: REPUBLISH_CYCLE skills=1 peers=4 fanout=3
+2026-03-10 04:28:49,499 WARNING knarr.dht.node: PRUNE_SKIP peer_count=4 at_or_below_floor=8
+2026-03-10 04:29:52,067 WARNING knarr.dht.node: PRUNE_SKIP peer_count=4 at_or_below_floor=8
+2026-03-10 04:30:54,625 WARNING knarr.dht.node: PRUNE_SKIP peer_count=4 at_or_below_floor=8
+2026-03-10 04:31:57,235 WARNING knarr.dht.node: PRUNE_SKIP peer_count=4 at_or_below_floor=8
+2026-03-10 04:32:59,806 WARNING knarr.dht.node: PRUNE_SKIP peer_count=4 at_or_below_floor=8
+2026-03-10 04:33:41,216 WARNING knarr.dht.node: PULL_TIMEOUT pull_from_correspondents exceeded 5s deadline
+2026-03-10 04:33:58,620 INFO knarr.dht.node: REPUBLISH_CYCLE skills=1 peers=4 fanout=3
+2026-03-10 04:34:02,441 WARNING knarr.dht.node: PRUNE_SKIP peer_count=4 at_or_below_floor=8
+2026-03-10 04:35:05,032 WARNING knarr.dht.node: PRUNE_SKIP peer_count=4 at_or_below_floor=8
+2026-03-10 04:36:07,679 WARNING knarr.dht.node: PRUNE_SKIP peer_count=4 at_or_below_floor=8
+2026-03-10 04:37:10,276 WARNING knarr.dht.node: PRUNE_SKIP peer_count=4 at_or_below_floor=8
+2026-03-10 04:38:12,949 WARNING knarr.dht.node: PRUNE_SKIP peer_count=4 at_or_below_floor=8
+2026-03-10 04:38:59,138 WARNING knarr.dht.node: PULL_TIMEOUT pull_from_correspondents exceeded 5s deadline
+2026-03-10 04:39:15,574 WARNING knarr.dht.node: PRUNE_SKIP peer_count=4 at_or_below_floor=8
+2026-03-10 04:39:30,283 INFO knarr.dht.node: REPUBLISH_CYCLE skills=1 peers=4 fanout=3
+2026-03-10 04:40:18,276 WARNING knarr.dht.node: PRUNE_SKIP peer_count=4 at_or_below_floor=8
+2026-03-10 04:41:21,035 WARNING knarr.dht.node: PRUNE_SKIP peer_count=4 at_or_below_floor=8
+2026-03-10 04:42:23,716 WARNING knarr.dht.node: PRUNE_SKIP peer_count=4 at_or_below_floor=8
+2026-03-10 04:43:26,418 WARNING knarr.dht.node: PRUNE_SKIP peer_count=4 at_or_below_floor=8
+2026-03-10 04:44:17,527 WARNING knarr.dht.node: PULL_TIMEOUT pull_from_correspondents exceeded 5s deadline
+2026-03-10 04:44:21,730 INFO knarr.dht.node: REPUBLISH_CYCLE skills=1 peers=4 fanout=3
+2026-03-10 04:44:29,185 WARNING knarr.dht.node: PRUNE_SKIP peer_count=4 at_or_below_floor=8
+2026-03-10 04:45:31,925 WARNING knarr.dht.node: PRUNE_SKIP peer_count=4 at_or_below_floor=8
+2026-03-10 04:46:34,674 WARNING knarr.dht.node: PRUNE_SKIP peer_count=4 at_or_below_floor=8
+2026-03-10 04:47:37,421 WARNING knarr.dht.node: PRUNE_SKIP peer_count=4 at_or_below_floor=8
+2026-03-10 04:48:40,218 WARNING knarr.dht.node: PRUNE_SKIP peer_count=4 at_or_below_floor=8
+2026-03-10 04:49:36,085 WARNING knarr.dht.node: PULL_TIMEOUT pull_from_correspondents exceeded 5s deadline
+2026-03-10 04:49:42,965 WARNING knarr.dht.node: PRUNE_SKIP peer_count=4 at_or_below_floor=8
+2026-03-10 04:49:55,449 INFO knarr.dht.node: REPUBLISH_CYCLE skills=1 peers=4 fanout=3
+2026-03-10 04:50:45,765 WARNING knarr.dht.node: PRUNE_SKIP peer_count=4 at_or_below_floor=8
+2026-03-10 04:51:48,523 WARNING knarr.dht.node: PRUNE_SKIP peer_count=4 at_or_below_floor=8
+2026-03-10 04:52:51,330 WARNING knarr.dht.node: PRUNE_SKIP peer_count=4 at_or_below_floor=8
+2026-03-10 04:53:54,115 WARNING knarr.dht.node: PRUNE_SKIP peer_count=4 at_or_below_floor=8
+2026-03-10 04:54:54,840 WARNING knarr.dht.node: PULL_TIMEOUT pull_from_correspondents exceeded 5s deadline
+2026-03-10 04:54:56,070 INFO knarr.dht.node: REPUBLISH_CYCLE skills=1 peers=4 fanout=3
+2026-03-10 04:54:56,937 WARNING knarr.dht.node: PRUNE_SKIP peer_count=4 at_or_below_floor=8
+2026-03-10 04:55:59,750 WARNING knarr.dht.node: PRUNE_SKIP peer_count=4 at_or_below_floor=8

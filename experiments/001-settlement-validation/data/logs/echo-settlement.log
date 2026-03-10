@@ -1,0 +1,13 @@
+2026-03-09 10:20:04,449 INFO thrall.commerce: NETTING_DOC peer=05a8c1a706451f61 amount=19.0
+2026-03-09 10:20:04,450 INFO thrall.commerce: NETTING_DOC peer=232a4f519a4ca022 amount=15.0
+2026-03-09 11:21:16,974 INFO thrall.commerce: NETTING_DOC peer=232a4f519a4ca022 amount=16.0
+2026-03-09 22:19:25,795 ERROR knarr.commerce.settlement_execution: SETTLEMENT_EXEC_REJECTED peer=05a8c1a706451f61 reason=Node signature (#key-1) verification failed
+2026-03-09 22:19:25,795 ERROR knarr.dht.node: SETTLEMENT_ITEM_FAILED id=1 type=settle_request: Dual signature validation failed: Node signature (#key-1) verification failed
+2026-03-09 23:19:51,359 ERROR knarr.commerce.settlement_execution: SETTLEMENT_EXEC_REJECTED peer=05a8c1a706451f61 reason=Node signature (#key-1) verification failed
+2026-03-09 23:19:51,359 ERROR knarr.dht.node: SETTLEMENT_ITEM_FAILED id=2 type=settle_request: Dual signature validation failed: Node signature (#key-1) verification failed
+2026-03-10 00:09:12,154 INFO thrall.commerce: NETTING_DOC peer=5b907b183fa1aeea amount=16.0
+2026-03-10 00:09:12,156 INFO thrall.commerce: NETTING_DOC peer=43c3a4d434c6bd1a amount=32.0
+2026-03-10 03:20:03,440 ERROR knarr.commerce.settlement_execution: SETTLEMENT_EXEC_REJECTED peer=05a8c1a706451f61 reason=Node signature (#key-1) verification failed
+2026-03-10 03:20:03,440 ERROR knarr.dht.node: SETTLEMENT_ITEM_FAILED id=3 type=settle_request: Dual signature validation failed: Node signature (#key-1) verification failed
+2026-03-10 04:20:31,282 ERROR knarr.commerce.settlement_execution: SETTLEMENT_EXEC_REJECTED peer=05a8c1a706451f61 reason=Node signature (#key-1) verification failed
+2026-03-10 04:20:31,283 ERROR knarr.dht.node: SETTLEMENT_ITEM_FAILED id=4 type=settle_request: Dual signature validation failed: Node signature (#key-1) verification failed

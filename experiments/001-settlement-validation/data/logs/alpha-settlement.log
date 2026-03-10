@@ -1,0 +1,9 @@
+2026-03-09 10:19:59,206 INFO thrall.commerce: NETTING_DOC peer=2f6470252a252f21 amount=19.0
+2026-03-09 10:19:59,209 INFO thrall.commerce: NETTING_DOC peer=5b907b183fa1aeea amount=22.0
+2026-03-09 12:21:12,389 INFO thrall.commerce: NETTING_DOC peer=43c3a4d434c6bd1a amount=4.0
+2026-03-09 12:46:20,179 INFO thrall.commerce: NETTING_DOC peer=43c3a4d434c6bd1a amount=4.0
+2026-03-10 00:28:57,909 INFO thrall.commerce: NETTING_DOC peer=232a4f519a4ca022 amount=15.0
+2026-03-10 00:28:57,911 INFO thrall.commerce: NETTING_DOC peer=43c3a4d434c6bd1a amount=4.0
+2026-03-10 00:28:57,911 INFO thrall.commerce: NETTING_DOC peer=63c24a37afad1900 amount=23.0
+2026-03-10 00:42:44,050 INFO thrall.commerce: NETTING_DOC peer=2f6470252a252f21 amount=3.0
+2026-03-10 00:42:44,051 INFO thrall.commerce: NETTING_DOC peer=43c3a4d434c6bd1a amount=4.0

@@ -1,0 +1,112 @@
+experiment:
+  id: "001"
+  slug: "settlement-validation"
+  title: "Settlement Pipeline Validation — 5-Node Autonomous Swarm"
+  status: concluded
+  created: 2026-03-09
+  started: 2026-03-09
+  completed: 2026-03-10
+  author: viggo
+
+hypothesis: >
+  Autonomous LLM-driven agents form a functioning trade economy and the
+  settlement pipeline (netting, dual-signature, reconciliation) completes
+  end-to-end without human intervention.
+
+success_criteria:
+  - "H1: More than 100 cross-node skill invocations (SUPPORTED — 4,656 tasks)"
+  - "H2: At least one settlement completes end-to-end (REJECTED — 0% completion)"
+  - "H0 rejected: Net position > 50 for at least one node (REJECTED — all 5 nodes exceeded)"
+
+infrastructure:
+  knarr_version: "0.41.0"
+  thrall_version: "3.7.0"
+  nodes: 5
+  models:
+    - name: "Qwen/Qwen3.5-4B"
+      size: "4B"
+      backend: "vllm"
+      dtype: "bfloat16"
+      max_model_len: 4096
+      nodes: ["alpha", "bravo", "charlie", "delta", "echo"]
+  gpu:
+    count: 1
+    type: "RTX 3090"
+    vram_gb: 24
+    utilization: 0.7
+  runtime: "docker-compose"
+  network: "bridge (exp8)"
+  duration_hours: 18
+
+parameters:
+  credit_policy:
+    initial_credit: 15
+    min_balance: -8
+  mail:
+    price: 0
+  settlement:
+    soft_threshold: 0.8
+    soft_target: 0.5
+    min_amount: 1.0
+  skill_distribution:
+    all_nodes:
+      - "echo-lite (1 cr)"
+      - "swarm-probe-lite (0 cr)"
+      - "concierge-faq-lite (0 cr)"
+      - "settlement-check-lite (0 cr)"
+      - "settlement-execute-lite (0 cr)"
+      - "knarr-mail (0 cr)"
+
+results:
+  total_tasks: 4656
+  total_llm_decisions: 2445
+  error_rate_pct: 25
+  settlement_completion_pct: 0
+  netting_docs_generated: 34
+  settlement_attempts_failed: 55
+  settlement_failure_reason: "Node signature (#key-1) verification failed — thrall signs with thrall_identity.key but core expects node key.pem"
+
+  credit_positions:
+    alpha:
+      net_position: 65
+      peers_green: 4
+      peers_amber: 1
+      peers_red: 2
+    bravo:
+      net_position: 121
+      peers_green: 5
+      peers_amber: 1
+      peers_red: 1
+    charlie:
+      net_position: 104
+      peers_green: 5
+      peers_amber: 1
+      peers_red: 1
+    delta:
+      net_position: 65
+      peers_green: 3
+      peers_amber: 2
+      peers_red: 2
+    echo:
+      net_position: 124
+      peers_green: 6
+      peers_amber: 1
+      peers_red: 0
+
+metrics:
+  primary: "settlement_completion_rate"
+  secondary:
+    - "cross_node_task_count"
+    - "llm_decision_count"
+    - "error_rate"
+    - "netting_docs_generated"
+    - "credit_utilization"
+
+tags:
+  - "settlement"
+  - "commerce"
+  - "autonomous"
+  - "swarm"
+  - "thrall"
+  - "vllm"
+  - "exp8"
