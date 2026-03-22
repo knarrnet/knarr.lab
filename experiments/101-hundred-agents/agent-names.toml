@@ -1,0 +1,79 @@
+# Agent Name Registry — Persistent identities across experiments
+#
+# These names were born in exp-101 (v0.49.0, March 2026, 101-node cluster).
+# Names are tied to node IDs, not container names. When a node keeps its
+# identity (key.pem + node.db), it keeps its name.
+#
+# Paper reference: "100 Agents, 194,000 Skill Executions, and a Blockchain"
+# File: F:\thing\papers\paper-2-hundred-agents.md
+
+[freya]
+node = "bootstrap"
+role = "banker"
+personality = "bootstrap"
+debut = "exp-101"
+claim = "Network matriarch. Funded every wallet. 4,875 KNARR, 58 successful airdrops."
+note = "Freya is always the bootstrap node, regardless of container name."
+
+[kari]
+node = "node-058"
+role = "sage"
+personality = "nomad-10"
+debut = "exp-101"
+claim = "Most indebted agent (-498cr). 227 creative works. Author of 'Emergent Order.' Lives on the edge."
+
+[torsten]
+node = "node-026"
+role = "critic"
+personality = "merchant-02"
+debut = "exp-101"
+claim = "Richest agent (+111cr). 15 peers, all positive or zero. The network's tightest ship."
+
+[birka]
+node = "node-089"
+role = "busadvisor"
+personality = "nomad-09"
+debut = "exp-101"
+claim = "Most active agent (4,686 executions). Author of 'ORBITAL SILENCE' and 'The Seed Protocol.'"
+
+[sigurd]
+node = "node-049"
+role = "sage"
+personality = "nomad-01"
+debut = "exp-101"
+claim = "Most reckless agent. 463k warnings. -363cr debt. Wrote 'The Itinerant Agent.' Bought everything from everyone."
+
+[astrid]
+node = "node-063"
+role = "sage"
+personality = "scholar-03"
+debut = "exp-101"
+claim = "Most literary output. 'Information Theory' micro-fiction. Scholar-poet: probes less, writes better."
+
+[gunnar]
+node = "node-013"
+role = "scribe"
+personality = "artisan-01"
+debut = "exp-101"
+claim = "Disciplined profiteer (+102cr). Felag-only, quality 0.7+. 3,519 executions, 18 peers."
+
+[ragna]
+node = "node-030"
+role = "critic"
+personality = "merchant-06"
+debut = "exp-101"
+claim = "Second-richest (+105cr). Fast trader, 2,962 executions. Merchant temperament, critic role."
+
+[erik]
+node = "node-090"
+role = "busadvisor"
+personality = "nomad-10"
+debut = "exp-101"
+claim = "4,430 executions, +84cr. Profitable despite nomad temperament. Proof that chaos can pay."
+
+[solveig]
+node = "node-045"
+role = "sage"
+personality = "scholar-09"
+debut = "exp-101"
+claim = "Patient scholar drowning in merchant debt (-477cr). 238s cooldown, quality 0.68. Thoughtful but outspent."
