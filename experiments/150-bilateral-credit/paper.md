@@ -330,30 +330,48 @@ The scored menu constrains the action space while preserving the LLM's ability t
 
 | Wang et al. Plane | Knarr Implementation | Evidence |
 |-------------------|---------------------|----------|
-| Connectivity/Identity | Ed25519 node identity, peer table, DHT | 134 nodes, 2573 bilateral pairs |
+| Connectivity/Identity | Ed25519 node identity, peer table, DHT | 134 nodes, 2,573 bilateral pairs |
 | Semantic Discovery | Skill announcements, punchhole epoch | 5 archetypes discover each other's skills |
-| Trust/Verification | Admission gate, signed receipts | 10,583 receipts, 860 credit notes |
-| Execution | Bilateral credit, task routing | 914 executions, 35 settlements |
+| Trust/Verification | Admission gate, signed receipts, adaptive credit | 10,583 receipts, 860 credit notes, per-peer limits |
+| Execution | Bilateral credit, task routing, on-chain settlement | 914 executions, 35 Solana settlements |
 
-### 6.2 What Remains Open
+### 6.2 Adaptive Credit as Decentralized Reputation
 
-**Sybil resistance**: Bilateral credit deters free-riding but does not prevent identity creation. A free-rider could create multiple identities to access fresh credit. Knarr's Ed25519 identity is persistent (tied to wallet and node.db), but identity creation is free. Future work: identity staking or social attestation.
+Static credit limits treat every peer equally. But the ledger already stores per-peer `soft_limit` and `hard_limit` fields. A thrall recipe can adjust these dynamically based on observed bilateral behavior:
+
+```
+IF peer.tasks_provided > 0 AND peer.provide_consume_ratio > 0.5:
+    peer.hard_limit = min(-30, peer.hard_limit - 5)    # extend credit
+ELIF peer.tasks_consumed > 5 AND peer.tasks_provided == 0:
+    peer.hard_limit = max(-5, peer.hard_limit + 2)     # tighten credit
+```
+
+This creates **decentralized reputation through credit policy** --- no global reputation score, no coordination between nodes. Each node independently decides how much credit to extend to each peer, based on that peer's bilateral trade history.
+
+**Sybil resistance through credit depth**: A Sybil attacker creates a new identity. It starts with default limits (hard_limit = -10). It can consume ~5 skills before being blocked. To earn deeper credit, it must *provide* skills first --- proving it has real computational value. Creating 100 identities gives 100 x 5 = 500 free calls, but the attacker must answer 500 incoming skill requests from 100 different identities. The cost of Sybil scales linearly with the benefit, eliminating the asymmetry that makes Sybil attacks profitable.
+
+This is Feldman et al.'s (2004) "adaptive stranger policy" implemented via bilateral credit adjustment. New strangers get minimal trust. Trust grows through reciprocal trade. The mechanism requires no protocol changes --- only a thrall recipe that periodically evaluates bilateral positions and adjusts limits. Schraven (2001) showed LETS systems resist free-riding through exactly this kind of social embeddedness; knarr mechanizes it.
+
+### 6.3 What Remains Open
 
 **Privacy**: Skill announcements reveal capability surfaces. Punchhole ACL tiers partially address this (nodes control what they disclose), but a full privacy-preserving discovery protocol is needed.
 
 **Cross-network**: This experiment ran on a single machine. Multi-machine deployment introduces network latency, partition tolerance, and geographic routing challenges.
 
+**Adaptive credit validation**: The mechanism described in 6.2 is designed but not yet validated experimentally. The next experiment should compare static limits vs adaptive limits under Sybil conditions.
+
 ### 6.3 The Framework Gap
 
 No existing multi-agent framework addresses economic incentives:
 
-| Framework | Economic Layer | Cross-Node | Trust |
-|-----------|---------------|------------|-------|
-| AutoGen | None | No | Implicit |
-| CrewAI | None | No | Implicit |
-| LangGraph | None | No | Implicit |
-| open-multi-agent | None | No | Implicit |
-| **Knarr** | **Bilateral credit + settlement** | **Yes** | **Signed receipts** |
+| Framework | Economic Layer | Cross-Node | Trust | Reputation |
+|-----------|---------------|------------|-------|------------|
+| AutoGen | None | No | Implicit | None |
+| CrewAI | None | No | Implicit | None |
+| LangGraph | None | No | Implicit | None |
+| open-multi-agent | None | No | Implicit | None |
+| Wang et al. | Proposed | Yes | Proposed | Trust scores |
+| **Knarr** | **Bilateral credit** | **Yes** | **Signed receipts** | **Adaptive credit limits** |
 
 The gap is not architectural --- Wang et al.'s framework is correct. The gap is implementation. Knarr provides existence proof that the execution layer works.
 
