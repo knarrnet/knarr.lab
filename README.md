@@ -1,14 +1,46 @@
 # knarr.lab
 
-**101 autonomous AI agents. 194,000 skill executions. 99 on-chain settlements. A Gini coefficient of 0.161.**
+**134 autonomous AI agents. 2,573 bilateral credit positions. 35 on-chain Solana settlements. 493 poems. 878 trade negotiations. Zero human intervention.**
 
-We put 101 LLM-powered agents on a peer-to-peer network, gave each one a Solana wallet, a personality, and a set of skills, and told them: trade with each other. Six days later they had written poetry, judged each other's work, produced existentialist strategy documents, and settled debts on the blockchain -- without a single human touching a keyboard after launch.
+We put 150 LLM-powered agents on a peer-to-peer network, gave each one a Solana wallet, a personality, and a set of skills, and told them: trade with each other. They wrote poetry, judged quality, ran casinos, negotiated trades, and settled debts on the blockchain -- autonomously, on two consumer GPUs in a home office in Zurich.
 
-One machine. Two consumer GPUs. A home office in Zurich.
+Wang et al. (2026) proposed the architecture for Agentic P2P Networks. We built it.
 
-**[Read the full report: Experiment 101 -- 100 Agents, 194,000 Skill Executions, and a Blockchain](experiments/101-hundred-agents/)**
+**[Read the paper: Bilateral Credit, Signed Receipts, and 134 Autonomous Agents](experiments/150-bilateral-credit/paper.md)**
 
-## Latest: Experiment 101
+## Latest: Experiment 150
+
+| Metric | Value |
+|--------|-------|
+| Nodes | 134 active (of 150 launched) |
+| Bilateral credit positions | **2,573** |
+| Signed cryptographic receipts | **10,583** |
+| On-chain Solana settlements | **35** |
+| Credit notes issued | 860 |
+| Poems written | 493 |
+| Trade negotiations | 878 |
+| Casino games | 307 |
+| Free-rider rate (gamblers) | **97%** provide zero skills |
+| Free-rider rate (advisors) | **92%** provide zero skills |
+
+Six archetypes (Poet, Critic, Casino Host, Gambler, Advisor) across 134 nodes. Poets produced 1,245 skills. Casino hosts ran 307 games. Gamblers and advisors consumed without providing -- and bilateral credit bounded them without centralized reputation. Every receipt is Ed25519-signed. Every settlement is verifiable on Solana.
+
+![Economic flow: who produces, who consumes](experiments/150-bilateral-credit/charts/economy_flow.png)
+
+![Free-riding rate by archetype](experiments/150-bilateral-credit/charts/free_rider_fraction.png)
+
+![Provider vs consumer scatter](experiments/150-bilateral-credit/charts/provide_consume_scatter.png)
+
+### Key Findings
+
+1. **Bilateral credit isolates free-riders without reputation.** 97% of gamblers provided zero skills. The credit system bounded them -- no global scoring, no central authority, just per-pair ledgers.
+2. **Every execution produces a signed receipt chain.** 10,583 Ed25519-signed receipts following W3C Data Integrity standards. Six receipt types per skill call, from acknowledgment to settlement.
+3. **Agents negotiate autonomously.** 878 trade proposals where LLM agents discuss specific skills, prices, and bundles.
+4. **On-chain settlement works.** 35 bilateral settlements on Solana testnet, each autonomously proposed, accepted, and executed by agent wallets.
+
+---
+
+## Previous: Experiment 101
 
 | Metric | Value |
 |--------|-------|
@@ -20,21 +52,19 @@ One machine. Two consumer GPUs. A home office in Zurich.
 | Off-chain : on-chain ratio | **15,476 : 1** |
 | Gini coefficient (avg) | **0.161** |
 | Poems/stories written | 4,954 |
-| Strategy documents | 186 |
 
-Five personality archetypes (Scout, Artisan, Merchant, Scholar, Nomad) and five roles (Scribe, Critic, Sage, Oracle, Strategist) create 100 unique economic agents. They discover peers, negotiate bilateral credit, buy and sell skills, and settle debts on Solana testnet. Every wallet is verifiable on [Solscan](https://solscan.io/account/EeCTSTNskhMiSdrXuLNgETHwQQ7i9eDVevXLRFYgrjox?cluster=testnet).
+**[Read the report: 100 Agents, 194,000 Skill Executions, and a Blockchain](experiments/101-hundred-agents/)**
 
 ![Gini coefficient trajectory over 6 days](experiments/101-hundred-agents/charts/chart_gini_trajectory.png)
 
-![Settlement efficiency: 15,476:1 off-chain to on-chain ratio](experiments/101-hundred-agents/charts/chart_settlement_ratio.png)
-
 ## All Experiments
 
-| # | Name | Nodes | Duration | Key Finding |
-|---|------|-------|----------|-------------|
-| 001 | [Settlement validation](experiments/001-settlement-validation/) | 5 | 18h | Settlement pipeline works end-to-end |
-| 002 | [Creative economy](experiments/002-creative-economy/) | 10 | 48h | Agents produce and trade creative content; Gini 0.90 |
-| **101** | [**100 agents**](experiments/101-hundred-agents/) | **101** | **6 days** | **Bilateral credit flattens wealth (Gini 0.90 -> 0.161); 15,476:1 settlement efficiency** |
+| # | Name | Nodes | Key Finding |
+|---|------|-------|-------------|
+| 001 | [Settlement validation](experiments/001-settlement-validation/) | 5 | Settlement pipeline works end-to-end |
+| 002 | [Creative economy](experiments/002-creative-economy/) | 10 | Agents produce and trade creative content; Gini 0.90 |
+| 101 | [100 agents](experiments/101-hundred-agents/) | 101 | Bilateral credit flattens wealth (Gini 0.161); 15,476:1 settlement efficiency |
+| **150** | [**Bilateral credit + signed receipts**](experiments/150-bilateral-credit/) | **134** | **97% free-riding bounded by credit; 10,583 signed receipts; 35 Solana settlements; [paper](experiments/150-bilateral-credit/paper.md)** |
 
 ## What This Is
 
@@ -70,7 +100,8 @@ knarr.lab/
 │   ├── _template/           # Skeleton for new experiments
 │   ├── 001-settlement-validation/
 │   ├── 002-creative-economy/
-│   └── 101-hundred-agents/  # Latest: the 101-node run
+│   ├── 101-hundred-agents/
+│   └── 150-bilateral-credit/ # Latest: paper + data + charts
 ├── scoring/                 # Metrics collector and analysis
 ├── results/                 # Cross-experiment summaries
 ├── lib/                     # Shared Python utilities
