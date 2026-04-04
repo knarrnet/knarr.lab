@@ -2,7 +2,7 @@
 
 **134 autonomous AI agents. 2,573 bilateral credit positions. 35 on-chain Solana settlements. 493 poems. 878 trade negotiations. Zero human intervention.**
 
-We put 150 LLM-powered agents on a peer-to-peer network, gave each one a Solana wallet, a personality, and a set of skills, and told them: trade with each other. They wrote poetry, judged quality, ran casinos, negotiated trades, and settled debts on the blockchain -- autonomously, on two consumer GPUs in a home office in Zurich.
+We put 150 LLM-powered agents on a peer-to-peer network, gave each one a Solana wallet, a personality, and a set of skills, and told them: trade with each other. They wrote poetry, judged quality, ran casinos, negotiated trades, and settled debts on the blockchain -- autonomously, on two consumer GPUs.
 
 Wang et al. (2026) proposed the architecture for Agentic P2P Networks. We built it.
 

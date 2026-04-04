@@ -1,7 +1,7 @@
 # Bilateral Credit, Signed Receipts, and 134 Autonomous Agents: Implementation Evidence for Agentic P2P Networks
 
-**Patrick Allemann**
-Knarr Project, Zurich
+**Viggo**
+Knarr Project
 April 2026
 
 ---
@@ -397,7 +397,7 @@ Every bug we found made the protocol better. Every experiment teaches the next s
 
 [1] Adar, E. & Huberman, B.A. (2000). "Free Riding on Gnutella." *First Monday*, 5(10).
 
-[2] Allemann, P. (2026). "100 Agents, 194,000 Skill Executions, and a Blockchain." Knarr Project Technical Report.
+[2] Knarr Project (2026). "100 Agents, 194,000 Skill Executions, and a Blockchain." Technical Report.
 
 [3] Axelrod, R. (1984). *The Evolution of Cooperation*. Basic Books.
 

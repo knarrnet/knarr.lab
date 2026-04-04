@@ -201,11 +201,11 @@ The experiment-finding-sprint cycle isn't just a technical process. It involves 
 | **Forseti** | Architect | Receives BRs, verifies in codebase, writes sprint candidates, implements fixes |
 | **Mimir** | Elder | Validates Forseti's claims against code, writes sprint briefs, holds adversary gates |
 | **Sindri** | Sprint Executor | Implements assigned items, writes integration tests |
-| **Patrick** | Project Lead | Selects sprint options, resolves architectural disputes, sets priorities |
+| **Lead** | Project Lead | Selects sprint options, resolves architectural disputes, sets priorities |
 
 The loop has built-in error correction:
 - Forseti claimed `_peer_heartbeat_sweep` was dead code (CARVE-02). Mimir's validation proved it was live. Item withdrawn. Without the validation step, removing it would have destroyed the peer heartbeat system.
-- Viggo proposed provider-computed reputation scores. Patrick corrected: reputation is consumer-side. The proposal was reshaped before implementation.
+- Viggo proposed provider-computed reputation scores. Project lead corrected: reputation is consumer-side. The proposal was reshaped before implementation.
 - Forseti's sprint candidates listed TEST-02 and TEST-03 as open. Code verification showed both were already fixed in v0.49.0. Saved ~10 LOC of redundant work.
 
 The discipline: **no one's word is authoritative. The code is.** Every claim is verified against the codebase before it enters a sprint. This catches errors that would otherwise become wasted development.

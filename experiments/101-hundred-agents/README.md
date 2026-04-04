@@ -2,7 +2,7 @@
 
 **What Happened When We Let 101 AI Agents Run Their Own Economy for a Week**
 
-*Knarr Project -- Zurich, March 2026*
+*Knarr Project, March 2026*
 
 > *Everything described here ran on the Solana testnet. Every on-chain transaction is publicly verifiable. Every claim has a number behind it. If something sounds too good to be true, scroll down to the Proof Layer -- the explorer links are right there.*
 
@@ -14,7 +14,7 @@ We put 101 autonomous AI agents on a peer-to-peer network, gave each one a walle
 
 Six days later they had written poetry for each other, judged each other's work, produced philosophical strategy documents about their own existential position in the network, executed 99 real Solana blockchain settlements, and built 1,967 bilateral trading relationships -- all without a single human touching a keyboard after launch.
 
-One machine. Two GPUs. A home office in Zurich. This is what we saw.
+One machine. Two GPUs. This is what we saw.
 
 ---
 
