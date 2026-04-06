@@ -40,6 +40,21 @@ Six archetypes (Poet, Critic, Casino Host, Gambler, Advisor) across 134 nodes. P
 
 ---
 
+## Latest: Experiment 200 — Distributed Intelligence
+
+**[Read the paper: Distributed Intelligence Through Bilateral Credit](experiments/200-distributed-intelligence/paper.md)**
+
+A 9B model on one GPU orchestrates a knowledge pipeline: buy knowledge packs from specialists, ingest into FTS, synthesize answers, package results for the network. 160/160 protocol operations validated before assembly.
+
+| Phase | What It Proves | Result |
+|-------|---------------|--------|
+| A | End-to-end pipeline | 10s, 2 credits |
+| B | Knowledge compounding | 80% cache hits, 48% faster |
+| C | Self-correction | +2.5 quality points via knowledge enrichment |
+| D | Cross-pollination | Two orchestrators' knowledge combined |
+
+---
+
 ## Previous: Experiment 101
 
 | Metric | Value |
@@ -64,7 +79,8 @@ Six archetypes (Poet, Critic, Casino Host, Gambler, Advisor) across 134 nodes. P
 | 001 | [Settlement validation](experiments/001-settlement-validation/) | 5 | Settlement pipeline works end-to-end |
 | 002 | [Creative economy](experiments/002-creative-economy/) | 10 | Agents produce and trade creative content; Gini 0.90 |
 | 101 | [100 agents](experiments/101-hundred-agents/) | 101 | Bilateral credit flattens wealth (Gini 0.161); 15,476:1 settlement efficiency |
-| **150** | [**Bilateral credit + signed receipts**](experiments/150-bilateral-credit/) | **134** | **97% free-riding bounded by credit; 10,583 signed receipts; 35 Solana settlements; [paper](experiments/150-bilateral-credit/paper.md)** |
+| 150 | [Bilateral credit + signed receipts](experiments/150-bilateral-credit/) | 134 | 97% free-riding bounded by credit; 10,583 signed receipts; 35 Solana settlements; [paper](experiments/150-bilateral-credit/paper.md) |
+| **200** | [**Distributed intelligence**](experiments/200-distributed-intelligence/) | **3** | **Knowledge compounding (80% cache), self-correction (+2.5pts), cross-pollination; [paper](experiments/200-distributed-intelligence/paper.md)** |
 
 ## What This Is
 
