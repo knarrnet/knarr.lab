@@ -222,6 +222,39 @@ Two independently created knowledge domains, deposited by different orchestrator
 
 The marketplace dynamic: **knowledge creation is expensive, knowledge reuse is cheap.** The network incentivizes curation --- the node that creates the best pack for a domain earns the most, because every subsequent query on that topic hits the cache instead of buying a new pack.
 
+### 3.8 Phase F: Adaptive Credit as Decentralized Reputation
+
+**Setup:** Two nodes trade one-directionally (consumer buys 10 skills from provider, never provides). After trade, a reputation policy adjusts per-peer credit limits based on observed provide:consume ratio.
+
+**Policy:**
+- Peer provides to us (ratio >= 0.5) → extend credit (deepen hard_limit by 5)
+- Peer only consumes, never provides (consumed > 5, provided == 0) → tighten credit (shallow by 2)
+
+**Results:**
+
+| Node's view | Before | After | Action |
+|-------------|--------|-------|--------|
+| Provider's limit for free-riding consumer | -10.0 | **-3.0** | Tightened (3 calls max) |
+| Consumer's limit for reliable provider | -10.0 | **-15.0** | Extended (15 calls max) |
+
+After tightening, the free-rider was **immediately blocked** on the next call attempt.
+
+**Sybil resistance:** A new identity starts at default (-10, 10 calls). After one reputation cycle, a free-rider is tightened to -3 (3 calls). Creating 100 identities gets 100 x 10 initial calls, but each subsequent cycle tightens them. To earn deeper credit, the attacker must **provide real computation** --- the cost of Sybil scales linearly with the benefit.
+
+### 3.9 Phase G: Quality Gate
+
+**Setup:** The same question answered with and without knowledge, scored by an LLM judge (1-10). A quality threshold (5/10) determines PASS/REJECT.
+
+**Results:**
+
+| Condition | Score | Gate |
+|-----------|-------|------|
+| Without knowledge (hallucination risk) | **2/10** | REJECT |
+| With knowledge pack | **6/10** | PASS |
+| Improvement | **+4 points** | |
+
+The quality gate correctly identifies when an answer is backed by real knowledge versus when it's hallucinated. Combined with Phase F (adaptive credit), this creates a full feedback loop: **bad answers → low quality score → reduced reputation → less credit → less business.** Good providers earn deeper credit and more queries.
+
 ---
 
 ## 4. Discussion
@@ -340,6 +373,8 @@ The data, code, and all experimental scripts are available at `github.com/knarrn
 | C: Self-correction | Quality improves on >=2/3 problems | PASS (2/3, +2.5 avg) |
 | D: Cross-pollination | Answer uses both domains | PASS (settlement + casino combined) |
 | E: Knowledge marketplace | Cache hits >=60%, cost drops | PASS (75% cache, 5cr for 20 problems) |
+| F: Adaptive credit reputation | Asymmetric limit adjustment | PASS (free-rider -10 -> -3, provider -10 -> -15) |
+| G: Quality gate | Rejects low, passes high | PASS (2/10 rejected, 6/10 passed, +4 improvement) |
 
 ## Appendix C: Reproduction
 

@@ -28,6 +28,8 @@ knarr.lab is the research arm of the [knarr protocol](https://github.com/knarrne
 | Self-correction via knowledge enrichment | +2.5 quality points when richer packs are provided | exp-200 |
 | Cross-orchestrator pollination | Independent orchestrators' knowledge combines on shared specialist | exp-200 |
 | Knowledge marketplace | 5 packs serve 20 questions (4:1 reuse), cost drops 50% | exp-200 |
+| Adaptive credit = reputation | Free-riders tightened (-10 -> -3), providers extended (-10 -> -15) | exp-200 |
+| Quality gate rejects hallucinations | Without knowledge: 2/10 rejected. With knowledge: 6/10 passed | exp-200 |
 | Protocol primitives are reliable | 160/160 operations pass (skill calls, sidecar, mail, knowledge) | exp-200 |
 
 ### Open Questions Under Investigation
@@ -52,6 +54,8 @@ A 9B model on one GPU orchestrates a knowledge pipeline: buy packs from speciali
 | C | Self-correction | +2.5 quality points via enrichment |
 | D | Cross-pollination | Two orchestrators' knowledge combined |
 | E | Knowledge marketplace | 75% cache, 5cr for 20 problems |
+| F | Adaptive credit reputation | Free-riders tightened to 3 calls, providers extended to 15 |
+| G | Quality gate | Hallucinations rejected (2/10), knowledge-backed pass (6/10) |
 
 ---
 
