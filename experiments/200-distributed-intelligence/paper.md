@@ -255,11 +255,167 @@ After tightening, the free-rider was **immediately blocked** on the next call at
 
 The quality gate correctly identifies when an answer is backed by real knowledge versus when it's hallucinated. Combined with Phase F (adaptive credit), this creates a full feedback loop: **bad answers → low quality score → reduced reputation → less credit → less business.** Good providers earn deeper credit and more queries.
 
+### 3.10 Phase H: Self-Improving Coach Loop
+
+**Setup:** Two models — a small agent (Qwen3.5 9B on GPU 0) and a large curator/coach (Gemma 4 26B on GPU 1), served by Ollama with q4_0 KV cache across both GPUs.
+
+The loop:
+1. Agent tries to answer with current knowledge
+2. Quality gate (Gemma 4) judges the answer
+3. If below threshold: curator writes a targeted knowledge pack addressing the specific failures
+4. Agent ingests the pack, tries again
+5. Repeat until quality gate passes at 8+/10
+
+**Results:**
+
+| Question | Iter 1 | Iter 2 | Iter 3 |
+|----------|--------|--------|--------|
+| Settlement pipeline (12 steps) | **10/10** | — | — |
+| Casino escrow (hold-judge-release) | 1/10 | **8/10** | — |
+
+The curator (Gemma 4 26B) wrote a 4,450-character knowledge pack in 25 seconds that lifted the agent's score from 1 to 8. The expensive reasoning happened once; the agent can now serve this answer indefinitely.
+
+### 3.11 Phase H2-H3: Model Size Scaling
+
+**Question:** How small can the agent be while still passing the quality gate with curator help?
+
+**SQuAD 2.0 benchmark** (100 questions, 5 domains: Oxygen, Normans, Immune system, Steam engine, EU law):
+
+| Model | Active params | SQuAD accuracy | Quality gate |
+|-------|-------------|----------------|-------------|
+| qwen3:0.6b | 0.6B | 2% | Fails (1/10) |
+| gemma4:e2b | 2.3B (MoE) | **88%** | Fails on composition (4/10) |
+| qwen3.5:4b | 4B | **83%** | **Passes (9/10)** |
+| gemma4:e4b | 4.5B (MoE) | 86% | **Passes (7/10)** |
+| qwen3.5:9b | 9B | 83% | **Passes (9/10)** |
+
+**Key finding 1:** Gemma 4 E2B (2.3B active, the Raspberry Pi model) achieves the **highest SQuAD accuracy** (88%) — outperforming both the 4B and 9B dense models at extractive QA.
+
+**Key finding 2:** The quality gate test (compose a structured explanation) requires 4B+. Extraction and composition have different thresholds.
+
+**Key finding 3:** A bigger coach (31B dense vs 26B MoE) does NOT improve results for failing models. The bottleneck is the agent's ability to reason over context, not the pack quality.
+
+### 3.12 Phase H5-H6: Retrieval Strategy at Scale
+
+**Question:** Does vector retrieval matter? When?
+
+**Small corpus (1 passage per question):** No difference. RAW, FTS, and VEC all perform within 1-2% of each other.
+
+**Large corpus (217 passages from 5 domains):**
+
+| Model | ORACLE | FTS | VEC | VEC vs FTS |
+|-------|--------|-----|-----|-----------|
+| qwen3:0.6b | 3% | 0% | 1% | +1% |
+| gemma4:e2b | 89% | 51% | **59%** | **+8%** |
+| qwen3.5:4b | 87% | 51% | **55%** | **+4%** |
+
+**Retrieval is now the bottleneck.** With the gold passage (ORACLE), models score 87-89%. With the best retrieval (VEC), they score 55-59%. That is a **30-point retrieval gap** — the model is capable, but the retrieval system doesn't surface the right context.
+
+Vector retrieval outperforms keyword search by 4-8 percentage points on a multi-domain corpus. The gap will widen with larger corpora (thousands of knowledge packs across hundreds of domains).
+
 ---
 
-## 4. Discussion
+## 4. The Knowledge Ecosystem
 
-### 4.1 What This Proves
+### 4.1 Architecture: Three Tiers of Intelligence
+
+The experimental results reveal a natural three-tier architecture:
+
+```
+Tier 3: CURATORS (expensive, slow, deep)
+  Gemma 4 26B / Claude Opus / GPT-4
+  Sit on large corpora (Wikipedia, domain libraries, ebook collections)
+  Create tailored knowledge packs on demand
+  Run once per topic — amortized across thousands of queries
+
+Tier 2: SPECIALISTS (medium, focused, reliable)
+  Qwen3.5 4B-9B / Gemma 4 E4B
+  Serve specific domains with curated knowledge packs
+  Quality gate ensures output meets threshold
+  Earn credits through reliable service
+
+Tier 1: EDGE NODES (cheap, fast, everywhere)
+  Gemma 4 E2B on Raspberry Pi (7.6 tok/s)
+  88% accuracy on extractive QA with the right knowledge
+  Serve cached packs, handle structured extraction
+  Run on $50 hardware at near-zero marginal cost
+```
+
+Each tier is economically self-sustaining through bilateral credit:
+- Curators invest expensive compute, earn credits from pack sales
+- Specialists buy packs, serve queries, earn credits from consumers
+- Edge nodes buy cheap packs, serve at scale, earn through volume
+
+### 4.2 Knowledge Curators on Large Corpora
+
+A curator node with access to Wikipedia (6M articles, ~20GB text) or a domain-specific library operates as follows:
+
+1. **Query arrives** via the marketplace: "Create a knowledge pack about the immune system's response to viral infections"
+2. **Curator retrieves** relevant Wikipedia articles using vector search over its local corpus
+3. **Curator synthesizes** a focused knowledge pack: key mechanisms, specific proteins, clinical evidence — tailored for the requesting node's model size
+4. **Pack is signed** (Ed25519) and priced via bilateral credit
+5. **Consumer ingests** the pack, serves hundreds of queries from it
+
+The economics: curator spends 30 seconds of Gemma 4 26B compute (~$0.01). The pack serves 1000 queries at 1 credit each. That's a 100:1 return on the curator's investment. The bilateral credit system ensures curators who produce better packs earn more — because specialists that buy good packs score higher on the quality gate, get deeper credit limits (Phase F), and attract more queries.
+
+### 4.3 Specialized Nodes: Gatekeepers and QA Managers
+
+Not every node needs to answer questions. The knowledge pack mechanism enables **role specialization**:
+
+**Quality Gatekeeper:** A node whose only job is evaluating output quality. Equipped with a knowledge pack containing:
+- Rubrics for each domain ("what a good medical answer looks like")
+- Common failure modes ("hallucination patterns in legal QA")
+- Scoring criteria calibrated to human evaluators
+
+The gatekeeper doesn't need a large model — it needs the RIGHT knowledge about quality standards. A 4B model with a well-crafted rubric pack outperforms a 9B model guessing at quality.
+
+**Domain Expert:** A node that knows everything about one topic. A curator downloads all Wikipedia articles about EU law, synthesizes them into a comprehensive pack, and sends it to a specialist node. That node becomes the EU law expert for the entire network — answering questions at 4B model cost with curator-level knowledge.
+
+**Triage Router:** A node that receives queries and routes them to the right specialist. Equipped with a pack describing what each specialist knows and what it costs. Makes routing decisions at 2.3B (E2B) speed — fast and cheap.
+
+**Compliance Auditor:** A node that reviews skill outputs against regulatory requirements. Knowledge pack contains: relevant regulations, compliance checklists, red-flag patterns. Runs continuously on edge hardware, checking every transaction.
+
+Each of these roles is:
+- **Deployable**: orchestrator pushes the right knowledge pack + recipe
+- **Qualifiable**: entry test verifies the node can perform its role
+- **Economically accountable**: bilateral credit tracks cost and quality
+- **Replaceable**: if a node fails the quality gate, the orchestrator deploys a new one
+
+### 4.4 The Model-Agnostic Upgrade Path
+
+The entire ecosystem improves when ANY component upgrades:
+
+| Upgrade | Effect |
+|---------|--------|
+| Better curator model (Opus 4.6) | Higher quality knowledge packs for the same price |
+| Better agent model (Gemma 5) | Same packs produce better answers |
+| Better embeddings | Retrieval gap shrinks (currently 30 points) |
+| Better quantization (TurboQuant) | Same models fit on cheaper hardware |
+| Larger corpus (full Wikipedia) | More domains available on demand |
+
+No component depends on a specific model version. The knowledge packs are model-agnostic documents. The quality gate is the invariant — it doesn't care how the answer was produced, only whether it's correct.
+
+---
+
+## 5. What This Proves
+
+1. **Distributed intelligence works on bilateral credit.** Knowledge is a tradeable asset. The cost of acquiring it is measurable. The credit system ensures fair exchange.
+
+2. **Intelligence compounds.** The second query is cheaper than the first (80% cache hit rate, 48% time reduction). Knowledge packs persist and serve future queries.
+
+3. **Self-correction through coaching.** A large curator model writes knowledge packs that lift small agent scores from 1/10 to 8/10. The expensive reasoning happens once.
+
+4. **4B is the minimum for composition, 2.3B for extraction.** Gemma 4 E2B (88% SQuAD) can serve on a Raspberry Pi. Qwen3.5 4B (83% SQuAD, 9/10 quality gate) is the sweet spot for general-purpose agents.
+
+5. **Retrieval is the bottleneck at scale.** With 217 passages, vector search gains 4-8% over keywords. The 30-point gap between ORACLE and best retrieval is the next frontier.
+
+6. **Adaptive credit IS reputation.** Free-riders get tightened from 10 to 3 calls. Reliable providers earn 15+. No global scoring needed.
+
+7. **The quality gate closes every loop.** Hallucinated answers (2/10) are rejected. Knowledge-backed answers (6-10/10) pass. Combined with adaptive credit, this creates self-sustaining quality pressure.
+
+8. **Knowledge crosses boundaries.** Two independent orchestrators' knowledge combines on a shared specialist to answer novel questions (Phase D).
+
+9. **The ecosystem is model-agnostic.** Upgrading any component (curator, agent, embeddings, corpus) improves the whole system without protocol changes.
 
 1. **Distributed intelligence works on bilateral credit.** Knowledge is a tradeable asset. The cost of acquiring it is measurable. The credit system ensures fair exchange.
 
@@ -375,6 +531,10 @@ The data, code, and all experimental scripts are available at `github.com/knarrn
 | E: Knowledge marketplace | Cache hits >=60%, cost drops | PASS (75% cache, 5cr for 20 problems) |
 | F: Adaptive credit reputation | Asymmetric limit adjustment | PASS (free-rider -10 -> -3, provider -10 -> -15) |
 | G: Quality gate | Rejects low, passes high | PASS (2/10 rejected, 6/10 passed, +4 improvement) |
+| H: Self-improving coach | Curator writes packs, agent improves | PASS (1/10 -> 8/10 with curator pack) |
+| H2-H3: Model scaling | Minimum viable agent size | 4B for composition, 2.3B for extraction |
+| H4: SQuAD benchmark | 100 questions, 5 domains | E2B 88%, 4B 83%, 9B 83% |
+| H5-H6: Retrieval at scale | FTS vs VEC on 217 passages | VEC +4-8% over FTS, 30pt gap to ORACLE |
 
 ## Appendix C: Reproduction
 

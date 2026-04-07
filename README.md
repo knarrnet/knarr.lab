@@ -30,6 +30,9 @@ knarr.lab is the research arm of the [knarr protocol](https://github.com/knarrne
 | Knowledge marketplace | 5 packs serve 20 questions (4:1 reuse), cost drops 50% | exp-200 |
 | Adaptive credit = reputation | Free-riders tightened (-10 -> -3), providers extended (-10 -> -15) | exp-200 |
 | Quality gate rejects hallucinations | Without knowledge: 2/10 rejected. With knowledge: 6/10 passed | exp-200 |
+| Self-improving coach loop | Curator (26B) lifts agent (9B) from 1/10 to 8/10 in one iteration | exp-200 |
+| 4B is the minimum for composition | SQuAD: E2B 88%, 4B 83%, 0.6B 2%. Bigger coach doesn't help below 4B | exp-200 |
+| Vector retrieval matters at scale | 217 passages: VEC +8% over FTS. 30-point gap between retrieval and ORACLE | exp-200 |
 | Protocol primitives are reliable | 160/160 operations pass (skill calls, sidecar, mail, knowledge) | exp-200 |
 
 ### Open Questions Under Investigation
@@ -56,6 +59,8 @@ A 9B model on one GPU orchestrates a knowledge pipeline: buy packs from speciali
 | E | Knowledge marketplace | 75% cache, 5cr for 20 problems |
 | F | Adaptive credit reputation | Free-riders tightened to 3 calls, providers extended to 15 |
 | G | Quality gate | Hallucinations rejected (2/10), knowledge-backed pass (6/10) |
+| H | Self-improving coach | Curator (26B) writes pack, agent (9B) goes from 1/10 to 8/10 |
+| H2-H6 | Model scaling + retrieval | 4B minimum for composition; VEC +8% over FTS at 217 passages |
 
 ---
 
