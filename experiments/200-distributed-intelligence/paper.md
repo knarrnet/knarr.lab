@@ -395,6 +395,57 @@ The entire ecosystem improves when ANY component upgrades:
 
 No component depends on a specific model version. The knowledge packs are model-agnostic documents. The quality gate is the invariant — it doesn't care how the answer was produced, only whether it's correct.
 
+### 4.5 Knowledge Subscriptions: The Business Model
+
+The knowledge pack mechanism naturally supports **subscription-based intelligence delivery**:
+
+**Curator as publisher:**
+A curator node with web search, browser access, and API integrations operates as a knowledge publisher:
+
+| Subscription | Update Frequency | Content | Use Case |
+|-------------|-----------------|---------|----------|
+| Financial markets | Every hour | Stock indices, forex, crypto prices, analyst summaries | Trading agents, portfolio managers |
+| News digest | Every 6 hours | Top stories, categorized by domain, with context | General-purpose agents, briefing services |
+| Weather/meteo | Every 3 hours | Regional forecasts, severe weather alerts | Logistics, agriculture, outdoor operations |
+| Sports results | Real-time | Scores, standings, player stats | Entertainment, betting analysis |
+| Regulatory updates | Daily | New regulations, compliance changes, legal precedents | Legal agents, compliance auditors |
+| Medical guidelines | Weekly | Updated treatment protocols, drug interactions, safety alerts | Clinical decision support |
+
+**Delivery mechanism:** Already built and tested.
+- Curator calls `knowledge-pack-lite` on schedule (thrall recipe with timer)
+- Pack delivered via sidecar + knarr-mail to all subscribers
+- Consumer's thrall auto-ingests on receipt (L2-01: 10/10 proven)
+- Quality gate verifies pack meets standards before serving (Phase G: proven)
+- Bilateral credit charges per delivery (Phase A: proven)
+
+**The air-gapped edge node:**
+
+A Raspberry Pi on a factory floor, hospital ward, or retail location has no internet access. But it's on the local knarr network:
+
+- **Factory:** Subscribes to equipment manuals, safety protocols, shift schedules, production targets. Workers ask questions, the Pi answers from curated knowledge. When regulations change, the curator pushes an updated pack overnight.
+- **Hospital:** Subscribes to drug interaction databases, treatment protocols, patient safety alerts. Clinicians get instant answers at the point of care. Updates flow through the hospital's knarr network, not through the internet.
+- **Retail:** Subscribes to product catalogs, pricing updates, inventory levels, promotional schedules. Staff and customers get accurate, current information from a $50 device.
+
+The node never touches the internet. It never hallucinates from stale training data. Every answer comes from a signed, timestamped, quality-gated knowledge pack with verifiable provenance.
+
+**Revenue model:**
+
+```
+Free tier:     Public domain packs (Wikipedia, open data, government publications)
+Standard:      Curated daily digests (news, markets, weather) — 10 credits/day
+Premium:       Real-time feeds (financial data, sports live) — 50 credits/day
+Enterprise:    Custom curators per organization — negotiated pricing
+```
+
+The bilateral credit system IS the subscription accounting:
+- Subscription = recurring skill call on a schedule (thrall recipe)
+- Payment = bilateral credit per pack delivery
+- SLA = quality gate score threshold
+- Churn = adaptive credit tightens on bad curators (Phase F)
+- Cancellation = stop calling the curator's skill
+
+No payment processor. No subscription management platform. No invoicing system. The protocol handles all of it through the same mechanisms we've tested at 160/160 reliability.
+
 ---
 
 ## 5. What This Proves
