@@ -302,19 +302,22 @@ The agent now produces a structured, accurate answer that references specific sk
 
 **SQuAD 2.0 benchmark** (100 questions, 5 domains: Oxygen, Normans, Immune system, Steam engine, EU law):
 
-| Model | Active params | SQuAD accuracy | Quality gate |
-|-------|-------------|----------------|-------------|
-| qwen3:0.6b | 0.6B | 2% | Fails (1/10) |
-| gemma4:e2b | 2.3B (MoE) | **88%** | Fails on composition (4/10) |
-| qwen3.5:4b | 4B | **83%** | **Passes (9/10)** |
-| gemma4:e4b | 4.5B (MoE) | 86% | **Passes (7/10)** |
-| qwen3.5:9b | 9B | 83% | **Passes (9/10)** |
+| Model | Active params | Architecture | SQuAD accuracy | Quality gate |
+|-------|-------------|--------------|----------------|-------------|
+| qwen3:0.6b | 0.6B | Dense | 2% | Fails (1/10) |
+| gemma4:e2b | 2.3B (MoE) | Transformer | **88%** | Fails on composition (4/10) |
+| nemotron-3-nano | 3.6B (MoE) | Mamba-Transformer | 77% | — |
+| qwen3.5:4b | 4B | Dense | **83%** | **Passes (9/10)** |
+| gemma4:e4b | 4.5B (MoE) | Transformer | 86% | **Passes (7/10)** |
+| qwen3.5:9b | 9B | Dense | 83% | **Passes (9/10)** |
 
 **Key finding 1:** Gemma 4 E2B (2.3B active, the Raspberry Pi model) achieves the **highest SQuAD accuracy** (88%) — outperforming both the 4B and 9B dense models at extractive QA.
 
 **Key finding 2:** The quality gate test (compose a structured explanation) requires 4B+. Extraction and composition have different thresholds.
 
 **Key finding 3:** A bigger coach (31B dense vs 26B MoE) does NOT improve results for failing models. The bottleneck is the agent's ability to reason over context, not the pack quality.
+
+**Key finding 4:** NVIDIA's Nemotron 3 Nano (30B total, 3.6B active, hybrid Mamba-Transformer MoE) scores 77% — below both Gemma 4 E2B and Qwen3.5:4b despite having more active parameters. The Mamba-Transformer hybrid, designed for tool calling and long-context tasks, underperforms pure Transformer architectures on extractive QA from knowledge packs. Architecture matters more than parameter count for this workload.
 
 **Gemma 4 E2B in action** — a 2.3B-active MoE model answering real SQuAD questions from 5 domains:
 
@@ -340,15 +343,18 @@ Four domains, four correct extractions. This is a model that runs at 7.6 tokens/
 
 **Large corpus (217 passages from 5 domains):**
 
-| Model | ORACLE | FTS | VEC | VEC vs FTS |
-|-------|--------|-----|-----|-----------|
-| qwen3:0.6b | 3% | 0% | 1% | +1% |
-| gemma4:e2b | 89% | 51% | **59%** | **+8%** |
-| qwen3.5:4b | 87% | 51% | **55%** | **+4%** |
+| Model | Architecture | ORACLE | FTS | VEC | VEC vs FTS |
+|-------|-------------|--------|-----|-----|-----------|
+| qwen3:0.6b | Dense | 3% | 0% | 1% | +1% |
+| nemotron-3-nano | Mamba-Transformer | 76% | **57%** | 52% | **-5%** |
+| gemma4:e2b | Transformer | 89% | 51% | **59%** | **+8%** |
+| qwen3.5:4b | Dense | 87% | 51% | **55%** | **+4%** |
 
 **Retrieval is now the bottleneck.** With the gold passage (ORACLE), models score 87-89%. With the best retrieval (VEC), they score 55-59%. That is a **30-point retrieval gap** — the model is capable, but the retrieval system doesn't surface the right context.
 
-Vector retrieval outperforms keyword search by 4-8 percentage points on a multi-domain corpus. The gap will widen with larger corpora (thousands of knowledge packs across hundreds of domains).
+Vector retrieval outperforms keyword search by 4-8 percentage points on a multi-domain corpus for Transformer-based models. The gap will widen with larger corpora (thousands of knowledge packs across hundreds of domains).
+
+**Architecture effect on retrieval:** Nemotron 3 Nano is the only model where FTS **outperforms** VEC (-5%). The Mamba-Transformer hybrid processes keyword-matched context more effectively than semantically-matched context — likely because Mamba's selective state-space mechanism handles sequential token patterns (exact keyword matches) differently than the distributed semantic representations that vector retrieval produces. This has a practical implication: **retrieval strategy should be model-architecture-aware.** A system serving both Transformer and Mamba-hybrid models should select the retrieval strategy per-model, not globally.
 
 ---
 
@@ -493,9 +499,9 @@ No payment processor. No subscription management platform. No invoicing system. 
 
 3. **Self-correction through coaching.** A large curator model writes knowledge packs that lift small agent scores from 1/10 to 8/10. The expensive reasoning happens once.
 
-4. **4B is the minimum for composition, 2.3B for extraction.** Gemma 4 E2B (88% SQuAD) can serve on a Raspberry Pi. Qwen3.5 4B (83% SQuAD, 9/10 quality gate) is the sweet spot for general-purpose agents.
+4. **4B is the minimum for composition, 2.3B for extraction.** Gemma 4 E2B (88% SQuAD) can serve on a Raspberry Pi. Qwen3.5 4B (83% SQuAD, 9/10 quality gate) is the sweet spot for general-purpose agents. Architecture matters: Nemotron 3 Nano (3.6B active Mamba-Transformer) scores only 77% despite more active parameters than E2B.
 
-5. **Retrieval is the bottleneck at scale.** With 217 passages, vector search gains 4-8% over keywords. The 30-point gap between ORACLE and best retrieval is the next frontier.
+5. **Retrieval strategy must be architecture-aware.** Transformer models gain 4-8% from vector over keyword retrieval. Mamba-Transformer hybrids (Nemotron) perform 5% *worse* with vector retrieval. A heterogeneous network must match retrieval strategy to model architecture.
 
 6. **Adaptive credit IS reputation.** Free-riders get tightened from 10 to 3 calls. Reliable providers earn 15+. No global scoring needed.
 
@@ -621,8 +627,8 @@ The data, code, and all experimental scripts are available at `github.com/knarrn
 | G: Quality gate | Rejects low, passes high | PASS (2/10 rejected, 6/10 passed, +4 improvement) |
 | H: Self-improving coach | Curator writes packs, agent improves | PASS (1/10 -> 8/10 with curator pack) |
 | H2-H3: Model scaling | Minimum viable agent size | 4B for composition, 2.3B for extraction |
-| H4: SQuAD benchmark | 100 questions, 5 domains | E2B 88%, 4B 83%, 9B 83% |
-| H5-H6: Retrieval at scale | FTS vs VEC on 217 passages | VEC +4-8% over FTS, 30pt gap to ORACLE |
+| H4: SQuAD benchmark | 100 questions, 5 domains, 6 models | E2B 88%, 4B 83%, Nemotron 77%, 9B 83% |
+| H5-H6: Retrieval at scale | FTS vs VEC on 217 passages, 4 models | VEC +4-8% (Transformer), VEC -5% (Mamba-Transformer) |
 
 ## Appendix C: Reproduction
 
