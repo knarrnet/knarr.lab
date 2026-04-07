@@ -275,6 +275,27 @@ The loop:
 
 The curator (Gemma 4 26B) wrote a 4,450-character knowledge pack in 25 seconds that lifted the agent's score from 1 to 8. The expensive reasoning happened once; the agent can now serve this answer indefinitely.
 
+**Before coaching (1/10) — agent with no knowledge:**
+
+> *Q: How does the casino number game implement a hold-judge-release escrow pattern in knarr?*
+>
+> *"Based on the current state of computer science, cryptography, and gaming technology, **there is no known casino number game that implements a hold-judge-release escrow pattern in a language or system called knarr.** It appears there may be a misunderstanding of terminology, a confusion with a specific fictional universe..."*
+
+The agent hallucinated confidently — it doesn't know knarr exists. Score: 1/10.
+
+**Curator writes a knowledge pack (25 seconds, Gemma 4 26B):**
+
+> *"# Technical Specification: Knarr Casino Escrow Pattern*
+> *The system operates via two distinct skill types: betting-action (User-initiated) and settlement-engine (System-initiated). The betting-action skill executes the transition of credits from the User Wallet to the Escrow Vault..."*
+
+**After coaching (8/10) — agent with curator's knowledge pack:**
+
+> *"The Knarr Casino Escrow Pattern implements the hold-judge-release mechanism through two distinct skill types and specific credit flows:*
+> *1. The Hold Phase (User-Initiated) — Skill: betting-action. Executes the transition of credits from the User Wallet to the Escrow Vault.*
+> *2. The Judge Phase (System-Initiated) — Skill: settlement-engine..."*
+
+The agent now produces a structured, accurate answer that references specific skill names and credit flows — all extracted from the curator's pack. The knowledge pack cost 25 seconds of Gemma 4 compute. The agent can serve this answer thousands of times at 9B cost.
+
 ### 3.11 Phase H2-H3: Model Size Scaling
 
 **Question:** How small can the agent be while still passing the quality gate with curator help?
@@ -294,6 +315,22 @@ The curator (Gemma 4 26B) wrote a 4,450-character knowledge pack in 25 seconds t
 **Key finding 2:** The quality gate test (compose a structured explanation) requires 4B+. Extraction and composition have different thresholds.
 
 **Key finding 3:** A bigger coach (31B dense vs 26B MoE) does NOT improve results for failing models. The bottleneck is the agent's ability to reason over context, not the pack quality.
+
+**Gemma 4 E2B in action** — a 2.3B-active MoE model answering real SQuAD questions from 5 domains:
+
+> **Immune system** — *Q: What percentage of leukocytes do neutrophils represent?*
+> E2B: *"50% to 60%"* ✓
+
+> **Normans** — *Q: What is the most important type of Norman art preserved in churches?*
+> E2B: *"mosaics"* ✓
+
+> **Oxygen** — *Q: What effect did breathing Priestley's discovered gas have on the experiment's mouse?*
+> E2B: *"a mouse was more active and lived longer while breathing it"* ✓
+
+> **Steam engine** — *Q: What were early drivers looking to generate when they fastened safety valves down?*
+> E2B: *"more power from the engine"* ✓
+
+Four domains, four correct extractions. This is a model that runs at 7.6 tokens/second on a Raspberry Pi 5. With the right knowledge pack, a $50 device answers these questions as accurately as a 9B model on a $1500 GPU.
 
 ### 3.12 Phase H5-H6: Retrieval Strategy at Scale
 
