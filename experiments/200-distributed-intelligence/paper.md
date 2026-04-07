@@ -201,6 +201,27 @@ The scores are modest (Qwen3.5-9B is a small model with thin knowledge packs), b
 
 Two independently created knowledge domains, deposited by different orchestrators, combined on a shared specialist to answer a novel question that neither could answer alone.
 
+### 3.7 Phase E: Knowledge Marketplace
+
+**Setup:** 20 problems across 5 knowledge domains (bilateral credit, settlement, casino, agent decisions, signed receipts). Each problem checks the FTS cache before purchasing. Knowledge accumulates on the specialist node.
+
+**Results:**
+
+| Window | Cache Hits | Credits Spent | Avg Time |
+|--------|-----------|---------------|----------|
+| Problems 1-5 | 3/5 (60%) | 2cr | 2.2s |
+| Problems 6-10 | 4/5 (80%) | 1cr | 2.5s |
+| Problems 11-15 | 4/5 (80%) | 1cr | 2.5s |
+| Problems 16-20 | 4/5 (80%) | 1cr | 2.0s |
+
+**Overall: 75% cache hit rate.** 5 knowledge packs served 20 questions --- a 4:1 reuse ratio.
+
+**Cost: 5 credits for 20 problems.** Without caching, the cost would be 20 credits. The last 5 problems cost 50% of the first 5.
+
+**Knowledge hub formation:** All 5 domains showed identical 75% reuse rates. Each domain's first query invested 1 credit to create the pack; the subsequent 3 queries were free.
+
+The marketplace dynamic: **knowledge creation is expensive, knowledge reuse is cheap.** The network incentivizes curation --- the node that creates the best pack for a domain earns the most, because every subsequent query on that topic hits the cache instead of buying a new pack.
+
 ---
 
 ## 4. Discussion
@@ -318,6 +339,7 @@ The data, code, and all experimental scripts are available at `github.com/knarrn
 | B: Knowledge compounding | Cache hit rate >50% | PASS (80% hits, 48% time reduction) |
 | C: Self-correction | Quality improves on >=2/3 problems | PASS (2/3, +2.5 avg) |
 | D: Cross-pollination | Answer uses both domains | PASS (settlement + casino combined) |
+| E: Knowledge marketplace | Cache hits >=60%, cost drops | PASS (75% cache, 5cr for 20 problems) |
 
 ## Appendix C: Reproduction
 
