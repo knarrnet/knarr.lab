@@ -1,149 +1,175 @@
 # knarr.lab
 
-**134 autonomous AI agents. 2,573 bilateral credit positions. 35 on-chain Solana settlements. 493 poems. 878 trade negotiations. Zero human intervention.**
+**Autonomous AI agents trading skills, settling on blockchain, and compounding intelligence — on consumer hardware.**
 
-We put 150 LLM-powered agents on a peer-to-peer network, gave each one a Solana wallet, a personality, and a set of skills, and told them: trade with each other. They wrote poetry, judged quality, ran casinos, negotiated trades, and settled debts on the blockchain -- autonomously, on two consumer GPUs.
+knarr.lab is the research arm of the [knarr protocol](https://github.com/knarrnet/knarr). We run experiments where LLM-powered agents operate peer-to-peer economies: trading skills, signing receipts, settling on Solana, and — as of experiment 200 — buying and selling knowledge that makes the network smarter with every query.
 
-Wang et al. (2026) proposed the architecture for Agentic P2P Networks. We built it.
+---
 
-**[Read the paper: Bilateral Credit, Signed Receipts, and 134 Autonomous Agents](experiments/150-bilateral-credit/paper.md)**
+## Research Index
 
-## Latest: Experiment 150
+### Papers
 
-| Metric | Value |
-|--------|-------|
-| Nodes | 134 active (of 150 launched) |
-| Bilateral credit positions | **2,573** |
-| Signed cryptographic receipts | **10,583** |
-| On-chain Solana settlements | **35** |
-| Credit notes issued | 860 |
-| Poems written | 493 |
-| Trade negotiations | 878 |
-| Casino games | 307 |
-| Free-rider rate (gamblers) | **97%** provide zero skills |
-| Free-rider rate (advisors) | **92%** provide zero skills |
+| Paper | Experiment | DOI / Link | Key Claim |
+|-------|-----------|------------|-----------|
+| **Bilateral Credit, Signed Receipts, and 134 Autonomous Agents** | exp-150 | [DOI: 10.5281/zenodo.19417258](https://doi.org/10.5281/zenodo.19417258) | Bilateral credit isolates free-riders without reputation. 10,583 signed receipts. 35 Solana settlements. |
+| **Distributed Intelligence Through Bilateral Credit** | exp-200 | [paper](experiments/200-distributed-intelligence/paper.md) | Knowledge compounds in P2P networks. 75% cache hit rate. Self-correction via iteration. Cross-orchestrator pollination. |
+| **100 Agents, 194,000 Skill Executions, and a Blockchain** | exp-101 | [report](experiments/101-hundred-agents/) | Bilateral credit flattens wealth distribution (Gini 0.161). 15,476:1 off-chain to on-chain settlement ratio. |
 
-Six archetypes (Poet, Critic, Casino Host, Gambler, Advisor) across 134 nodes. Poets produced 1,245 skills. Casino hosts ran 307 games. Gamblers and advisors consumed without providing -- and bilateral credit bounded them without centralized reputation. Every receipt is Ed25519-signed. Every settlement is verifiable on Solana.
+### Key Results
 
-![Economic flow: who produces, who consumes](experiments/150-bilateral-credit/charts/economy_flow.png)
+| Finding | Evidence | Experiment |
+|---------|----------|------------|
+| Bilateral credit bounds free-riders | 97% of gamblers provide zero skills, bounded by credit limits | exp-150 |
+| Signed receipt chain per execution | 6-step Ed25519 chain (order_ack through mail_receive_receipt) | exp-150 |
+| On-chain settlement works | 35 autonomous Solana SPL transfers via bilateral netting | exp-150 |
+| Agents negotiate autonomously | 878 trade proposals with specific skills, prices, bundles | exp-150 |
+| Knowledge compounds | 80% cache hit rate on repeated queries, 48% time reduction | exp-200 |
+| Self-correction via knowledge enrichment | +2.5 quality points when richer packs are provided | exp-200 |
+| Cross-orchestrator pollination | Independent orchestrators' knowledge combines on shared specialist | exp-200 |
+| Knowledge marketplace | 5 packs serve 20 questions (4:1 reuse), cost drops 50% | exp-200 |
+| Protocol primitives are reliable | 160/160 operations pass (skill calls, sidecar, mail, knowledge) | exp-200 |
 
-![Free-riding rate by archetype](experiments/150-bilateral-credit/charts/free_rider_fraction.png)
+### Open Questions Under Investigation
 
-![Provider vs consumer scatter](experiments/150-bilateral-credit/charts/provide_consume_scatter.png)
-
-### Key Findings
-
-1. **Bilateral credit isolates free-riders without reputation.** 97% of gamblers provided zero skills. The credit system bounded them -- no global scoring, no central authority, just per-pair ledgers.
-2. **Every execution produces a signed receipt chain.** 10,583 Ed25519-signed receipts following W3C Data Integrity standards. Six receipt types per skill call, from acknowledgment to settlement.
-3. **Agents negotiate autonomously.** 878 trade proposals where LLM agents discuss specific skills, prices, and bundles.
-4. **On-chain settlement works.** 35 bilateral settlements on Solana testnet, each autonomously proposed, accepted, and executed by agent wallets.
+- Can a Raspberry Pi 5 (4GB, 7.6 tok/s) serve as an effective specialist when briefed with optimized recipes?
+- Does adaptive bilateral credit (per-peer limit adjustment) provide Sybil resistance?
+- Can an orchestrator dynamically deploy and configure specialist nodes via `deploy-knarr-lite`?
+- What is the equilibrium knowledge pack price in a competitive marketplace?
 
 ---
 
 ## Latest: Experiment 200 — Distributed Intelligence
 
-**[Read the paper: Distributed Intelligence Through Bilateral Credit](experiments/200-distributed-intelligence/paper.md)**
+**[Read the paper](experiments/200-distributed-intelligence/paper.md)**
 
-A 9B model on one GPU orchestrates a knowledge pipeline: buy knowledge packs from specialists, ingest into FTS, synthesize answers, package results for the network. 160/160 protocol operations validated before assembly.
+A 9B model on one GPU orchestrates a knowledge pipeline: buy packs from specialists, ingest into FTS, synthesize answers, package results for the network. 160/160 protocol operations validated before assembly.
 
 | Phase | What It Proves | Result |
 |-------|---------------|--------|
 | A | End-to-end pipeline | 10s, 2 credits |
 | B | Knowledge compounding | 80% cache hits, 48% faster |
-| C | Self-correction | +2.5 quality points via knowledge enrichment |
+| C | Self-correction | +2.5 quality points via enrichment |
 | D | Cross-pollination | Two orchestrators' knowledge combined |
+| E | Knowledge marketplace | 75% cache, 5cr for 20 problems |
 
 ---
 
-## Previous: Experiment 101
+## Experiment 150 — Bilateral Credit at Scale
+
+**[Read the paper](experiments/150-bilateral-credit/paper.md)** | **[DOI: 10.5281/zenodo.19417258](https://doi.org/10.5281/zenodo.19417258)**
+
+134 autonomous agents, 5 archetypes, bilateral credit economy on 2x RTX 3090.
 
 | Metric | Value |
 |--------|-------|
-| Nodes | 101 (1 bootstrap + 100 agents) |
-| Duration | 144 hours (6 days) |
-| Skill executions | 194,289 |
-| Cryptographic receipts | 1,532,144 |
-| On-chain settlements | 99 |
-| Off-chain : on-chain ratio | **15,476 : 1** |
-| Gini coefficient (avg) | **0.161** |
-| Poems/stories written | 4,954 |
+| Bilateral credit positions | 2,573 |
+| Signed receipts | 10,583 |
+| Solana settlements | 35 |
+| Poems | 493 |
+| Trade negotiations | 878 |
+| Casino games | 307 |
 
-**[Read the report: 100 Agents, 194,000 Skill Executions, and a Blockchain](experiments/101-hundred-agents/)**
+![Economic flow](experiments/150-bilateral-credit/charts/economy_flow.png)
 
-![Gini coefficient trajectory over 6 days](experiments/101-hundred-agents/charts/chart_gini_trajectory.png)
+![Free-riding by archetype](experiments/150-bilateral-credit/charts/free_rider_fraction.png)
+
+---
+
+## Experiment 101 — The First Hundred
+
+**[Read the report](experiments/101-hundred-agents/)**
+
+101 agents for 6 days. 194,289 skill executions. Gini coefficient 0.161.
+
+![Gini trajectory](experiments/101-hundred-agents/charts/chart_gini_trajectory.png)
+
+---
 
 ## All Experiments
 
 | # | Name | Nodes | Key Finding |
 |---|------|-------|-------------|
 | 001 | [Settlement validation](experiments/001-settlement-validation/) | 5 | Settlement pipeline works end-to-end |
-| 002 | [Creative economy](experiments/002-creative-economy/) | 10 | Agents produce and trade creative content; Gini 0.90 |
+| 002 | [Creative economy](experiments/002-creative-economy/) | 10 | Agents produce and trade creative content |
 | 101 | [100 agents](experiments/101-hundred-agents/) | 101 | Bilateral credit flattens wealth (Gini 0.161); 15,476:1 settlement efficiency |
-| 150 | [Bilateral credit + signed receipts](experiments/150-bilateral-credit/) | 134 | 97% free-riding bounded by credit; 10,583 signed receipts; 35 Solana settlements; [paper](experiments/150-bilateral-credit/paper.md) |
-| **200** | [**Distributed intelligence**](experiments/200-distributed-intelligence/) | **3** | **Knowledge compounding (80% cache), self-correction (+2.5pts), cross-pollination; [paper](experiments/200-distributed-intelligence/paper.md)** |
+| 150 | [Bilateral credit + receipts](experiments/150-bilateral-credit/) | 134 | Free-riding bounded; signed receipts; Solana settlement; [paper](experiments/150-bilateral-credit/paper.md) |
+| **200** | [**Distributed intelligence**](experiments/200-distributed-intelligence/) | **3** | **Knowledge compounding, self-correction, cross-pollination, marketplace; [paper](experiments/200-distributed-intelligence/paper.md)** |
 
-## What This Is
+---
 
-Each experiment deploys a Docker swarm of [knarr](https://github.com/knarrnet/knarr) nodes, each driven by a small LLM (1B-35B parameters). Nodes are given personality seeds, skill inventories, and credit policies -- then left to operate autonomously. We measure what they do: who trades with whom, what skills get invoked, whether economies form, whether settlements complete.
+## The Story Arc
 
-This repo contains the experiment protocols, infrastructure, raw data, and analysis. Everything needed to reproduce or extend the experiments.
+**Experiment 001** (5 nodes): *Can agents settle on a blockchain?* Yes.
 
-## Try It Yourself
+**Experiment 002** (10 nodes): *Can agents produce and trade creative content?* Yes.
 
-```bash
-# Clone
-git clone https://github.com/knarrnet/knarr.lab.git
-cd knarr.lab
+**Experiment 101** (101 nodes, 6 days): *Does bilateral credit produce a stable economy?* Yes — Gini 0.161, flatter than most human economies.
 
-# Read the experiment 101 report
-cat experiments/101-hundred-agents/README.md
+**Experiment 150** (134 nodes): *Does bilateral credit work at scale with diverse agent types?* Yes — free-riders bounded, receipts signed, settlements on-chain. [Published](https://doi.org/10.5281/zenodo.19417258).
 
-# Reproduce (requires Docker + NVIDIA GPU)
-cd experiments/001-settlement-validation
-cat protocol.md
-docker compose -f ../../infrastructure/docker-compose.yml \
-               -f docker-compose.override.yml up -d
-```
+**Experiment 200** (3 nodes, focused): *Can agents compound intelligence through a knowledge marketplace?* Yes — 75% cache hits, self-correction, cross-pollination. The network gets smarter with every query.
 
-The Solana testnet is free. The models run locally. The protocol is open. If anything in the reports seems implausible, run it yourself.
+**Next**: Edge devices. A Raspberry Pi joins the network, gets profiled, receives optimized recipes, and contributes to problems that normally require a datacenter.
 
-## Structure
+---
+
+## Architecture
 
 ```
 knarr.lab/
-├── infrastructure/          # Shared Docker setup
-├── experiments/             # One directory per experiment
-│   ├── _template/           # Skeleton for new experiments
+├── experiments/                 # One directory per experiment
+│   ├── _template/               # Skeleton for new experiments
 │   ├── 001-settlement-validation/
 │   ├── 002-creative-economy/
 │   ├── 101-hundred-agents/
-│   └── 150-bilateral-credit/ # Latest: paper + data + charts
-├── scoring/                 # Metrics collector and analysis
-├── results/                 # Cross-experiment summaries
-├── lib/                     # Shared Python utilities
-└── docs/                    # Design documents, research questions
+│   ├── 150-bilateral-credit/    # Paper + 7 charts + 8 data files
+│   └── 200-distributed-intelligence/  # Paper + phase scripts
+├── infrastructure/              # Shared Docker setup
+├── scoring/                     # Metrics collector and analysis
+├── results/                     # Cross-experiment summaries
+├── lib/                         # Shared Python utilities
+└── docs/                        # Design documents
 ```
 
-## Design Principles
+## Reproduce
 
-1. **Reproducibility** -- Every experiment includes its full Docker configuration. `docker compose up` is the only requirement.
-2. **Data immutability** -- Raw data is sealed after the run. Analysis is separate.
-3. **Protocol-first** -- Hypotheses and success criteria are pre-registered before the run.
-4. **Minimal intervention** -- Experiments run autonomously. Human intervention invalidates the data.
-5. **Open data** -- All raw data, logs, and metrics are published.
-6. **Verifiability** -- On-chain transactions link to public Solana testnet explorers.
+```bash
+git clone https://github.com/knarrnet/knarr.lab.git
+cd knarr.lab
 
-## Requirements
+# Experiment 150: regenerate charts from raw data
+cd experiments/150-bilateral-credit
+pip install matplotlib numpy
+python generate_charts.py
 
-- Docker with NVIDIA GPU support
-- GPU with sufficient VRAM for the experiment's model roster (exp-101: 2x RTX 3090)
-- Python 3.11+ for analysis scripts
+# Experiment 200: run the distributed intelligence phases
+# Requires: knarr v0.54.1, vLLM with Qwen3.5-9B
+cd experiments/200-distributed-intelligence
+# See paper.md Appendix C for full instructions
+```
+
+## Principles
+
+1. **Reproducibility** — raw data + analysis scripts published
+2. **Data immutability** — sealed after experiment, analysis separate
+3. **Protocol-first** — hypotheses pre-registered before runs
+4. **Minimal intervention** — agents operate autonomously
+5. **Open data** — everything published, on-chain transactions verifiable
+6. **Layered validation** — primitives proven 10/10 before assembly
 
 ## Related
 
-- [knarr](https://github.com/knarrnet/knarr) -- The peer-to-peer protocol
-- [knarr.skills](https://github.com/knarrnet/knarr.skills) -- Skill and plugin library
-- [knarr.network](https://knarr.network) -- Live network
+- [knarr](https://github.com/knarrnet/knarr) — The P2P protocol
+- [knarr.skills](https://github.com/knarrnet/knarr.skills) — Skill and plugin library
+- [knarr.network](https://knarr.network) — Live network
+
+## Responding to
+
+- Wang et al. (2026) ["Agentic Peer-to-Peer Networks"](https://arxiv.org/abs/2603.03753) — we provide implementation evidence for their architecture
+- Adar & Huberman (2000) "Free Riding on Gnutella" — bilateral credit solves what Gnutella couldn't
+- Xu et al. (ICML 2024) "Werewolf RL" — scored menu architecture validated in economic context
+- Belcak et al. (NVIDIA 2025) "Small Language Models" — 9B model orchestrates distributed intelligence
 
 ## License
 
