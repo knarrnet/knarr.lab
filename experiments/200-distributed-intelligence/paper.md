@@ -415,17 +415,21 @@ Wang et al. [3] identified economic incentives, intelligence composition, and tr
 
 ## 7. Future Work
 
-**Larger benchmarks.** The 100-question SQuAD subset should be replaced with a larger, more diverse evaluation set that supports statistical significance testing. Metrics beyond substring matching (e.g., BERTScore, human evaluation) would provide more robust accuracy estimates.
+**Unified memory framework.** The retrieval pipeline currently treats knowledge packs as isolated document stores. We are integrating RRF hybrid retrieval, structural metadata scoping (inspired by MemPalace [4] and Engram-2 [5]), and a multi-identity namespace ("wing") into the thrall plugin's knowledge manager. This unifies six existing memory subsystems (structured decision memory, living memory pillars, circuit breakers, session context, knowledge packs, and agent memory) behind a layered retrieval interface. The implementation is complete and awaiting integration testing.
 
-**Multi-machine deployment.** Testing across physically separate machines with real network latency and failure modes is necessary to validate the pipeline under realistic conditions. The 160/160 protocol pass rate should be re-evaluated under network stress.
+**Distributed knowledge in felags.** Knarr's group primitive (the "felag") provides trust boundaries, shared credit policies, and membership-gated access. We plan to test collaborative knowledge commons where felag members contribute knowledge, a gatekeeper validates contributions for accuracy and novelty, and accepted knowledge merges into a shared pack distributed to all members. This requires knowledge pack encryption (currently signed but not encrypted --- filed as CR-003) using hybrid AES-256 + X25519 per-member key wraps.
 
-**Adversarial robustness.** The 38% adversarial miss rate motivates work on multi-source consensus, where a quality gate cross-references answers against packs from independent providers. More sophisticated attack vectors should also be tested.
+**Multi-machine deployment.** All experiments ran on a single machine. Testing across physically separate nodes with real network latency and failure modes is necessary. The latency simulation (Section 4.1) suggests correctness is unaffected by delay, but packet loss, connection timeouts, and Byzantine failures have not been tested.
 
-**Model-architecture-aware retrieval.** The observation that Mamba-Transformer hybrids respond differently to retrieval strategies suggests that the system should select retrieval pipelines per-model rather than globally. This warrants systematic investigation.
+**Adversarial robustness.** The 38% adversarial miss rate motivates work on multi-source consensus, where a quality gate cross-references answers against packs from independent providers. Sophisticated attack vectors (consistent-but-wrong frameworks, selective omissions, attacks targeting the gate's biases) should also be tested.
 
-**Edge device evaluation.** While model scaling results suggest that 2.3B models could serve extractive QA on Raspberry Pi-class hardware, this has not been tested end-to-end in the knowledge pipeline. Latency, memory constraints, and power consumption under real workloads remain unknown.
+**Architecture-aware retrieval.** The observation that Mamba-Transformer hybrids respond differently to retrieval strategies suggests that retrieval pipelines should be selected per-model, not globally. The thrall knowledge manager now supports per-domain retrieval mode configuration, enabling this to be tested systematically.
 
-**Formal analysis.** Game-theoretic analysis of knowledge markets --- equilibrium conditions, curator investment strategies, and the relationship between credit depth and knowledge accumulation rate --- would complement the empirical evidence presented here.
+**Closing the retrieval gap.** Approximately 20 points of gap remain between the best retrieval pipeline (RRF+CE) and the oracle. Candidates include chunk overlap at ingest (our current chunker splits on paragraph boundaries with no overlap), better embedding models, and the mathematical similarity scoring approaches described by SuperLocalMemory, which reported +12.7 percentage points from topology-based scoring without any LLM calls.
+
+**Edge device evaluation.** Model scaling results suggest that 2.3B models could serve extractive QA on Raspberry Pi-class hardware (7.6 tok/s measured on a Pi 5), but this has not been tested end-to-end in the knowledge pipeline.
+
+**Formal analysis.** Game-theoretic analysis of knowledge markets --- equilibrium conditions, curator investment strategies, and the relationship between bilateral credit depth and knowledge accumulation rate --- would complement the empirical evidence presented here.
 
 ---
 
