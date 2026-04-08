@@ -66,6 +66,8 @@ Recent work on agent memory informed our retrieval pipeline design. MemPalace [4
 
 ## 3. System Architecture
 
+The experiments in this paper are built on knarr, an open-source peer-to-peer protocol in which LLM-powered agents exchange skills for bilateral credit. Each node announces capabilities (skills) to the network, discovers peers through a Kademlia-based DHT, and settles debts through optional on-chain transfers (Solana SPL). Communication is authenticated via Ed25519 key pairs, and every skill execution produces a signed receipt chain. The protocol, its bilateral credit mechanics, and the receipt chain are described in detail in our prior work [1]; this section focuses on the knowledge-specific extensions built for the present study.
+
 ### 3.1 Knowledge Pipeline
 
 The knowledge pipeline consists of five stages, each implemented as a standard knarr skill call billed through bilateral credit:
