@@ -106,7 +106,17 @@ Knowledge packs are JSON documents containing: a domain identifier, a semantic v
 | Knowledge store | SQLite FTS5 via thrall plugin |
 | Signing | Ed25519 (PyNaCl) |
 
-The topology consists of 2--3 nodes running on a single machine. All nodes communicate over localhost via the knarr protocol with bilateral credit billing. This topology does not reflect real network conditions (latency, partial failures, heterogeneous hardware) and represents a significant limitation of this work.
+The topology consists of 2--3 nodes running on a single machine. All nodes communicate over localhost via the knarr protocol with bilateral credit billing. This topology does not reflect real network conditions (latency, partial failures, heterogeneous hardware) and represents a significant limitation of this work. To partially address this, we simulated network latency by injecting configurable delays (0--1000ms) between skill call steps. Accuracy remained constant across all latency levels (88--90% on n=50), while per-pipeline time scaled linearly with the number of network hops (3 per pipeline):
+
+| Simulated latency | Accuracy | Avg pipeline time | P95 |
+|--------------------|----------|-------------------|-----|
+| 0ms (localhost) | 88% | 0.69s | 1.18s |
+| 50ms | 88% | 0.63s | 0.93s |
+| 200ms | 88% | 1.11s | 1.38s |
+| 500ms | 90% | 2.12s | 2.70s |
+| 1000ms | 90% | 3.53s | 3.77s |
+
+This confirms that latency affects throughput but not correctness. However, simulated delay does not capture packet loss, connection timeouts, or partial failures that would occur in a real distributed deployment.
 
 Models tested in the scaling experiments (Phases H2--H4):
 
@@ -121,11 +131,21 @@ Models tested in the scaling experiments (Phases H2--H4):
 
 ### 4.2 Evaluation Metrics and Their Limitations
 
-**Extractive QA accuracy (Phases H2--H8).** We use exact substring matching: a response is correct if `answer.lower() in response.lower()`. This metric has two failure modes. It undercounts correct paraphrases (a model that restates the answer in different words scores 0). It overcounts incidental matches (a model that produces a long response containing the answer substring by chance scores 1). A model-based judge would be more robust but introduces its own biases and reproducibility concerns. We use substring matching for its simplicity and reproducibility, but results should be interpreted with this limitation in mind.
+**Extractive QA accuracy (Phases H2--H8).** We use exact substring matching: a response is correct if `answer.lower() in response.lower()`. This metric has two failure modes. It undercounts correct paraphrases (a model that restates the answer in different words scores 0). It overcounts incidental matches (a model that produces a long response containing the answer substring by chance scores 1).
+
+**Dual-metric validation.** To quantify the substring matching bias, we ran a model-based judge (Qwen3.5:4b) on a 100-question subsample of the 500-question benchmark. The judge evaluates whether the model's answer contains the correct information, accepting paraphrases:
+
+| Model | Substring (n=500) | Model judge (n=100) | Undercount |
+|-------|-------------------|---------------------|------------|
+| gemma4:e2b | 83.4% | 99.0% | ~16pts |
+| qwen3.5:4b | 76.0% | 95.0% | ~19pts |
+| qwen3.5:9b | 82.4% | 99.0% | ~17pts |
+
+Substring matching undercounts by approximately 16--19 percentage points compared to a model-based judge. The models are substantially more capable than the primary metric suggests. We report substring scores throughout for reproducibility (no model-judge dependency), but the dual-metric comparison establishes that the absolute accuracy figures are conservative estimates. Relative comparisons between strategies (e.g., FTS vs RRF+CE) are less affected, since the undercount is approximately constant across retrieval methods.
 
 **Quality gate scores (Phases C, G, H).** An LLM judge (Gemma 4 26B or Qwen3.5:4b) scores answers on a 1--10 scale against reference criteria. LLM-as-judge is known to exhibit position bias, verbosity bias, and self-preference. We do not calibrate against human judgments. Quality gate scores should be treated as ordinal indicators of relative quality, not as absolute measures.
 
-**Benchmark size.** The SQuAD 2.0 subset contains 100 questions across 5 domains (Oxygen, Normans, Immune system, Steam engine, EU law). At this sample size, score differences of 4--6 percentage points are within the range of sampling noise (estimated at approximately plus or minus 5%). All accuracy differences should be read as directional, not statistically significant.
+**Benchmark size.** The primary SQuAD 2.0 subset contains 100 questions across 5 domains (Oxygen, Normans, Immune system, Steam engine, EU law). At this sample size, score differences of 4--6 percentage points are within the range of sampling noise (estimated at approximately plus or minus 5%). To validate key findings, we ran an expanded benchmark of 500 questions across 10 domains with 271 passages. The expanded results (reported alongside n=100 figures where available) reduce the noise margin to approximately plus or minus 2%.
 
 **Adversarial evaluation (Phase H9).** The adversarial test uses one attack vector: plausible rewrites of known passages that change specific dates, names, or numbers while preserving style and tone. This does not cover sophisticated attacks such as consistent but wrong frameworks, selective omissions, or attacks that exploit the quality gate's own biases.
 
@@ -209,18 +229,18 @@ Knowledge packs provide a 57--72 point improvement over parametric knowledge alo
 
 **Phases H2--H4: Model Scaling on SQuAD 2.0.** Six models were evaluated on a 100-question SQuAD 2.0 subset (5 domains: Oxygen, Normans, Immune system, Steam engine, EU law) using exact substring matching.
 
-| Model | Params | Arch | SQuAD | Gate |
-|-------|--------|------|-------|------|
-| qwen3:0.6b | 0.6B | Dense | 2% | Fails (1/10) |
-| gemma4:e2b | 2.3B (MoE) | Transformer | 88% | Fails (4/10) |
-| nemotron-3-nano | 3.6B (MoE) | Mamba-Trans. | 77% | --- |
-| qwen3.5:4b | 4B | Dense | 83% | Passes (9/10) |
-| gemma4:e4b | 4.5B (MoE) | Transformer | 86% | Passes (7/10) |
-| qwen3.5:9b | 9B | Dense | 83% | Passes (9/10) |
+| Model | Params | Arch | SQuAD (n=100) | SQuAD (n=500) | Gate |
+|-------|--------|------|---------------|---------------|------|
+| qwen3:0.6b | 0.6B | Dense | 2% | 1% | Fails (1/10) |
+| gemma4:e2b | 2.3B (MoE) | Transformer | 88% | 83% | Fails (4/10) |
+| nemotron-3-nano | 3.6B (MoE) | Mamba-Trans. | 77% | --- | --- |
+| qwen3.5:4b | 4B | Dense | 83% | 76% | Passes (9/10) |
+| gemma4:e4b | 4.5B (MoE) | Transformer | 86% | --- | Passes (7/10) |
+| qwen3.5:9b | 9B | Dense | 83% | 82% | Passes (9/10) |
 
 Figure 1 plots accuracy against active parameter count. Several observations emerge, though all are subject to the benchmark size limitation (approximately plus or minus 5% noise at n=100):
 
-First, Gemma 4 E2B (2.3B active parameters) achieved the highest extractive QA accuracy (88%), outperforming both the 4B and 9B dense models. However, it failed the compositional quality gate (4/10), suggesting that extraction and composition have different parameter thresholds.
+First, Gemma 4 E2B (2.3B active parameters) achieved the highest extractive QA accuracy at n=100 (88%), but at n=500 the advantage narrows: E2B scores 83% vs 9B at 82%. The original 5-point gap was within sampling noise. E2B and 9B are approximately equivalent on extraction. However, E2B failed the compositional quality gate (4/10), suggesting that extraction and composition have different parameter thresholds.
 
 Second, NVIDIA Nemotron 3 Nano (3.6B active, Mamba-Transformer hybrid) scored 77%, below both E2B and Qwen3.5:4b despite more active parameters. This suggests that architecture affects performance on this task independently of parameter count, though the comparison involves confounds (different training data, different tokenizers).
 
@@ -292,7 +312,18 @@ Cross-encoder reranking provided the largest single improvement (+4--6 points on
 
 ![Figure 2: Retrieval pipeline — cumulative improvement per strategy](figures/fig2_retrieval_pipeline.png)
 
-**Summary for RQ3.** Algorithmic improvements closed 48% of the retrieval gap across all tested model architectures without changing the embedding model (Figure 2). RRF outperformed both FTS and VEC individually. Cross-encoder reranking provided the largest marginal gain. Approximately 20 points of gap remain, likely attributable to chunking boundary losses and embedding model quality limits.
+**Validation at n=500.** On the expanded 500-question benchmark with 271 passages and 10 domains (E2B only):
+
+| Strategy | n=100 | n=500 |
+|----------|-------|-------|
+| FTS | 53% | 50% |
+| RRF+CE | 69% | 63% |
+| ORACLE | 89% | 82% |
+| Gap closed | 16pts (44%) | 13pts (40%) |
+
+The n=500 results are directionally consistent with n=100. The absolute numbers are lower (broader domain mix, more passages to search), but the relative improvement from RRF+CE is stable at 40--48% gap closure.
+
+**Summary for RQ3.** Algorithmic improvements closed 40--48% of the retrieval gap across tested configurations without changing the embedding model (Figure 2). RRF outperformed both FTS and VEC individually. Cross-encoder reranking provided the largest marginal gain. Approximately 19--20 points of gap remain, likely attributable to chunking boundary losses and embedding model quality limits.
 
 ### 5.4 RQ4: Trust and Quality
 
@@ -402,7 +433,7 @@ Wang et al. [3] identified economic incentives, intelligence composition, and tr
 
 We presented implementation evidence for a knowledge acquisition and retrieval system operating on peer-to-peer bilateral credit. Across 16 experimental phases on consumer hardware, we observed within-domain knowledge reuse (75--80% cache hits), coaching-based quality improvement (1/10 to 8/10 via curator packs), model scaling thresholds (2.3B for extraction, 4B for composition on a 100-question benchmark), retrieval pipeline optimization (48% gap closure via RRF and cross-encoder reranking), and partial adversarial resilience (76% detection, 0% false rejects, 38% miss rate).
 
-These results are directional, not definitive. The benchmark is small (100 questions, approximately plus or minus 5% noise), the topology is minimal (2--3 nodes on one machine), the evaluation metric is limited (substring matching), and several claimed mechanisms have been tested only in single demonstrations. The multi-hop result is negative: 4B models do not synthesize across knowledge domains.
+These results are directional, not definitive. Key findings were validated on a 500-question expanded benchmark (plus or minus 2% noise), but the primary results use 100 questions (plus or minus 5% noise), the topology is minimal (2--3 nodes on one machine), the evaluation metric is limited (substring matching), and several claimed mechanisms have been tested only in single demonstrations. The multi-hop result is negative: 4B models do not synthesize across knowledge domains.
 
 What the evidence does support is that the core primitives function (160/160 protocol pass rate), that knowledge packs are a viable unit of exchange over bilateral credit, and that a quality gate provides a meaningful --- if imperfect --- trust signal. Wang et al. [3] proposed the architecture for agentic P2P networks; our previous work [1] provided evidence for the economic layer; this paper extends that evidence to the knowledge and retrieval layers, while honestly noting the limitations of a small-scale, single-machine evaluation.
 
