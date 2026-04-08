@@ -356,6 +356,35 @@ Vector retrieval outperforms keyword search by 4-8 percentage points on a multi-
 
 **Architecture effect on retrieval:** Nemotron 3 Nano is the only model where FTS **outperforms** VEC (-5%). The Mamba-Transformer hybrid processes keyword-matched context more effectively than semantically-matched context — likely because Mamba's selective state-space mechanism handles sequential token patterns (exact keyword matches) differently than the distributed semantic representations that vector retrieval produces. This has a practical implication: **retrieval strategy should be model-architecture-aware.** A system serving both Transformer and Mamba-hybrid models should select the retrieval strategy per-model, not globally.
 
+### 3.13 Phase H7: Retrieval Gap Diagnostic and Reciprocal Rank Fusion
+
+**Question:** Is the 30-point retrieval gap a retrieval problem or a utilization problem? And can we close it?
+
+**Diagnostic (Phase 0):** For each question where VEC retrieval failed, we tested whether the model could answer correctly when given the gold passage directly. Results on Gemma 4 E2B:
+
+| Category | Count | Meaning |
+|----------|-------|---------|
+| Both correct | 55% | No problem — VEC finds the right passage |
+| **Retrieval fail** | 33% | VEC wrong passage, ORACLE correct → retrieval problem |
+| Utilization fail | 8% | Both wrong → model can't use the context |
+| Anomaly | 4% | VEC correct, ORACLE wrong (different passage also works) |
+
+**The gap is 80% retrieval, 20% utilization.** Improving retrieval is the right investment.
+
+**Reciprocal Rank Fusion (Phase 1):** We implemented RRF — merging FTS5 and VEC ranked lists by reciprocal rank score (1/(k+rank)) rather than trying to normalize incompatible score scales. Also tested domain-scoped pre-filtering (inspired by MemPalace's structural metadata approach, which showed 60.9% → 94.8% improvement from metadata scoping alone).
+
+| Model | FTS | VEC | **RRF** | RERANK | **RRF+SCOPE** | ORACLE | Gap closed |
+|-------|-----|-----|---------|--------|---------------|--------|------------|
+| gemma4:e2b | 54% | 59% | 62% | 56% | **63%** | 88% | +9pts / 34pt gap |
+| qwen3.5:4b | 54% | 55% | 63% | 55% | **64%** | 87% | +10pts / 33pt gap |
+| nemotron-3-nano | 54% | 50% | **59%** | 54% | 57% | 75% | +5pts / 21pt gap |
+
+**RRF+SCOPE is the best strategy for Transformer models** (+9-10 points over FTS baseline). RRF alone beats both FTS and VEC individually. Reranking (FTS broad → cosine rerank) underperforms RRF because it only reranks one candidate pool instead of merging two.
+
+Nemotron confirms the architecture effect: RRF (59%) beats RRF+SCOPE (57%) — the Mamba-Transformer hybrid benefits from the broader unscoped candidate pool.
+
+**20-24 points of gap remain.** The next candidates are: better embedding models, chunk overlap at ingest, cross-encoder reranking (22M param model, CPU-only), and two-lane indexing (raw chunks + extracted facts).
+
 ---
 
 ## 4. The Knowledge Ecosystem
@@ -629,6 +658,7 @@ The data, code, and all experimental scripts are available at `github.com/knarrn
 | H2-H3: Model scaling | Minimum viable agent size | 4B for composition, 2.3B for extraction |
 | H4: SQuAD benchmark | 100 questions, 5 domains, 6 models | E2B 88%, 4B 83%, Nemotron 77%, 9B 83% |
 | H5-H6: Retrieval at scale | FTS vs VEC on 217 passages, 4 models | VEC +4-8% (Transformer), VEC -5% (Mamba-Transformer) |
+| H7: Retrieval diagnostic | Retrieval vs utilization split | 80% retrieval / 20% utilization. RRF+SCOPE closes 9-10pts |
 
 ## Appendix C: Reproduction
 
