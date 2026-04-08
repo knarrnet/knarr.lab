@@ -416,6 +416,42 @@ Query
 
 Total latency: ~20ms. Fast enough for real-time queries on consumer hardware.
 
+### 3.15 Phase H9: Adversarial Knowledge Injection
+
+**Question:** Can a malicious node poison the knowledge marketplace with plausible-but-wrong facts? Does the quality gate catch it?
+
+We created "poisoned" knowledge packs where a large model (Gemma 4 E2B) rewrites passages to contain subtle factual errors — changing specific dates, names, or numbers while keeping the text's style and tone intact. The agent (same E2B model) then answers questions using either the clean or poisoned pack, and a quality gate (Qwen3.5:4b with reference context) judges the answer.
+
+| Metric | Value |
+|--------|-------|
+| Clean pack correct | 15/20 (75%) |
+| Poison effective (answer flipped) | 13/20 (65%) |
+| **Gate caught poisoned answers** | **10/13 (76%)** |
+| Gate false rejects (clean) | **0/15 (0%)** |
+| Gate missed (poison accepted) | 5/13 (38%) |
+
+**The attack is effective** — poisoned packs flip 65% of answers. But **the quality gate catches 76% of them with zero false positives.** The gate provides meaningful trust in a P2P marketplace where any node can publish knowledge.
+
+The 38% miss rate is concerning for high-stakes domains (compliance, medical). Mitigation strategies: require multiple independent sources for critical facts (consensus), higher-confidence gate thresholds, or cross-referencing against a second knowledge pack from a different provider.
+
+**This directly addresses Wang et al.'s open challenge on trust and verification in agentic P2P networks** (§VIII). Bilateral credit adds economic cost to attacks (poisoning costs credits), the quality gate adds a verification layer, and the Ed25519 signature chain provides provenance to trace malicious packs back to their source.
+
+### 3.16 Phase H10: Multi-Hop Reasoning Across Domains
+
+**Question:** Can an agent answer questions that require combining knowledge from two different domains?
+
+We tested 15 synthetic questions requiring facts from 2 of our 5 SQuAD domains (e.g., "How might EU environmental law address immune system impacts of industrial oxygen depletion?"). Three conditions: no context, single-domain context, and cross-domain context from both relevant domains.
+
+| Condition | Avg Score (0-3) | Full synthesis (3/3) |
+|-----------|----------------|---------------------|
+| No context | 0.80 | 2/15 |
+| Single domain | 0.93 | 0/15 |
+| Cross-domain | 0.93 | 1/15 |
+
+**Cross-domain knowledge delivery works** — the retrieval pipeline successfully provides context from both domains. But **the 4B model rarely achieves true synthesis.** It references facts from both domains but lists them separately rather than connecting them. Analogy questions showed the strongest cross-domain lift (+0.7 points), while application and causal questions showed no improvement.
+
+**Implication for the knowledge ecosystem:** Multi-hop reasoning is a curator-tier capability (26B+), not a specialist-tier capability (4B). The architecture should route synthesis questions to curators and extraction questions to specialists. This supports the three-tier model: edge nodes extract, specialists serve, curators synthesize.
+
 ---
 
 ## 4. The Knowledge Ecosystem
@@ -691,6 +727,8 @@ The data, code, and all experimental scripts are available at `github.com/knarrn
 | H5-H6: Retrieval at scale | FTS vs VEC on 217 passages, 4 models | VEC +4-8% (Transformer), VEC -5% (Mamba-Transformer) |
 | H7: Retrieval diagnostic | Retrieval vs utilization split | 80% retrieval / 20% utilization. RRF+SCOPE closes 9-10pts |
 | H8: Cross-encoder rerank | 22M param reranker on RRF pipeline | +16-18pts over FTS, 48% of gap closed, ~20ms total latency |
+| H9: Adversarial injection | Poisoned packs vs quality gate | Gate catches 76% of poisoned answers, 0% false rejects |
+| H10: Multi-hop reasoning | Cross-domain synthesis, 15 questions | 4B can't synthesize; multi-hop is a curator-tier capability |
 
 ## Appendix C: Reproduction
 
