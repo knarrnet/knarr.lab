@@ -225,7 +225,18 @@ Knowledge packs provide a 57--72 point improvement over parametric knowledge alo
 
 ### 5.2 RQ2: Model Scaling Thresholds
 
-**Phase H: Coaching Loop.** A 26B curator (Gemma 4) wrote targeted knowledge packs for a 9B agent (Qwen3.5) that initially scored 1/10 on a structured explanation task. After ingesting the curator's pack, the agent scored 8/10. The curator wrote a 4,450-character knowledge pack in 25 seconds. Two problems were tested: settlement pipeline reached 10/10 on the first iteration; casino escrow improved from 1/10 to 8/10 after one coaching iteration.
+**Phase H: Coaching Loop.** A 26B curator (Gemma 4) wrote targeted knowledge packs for agents that initially scored poorly. In the original test, a 9B agent went from 1/10 to 8/10 on a structured explanation task. To validate at larger n, we expanded to 5 domains × 5 SQuAD questions each (n=25), using a 4B agent (Qwen3.5) with zero-shot baseline:
+
+| Domain | Baseline | Coached | Improvement |
+|--------|----------|---------|-------------|
+| European Union law | 1/5 | 1/5 | +0 |
+| Immune system | 1/5 | 3/5 | +2 |
+| Normans | 0/5 | 3/5 | +3 |
+| Oxygen | 1/5 | 4/5 | +3 |
+| Steam engine | 0/5 | 2/5 | +2 |
+| **Total** | **3/25 (12%)** | **13/25 (52%)** | **+10** |
+
+Four of five domains improved. The curator wrote packs of 2,500--3,400 characters in 20--28 seconds each. EU law did not improve --- legal terminology is precise and the curator's general summary did not contain the specific treaty provisions needed. Overall, coaching lifted accuracy from 12% to 52% (+40 points), consistent with the original Phase H finding.
 
 **Phases H2--H4: Model Scaling on SQuAD 2.0.** Six models were evaluated on a 100-question SQuAD 2.0 subset (5 domains: Oxygen, Normans, Immune system, Steam engine, EU law) using exact substring matching.
 
@@ -359,7 +370,9 @@ The quality gate distinguished knowledge-backed answers from hallucinated ones i
 
 The attack was effective: poisoned packs flipped 75% of answers. The quality gate caught 76% of successful poisoning attempts with zero false positives. Analysis of the 23 missed cases reveals a consistent failure mode: the gate cannot distinguish semantic near-synonyms (e.g., "clergyman" vs "theologian", "static discs" vs "fixed discs", "water" vs "oceans"). Domain-specific performance varied: EU law achieved 100% catch rate (legal terms are precise), while Immune system and Oxygen domains were weaker at 53--64% (scientific terminology has more synonyms).
 
-The 30% miss rate is a significant limitation. For domains where factual accuracy is critical, a single quality gate is insufficient; multi-source consensus, domain-specific verification, or human escalation would be needed.
+**Enhanced gate with synonym detection (Phase H9b).** To test whether the near-synonym failure mode can be mitigated, we added two signals to the quality gate: WordNet lexical similarity and embedding distance between the model's answer and the reference answer. On the 23 missed cases, the enhanced gate caught 12 additional attacks, improving the overall catch rate from 76% to 92% (miss rate: 30% to 14%). Most gains came from the LLM re-evaluation with stricter prompting rather than the lexical signals, suggesting that prompt engineering for the gate model may be as effective as adding external knowledge bases. The remaining 11 misses are true semantic near-synonyms (e.g., "enzymes" vs "proteins", "1992" vs "1991") that require domain-specific validation.
+
+Even with the enhanced gate, a 14% miss rate remains. For domains where factual accuracy is critical, multi-source consensus, domain-specific verification, or human escalation would be needed.
 
 **Summary for RQ4.** Adaptive credit limits tightened free-riders from 10 to 3 calls in a single test. The quality gate provided a meaningful but imperfect trust signal: it detected 76% of adversarial packs across 100 questions with no false rejects, but missed 30% of successful attacks --- predominantly semantic near-synonyms that the gate model cannot distinguish from correct answers. Combined with Ed25519 provenance (enabling tracing of malicious packs to their source), these mechanisms provide partial evidence toward the trust and accountability challenges identified by Wang et al. [3]. The adaptive credit test remains a single demonstration; the adversarial test covers one attack vector on one domain set.
 
