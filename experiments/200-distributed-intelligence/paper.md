@@ -1,4 +1,4 @@
-# Distributed Intelligence Through Bilateral Credit: How Small Language Models Solve Problems by Shopping for Knowledge in a P2P Network
+# Distributed Intelligence Through Bilateral Credit: Knowledge Acquisition, Retrieval, and Trust in a Peer-to-Peer Agent Network
 
 **Viggo**
 Knarr Project
@@ -8,658 +8,384 @@ April 2026
 
 ## Abstract
 
-We report implementation evidence for a distributed intelligence architecture where autonomous LLM agents purchase, ingest, and reuse knowledge packs through a peer-to-peer bilateral credit protocol. Validated across 16 experimental phases on consumer hardware (2x RTX 3090), the system demonstrates: (A-D) an end-to-end knowledge pipeline with 80% within-domain cache reuse and cross-orchestrator knowledge combination; (E-G) a knowledge marketplace with adaptive credit limits and a quality gate that rejects hallucinated answers; (H) self-improving coaching where a 26B curator lifts a 9B agent from 1/10 to 8/10; (H2-H6) model scaling thresholds across 6 architectures on a 100-question SQuAD 2.0 subset (4B minimum for composition, 2.3B for extraction); (H7-H8) a retrieval pipeline using Reciprocal Rank Fusion and cross-encoder reranking that closes 48% of the retrieval gap on a 217-passage corpus; (H9) adversarial resilience where a quality gate catches 76% of poisoned knowledge packs with 0% false rejects; and (H10) a negative result showing multi-hop synthesis requires curator-tier models (26B+), not specialist-tier (4B). Every skill call is billed through bilateral credit, every knowledge pack is Ed25519-signed, and all data and scripts are published. The system builds on the architecture proposed by Wang et al. (2026) for Agentic P2P Networks, providing concrete implementation evidence for their economic and intelligence layers.
+We investigate whether autonomous language model agents can acquire, reuse, and quality-gate knowledge through a peer-to-peer bilateral credit protocol. Four research questions structure the inquiry: (RQ1) whether bilateral credit supports a functioning knowledge marketplace with cache reuse, (RQ2) the minimum model size for knowledge-augmented extractive QA and compositional reasoning, (RQ3) how much of the retrieval gap algorithmic improvements can close without changing the embedding model, and (RQ4) whether quality gates and adaptive credit provide meaningful trust signals in an open marketplace. Experiments span 16 phases on consumer hardware (2x RTX 3090, 2--3 node topology). For RQ1, we observe 75--80% within-domain cache reuse and cross-node knowledge combination across 5 domains. For RQ2, a 100-question SQuAD 2.0 subset suggests 2.3B active parameters suffice for extraction (88%) while 4B is needed for compositional explanation. For RQ3, Reciprocal Rank Fusion with cross-encoder reranking closes 48% of a 30-point retrieval gap on a 217-passage corpus. For RQ4, a quality gate catches 76% of adversarially poisoned packs with 0% false rejects, though a 38% miss rate remains. All pipeline primitives pass protocol validation (160/160). These results are directional: the benchmark is small, the evaluation metric is limited, and the topology does not reflect real network conditions. We position this work as implementation evidence for the framework proposed by Wang et al. (2026) for Agentic P2P Networks. All data and scripts are publicly available.
 
 ---
 
 ## 1. Introduction
 
-Multi-agent AI systems typically operate within a single process, with agents sharing memory and implicit trust. When agents need external capabilities, they call APIs with fixed pricing and no bilateral relationship. The question we address: **can intelligence compound in a peer-to-peer network where knowledge is bought, sold, signed, and reused through bilateral credit?**
+Multi-agent AI systems typically operate within a single process, with agents sharing memory and implicit trust. When agents require external capabilities, they call centralized APIs with fixed pricing and no bilateral relationship. This architecture assumes a trusted coordinator and does not account for the incentive problems that arise when agents operate autonomously across organizational boundaries.
 
-We present a system where:
-- An **orchestrator** (small LLM on consumer hardware) receives a problem
-- It **purchases knowledge packs** from specialist nodes, paying via bilateral credit
-- It **ingests** the knowledge into a local FTS (full-text search) store
-- It **synthesizes** an answer using the LLM with retrieved knowledge as context
-- It **packages** the result as a new signed knowledge pack for the network
-- **Subsequent queries** on similar topics hit the cache, reducing cost and time
+Wang et al. [3] proposed an architecture for Agentic Peer-to-Peer Networks that decouples agent intelligence from centralized infrastructure. Their framework identifies economic, intelligence, and trust layers as necessary components for autonomous agent cooperation. This paper asks whether those layers can be instantiated with concrete mechanisms --- specifically, whether bilateral credit, signed knowledge packs, and quality gates can support a functioning knowledge marketplace among small language model agents.
 
-This is not a proposal. Every operation described here executed on real knarr protocol nodes with bilateral credit charges, Ed25519-signed receipts, and verifiable knowledge provenance.
+### 1.1 Research Questions
 
-### Prior Work
+We organize our investigation around four research questions:
 
-This paper builds on our earlier work demonstrating bilateral credit isolation of free-riders across 134 autonomous agents (DOI: 10.5281/zenodo.19417258). Wang et al. (2026) proposed the architecture for Agentic P2P Networks; we provided implementation evidence for the economic layer. This paper extends that evidence to knowledge acquisition and retrieval --- investigating whether P2P economic incentives can support within-domain knowledge reuse, quality-gated content, and multi-model retrieval pipelines.
+- **RQ1 (Knowledge Pipeline).** Can bilateral credit support a functioning knowledge marketplace where agents buy, ingest, and reuse knowledge packs? We hypothesize that within-domain cache reuse will reduce per-query cost after an initial knowledge investment, and that knowledge created by one agent can be used by another.
 
-NVIDIA's SLM position paper (Belcak et al. 2025) argued that sub-10B models are sufficient for most agentic tasks. Our Phase H2-H4 results provide partial support: a 4B model passes quality gates on extractive QA, while a 9B model orchestrates the full knowledge pipeline. Recent work on agent memory systems (MemPalace [4], Engram-2 [5]) informed our retrieval pipeline design, particularly the use of structural metadata filtering and Reciprocal Rank Fusion.
+- **RQ2 (Model Scaling).** What is the minimum model size for knowledge-augmented extractive QA and compositional reasoning? We hypothesize that extraction and composition have different parameter thresholds, and that architecture (e.g., Transformer vs. Mamba-Transformer hybrid) affects performance independently of parameter count.
 
----
+- **RQ3 (Retrieval).** How much of the retrieval gap can algorithmic improvements --- Reciprocal Rank Fusion, structural scoping, and cross-encoder reranking --- close without changing the embedding model? We hypothesize that fusion of keyword and vector retrieval will outperform either alone, and that a lightweight reranker will provide additional gains.
 
-## 2. System Architecture
+- **RQ4 (Trust).** Can a quality gate and adaptive credit provide meaningful trust signals in an open P2P knowledge marketplace? We hypothesize that a quality gate can distinguish knowledge-backed answers from hallucinated or poisoned ones, and that adaptive credit limits can penalize free-riding behavior.
 
-### 2.1 Knowledge Pipeline
+### 1.2 Contributions
 
-```
-Problem received
-  -> Orchestrator analyzes what knowledge is needed (LLM)
-  -> Buy knowledge-pack-lite from specialist (bilateral credit, 1cr)
-  -> Specialist returns Ed25519-signed pack with domain content
-  -> Ingest into local FTS store (chunked, indexed)
-  -> Query FTS for relevant context
-  -> Synthesize answer (LLM + retrieved context)
-  -> Create signed output pack (available for resale)
-```
+1. An end-to-end implementation of knowledge acquisition, caching, and reuse over bilateral credit, validated across 5 domains and 20 problems (Sections 5.1).
+2. Model scaling thresholds for knowledge-augmented QA across 6 architectures on a 100-question SQuAD 2.0 subset, identifying 2.3B (extraction) and 4B (composition) as minimum sizes (Section 5.2).
+3. A retrieval pipeline combining FTS5, vector search, RRF, and cross-encoder reranking that closes 48% of the retrieval gap on a 217-passage corpus (Section 5.3).
+4. Adversarial evaluation of a quality gate against poisoned knowledge packs, with 76% detection and 0% false rejects (Section 5.4).
+5. A negative result: 4B models cannot synthesize across knowledge domains, suggesting multi-hop reasoning requires larger models (Section 5.2).
 
-Each step is a standard knarr skill call. Knowledge packs are JSON documents containing:
-- **domain**: topic identifier (e.g., "bilateral-credit-economics")
-- **version**: semver for idempotency
-- **files**: markdown content keyed by filename
-- **metadata**: author node_id, Ed25519 public key, SHA-256 hash, signature
+### 1.3 Paper Organization
 
-The signature chain ensures provenance: every pack can be traced to the node that created it, and any tampering invalidates the cryptographic signature.
-
-### 2.2 Bilateral Credit as Compute Budget
-
-The orchestrator starts with a credit balance. Each knowledge purchase costs credits. Each query costs credits. The bilateral credit system (validated at 160/160 pass rate in protocol testing) ensures:
-
-- Specialists that provide useful knowledge earn credits
-- Free-riders who consume without providing are bounded by credit limits
-- The cost of solving a problem is measurable and auditable
-
-The credit spend IS the compute budget. The orchestrator decides how to allocate credits across knowledge sources --- buy one expensive comprehensive pack, or several cheap targeted ones.
-
-### 2.3 Skill Handlers
-
-Four thin skill handlers enable the pipeline:
-
-| Skill | Role | Function |
-|-------|------|----------|
-| `knowledge-pack-lite` | Provider | Returns signed knowledge pack for a domain |
-| `knowledge-ingest-lite` | Consumer | Ingests pack into thrall FTS store |
-| `knowledge-query-lite` | Consumer | Queries FTS, returns matching chunks |
-| `recipe-install-lite` | Consumer | Installs behavioral recipes, triggers hot-reload |
-
-Each handler is ~40 lines of Python following knarr's `set_node() + handle()` pattern. The handlers access the thrall plugin's `KnowledgeManager` for ingestion and SQLite FTS5 for queries.
+Section 2 reviews related work. Section 3 describes the system architecture. Section 4 presents the experimental methodology, including hardware, evaluation metrics, and their limitations. Section 5 reports results organized by research question. Section 6 discusses findings, limitations, and threats to validity. Section 7 outlines future work, and Section 8 concludes.
 
 ---
 
-## 3. Experimental Validation
+## 2. Related Work
 
-### 3.1 Infrastructure
+### 2.1 Agentic P2P Networks
+
+Wang et al. [3] proposed an architecture for Agentic Peer-to-Peer Networks in which autonomous agents cooperate without centralized coordination. Their framework identifies three layers: an economic layer for incentive alignment, an intelligence layer for capability composition, and a trust layer for accountability. Our work provides implementation evidence for these layers using bilateral credit (economic), signed knowledge packs (intelligence), and quality gates (trust). We do not claim to validate their framework in full; rather, we instantiate specific mechanisms and report empirical observations on a small-scale testbed.
+
+### 2.2 Free-Riding and Incentive Mechanisms
+
+Free-riding is a well-documented problem in peer-to-peer systems. Adar and Huberman [6] showed that 70% of Gnutella users shared no files, with the top 1% providing nearly 50% of all shared content. Subsequent work in file-sharing networks introduced tit-for-tat mechanisms (BitTorrent), reputation systems (eBay), and token economies (various blockchain projects). Bilateral credit, as used in the knarr protocol, is closest to tit-for-tat: each peer maintains an independent ledger, and credit limits constrain how much any peer can consume without reciprocating. Our earlier work [1] demonstrated bilateral credit isolation of free-riders across 134 autonomous agents. This paper extends those observations to knowledge transactions.
+
+### 2.3 Small Language Models for Retrieval-Augmented QA
+
+Belcak et al. [2] argued that sub-10B language models are sufficient for most agentic tasks, positioning small language models (SLMs) as the backbone of future agent deployments. Our Phase H2--H4 results provide partial support: a 4B model passes quality gates on structured explanation tasks, while a 2.3B MoE model achieves the highest extractive QA accuracy in our benchmark. However, our results also show that model architecture matters independently of parameter count --- a finding consistent with recent observations that Mamba-Transformer hybrids behave differently from pure Transformers on retrieval-augmented tasks.
+
+### 2.4 Agent Memory and Retrieval Systems
+
+Recent work on agent memory informed our retrieval pipeline design. MemPalace [4] demonstrated that structural metadata filtering improves recall from 60.9% to 94.8% on the LongMemEval benchmark, motivating our domain-scoped pre-filtering. Engram-2 [5] showed that combining FTS5 keyword search with Reciprocal Rank Fusion achieves R@5 = 0.990 on LongMemEval, which informed our decision to fuse keyword and vector retrieval rather than relying on either alone. Our contribution is applying these techniques within a P2P knowledge marketplace where retrieval serves economic transactions, not just memory augmentation.
+
+---
+
+## 3. System Architecture
+
+### 3.1 Knowledge Pipeline
+
+The knowledge pipeline consists of five stages, each implemented as a standard knarr skill call billed through bilateral credit:
+
+1. **Analysis.** The orchestrator (a small LLM on consumer hardware) receives a problem and determines what knowledge is needed.
+2. **Acquisition.** The orchestrator purchases a knowledge pack from a specialist node via bilateral credit (1 credit per pack).
+3. **Ingestion.** The knowledge pack is chunked and indexed into a local SQLite FTS5 store.
+4. **Retrieval.** On subsequent queries, the orchestrator queries the FTS store for relevant context before purchasing new packs.
+5. **Synthesis.** The LLM generates an answer using retrieved context, and the result is packaged as a new Ed25519-signed knowledge pack available for resale.
+
+Four thin skill handlers (~40 lines each) enable the pipeline: `knowledge-pack-lite` (returns signed packs), `knowledge-ingest-lite` (ingests packs into the FTS store), `knowledge-query-lite` (queries FTS and returns matching chunks), and `recipe-install-lite` (installs behavioral recipes with hot-reload).
+
+### 3.2 Bilateral Credit
+
+The bilateral credit system serves as both compute budget and incentive mechanism. Each peer maintains an independent ledger tracking credits exchanged with every other peer. The orchestrator's credit balance constrains its knowledge acquisition budget; it must decide how to allocate credits across knowledge sources. Specialists that provide useful knowledge earn credits; consumers who do not reciprocate are bounded by credit limits. The system was validated at 160/160 pass rate in protocol testing (Section 4.3).
+
+### 3.3 Signed Knowledge Packs
+
+Knowledge packs are JSON documents containing: a domain identifier, a semantic version for idempotency, markdown content keyed by filename, and metadata including the author's node ID, Ed25519 public key, SHA-256 content hash, and cryptographic signature. The signature chain ensures provenance: every pack can be traced to the node that created it, and any content modification invalidates the signature. This mechanism does not prevent a node from creating a deliberately misleading pack, but it does ensure that the source of any pack is identifiable and accountable.
+
+---
+
+## 4. Methodology
+
+### 4.1 Experimental Setup
 
 | Component | Specification |
 |-----------|--------------|
 | Hardware | 2x RTX 3090 (24GB each), Windows 11 |
-| LLM (Phases A-G) | Qwen3.5-9B via vLLM on GPU 0 |
-| LLM (Phases H+) | Multiple models via Ollama across both GPUs (Gemma 4 26B curator on GPU 1, various agent models on GPU 0) |
+| LLM (Phases A--G) | Qwen3.5-9B via vLLM on GPU 0 |
+| LLM (Phases H+) | Multiple models via Ollama across both GPUs |
+| Curator model | Gemma 4 26B (q4_0 KV cache, GPU 1) |
 | Embeddings | nomic-embed-text (274MB) via Ollama |
-| Reranking | cross-encoder/ms-marco-MiniLM-L-6-v2 (22M params, CPU) |
-| Protocol | knarr v0.54.1, 3 nodes (bootstrap + 2 test nodes) |
+| Cross-encoder | ms-marco-MiniLM-L-6-v2 (22M params, CPU) |
+| Protocol | knarr v0.54.1, 3 nodes (1 bootstrap + 2 test nodes) |
 | Knowledge store | SQLite FTS5 via thrall plugin |
 | Signing | Ed25519 (PyNaCl) |
 
-### 3.2 Foundation Validation
+The topology consists of 2--3 nodes running on a single machine. All nodes communicate over localhost via the knarr protocol with bilateral credit billing. This topology does not reflect real network conditions (latency, partial failures, heterogeneous hardware) and represents a significant limitation of this work.
+
+Models tested in the scaling experiments (Phases H2--H4):
+
+| Model | Params | Architecture |
+|-------|--------|-------------|
+| qwen3:0.6b | 0.6B | Dense Transformer |
+| gemma4:e2b | 2.3B (MoE) | Transformer |
+| nemotron-3-nano | 3.6B (MoE) | Mamba-Transformer |
+| qwen3.5:4b | 4B | Dense Transformer |
+| gemma4:e4b | 4.5B (MoE) | Transformer |
+| qwen3.5:9b | 9B | Dense Transformer |
+
+### 4.2 Evaluation Metrics and Their Limitations
+
+**Extractive QA accuracy (Phases H2--H8).** We use exact substring matching: a response is correct if `answer.lower() in response.lower()`. This metric has two failure modes. It undercounts correct paraphrases (a model that restates the answer in different words scores 0). It overcounts incidental matches (a model that produces a long response containing the answer substring by chance scores 1). A model-based judge would be more robust but introduces its own biases and reproducibility concerns. We use substring matching for its simplicity and reproducibility, but results should be interpreted with this limitation in mind.
+
+**Quality gate scores (Phases C, G, H).** An LLM judge (Gemma 4 26B or Qwen3.5:4b) scores answers on a 1--10 scale against reference criteria. LLM-as-judge is known to exhibit position bias, verbosity bias, and self-preference. We do not calibrate against human judgments. Quality gate scores should be treated as ordinal indicators of relative quality, not as absolute measures.
+
+**Benchmark size.** The SQuAD 2.0 subset contains 100 questions across 5 domains (Oxygen, Normans, Immune system, Steam engine, EU law). At this sample size, score differences of 4--6 percentage points are within the range of sampling noise (estimated at approximately plus or minus 5%). All accuracy differences should be read as directional, not statistically significant.
+
+**Adversarial evaluation (Phase H9).** The adversarial test uses one attack vector: plausible rewrites of known passages that change specific dates, names, or numbers while preserving style and tone. This does not cover sophisticated attacks such as consistent but wrong frameworks, selective omissions, or attacks that exploit the quality gate's own biases.
+
+### 4.3 Protocol Validation
 
 Before assembling the intelligence pipeline, we validated every protocol primitive to zero-tolerance standards:
 
-**Layer 1 (Protocol Foundation): 80/80 operations passed**
+**Layer 1 (Protocol Foundation): 80/80 operations passed.**
 - Cross-node skill calls with bilateral credit billing (10/10 x 2 conditions)
 - Sidecar asset upload + cross-node fetch (10/10 x 2)
 - Mail round-trip with session correlation (10/10 x 2)
 - Mail + asset attachment (10/10 x 2)
 
-**Layer 2 (Thrall Behaviors): 80/80 operations passed**
+**Layer 2 (Thrall Behaviors): 80/80 operations passed.**
 - Knowledge pack delivery + Ed25519-signed ingestion (10/10 x 2)
 - Recipe delivery + hot-reload (10/10 x 2)
 - Entry test / structured evaluation (10/10 x 2)
 - Knowledge-backed FTS query response (10/10 x 2)
 
-**160 total operations, zero failures.** Every primitive the intelligence pipeline depends on was individually proven reliable.
+Total: 160 operations, 0 failures. Each primitive the intelligence pipeline depends on was individually validated as reliable. The validation was conducted on a single machine; network-level failure modes (partitions, message loss, out-of-order delivery) were not tested.
 
-### 3.3 Phase A: End-to-End Pipeline
+---
 
-**Setup:** One orchestrator, one specialist, one problem.
+## 5. Results
 
-**Problem:** *"What is bilateral credit in a peer-to-peer network, and how does it prevent free-riding without centralized reputation?"*
+### 5.1 RQ1: Knowledge Pipeline and Marketplace
 
-**Results:**
+**Phase A: End-to-End Pipeline.** A single orchestrator purchased a knowledge pack from a specialist, ingested it, queried the local FTS store, synthesized an answer, and packaged the result as a new signed pack. The complete pipeline executed in approximately 10 seconds at a cost of 2 credits (1 credit for pack acquisition, 1 credit for the FTS query).
 
 | Step | Time | Cost |
 |------|------|------|
 | Analyze: LLM identifies needed knowledge | 3.5s | 0cr |
-| Buy: purchase knowledge-pack-lite from specialist | 1.0s | 1cr |
-| Ingest: chunk and FTS index the pack | 1.0s | 0cr |
+| Buy: purchase knowledge-pack-lite | 1.0s | 1cr |
+| Ingest: chunk and FTS index | 1.0s | 0cr |
 | Query: FTS retrieval from local store | 1.0s | 1cr |
-| Synthesize: LLM generates answer with knowledge context | 3.5s | 0cr |
-| Package: sign output pack for the network | 0.1s | 0cr |
+| Synthesize: LLM generates answer | 3.5s | 0cr |
+| Package: sign output pack | 0.1s | 0cr |
 | **Total** | **~10s** | **2cr** |
 
-The orchestrator produced a coherent answer referencing the ingested knowledge: *"Bilateral credit is a mechanism in peer-to-peer networks where each peer maintains an independent ledger... prevents free-riding through [the mechanism described in the pack]... eliminates the need for centralized reputation."*
+**Phase B: Within-Domain Cache Reuse.** Five related questions on bilateral credit were asked sequentially. The first required a fresh pack purchase (4.6s); the remaining four were served from the FTS cache (average 2.4s). Cache hit rate: 80% (4/5). Time reduction from fresh to cached: 48%.
 
-The output pack was Ed25519-signed and ready for distribution --- the next agent asking a similar question can buy it for 1 credit instead of spending 2 credits + 10 seconds.
+| Problem | Source | Time |
+|---------|--------|------|
+| 1 (What is bilateral credit?) | Fresh | 4.6s |
+| 2 (Admission gate limits?) | Cache | 2.4s |
+| 3 (Free-rider credit exhaustion?) | Cache | 2.5s |
+| 4 (Bilateral netting costs?) | Cache | 2.2s |
+| 5 (Bilateral vs. centralized reputation?) | Cache | 2.4s |
 
-### 3.4 Phase B: Knowledge Compounding
+**Phase C: Iterative Enrichment.** Three problems were tested with progressively richer knowledge packs (3 tiers), scored by an LLM judge. Two of three problems showed quality improvement: casino escrow improved by +3 points (1/10 to 4/10) and scored menu by +2 points (1/10 to 3/10). Settlement pipeline did not improve (remained at 2/10 across tiers). Average improvement on the two responsive problems: +2.5 points. The scores are modest, reflecting both the small model size (9B) and thin knowledge packs.
 
-**Setup:** Same pipeline, 5 related questions asked sequentially.
+**Phase D: Cross-Node Knowledge Combination.** Two independent orchestrators solved different problems and deposited knowledge on a shared specialist node (one created settlement-pipeline knowledge, the other casino-escrow knowledge). A subsequent query requiring both domains received an answer that referenced both settlement (netting, Solana, SPL) and casino (escrow, game-seat, rake) content. This suggests that knowledge created by independent agents can be combined on a shared node, though the test involved only one such combination.
 
-**Questions:**
-1. What is bilateral credit? (from scratch)
-2. How does the admission gate enforce credit limits?
-3. What happens when a free-rider exhausts credit?
-4. How does bilateral netting reduce settlement costs?
-5. Compare bilateral credit to centralized reputation.
-
-**Results:**
-
-| Problem | Knowledge Source | Time | Steps |
-|---------|-----------------|------|-------|
-| 1 | **Fresh** (buy + ingest) | 4.6s | buy_pack -> ingest -> synthesize |
-| 2 | **Cache** (FTS hit) | 2.4s | cache_hit -> query -> synthesize |
-| 3 | Cache | 2.5s | cache_hit -> query -> synthesize |
-| 4 | Cache | 2.2s | cache_hit -> query -> synthesize |
-| 5 | Cache | 2.4s | cache_hit -> query -> synthesize |
-
-**Cache hit rate: 80%** (4/5 problems served from previously ingested knowledge).
-
-**Time reduction: 48%** (4.6s fresh -> 2.4s cached average).
-
-The first query teaches the network. Subsequent queries on related topics are cheaper and faster. **Intelligence compounds.**
-
-### 3.5 Phase C: Self-Correction Through Iteration
-
-**Setup:** 3 hard problems. For each, the orchestrator receives progressively richer knowledge packs (3 tiers) and the answer quality is scored by an LLM judge (1-10).
-
-**Problems:**
-1. Settlement pipeline (netting -> Solana SPL transfer)
-2. Casino number game as escrow primitive
-3. Scored menu vs open-ended tool-use
-
-**Results:**
-
-| Problem | Tier 0 | Tier 1 | Tier 2 | Improved? |
-|---------|--------|--------|--------|-----------|
-| Settlement | 2/10 | 1/10 | 2/10 | No |
-| Casino escrow | 1/10 | 1/10 | **4/10** | **Yes (+3)** |
-| Scored menu | 1/10 | 1/10 | **3/10** | **Yes (+2)** |
-
-**Self-correction rate: 2/3 problems** showed quality improvement when richer knowledge was provided.
-
-**Average improvement: +2.5 points** per self-correcting problem.
-
-The scores are modest (Qwen3.5-9B is a small model with thin knowledge packs), but the **mechanism works**: richer knowledge -> better answers. This is the feedback loop the distributed intelligence experiment needs --- the orchestrator doesn't just retry, it **enriches the specialist's knowledge** and tries again.
-
-### 3.6 Phase D: Cross-Orchestrator Knowledge Pollination
-
-**Setup:** Two independent orchestrators (A and B) solve different problems. Both deposit knowledge on a shared specialist node. Then: can one orchestrator use knowledge that the other created?
-
-**Flow:**
-1. **Orchestrator A** creates and ingests "settlement-pipeline" knowledge
-2. **Orchestrator B** creates and ingests "casino-escrow" knowledge
-3. **Cross-query:** A asks a question requiring BOTH domains
-
-**Result:**
-- Orchestrator A asked: *"How do bilateral credit, on-chain settlement, and the casino escrow pattern relate to each other in knarr?"*
-- The specialist combined both knowledge domains
-- The answer referenced **both** settlement (netting, Solana, SPL) **and** casino (escrow, game-seat, rake)
-- **Cross-pollination: confirmed**
-
-Two independently created knowledge domains, deposited by different orchestrators, combined on a shared specialist to answer a novel question that neither could answer alone.
-
-### 3.7 Phase E: Knowledge Marketplace
-
-**Setup:** 20 problems across 5 knowledge domains (bilateral credit, settlement, casino, agent decisions, signed receipts). Each problem checks the FTS cache before purchasing. Knowledge accumulates on the specialist node.
-
-**Results:**
+**Phase E: Multi-Domain Marketplace.** Twenty problems across 5 knowledge domains (bilateral credit, settlement, casino, agent decisions, signed receipts) were processed sequentially, with the FTS cache checked before each purchase.
 
 | Window | Cache Hits | Credits Spent | Avg Time |
 |--------|-----------|---------------|----------|
-| Problems 1-5 | 3/5 (60%) | 2cr | 2.2s |
-| Problems 6-10 | 4/5 (80%) | 1cr | 2.5s |
-| Problems 11-15 | 4/5 (80%) | 1cr | 2.5s |
-| Problems 16-20 | 4/5 (80%) | 1cr | 2.0s |
+| Problems 1--5 | 3/5 (60%) | 2cr | 2.2s |
+| Problems 6--10 | 4/5 (80%) | 1cr | 2.5s |
+| Problems 11--15 | 4/5 (80%) | 1cr | 2.5s |
+| Problems 16--20 | 4/5 (80%) | 1cr | 2.0s |
 
-**Overall: 75% cache hit rate.** 5 knowledge packs served 20 questions --- a 4:1 reuse ratio.
+Overall cache hit rate: 75%. Five knowledge packs served 20 questions (4:1 reuse ratio). Total cost: 5 credits. Without caching, the cost would have been 20 credits.
 
-**Cost: 5 credits for 20 problems.** Without caching, the cost would be 20 credits. The last 5 problems cost 50% of the first 5.
+**Summary for RQ1.** The bilateral credit system supported a functioning knowledge pipeline across all tested phases. Within-domain cache reuse reached 75--80%, reducing per-query cost and latency after an initial knowledge investment. Cross-node knowledge combination was observed in one controlled test. These results are consistent with the hypothesis that bilateral credit can support knowledge marketplace transactions, though the scale (5 domains, 20 problems, 2--3 nodes) is too small to draw conclusions about marketplace dynamics at scale.
 
-**Knowledge hub formation:** All 5 domains showed identical 75% reuse rates. Each domain's first query invested 1 credit to create the pack; the subsequent 3 queries were free.
+### 5.2 RQ2: Model Scaling Thresholds
 
-The marketplace dynamic: **knowledge creation is expensive, knowledge reuse is cheap.** The network incentivizes curation --- the node that creates the best pack for a domain earns the most, because every subsequent query on that topic hits the cache instead of buying a new pack.
+**Phase H: Coaching Loop.** A 26B curator (Gemma 4) wrote targeted knowledge packs for a 9B agent (Qwen3.5) that initially scored 1/10 on a structured explanation task. After ingesting the curator's pack, the agent scored 8/10. The curator wrote a 4,450-character knowledge pack in 25 seconds. Two problems were tested: settlement pipeline reached 10/10 on the first iteration; casino escrow improved from 1/10 to 8/10 after one coaching iteration.
 
-### 3.8 Phase F: Adaptive Credit as Decentralized Reputation
+**Phases H2--H4: Model Scaling on SQuAD 2.0.** Six models were evaluated on a 100-question SQuAD 2.0 subset (5 domains: Oxygen, Normans, Immune system, Steam engine, EU law) using exact substring matching.
 
-**Setup:** Two nodes trade one-directionally (consumer buys 10 skills from provider, never provides). After trade, a reputation policy adjusts per-peer credit limits based on observed provide:consume ratio.
-
-**Policy:**
-- Peer provides to us (ratio >= 0.5) → extend credit (deepen hard_limit by 5)
-- Peer only consumes, never provides (consumed > 5, provided == 0) → tighten credit (shallow by 2)
-
-**Results:**
-
-| Node's view | Before | After | Action |
-|-------------|--------|-------|--------|
-| Provider's limit for free-riding consumer | -10.0 | **-3.0** | Tightened (3 calls max) |
-| Consumer's limit for reliable provider | -10.0 | **-15.0** | Extended (15 calls max) |
-
-After tightening, the free-rider was **immediately blocked** on the next call attempt.
-
-**Sybil resistance:** A new identity starts at default (-10, 10 calls). After one reputation cycle, a free-rider is tightened to -3 (3 calls). Creating 100 identities gets 100 x 10 initial calls, but each subsequent cycle tightens them. To earn deeper credit, the attacker must **provide real computation** --- the cost of Sybil scales linearly with the benefit.
-
-### 3.9 Phase G: Quality Gate
-
-**Setup:** The same question answered with and without knowledge, scored by an LLM judge (1-10). A quality threshold (5/10) determines PASS/REJECT.
-
-**Results:**
-
-| Condition | Score | Gate |
-|-----------|-------|------|
-| Without knowledge (hallucination risk) | **2/10** | REJECT |
-| With knowledge pack | **6/10** | PASS |
-| Improvement | **+4 points** | |
-
-The quality gate correctly identifies when an answer is backed by real knowledge versus when it's hallucinated. Combined with Phase F (adaptive credit), this creates a full feedback loop: **bad answers → low quality score → reduced reputation → less credit → less business.** Good providers earn deeper credit and more queries.
-
-### 3.10 Phase H: Self-Improving Coach Loop
-
-**Setup:** Two models — a small agent (Qwen3.5 9B on GPU 0) and a large curator/coach (Gemma 4 26B on GPU 1), served by Ollama with q4_0 KV cache across both GPUs.
-
-The loop:
-1. Agent tries to answer with current knowledge
-2. Quality gate (Gemma 4) judges the answer
-3. If below threshold: curator writes a targeted knowledge pack addressing the specific failures
-4. Agent ingests the pack, tries again
-5. Repeat until quality gate passes at 8+/10
-
-**Results:**
-
-| Question | Iter 1 | Iter 2 | Iter 3 |
-|----------|--------|--------|--------|
-| Settlement pipeline (12 steps) | **10/10** | — | — |
-| Casino escrow (hold-judge-release) | 1/10 | **8/10** | — |
-
-The curator (Gemma 4 26B) wrote a 4,450-character knowledge pack in 25 seconds that lifted the agent's score from 1 to 8. The expensive reasoning happened once; the agent can now serve this answer indefinitely.
-
-**Before coaching (1/10) — agent with no knowledge:**
-
-> *Q: How does the casino number game implement a hold-judge-release escrow pattern in knarr?*
->
-> *"Based on the current state of computer science, cryptography, and gaming technology, **there is no known casino number game that implements a hold-judge-release escrow pattern in a language or system called knarr.** It appears there may be a misunderstanding of terminology, a confusion with a specific fictional universe..."*
-
-The agent hallucinated confidently — it doesn't know knarr exists. Score: 1/10.
-
-**Curator writes a knowledge pack (25 seconds, Gemma 4 26B):**
-
-> *"# Technical Specification: Knarr Casino Escrow Pattern*
-> *The system operates via two distinct skill types: betting-action (User-initiated) and settlement-engine (System-initiated). The betting-action skill executes the transition of credits from the User Wallet to the Escrow Vault..."*
-
-**After coaching (8/10) — agent with curator's knowledge pack:**
-
-> *"The Knarr Casino Escrow Pattern implements the hold-judge-release mechanism through two distinct skill types and specific credit flows:*
-> *1. The Hold Phase (User-Initiated) — Skill: betting-action. Executes the transition of credits from the User Wallet to the Escrow Vault.*
-> *2. The Judge Phase (System-Initiated) — Skill: settlement-engine..."*
-
-The agent now produces a structured, accurate answer that references specific skill names and credit flows — all extracted from the curator's pack. The knowledge pack cost 25 seconds of Gemma 4 compute. The agent can serve this answer thousands of times at 9B cost.
-
-### 3.11 Phase H2-H3: Model Size Scaling
-
-**Question:** How small can the agent be while still passing the quality gate with curator help?
-
-**SQuAD 2.0 benchmark** (100 questions, 5 domains: Oxygen, Normans, Immune system, Steam engine, EU law):
-
-| Model | Active params | Architecture | SQuAD accuracy | Quality gate |
-|-------|-------------|--------------|----------------|-------------|
+| Model | Params | Arch | SQuAD | Gate |
+|-------|--------|------|-------|------|
 | qwen3:0.6b | 0.6B | Dense | 2% | Fails (1/10) |
-| gemma4:e2b | 2.3B (MoE) | Transformer | **88%** | Fails on composition (4/10) |
-| nemotron-3-nano | 3.6B (MoE) | Mamba-Transformer | 77% | — |
-| qwen3.5:4b | 4B | Dense | **83%** | **Passes (9/10)** |
-| gemma4:e4b | 4.5B (MoE) | Transformer | 86% | **Passes (7/10)** |
-| qwen3.5:9b | 9B | Dense | 83% | **Passes (9/10)** |
+| gemma4:e2b | 2.3B (MoE) | Transformer | 88% | Fails (4/10) |
+| nemotron-3-nano | 3.6B (MoE) | Mamba-Trans. | 77% | --- |
+| qwen3.5:4b | 4B | Dense | 83% | Passes (9/10) |
+| gemma4:e4b | 4.5B (MoE) | Transformer | 86% | Passes (7/10) |
+| qwen3.5:9b | 9B | Dense | 83% | Passes (9/10) |
 
-**Key finding 1:** Gemma 4 E2B (2.3B active, the Raspberry Pi model) achieves the **highest SQuAD accuracy** (88%) — outperforming both the 4B and 9B dense models at extractive QA.
+Several observations emerge, though all are subject to the benchmark size limitation (approximately plus or minus 5% noise at n=100):
 
-**Key finding 2:** The quality gate test (compose a structured explanation) requires 4B+. Extraction and composition have different thresholds.
+First, Gemma 4 E2B (2.3B active parameters) achieved the highest extractive QA accuracy (88%), outperforming both the 4B and 9B dense models. However, it failed the compositional quality gate (4/10), suggesting that extraction and composition have different parameter thresholds.
 
-**Key finding 3:** A bigger coach (31B dense vs 26B MoE) does NOT improve results for failing models. The bottleneck is the agent's ability to reason over context, not the pack quality.
+Second, NVIDIA Nemotron 3 Nano (3.6B active, Mamba-Transformer hybrid) scored 77%, below both E2B and Qwen3.5:4b despite more active parameters. This suggests that architecture affects performance on this task independently of parameter count, though the comparison involves confounds (different training data, different tokenizers).
 
-**Key finding 4:** NVIDIA's Nemotron 3 Nano (30B total, 3.6B active, hybrid Mamba-Transformer MoE) scores 77% — below both Gemma 4 E2B and Qwen3.5:4b despite having more active parameters. The Mamba-Transformer hybrid, designed for tool calling and long-context tasks, underperforms pure Transformer architectures on extractive QA from knowledge packs. Architecture matters more than parameter count for this workload.
+Third, a larger curator (31B dense vs. 26B MoE) did not improve results for failing models, suggesting that the bottleneck is the agent's ability to reason over context, not the quality of the knowledge pack.
 
-**Gemma 4 E2B in action** — a 2.3B-active MoE model answering real SQuAD questions from 5 domains:
+Fourth, the 0.6B model scored 2%, indicating a floor below which knowledge augmentation provides no benefit.
 
-> **Immune system** — *Q: What percentage of leukocytes do neutrophils represent?*
-> E2B: *"50% to 60%"* ✓
+**Phase H10: Multi-Hop Reasoning.** Fifteen synthetic questions requiring facts from two of five SQuAD domains were tested under three conditions: no context, single-domain context, and cross-domain context.
 
-> **Normans** — *Q: What is the most important type of Norman art preserved in churches?*
-> E2B: *"mosaics"* ✓
+| Condition | Avg Score (0--3) | Full Synthesis (3/3) |
+|-----------|-----------------|---------------------|
+| No context | 0.80 | 2/15 |
+| Single domain | 0.93 | 0/15 |
+| Cross-domain | 0.93 | 1/15 |
 
-> **Oxygen** — *Q: What effect did breathing Priestley's discovered gas have on the experiment's mouse?*
-> E2B: *"a mouse was more active and lived longer while breathing it"* ✓
+Cross-domain knowledge delivery functioned correctly --- the retrieval pipeline provided context from both domains. However, the 4B model rarely achieved true synthesis, instead listing facts from each domain separately. This is a negative result: multi-hop reasoning across knowledge domains does not appear viable at the 4B parameter scale in our setup. Analogy questions showed the strongest cross-domain lift (+0.7 points); application and causal questions showed no improvement.
 
-> **Steam engine** — *Q: What were early drivers looking to generate when they fastened safety valves down?*
-> E2B: *"more power from the engine"* ✓
+**Summary for RQ2.** The results suggest that 2.3B active parameters suffice for extractive QA with knowledge augmentation, while 4B is the minimum for compositional explanation. Architecture affects performance independently of parameter count. Multi-hop synthesis across domains was not achieved at the 4B scale. All accuracy figures should be read as directional given the benchmark size.
 
-Four domains, four correct extractions. This is a model that runs at 7.6 tokens/second on a Raspberry Pi 5. With the right knowledge pack, a $50 device answers these questions as accurately as a 9B model on a $1500 GPU.
+### 5.3 RQ3: Retrieval Pipeline
 
-### 3.12 Phase H5-H6: Retrieval Strategy at Scale
+**Phases H5--H6: Retrieval Strategy at Scale.** With a small corpus (1 passage per question), no difference was observed between raw context, FTS, and vector retrieval. With a larger corpus (217 passages from 5 domains), differences emerged:
 
-**Question:** Does vector retrieval matter? When?
-
-**Small corpus (1 passage per question):** No difference. RAW, FTS, and VEC all perform within 1-2% of each other.
-
-**Large corpus (217 passages from 5 domains):**
-
-| Model | Architecture | ORACLE | FTS | VEC | VEC vs FTS |
-|-------|-------------|--------|-----|-----|-----------|
+| Model | Arch | ORACLE | FTS | VEC | Delta |
+|-------|------|--------|-----|-----|-------|
 | qwen3:0.6b | Dense | 3% | 0% | 1% | +1% |
-| nemotron-3-nano | Mamba-Transformer | 76% | **57%** | 52% | **-5%** |
-| gemma4:e2b | Transformer | 89% | 51% | **59%** | **+8%** |
-| qwen3.5:4b | Dense | 87% | 51% | **55%** | **+4%** |
+| nemotron-3-nano | Mamba-Trans. | 76% | 57% | 52% | -5% |
+| gemma4:e2b | Transformer | 89% | 51% | 59% | +8% |
+| qwen3.5:4b | Dense | 87% | 51% | 55% | +4% |
 
-**Retrieval is now the bottleneck.** With the gold passage (ORACLE), models score 87-89%. With the best retrieval (VEC), they score 55-59%. That is a **30-point retrieval gap** — the model is capable, but the retrieval system doesn't surface the right context.
+The ORACLE column (gold passage provided directly) establishes an upper bound: models score 87--89% when given the correct context. The best retrieval method (VEC for Transformers) achieves 55--59%, leaving a gap of approximately 30 percentage points. This gap indicates that retrieval, not model capability, is the primary bottleneck.
 
-Vector retrieval outperforms keyword search by 4-8 percentage points on a multi-domain corpus for Transformer-based models. The gap will widen with larger corpora (thousands of knowledge packs across hundreds of domains).
+An architecture-dependent effect was observed: Transformer models scored 4--8 percentage points higher with vector retrieval than keyword search, while the Mamba-Transformer hybrid scored 5 percentage points lower. We speculate that this reflects differences in how the architectures process semantically-matched versus keyword-matched context, but we have not verified this explanation.
 
-**Architecture effect on retrieval:** Nemotron 3 Nano is the only model where FTS **outperforms** VEC (-5%). The Mamba-Transformer hybrid processes keyword-matched context more effectively than semantically-matched context — likely because Mamba's selective state-space mechanism handles sequential token patterns (exact keyword matches) differently than the distributed semantic representations that vector retrieval produces. This has a practical implication: **retrieval strategy should be model-architecture-aware.** A system serving both Transformer and Mamba-hybrid models should select the retrieval strategy per-model, not globally.
+**Phase H7: Retrieval Gap Diagnostic.** To determine whether the 30-point gap is a retrieval problem or a utilization problem, we tested each question where VEC failed by providing the gold passage directly. Results on Gemma 4 E2B:
 
-### 3.13 Phase H7: Retrieval Gap Diagnostic and Reciprocal Rank Fusion
+| Category | Proportion | Interpretation |
+|----------|-----------|----------------|
+| Both correct | 55% | Retrieval finds the right passage |
+| Retrieval failure | 33% | VEC selects wrong passage; ORACLE correct |
+| Utilization failure | 8% | Both wrong; model cannot use the context |
+| Anomaly | 4% | VEC correct, ORACLE wrong |
 
-**Question:** Is the 30-point retrieval gap a retrieval problem or a utilization problem? And can we close it?
+The gap is approximately 80% retrieval and 20% utilization. This motivated investment in retrieval improvements rather than model upgrades.
 
-**Diagnostic (Phase 0):** For each question where VEC retrieval failed, we tested whether the model could answer correctly when given the gold passage directly. Results on Gemma 4 E2B:
+**Reciprocal Rank Fusion.** RRF merges FTS5 and vector ranked lists using reciprocal rank scores (1/(k+rank)). Domain-scoped pre-filtering was also tested, inspired by MemPalace's [4] structural metadata approach.
 
-| Category | Count | Meaning |
-|----------|-------|---------|
-| Both correct | 55% | No problem — VEC finds the right passage |
-| **Retrieval fail** | 33% | VEC wrong passage, ORACLE correct → retrieval problem |
-| Utilization fail | 8% | Both wrong → model can't use the context |
-| Anomaly | 4% | VEC correct, ORACLE wrong (different passage also works) |
+| Model | FTS | VEC | RRF | RRF+SCOPE | ORACLE |
+|-------|-----|-----|-----|-----------|--------|
+| gemma4:e2b | 54% | 59% | 62% | 63% | 88% |
+| qwen3.5:4b | 54% | 55% | 63% | 64% | 87% |
+| nemotron-3-nano | 54% | 50% | 59% | 57% | 75% |
 
-**The gap is 80% retrieval, 20% utilization.** Improving retrieval is the right investment.
+Standalone reranking (FTS broad then cosine rerank) was also tested but underperformed RRF (56%, 55%, 54% for the three models respectively), because it reranks only one candidate pool instead of merging two.
 
-**Reciprocal Rank Fusion (Phase 1):** We implemented RRF — merging FTS5 and VEC ranked lists by reciprocal rank score (1/(k+rank)) rather than trying to normalize incompatible score scales. Also tested domain-scoped pre-filtering (inspired by MemPalace's structural metadata approach, which showed 60.9% → 94.8% improvement from metadata scoping alone).
+RRF+SCOPE was the best strategy for Transformer models (+9--10 points over FTS). For the Mamba-Transformer hybrid, unscoped RRF (59%) outperformed RRF+SCOPE (57%).
 
-| Model | FTS | VEC | **RRF** | RERANK | **RRF+SCOPE** | ORACLE | Gap closed |
-|-------|-----|-----|---------|--------|---------------|--------|------------|
-| gemma4:e2b | 54% | 59% | 62% | 56% | **63%** | 88% | +9pts / 34pt gap |
-| qwen3.5:4b | 54% | 55% | 63% | 55% | **64%** | 87% | +10pts / 33pt gap |
-| nemotron-3-nano | 54% | 50% | **59%** | 54% | 57% | 75% | +5pts / 21pt gap |
+**Phase H8: Cross-Encoder Reranking.** A cross-encoder (ms-marco-MiniLM-L-6-v2, 22M parameters, CPU, approximately 5ms per comparison) was added as a reranking stage after RRF.
 
-**RRF+SCOPE is the best strategy for Transformer models** (+9-10 points over FTS baseline). RRF alone beats both FTS and VEC individually. Reranking (FTS broad → cosine rerank) underperforms RRF because it only reranks one candidate pool instead of merging two.
+| Model | FTS | RRF+SCOPE | RRF+CE | ORACLE | Closed |
+|-------|-----|-----------|--------|--------|--------|
+| gemma4:e2b | 53% | 63% | 69% | 89% | +16pts |
+| qwen3.5:4b | 50% | 64% | 68% | 87% | +18pts |
+| nemotron-3-nano | 51% | 59% | 63% | 76% | +12pts |
 
-Nemotron confirms the architecture effect: RRF (59%) beats RRF+SCOPE (57%) — the Mamba-Transformer hybrid benefits from the broader unscoped candidate pool.
+Cross-encoder reranking provided the largest single improvement (+4--6 points on top of RRF+SCOPE). Domain pre-filtering improved cross-encoder performance (scoped 68--69% vs. unscoped 66--67%). The full pipeline (FTS5 + VEC + RRF + scope + cross-encoder) has a total latency of approximately 20ms on the test hardware.
 
-**20-24 points of gap remain.** The next candidates are: better embedding models, chunk overlap at ingest, cross-encoder reranking (22M param model, CPU-only), and two-lane indexing (raw chunks + extracted facts).
+**Summary for RQ3.** Algorithmic improvements closed 48% of the retrieval gap across all tested model architectures without changing the embedding model. RRF outperformed both FTS and VEC individually. Cross-encoder reranking provided the largest marginal gain. Approximately 20 points of gap remain, likely attributable to chunking boundary losses and embedding model quality limits.
 
-### 3.14 Phase H8: Cross-Encoder Reranking
+### 5.4 RQ4: Trust and Quality
 
-**Question:** Can a tiny dedicated reranker close more of the retrieval gap?
+**Phase F: Adaptive Credit Limits.** Two nodes traded one-directionally (consumer purchased 10 skills from provider, never reciprocated). A reputation policy adjusted per-peer credit limits based on observed provide:consume ratio.
 
-We added `cross-encoder/ms-marco-MiniLM-L-6-v2` (22M parameters, runs on CPU in ~5ms per comparison) as a reranking stage after RRF. The pipeline: FTS + VEC → RRF fusion → domain scoping → cross-encoder rerank → top-3.
+| Perspective | Before | After | Effect |
+|-------------|--------|-------|--------|
+| Provider's limit for free-riding consumer | -10.0 | -3.0 | Tightened (3 calls max) |
+| Consumer's limit for reliable provider | -10.0 | -15.0 | Extended (15 calls max) |
 
-| Model | FTS | VEC | RRF+SCOPE | **RRF+CE** | ORACLE | Gap closed |
-|-------|-----|-----|-----------|------------|--------|------------|
-| gemma4:e2b | 53% | 57% | 63% | **69%** | 89% | +16pts (44%) |
-| qwen3.5:4b | 50% | 55% | 64% | **68%** | 87% | +18pts (48%) |
-| nemotron-3-nano | 51% | 49% | 59% | **63%** | 76% | +12pts (48%) |
+After tightening, the free-rider was blocked on the next call attempt. This is a single demonstration of the mechanism; it does not constitute evidence of Sybil resistance. An attacker creating many identities would receive default credit for each, and each identity would be tightened after one reputation cycle. We have not tested this attack.
 
-**Cross-encoder reranking is the single biggest improvement** — adding +4-6 points on top of RRF+SCOPE. The 22M parameter model earns its keep: it provides a learned relevance signal that neither keyword matching nor embedding similarity can capture alone.
+**Phase G: Quality Gate.** The same question was answered with and without knowledge, scored by an LLM judge (1--10) against a quality threshold of 5/10.
 
-**Scoped > unscoped for cross-encoder too.** Domain pre-filtering gives the cross-encoder better candidates to rank (RRF+CE scoped: 68-69% vs unscoped: 66-67%).
+| Condition | Score | Gate Decision |
+|-----------|-------|---------------|
+| Without knowledge | 2/10 | REJECT |
+| With knowledge pack | 6/10 | PASS |
 
-**48% of the retrieval gap is now closed** across all model architectures, using only algorithmic improvements — no model upgrades, no additional training data. The remaining ~20 points to ORACLE are likely chunking boundary losses (the correct answer spans two chunks) and embedding model quality limits.
+The quality gate distinguished knowledge-backed answers from hallucinated ones in this controlled test.
 
-**The full retrieval pipeline:**
-```
-Query
-  → FTS5 keyword search (top-80)        [~1ms, SQLite]
-  → VEC embedding search (top-80)        [~10ms, nomic-embed-text]
-  → Reciprocal Rank Fusion (merge)       [~0ms, in-memory]
-  → Domain scope filter                  [~0ms, SQL WHERE]
-  → Cross-encoder rerank (top-20 → 3)   [~5ms, 22M params, CPU]
-  → Return top-3 passages to LLM
-```
-
-Total latency: ~20ms. Fast enough for real-time queries on consumer hardware.
-
-### 3.15 Phase H9: Adversarial Knowledge Injection
-
-**Question:** Can a malicious node poison the knowledge marketplace with plausible-but-wrong facts? Does the quality gate catch it?
-
-We created "poisoned" knowledge packs where a large model (Gemma 4 E2B) rewrites passages to contain subtle factual errors — changing specific dates, names, or numbers while keeping the text's style and tone intact. The agent (same E2B model) then answers questions using either the clean or poisoned pack, and a quality gate (Qwen3.5:4b with reference context) judges the answer.
+**Phase H9: Adversarial Knowledge Injection.** Poisoned knowledge packs were created by rewriting passages to contain subtle factual errors (changed dates, names, numbers) while preserving style and tone. The agent answered questions using either clean or poisoned packs, and a quality gate (Qwen3.5:4b with reference context) judged the answers.
 
 | Metric | Value |
 |--------|-------|
 | Clean pack correct | 15/20 (75%) |
 | Poison effective (answer flipped) | 13/20 (65%) |
-| **Gate caught poisoned answers** | **10/13 (76%)** |
-| Gate false rejects (clean) | **0/15 (0%)** |
+| Gate caught poisoned answers | 10/13 (76%) |
+| Gate false rejects (clean) | 0/15 (0%) |
 | Gate missed (poison accepted) | 5/13 (38%) |
 
-**The attack is effective** — poisoned packs flip 65% of answers. But **the quality gate catches 76% of them with zero false positives.** The gate provides meaningful trust in a P2P marketplace where any node can publish knowledge.
+The attack was effective: poisoned packs flipped 65% of answers. The quality gate caught 76% of successful poisoning attempts with zero false positives. The 38% miss rate is a significant limitation. For domains where factual accuracy is critical, a single quality gate is insufficient; multi-source consensus or human escalation would be needed.
 
-The 38% miss rate is concerning for high-stakes domains (compliance, medical). Mitigation strategies: require multiple independent sources for critical facts (consensus), higher-confidence gate thresholds, or cross-referencing against a second knowledge pack from a different provider.
-
-**This provides partial evidence toward the trust and accountability challenges identified by Wang et al. (2026).** Bilateral credit adds economic cost to attacks (poisoning costs credits), the quality gate adds a verification layer, and the Ed25519 signature chain provides provenance to trace malicious packs back to their source. However, the 38% miss rate indicates that a single quality gate is insufficient for high-stakes domains; multi-source consensus or human-in-the-loop escalation would be needed for compliance or medical applications.
-
-### 3.16 Phase H10: Multi-Hop Reasoning Across Domains
-
-**Question:** Can an agent answer questions that require combining knowledge from two different domains?
-
-We tested 15 synthetic questions requiring facts from 2 of our 5 SQuAD domains (e.g., "How might EU environmental law address immune system impacts of industrial oxygen depletion?"). Three conditions: no context, single-domain context, and cross-domain context from both relevant domains.
-
-| Condition | Avg Score (0-3) | Full synthesis (3/3) |
-|-----------|----------------|---------------------|
-| No context | 0.80 | 2/15 |
-| Single domain | 0.93 | 0/15 |
-| Cross-domain | 0.93 | 1/15 |
-
-**Cross-domain knowledge delivery works** — the retrieval pipeline successfully provides context from both domains. But **the 4B model rarely achieves true synthesis.** It references facts from both domains but lists them separately rather than connecting them. Analogy questions showed the strongest cross-domain lift (+0.7 points), while application and causal questions showed no improvement.
-
-**Implication for the knowledge ecosystem:** Multi-hop reasoning is a curator-tier capability (26B+), not a specialist-tier capability (4B). The architecture should route synthesis questions to curators and extraction questions to specialists. This supports the three-tier model: edge nodes extract, specialists serve, curators synthesize.
+**Summary for RQ4.** Adaptive credit limits tightened free-riders from 10 to 3 calls in a single test. The quality gate provided a meaningful but imperfect trust signal: it detected 76% of adversarial packs with no false rejects, but missed 38% of successful attacks. Combined with Ed25519 provenance (enabling tracing of malicious packs to their source), these mechanisms provide partial evidence toward the trust and accountability challenges identified by Wang et al. [3]. The evidence is limited to single-demonstration tests and one adversarial attack vector.
 
 ---
 
-## 4. The Knowledge Ecosystem
+## 6. Discussion
 
-### 4.1 Architecture: Three Tiers of Intelligence
+### 6.1 Summary of Findings
 
-The model scaling results (Phases H2-H4) suggest a three-tier architecture, though only the curator and specialist tiers have been experimentally validated:
+The results suggest that the core mechanisms --- bilateral credit transactions, knowledge pack caching, quality gating, and retrieval fusion --- function as designed on a small-scale testbed. Across the four research questions:
 
-```
-Tier 3: CURATORS (expensive, slow, deep)
-  Gemma 4 26B / Claude Opus / GPT-4
-  Sit on large corpora (Wikipedia, domain libraries, ebook collections)
-  Create tailored knowledge packs on demand
-  Run once per topic — amortized across thousands of queries
+RQ1 (Knowledge Pipeline): Within-domain cache reuse reached 75--80%, and cross-node knowledge combination was observed. The pipeline completes in approximately 10 seconds at 2 credits.
 
-Tier 2: SPECIALISTS (medium, focused, reliable)
-  Qwen3.5 4B-9B / Gemma 4 E4B
-  Serve specific domains with curated knowledge packs
-  Quality gate ensures output meets threshold
-  Earn credits through reliable service
+RQ2 (Model Scaling): Extraction and composition appear to have different parameter thresholds (2.3B and 4B respectively). Architecture affects performance independently of parameter count. Multi-hop synthesis was not achieved at 4B.
 
-Tier 1: EDGE NODES (cheap, fast, everywhere)
-  Gemma 4 E2B on Raspberry Pi (7.6 tok/s)
-  88% accuracy on extractive QA with the right knowledge
-  Serve cached packs, handle structured extraction
-  Run on $50 hardware at near-zero marginal cost
-```
+RQ3 (Retrieval): Algorithmic improvements closed 48% of the retrieval gap. RRF + cross-encoder reranking was the most effective combination. Approximately 20 points of gap remain.
 
-Each tier is economically self-sustaining through bilateral credit:
-- Curators invest expensive compute, earn credits from pack sales
-- Specialists buy packs, serve queries, earn credits from consumers
-- Edge nodes buy cheap packs, serve at scale, earn through volume
+RQ4 (Trust): The quality gate caught 76% of adversarial packs with 0% false rejects. Adaptive credit tightened free-riders in a single test. A 38% adversarial miss rate remains.
 
-### 4.2 Knowledge Curators on Large Corpora
+### 6.2 Limitations
 
-A curator node with access to Wikipedia (6M articles, ~20GB text) or a domain-specific library operates as follows:
+**Scale.** All experiments ran on 2--3 nodes on a single machine. The topology does not reflect real network conditions: there is no network latency, no partial failures, no heterogeneous hardware, and no concurrent access. Whether the pipeline functions under real distributed conditions is untested.
 
-1. **Query arrives** via the marketplace: "Create a knowledge pack about the immune system's response to viral infections"
-2. **Curator retrieves** relevant Wikipedia articles using vector search over its local corpus
-3. **Curator synthesizes** a focused knowledge pack: key mechanisms, specific proteins, clinical evidence — tailored for the requesting node's model size
-4. **Pack is signed** (Ed25519) and priced via bilateral credit
-5. **Consumer ingests** the pack, serves hundreds of queries from it
+**Benchmark size.** The SQuAD subset contains 100 questions. At this sample size, score differences of 4--6 percentage points are near the estimated plus or minus 5% sampling noise. Results should be interpreted as directional, not statistically significant. A larger benchmark with confidence intervals would be needed to support stronger claims.
 
-The economics: curator spends 30 seconds of Gemma 4 26B compute (~$0.01). The pack serves 1000 queries at 1 credit each. That's a 100:1 return on the curator's investment. The bilateral credit system ensures curators who produce better packs earn more — because specialists that buy good packs score higher on the quality gate, get deeper credit limits (Phase F), and attract more queries.
+**Evaluation metric.** Exact substring matching undercounts correct paraphrases and overcounts incidental matches. We chose it for reproducibility, but it introduces systematic measurement error that may favor or penalize specific model architectures differently.
 
-### 4.3 Specialized Nodes: Gatekeepers and QA Managers
+**Knowledge pack quality.** Test packs were scripted for the experiments, not organically curated by independent agents with divergent incentives. How knowledge quality evolves in an open marketplace with real economic pressures is unknown.
 
-Not every node needs to answer questions. The knowledge pack mechanism enables **role specialization**:
+**Adversarial scope.** Phase H9 tested one attack vector (plausible factual rewrites). Sophisticated attacks --- consistent but wrong conceptual frameworks, selective omissions, attacks exploiting the gate model's specific weaknesses --- were not tested. The 38% miss rate on even this simple attack vector suggests that more sophisticated attacks would be more successful.
 
-**Quality Gatekeeper:** A node whose only job is evaluating output quality. Equipped with a knowledge pack containing:
-- Rubrics for each domain ("what a good medical answer looks like")
-- Common failure modes ("hallucination patterns in legal QA")
-- Scoring criteria calibrated to human evaluators
+**Multi-hop weakness.** Phase H10 showed that 4B models list cross-domain facts but do not synthesize them. This limits the practical value of cross-domain knowledge delivery at the specialist tier.
 
-The gatekeeper doesn't need a large model — it needs the RIGHT knowledge about quality standards. A 4B model with a well-crafted rubric pack outperforms a 9B model guessing at quality.
+**Single-machine topology.** Running all nodes on one machine eliminates network effects that would be present in a real deployment: clock skew, message reordering, bandwidth constraints, and node failures. Our 160/160 protocol pass rate may not hold under these conditions.
 
-**Domain Expert:** A node that knows everything about one topic. A curator downloads all Wikipedia articles about EU law, synthesizes them into a comprehensive pack, and sends it to a specialist node. That node becomes the EU law expert for the entire network — answering questions at 4B model cost with curator-level knowledge.
+### 6.3 Threats to Validity
 
-**Triage Router:** A node that receives queries and routes them to the right specialist. Equipped with a pack describing what each specialist knows and what it costs. Makes routing decisions at 2.3B (E2B) speed — fast and cheap.
+**Internal validity.** The LLM-as-judge evaluation introduces the biases of the judge model. Quality gate scores are not calibrated against human judgments. The sequential execution of phases means that later phases may benefit from residual state (cached knowledge, warmed caches) not present in a clean deployment.
 
-**Compliance Auditor:** A node that reviews skill outputs against regulatory requirements. Knowledge pack contains: relevant regulations, compliance checklists, red-flag patterns. Runs continuously on edge hardware, checking every transaction.
+**External validity.** The SQuAD 2.0 domains (Oxygen, Normans, Immune system, Steam engine, EU law) are factoid-heavy and may not represent the question types that agents encounter in practice. The 2--3 node topology does not represent real P2P networks. Consumer hardware (RTX 3090) is high-end for consumer but not representative of the edge devices (Raspberry Pi, smartphones) where SLMs would be deployed.
 
-Each of these roles is:
-- **Deployable**: orchestrator pushes the right knowledge pack + recipe
-- **Qualifiable**: entry test verifies the node can perform its role
-- **Economically accountable**: bilateral credit tracks cost and quality
-- **Replaceable**: if a node fails the quality gate, the orchestrator deploys a new one
+**Construct validity.** Cache hit rate measures whether the FTS store contains relevant content, but does not measure whether the cached content produces correct answers (a cache hit on poor-quality content is worse than a cache miss that triggers fresh acquisition). The quality gate threshold (5/10) was chosen without calibration to task-specific requirements.
 
-### 4.4 The Model-Agnostic Upgrade Path
+### 6.4 Implications for P2P Agent Systems
 
-The entire ecosystem improves when ANY component upgrades:
+Wang et al. [3] identified economic incentives, intelligence composition, and trust as necessary layers for agentic P2P networks. Our results provide limited implementation evidence for each:
 
-| Upgrade | Effect |
-|---------|--------|
-| Better curator model (Opus 4.6) | Higher quality knowledge packs for the same price |
-| Better agent model (Gemma 5) | Same packs produce better answers |
-| Better embeddings | Retrieval gap shrinks (currently 30 points) |
-| Better quantization (TurboQuant) | Same models fit on cheaper hardware |
-| Larger corpus (full Wikipedia) | More domains available on demand |
+**Economic layer.** Bilateral credit supported knowledge transactions across all tested phases, including cache reuse that reduced per-query cost by 75% after initial investment. However, we tested only cooperative and one-directional scenarios, not adversarial economic behavior (e.g., strategic misreporting of quality, cartel formation among providers).
 
-No component depends on a specific model version. The knowledge packs are model-agnostic documents. The quality gate is the invariant — it doesn't care how the answer was produced, only whether it's correct.
+**Intelligence layer.** Knowledge packs served as a viable unit of capability transfer between nodes. The coaching loop (Phase H) showed that a larger model's reasoning can be distilled into a pack that durably improves a smaller model's performance. The negative multi-hop result (Phase H10) suggests that knowledge transfer has architectural limits --- some capabilities cannot be transferred via packs alone.
 
-### 4.5 Knowledge Subscriptions: The Business Model
-
-The knowledge pack mechanism naturally supports **subscription-based intelligence delivery**:
-
-**Curator as publisher:**
-A curator node with web search, browser access, and API integrations operates as a knowledge publisher:
-
-| Subscription | Update Frequency | Content | Use Case |
-|-------------|-----------------|---------|----------|
-| Financial markets | Every hour | Stock indices, forex, crypto prices, analyst summaries | Trading agents, portfolio managers |
-| News digest | Every 6 hours | Top stories, categorized by domain, with context | General-purpose agents, briefing services |
-| Weather/meteo | Every 3 hours | Regional forecasts, severe weather alerts | Logistics, agriculture, outdoor operations |
-| Sports results | Real-time | Scores, standings, player stats | Entertainment, betting analysis |
-| Regulatory updates | Daily | New regulations, compliance changes, legal precedents | Legal agents, compliance auditors |
-| Medical guidelines | Weekly | Updated treatment protocols, drug interactions, safety alerts | Clinical decision support |
-
-**Delivery mechanism:** The underlying primitives have been validated individually:
-- Curator calls `knowledge-pack-lite` on schedule (thrall recipe with timer)
-- Pack delivered via sidecar + knarr-mail to all subscribers
-- Consumer's thrall auto-ingests on receipt (L2-01: 10/10 in testing)
-- Quality gate verifies pack meets standards before serving (Phase G)
-- Bilateral credit charges per delivery (Phase A)
-
-Note: subscription delivery has not been tested end-to-end at production scale. The primitives work; the composition remains to be validated.
-
-**The air-gapped edge node:**
-
-A Raspberry Pi on a factory floor, hospital ward, or retail location has no internet access. But it's on the local knarr network:
-
-- **Factory:** Subscribes to equipment manuals, safety protocols, shift schedules, production targets. Workers ask questions, the Pi answers from curated knowledge. When regulations change, the curator pushes an updated pack overnight.
-- **Hospital:** Subscribes to drug interaction databases, treatment protocols, patient safety alerts. Clinicians get instant answers at the point of care. Updates flow through the hospital's knarr network, not through the internet.
-- **Retail:** Subscribes to product catalogs, pricing updates, inventory levels, promotional schedules. Staff and customers get accurate, current information from a $50 device.
-
-The node never touches the internet. Every answer comes from a signed, timestamped knowledge pack with verifiable provenance. However, the quality gate's 76% catch rate on adversarial content (Phase H9) means edge deployments in safety-critical settings would require additional safeguards.
-
-**Revenue model:**
-
-```
-Free tier:     Public domain packs (Wikipedia, open data, government publications)
-Standard:      Curated daily digests (news, markets, weather) — 10 credits/day
-Premium:       Real-time feeds (financial data, sports live) — 50 credits/day
-Enterprise:    Custom curators per organization — negotiated pricing
-```
-
-The bilateral credit system IS the subscription accounting:
-- Subscription = recurring skill call on a schedule (thrall recipe)
-- Payment = bilateral credit per pack delivery
-- SLA = quality gate score threshold
-- Churn = adaptive credit tightens on bad curators (Phase F)
-- Cancellation = stop calling the curator's skill
-
-No payment processor. No subscription management platform. No invoicing system. The protocol handles all of it through the same bilateral credit mechanisms, though the subscription composition has not yet been tested end-to-end.
+**Trust layer.** The quality gate and adaptive credit provide partial trust signals. The 76% adversarial detection rate and 0% false reject rate suggest the gate is useful but not sufficient. Combining multiple trust mechanisms (quality gate + economic penalties + provenance tracking) appears necessary, as Wang et al. anticipated.
 
 ---
 
-## 5. Discussion
+## 7. Future Work
 
-### 5.1 Summary of Findings
+**Larger benchmarks.** The 100-question SQuAD subset should be replaced with a larger, more diverse evaluation set that supports statistical significance testing. Metrics beyond substring matching (e.g., BERTScore, human evaluation) would provide more robust accuracy estimates.
 
-1. **Knowledge reuse on bilateral credit.** Within-domain cache reuse reaches 80% hit rate and 48% time reduction (Phase B). Knowledge packs persist and serve future queries within the same domain. Whether this constitutes "compounding" in a general sense remains to be tested across larger, more diverse workloads.
+**Multi-machine deployment.** Testing across physically separate machines with real network latency and failure modes is necessary to validate the pipeline under realistic conditions. The 160/160 protocol pass rate should be re-evaluated under network stress.
 
-2. **Coaching closes the quality gap.** A 26B curator model writes knowledge packs that lift a 4B agent from 1/10 to 8/10 on structured explanation tasks (Phase H). The expensive reasoning happens once; the pack serves many queries. This worked on 2 of 3 test problems (Phase C); the third did not improve.
+**Adversarial robustness.** The 38% adversarial miss rate motivates work on multi-source consensus, where a quality gate cross-references answers against packs from independent providers. More sophisticated attack vectors should also be tested.
 
-3. **4B is the minimum for composition, 2.3B for extraction.** Gemma 4 E2B (88% SQuAD) can serve on a Raspberry Pi. Qwen3.5 4B (83% SQuAD, 9/10 quality gate) is the sweet spot for general-purpose agents. Architecture matters: Nemotron 3 Nano (3.6B active Mamba-Transformer) scores 77% despite more active parameters than E2B.
+**Model-architecture-aware retrieval.** The observation that Mamba-Transformer hybrids respond differently to retrieval strategies suggests that the system should select retrieval pipelines per-model rather than globally. This warrants systematic investigation.
 
-4. **Retrieval strategy should be architecture-aware.** Transformer models gain 4-8% from vector over keyword retrieval. Mamba-Transformer hybrids perform 5% *worse* with vector retrieval. RRF + cross-encoder reranking closes 48% of the retrieval gap (Phase H8), but 20 points remain.
+**Edge device evaluation.** While model scaling results suggest that 2.3B models could serve extractive QA on Raspberry Pi-class hardware, this has not been tested end-to-end in the knowledge pipeline. Latency, memory constraints, and power consumption under real workloads remain unknown.
 
-5. **Adaptive credit provides per-peer reputation.** Free-riders get tightened from 10 to 3 calls. Reliable providers earn 15+. This is a single demonstration of the mechanism (Phase F), not a proof of Sybil resistance — a determined attacker creating many identities has not been tested.
-
-6. **The quality gate is useful but imperfect.** It rejects hallucinated answers (Phase G) and catches 76% of adversarially poisoned answers with 0% false rejects (Phase H9). The 38% miss rate means additional safeguards are needed for high-stakes domains.
-
-7. **Cross-domain synthesis requires large models.** A 4B model can extract facts from cross-domain context but rarely synthesizes them (Phase H10). Multi-hop reasoning is a curator-tier capability (26B+), not a specialist-tier capability.
-
-### 5.2 Limitations
-
-- **Scale.** Phases A-D used 2-3 nodes on one machine. True distributed intelligence requires cross-machine deployment with network latency and partial failures.
-- **Benchmark size.** The SQuAD benchmark uses 100 questions with exact substring matching. Score deltas of 4-6 points are near the ±5% sampling noise for this sample size. Results should be read as directional, not precise.
-- **Knowledge pack quality.** Test packs were scripted, not organically curated. Production knowledge quality depends on curator incentives that have not been tested at scale.
-- **Evaluation metric.** Exact substring matching (`answer.lower() in response.lower()`) undercounts correct paraphrases and overcounts incidental matches. A model-based judge would be more accurate but introduces its own biases.
-- **Adversarial scope.** Phase H9 tests one attack vector (plausible rewrites of known passages). Sophisticated attacks (e.g., consistent but wrong frameworks, selective omissions) have not been tested.
-- **Multi-hop is weak.** Phase H10 shows that 4B models list facts from two domains but don't connect them. This limits the value of cross-domain knowledge delivery at the specialist tier.
-
-### 5.3 Comparison to Existing Frameworks
-
-| Framework | Knowledge Reuse | Cross-Agent Knowledge | Economic Incentives |
-|-----------|----------------|----------------------|-------------------|
-| AutoGen | No | Shared memory (same process) | None |
-| CrewAI | No | Task handoff (orchestrated) | None |
-| LangGraph | No | State passing (explicit) | None |
-| RAG pipelines | Static corpus | No cross-agent | None |
-| **Knarr** | **Within-domain (80% cache)** | **Cross-pollination (Phase D)** | **Bilateral credit** |
-
-We are not aware of another framework that combines knowledge reuse, cross-agent knowledge exchange, and economic incentives in a peer-to-peer setting. However, this comparison is limited — each framework targets a different use case, and a direct benchmark would be needed to make stronger claims.
+**Formal analysis.** Game-theoretic analysis of knowledge markets --- equilibrium conditions, curator investment strategies, and the relationship between credit depth and knowledge accumulation rate --- would complement the empirical evidence presented here.
 
 ---
 
-## 6. Future Work
+## 8. Conclusion
 
-### 5.1 Edge Device Integration
+We presented implementation evidence for a knowledge acquisition and retrieval system operating on peer-to-peer bilateral credit. Across 16 experimental phases on consumer hardware, we observed within-domain knowledge reuse (75--80% cache hits), coaching-based quality improvement (1/10 to 8/10 via curator packs), model scaling thresholds (2.3B for extraction, 4B for composition on a 100-question benchmark), retrieval pipeline optimization (48% gap closure via RRF and cross-encoder reranking), and partial adversarial resilience (76% detection, 0% false rejects, 38% miss rate).
 
-A Raspberry Pi 5 running Gemma 4 E2B (7.6 tok/s) joins the network as a specialist. The orchestrator profiles it, discovers its capabilities, sends decomposed recipes optimized for the small model, and qualifies it through entry tests. The Pi doesn't need to be smart --- it needs to follow recipes and serve cached knowledge packs.
+These results are directional, not definitive. The benchmark is small (100 questions, approximately plus or minus 5% noise), the topology is minimal (2--3 nodes on one machine), the evaluation metric is limited (substring matching), and several claimed mechanisms have been tested only in single demonstrations. The multi-hop result is negative: 4B models do not synthesize across knowledge domains.
 
-### 5.2 Dynamic Team Assembly
-
-The orchestrator doesn't shop from a fixed catalog. It **deploys** specialists on the fly: spin up a node, push a Docker config, send knowledge packs and recipes via sidecar, qualify through entry tests, then use. The team is designed per-problem, not pre-built.
-
-### 5.3 Knowledge Marketplace
-
-Knowledge packs as the unit of economic value. Curators invest expensive reasoning (Claude, GPT-4) to create high-quality packs. Edge devices buy and serve them cheaply. The marketplace incentivizes quality through bilateral credit --- bad packs don't earn repeat business.
-
-### 5.4 Formal Analysis
-
-Game-theoretic analysis of knowledge markets: under what conditions does knowledge compounding reach equilibrium? When do curators invest in pack quality vs quantity? How does bilateral credit depth affect the rate of knowledge accumulation?
-
----
-
-## 7. Conclusion
-
-We presented implementation evidence for a knowledge acquisition and retrieval system operating on peer-to-peer bilateral credit. Across 16 experimental phases on consumer hardware, the system demonstrated within-domain knowledge reuse (80% cache hits), coaching-based quality improvement (1/10 to 8/10), model scaling thresholds (4B minimum for composition), retrieval pipeline optimization (48% gap closure via RRF + cross-encoder), and adversarial resilience (76% detection, 0% false rejects).
-
-The results are directional, not definitive. The benchmarks are small (100 questions), the topology is minimal (2-3 nodes on one machine), and several claimed mechanisms (Sybil resistance, subscription delivery, multi-hop synthesis) remain untested or showed negative results. The 20-point remaining retrieval gap, the 38% adversarial miss rate, and the inability of 4B models to synthesize across domains are honest limitations.
-
-What the evidence does support: the core primitives work (160/160 pass rate), knowledge packs are a viable unit of economic exchange, and the quality gate provides a meaningful — if imperfect — trust signal in a P2P marketplace. Wang et al. (2026) proposed the architecture; our previous paper [1] provided evidence for the economic layer; this paper extends that evidence to the knowledge and retrieval layers.
+What the evidence does support is that the core primitives function (160/160 protocol pass rate), that knowledge packs are a viable unit of exchange over bilateral credit, and that a quality gate provides a meaningful --- if imperfect --- trust signal. Wang et al. [3] proposed the architecture for agentic P2P networks; our previous work [1] provided evidence for the economic layer; this paper extends that evidence to the knowledge and retrieval layers, while honestly noting the limitations of a small-scale, single-machine evaluation.
 
 All data, code, and experimental scripts are available at [github.com/knarrnet/knarr.lab](https://github.com/knarrnet/knarr.lab).
 
@@ -673,21 +399,29 @@ All data, code, and experimental scripts are available at [github.com/knarrnet/k
 
 [3] Wang, T. et al. (2026). "Agentic Peer-to-Peer Networks." arXiv:2603.03753.
 
-[4] MemPalace (2026). "MemPalace: AI Memory System." github.com/milla-jovovich/mempalace. 96.6% R@5 on LongMemEval via structural metadata filtering.
+[4] MemPalace (2026). "MemPalace: AI Memory System." github.com/milla-jovovich/mempalace.
 
-[5] Engram-2 (2026). "Engram-2: Hybrid Retrieval Memory." github.com/199-biotechnologies/engram-2. R@5 = 0.990 on LongMemEval via FTS5 + Reciprocal Rank Fusion.
+[5] Engram-2 (2026). "Engram-2: Hybrid Retrieval Memory." github.com/199-biotechnologies/engram-2.
+
+[6] Adar, E. and Huberman, B. A. (2000). "Free Riding on Gnutella." *First Monday*, 5(10).
 
 ---
 
-## Appendix A: Protocol Validation Summary
+## Appendix A: Protocol Validation Details
 
-| Layer | Tests | Operations | Pass Rate |
-|-------|-------|------------|-----------|
-| L1: Protocol Foundation | 4 tests x 2 conditions x 10 iterations | 80 | 100% |
-| L2: Thrall Behaviors | 4 tests x 2 conditions x 10 iterations | 80 | 100% |
+| Layer | Test | Ops | Pass |
+|-------|------|-----|------|
+| L1 | Skill calls + billing (2 cond x 10) | 20 | 100% |
+| L1 | Asset upload + fetch (2 cond x 10) | 20 | 100% |
+| L1 | Mail round-trip (2 cond x 10) | 20 | 100% |
+| L1 | Mail + attachment (2 cond x 10) | 20 | 100% |
+| L2 | Pack delivery + signing (2 cond x 10) | 20 | 100% |
+| L2 | Recipe + hot-reload (2 cond x 10) | 20 | 100% |
+| L2 | Entry test / eval (2 cond x 10) | 20 | 100% |
+| L2 | FTS query response (2 cond x 10) | 20 | 100% |
 | **Total** | **8 tests** | **160** | **100%** |
 
-### BR/CR Candidates Discovered
+Bug reports and change requests discovered during validation:
 
 | ID | Type | Component | Summary |
 |----|------|-----------|---------|
@@ -696,25 +430,25 @@ All data, code, and experimental scripts are available at [github.com/knarrnet/k
 | CR-002 | Change | thrall/handler.py | Recipe reload latency up to 60s |
 | OBS-002 | Observation | cockpit/server.py | node_id vs public_key dual representation |
 
-## Appendix B: Phase Results Summary
+## Appendix B: Full Phase Results Table
 
-| Phase | Gate | Result |
-|-------|------|--------|
-| A: End-to-end pipeline | Pipeline completes | PASS (10s, 2cr) |
-| B: Knowledge compounding | Cache hit rate >50% | PASS (80% hits, 48% time reduction) |
-| C: Self-correction | Quality improves on >=2/3 problems | PASS (2/3, +2.5 avg) |
-| D: Cross-pollination | Answer uses both domains | PASS (settlement + casino combined) |
-| E: Knowledge marketplace | Cache hits >=60%, cost drops | PASS (75% cache, 5cr for 20 problems) |
-| F: Adaptive credit reputation | Asymmetric limit adjustment | PASS (free-rider -10 -> -3, provider -10 -> -15) |
-| G: Quality gate | Rejects low, passes high | PASS (2/10 rejected, 6/10 passed, +4 improvement) |
-| H: Self-improving coach | Curator writes packs, agent improves | PASS (1/10 -> 8/10 with curator pack) |
-| H2-H3: Model scaling | Minimum viable agent size | 4B for composition, 2.3B for extraction |
-| H4: SQuAD benchmark | 100 questions, 5 domains, 6 models | E2B 88%, 4B 83%, Nemotron 77%, 9B 83% |
-| H5-H6: Retrieval at scale | FTS vs VEC on 217 passages, 4 models | VEC +4-8% (Transformer), VEC -5% (Mamba-Transformer) |
-| H7: Retrieval diagnostic | Retrieval vs utilization split | 80% retrieval / 20% utilization. RRF+SCOPE closes 9-10pts |
-| H8: Cross-encoder rerank | 22M param reranker on RRF pipeline | +16-18pts over FTS, 48% of gap closed, ~20ms total latency |
-| H9: Adversarial injection | Poisoned packs vs quality gate | Gate catches 76% of poisoned answers, 0% false rejects |
-| H10: Multi-hop reasoning | Cross-domain synthesis, 15 questions | 4B can't synthesize; multi-hop is a curator-tier capability |
+| Phase | Key Metric | Result |
+|-------|------------|--------|
+| A | Pipeline completion | 10s, 2cr |
+| B | Cache hit rate | 80%, 48% time reduction |
+| C | Improvement rate | 2/3 problems, +2.5 avg |
+| D | Cross-pollination | Confirmed |
+| E | Cache across domains | 75%, 5cr/20 problems |
+| F | Credit adjustment | -10 to -3 (free-rider) |
+| G | Reject/pass | 2/10 vs 6/10 |
+| H | Coaching | 1/10 to 8/10 |
+| H2--H4 | SQuAD accuracy | E2B 88%, 4B 83%, 0.6B 2% |
+| H5--H6 | Retrieval | VEC +4--8% (Trans.), 30pt gap |
+| H7 | Diagnostic | 80% retrieval / 20% util. |
+| H8 | Gap closure | +16--18pts, 48% closed |
+| H9 | Adversarial | 76% caught, 0% false reject |
+| H10 | Multi-hop | Negative (0.93 avg) |
+| Protocol | Pass rate | 160/160 (100%) |
 
 ## Appendix C: Reproduction
 
