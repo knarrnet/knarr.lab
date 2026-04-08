@@ -8,7 +8,7 @@ April 2026
 
 ## Abstract
 
-We report implementation evidence for a distributed intelligence architecture where autonomous LLM agents purchase, ingest, and reuse knowledge packs through a peer-to-peer bilateral credit protocol. Validated across 16 experimental phases on consumer hardware (2x RTX 3090), the system demonstrates: (A-D) an end-to-end knowledge pipeline with 80% within-domain cache reuse and cross-orchestrator knowledge combination; (E-G) a knowledge marketplace with adaptive credit limits and a quality gate that rejects hallucinated answers; (H) self-improving coaching where a 26B curator lifts a 4B agent from 1/10 to 8/10; (H2-H6) model scaling thresholds across 6 architectures (4B minimum for composition, 2.3B for extraction on 100-question SQuAD 2.0); (H7-H8) a retrieval pipeline using Reciprocal Rank Fusion and cross-encoder reranking that closes 48% of the retrieval gap on a 217-passage corpus; (H9) adversarial resilience where a quality gate catches 76% of poisoned knowledge packs with 0% false rejects; and (H10) a negative result showing multi-hop synthesis requires curator-tier models (26B+), not specialist-tier (4B). Every skill call is billed through bilateral credit, every knowledge pack is Ed25519-signed, and all data and scripts are published. The system builds on the architecture proposed by Wang et al. (2026) for Agentic P2P Networks, providing concrete implementation evidence for their economic and intelligence layers.
+We report implementation evidence for a distributed intelligence architecture where autonomous LLM agents purchase, ingest, and reuse knowledge packs through a peer-to-peer bilateral credit protocol. Validated across 16 experimental phases on consumer hardware (2x RTX 3090), the system demonstrates: (A-D) an end-to-end knowledge pipeline with 80% within-domain cache reuse and cross-orchestrator knowledge combination; (E-G) a knowledge marketplace with adaptive credit limits and a quality gate that rejects hallucinated answers; (H) self-improving coaching where a 26B curator lifts a 9B agent from 1/10 to 8/10; (H2-H6) model scaling thresholds across 6 architectures on a 100-question SQuAD 2.0 subset (4B minimum for composition, 2.3B for extraction); (H7-H8) a retrieval pipeline using Reciprocal Rank Fusion and cross-encoder reranking that closes 48% of the retrieval gap on a 217-passage corpus; (H9) adversarial resilience where a quality gate catches 76% of poisoned knowledge packs with 0% false rejects; and (H10) a negative result showing multi-hop synthesis requires curator-tier models (26B+), not specialist-tier (4B). Every skill call is billed through bilateral credit, every knowledge pack is Ed25519-signed, and all data and scripts are published. The system builds on the architecture proposed by Wang et al. (2026) for Agentic P2P Networks, providing concrete implementation evidence for their economic and intelligence layers.
 
 ---
 
@@ -30,7 +30,7 @@ This is not a proposal. Every operation described here executed on real knarr pr
 
 This paper builds on our earlier work demonstrating bilateral credit isolation of free-riders across 134 autonomous agents (DOI: 10.5281/zenodo.19417258). Wang et al. (2026) proposed the architecture for Agentic P2P Networks; we provided implementation evidence for the economic layer. This paper extends that evidence to knowledge acquisition and retrieval --- investigating whether P2P economic incentives can support within-domain knowledge reuse, quality-gated content, and multi-model retrieval pipelines.
 
-The Werewolf RL approach (Xu et al., ICML 2024) demonstrated that constrained selection outperforms open-ended generation for agent decisions. NVIDIA's SLM position paper (Belcak et al. 2025) argued that sub-10B models are sufficient for most agentic tasks. We validate both claims: a 9B model effectively orchestrates a knowledge pipeline when given the right retrieval infrastructure.
+NVIDIA's SLM position paper (Belcak et al. 2025) argued that sub-10B models are sufficient for most agentic tasks. Our Phase H2-H4 results provide partial support: a 4B model passes quality gates on extractive QA, while a 9B model orchestrates the full knowledge pipeline. Recent work on agent memory systems (MemPalace [4], Engram-2 [5]) informed our retrieval pipeline design, particularly the use of structural metadata filtering and Reciprocal Rank Fusion.
 
 ---
 
@@ -88,8 +88,11 @@ Each handler is ~40 lines of Python following knarr's `set_node() + handle()` pa
 
 | Component | Specification |
 |-----------|--------------|
-| Hardware | 1x RTX 3090 (GPU 0), Windows 11 |
-| LLM | Qwen3.5-9B via vLLM, single GPU |
+| Hardware | 2x RTX 3090 (24GB each), Windows 11 |
+| LLM (Phases A-G) | Qwen3.5-9B via vLLM on GPU 0 |
+| LLM (Phases H+) | Multiple models via Ollama across both GPUs (Gemma 4 26B curator on GPU 1, various agent models on GPU 0) |
+| Embeddings | nomic-embed-text (274MB) via Ollama |
+| Reranking | cross-encoder/ms-marco-MiniLM-L-6-v2 (22M params, CPU) |
 | Protocol | knarr v0.54.1, 3 nodes (bootstrap + 2 test nodes) |
 | Knowledge store | SQLite FTS5 via thrall plugin |
 | Signing | Ed25519 (PyNaCl) |
@@ -458,7 +461,7 @@ We tested 15 synthetic questions requiring facts from 2 of our 5 SQuAD domains (
 
 ### 4.1 Architecture: Three Tiers of Intelligence
 
-The experimental results reveal a natural three-tier architecture:
+The model scaling results (Phases H2-H4) suggest a three-tier architecture, though only the curator and specialist tiers have been experimentally validated:
 
 ```
 Tier 3: CURATORS (expensive, slow, deep)
@@ -630,7 +633,7 @@ We are not aware of another framework that combines knowledge reuse, cross-agent
 
 ---
 
-## 5. Future Work
+## 6. Future Work
 
 ### 5.1 Edge Device Integration
 
@@ -650,7 +653,7 @@ Game-theoretic analysis of knowledge markets: under what conditions does knowled
 
 ---
 
-## 6. Conclusion
+## 7. Conclusion
 
 We presented implementation evidence for a knowledge acquisition and retrieval system operating on peer-to-peer bilateral credit. Across 16 experimental phases on consumer hardware, the system demonstrated within-domain knowledge reuse (80% cache hits), coaching-based quality improvement (1/10 to 8/10), model scaling thresholds (4B minimum for composition), retrieval pipeline optimization (48% gap closure via RRF + cross-encoder), and adversarial resilience (76% detection, 0% false rejects).
 
@@ -670,19 +673,9 @@ All data, code, and experimental scripts are available at [github.com/knarrnet/k
 
 [3] Wang, T. et al. (2026). "Agentic Peer-to-Peer Networks." arXiv:2603.03753.
 
-[4] Xu, Z. et al. (2024). "Language Agents with Reinforcement Learning for Strategic Play in the Werewolf Game." ICML.
+[4] MemPalace (2026). "MemPalace: AI Memory System." github.com/milla-jovovich/mempalace. 96.6% R@5 on LongMemEval via structural metadata filtering.
 
-[5] Park, J.S. et al. (2023). "Generative Agents: Interactive Simulacra of Human Behavior." UIST.
-
-[6] Horton, J.J. et al. (2024). "Large Language Models as Simulated Economic Agents." ACM EC.
-
-[7] Fleischman, T. et al. (2020). "Liquidity-Saving through Obligation-Clearing and Mutual Credit." J. Risk Financial Management.
-
-[8] Haeberlen, A. et al. (2007). "PeerReview: Practical Accountability for Distributed Systems." SOSP.
-
-[9] MemPalace (2026). "MemPalace: AI Memory System." github.com/milla-jovovich/mempalace. 96.6% R@5 on LongMemEval via structural metadata filtering.
-
-[10] Engram-2 (2026). "Engram-2: Hybrid Retrieval Memory." github.com/199-biotechnologies/engram-2. R@5 = 0.990 on LongMemEval via FTS5 + Reciprocal Rank Fusion.
+[5] Engram-2 (2026). "Engram-2: Hybrid Retrieval Memory." github.com/199-biotechnologies/engram-2. R@5 = 0.990 on LongMemEval via FTS5 + Reciprocal Rank Fusion.
 
 ---
 
