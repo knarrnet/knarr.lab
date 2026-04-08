@@ -123,15 +123,15 @@ Before assembling the intelligence pipeline, we validated every protocol primiti
 
 **Results:**
 
-| Step | Operation | Time | Cost |
-|------|-----------|------|------|
-| Analyze | LLM identifies needed knowledge | 3.5s | 0cr |
-| Buy | Purchase knowledge-pack-lite | 1.0s | 1cr |
-| Ingest | Chunk + FTS index | 1.0s | 0cr |
-| Query | FTS retrieval | 1.0s | 1cr |
-| Synthesize | LLM + knowledge context | 3.5s | 0cr |
-| Package | Sign output pack | <0.1s | 0cr |
-| **Total** | | **~10s** | **2cr** |
+| Step | Time | Cost |
+|------|------|------|
+| Analyze: LLM identifies needed knowledge | 3.5s | 0cr |
+| Buy: purchase knowledge-pack-lite from specialist | 1.0s | 1cr |
+| Ingest: chunk and FTS index the pack | 1.0s | 0cr |
+| Query: FTS retrieval from local store | 1.0s | 1cr |
+| Synthesize: LLM generates answer with knowledge context | 3.5s | 0cr |
+| Package: sign output pack for the network | 0.1s | 0cr |
+| **Total** | **~10s** | **2cr** |
 
 The orchestrator produced a coherent answer referencing the ingested knowledge: *"Bilateral credit is a mechanism in peer-to-peer networks where each peer maintains an independent ledger... prevents free-riding through [the mechanism described in the pack]... eliminates the need for centralized reputation."*
 
