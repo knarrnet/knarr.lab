@@ -345,21 +345,23 @@ After tightening, the free-rider was blocked on the next call attempt. This is a
 
 The quality gate distinguished knowledge-backed answers from hallucinated ones in this controlled test.
 
-**Phase H9: Adversarial Knowledge Injection.** Poisoned knowledge packs were created by rewriting passages to contain subtle factual errors (changed dates, names, numbers) while preserving style and tone. The agent answered questions using either clean or poisoned packs, and a quality gate (Qwen3.5:4b with reference context) judged the answers.
+**Phase H9: Adversarial Knowledge Injection.** Poisoned knowledge packs were created by rewriting passages to contain subtle factual errors (changed dates, names, numbers) while preserving style and tone. The agent (Gemma 4 E2B) answered all 100 SQuAD questions using either clean or poisoned packs, and a quality gate (Qwen3.5:4b with reference context) judged the answers.
 
 | Metric | Value |
 |--------|-------|
-| Clean pack correct | 15/20 (75%) |
-| Poison effective (answer flipped) | 13/20 (65%) |
-| Gate caught poisoned answers | 10/13 (76%) |
-| Gate false rejects (clean) | 0/15 (0%) |
-| Gate missed (poison accepted) | 5/13 (38%) |
+| Clean pack correct | 85/100 (85%) |
+| Poison effective (answer flipped) | 75/100 (75%) |
+| Gate caught poisoned answers | 57/75 (76%) |
+| Gate false rejects (clean) | 0/85 (0%) |
+| Gate missed (poison accepted) | 23/75 (30%) |
 
 ![Figure 3: Adversarial quality gate — detection rates and confusion matrix](figures/fig3_adversarial.png)
 
-The attack was effective: poisoned packs flipped 65% of answers. The quality gate caught 76% of successful poisoning attempts with zero false positives (Figure 3). The 38% miss rate is a significant limitation. For domains where factual accuracy is critical, a single quality gate is insufficient; multi-source consensus or human escalation would be needed.
+The attack was effective: poisoned packs flipped 75% of answers. The quality gate caught 76% of successful poisoning attempts with zero false positives. Analysis of the 23 missed cases reveals a consistent failure mode: the gate cannot distinguish semantic near-synonyms (e.g., "clergyman" vs "theologian", "static discs" vs "fixed discs", "water" vs "oceans"). Domain-specific performance varied: EU law achieved 100% catch rate (legal terms are precise), while Immune system and Oxygen domains were weaker at 53--64% (scientific terminology has more synonyms).
 
-**Summary for RQ4.** Adaptive credit limits tightened free-riders from 10 to 3 calls in a single test. The quality gate provided a meaningful but imperfect trust signal: it detected 76% of adversarial packs with no false rejects, but missed 38% of successful attacks. Combined with Ed25519 provenance (enabling tracing of malicious packs to their source), these mechanisms provide partial evidence toward the trust and accountability challenges identified by Wang et al. [3]. The evidence is limited to single-demonstration tests and one adversarial attack vector.
+The 30% miss rate is a significant limitation. For domains where factual accuracy is critical, a single quality gate is insufficient; multi-source consensus, domain-specific verification, or human escalation would be needed.
+
+**Summary for RQ4.** Adaptive credit limits tightened free-riders from 10 to 3 calls in a single test. The quality gate provided a meaningful but imperfect trust signal: it detected 76% of adversarial packs across 100 questions with no false rejects, but missed 30% of successful attacks --- predominantly semantic near-synonyms that the gate model cannot distinguish from correct answers. Combined with Ed25519 provenance (enabling tracing of malicious packs to their source), these mechanisms provide partial evidence toward the trust and accountability challenges identified by Wang et al. [3]. The adaptive credit test remains a single demonstration; the adversarial test covers one attack vector on one domain set.
 
 ---
 
@@ -435,7 +437,7 @@ Wang et al. [3] identified economic incentives, intelligence composition, and tr
 
 ## 8. Conclusion
 
-We presented implementation evidence for a knowledge acquisition and retrieval system operating on peer-to-peer bilateral credit. Across 16 experimental phases on consumer hardware, we observed within-domain knowledge reuse (75--80% cache hits), coaching-based quality improvement (1/10 to 8/10 via curator packs), model scaling thresholds (2.3B for extraction, 4B for composition on a 100-question benchmark), retrieval pipeline optimization (48% gap closure via RRF and cross-encoder reranking), and partial adversarial resilience (76% detection, 0% false rejects, 38% miss rate).
+We presented implementation evidence for a knowledge acquisition and retrieval system operating on peer-to-peer bilateral credit. Across 16 experimental phases on consumer hardware, we observed within-domain knowledge reuse (75--80% cache hits), coaching-based quality improvement (1/10 to 8/10 via curator packs), model scaling thresholds (2.3B for extraction, 4B for composition on a 100-question benchmark), retrieval pipeline optimization (48% gap closure via RRF and cross-encoder reranking), and partial adversarial resilience (76% detection across 100 questions, 0% false rejects, 30% miss rate).
 
 These results are directional, not definitive. Key findings were validated on a 500-question expanded benchmark (plus or minus 2% noise), but the primary results use 100 questions (plus or minus 5% noise), the topology is minimal (2--3 nodes on one machine), the evaluation metric is limited (substring matching), and several claimed mechanisms have been tested only in single demonstrations. The multi-hop result is negative: 4B models do not synthesize across knowledge domains.
 
@@ -500,7 +502,7 @@ Bug reports and change requests discovered during validation:
 | H5--H6 | Retrieval | VEC +4--8% (Trans.), 30pt gap |
 | H7 | Diagnostic | 80% retrieval / 20% util. |
 | H8 | Gap closure | +16--18pts, 48% closed |
-| H9 | Adversarial | 76% caught, 0% false reject |
+| H9 | Adversarial (n=100) | 76% caught, 0% false reject, 30% miss |
 | H10 | Multi-hop | Negative (0.93 avg) |
 | Protocol | Pass rate | 160/160 (100%) |
 
