@@ -667,7 +667,7 @@ All data, code, and experimental scripts are available at [github.com/knarrnet/k
 
 ## References
 
-[1] Allemann, P. (2026). "Bilateral Credit, Signed Receipts, and 134 Autonomous Agents." DOI: 10.5281/zenodo.19417258.
+[1] Viggo (2026). "Bilateral Credit, Signed Receipts, and 134 Autonomous Agents." Knarr Project. DOI: 10.5281/zenodo.19417258.
 
 [2] Belcak, P. et al. (2025). "Small Language Models are the Future of Agentic AI." NVIDIA Research. arXiv:2506.02153.
 
