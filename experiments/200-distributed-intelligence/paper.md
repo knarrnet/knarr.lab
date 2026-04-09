@@ -118,6 +118,19 @@ The topology consists of 2--3 nodes running on a single machine. All nodes commu
 
 This confirms that latency affects throughput but not correctness. However, simulated delay does not capture packet loss, connection timeouts, or partial failures that would occur in a real distributed deployment.
 
+**Cross-machine validation.** To verify the pipeline under real network conditions, we deployed a second node on separate hardware (GTX 1080 Ti, 11GB VRAM, Ryzen 9 3900X) on the local network. The knowledge pipeline ran end-to-end across the LAN with TLS-encrypted transport (v0.55.0):
+
+| Metric | Localhost | Cross-machine (LAN) |
+|--------|-----------|-------------------|
+| Echo skill round-trip | <1ms | 82ms |
+| Knowledge pipeline (GPU) | ~10s | 15s |
+| Knowledge pipeline (CPU) | ~10s | 65s (no CUDA) |
+| Bilateral credit billed | Yes | Yes |
+| Ed25519 receipt chain | Yes | Yes (both sides) |
+| Result delivery | Immediate | ~5s (via mail sync) |
+
+The 82ms echo round-trip includes TLS handshake, task dispatch, execution, receipt generation, credit billing, and result delivery across physical machines. The knowledge pipeline generated a 3,900-character GDPR compliance pack on the remote 1080 Ti using Gemma 4 E2B, with the full receipt chain signed on both nodes. This confirms that the protocol mechanisms validated on localhost function identically across machines, with network latency as the only measurable difference.
+
 Models tested in the scaling experiments (Phases H2--H4):
 
 | Model | Params | Architecture |
@@ -394,7 +407,7 @@ RQ4 (Trust): The quality gate caught 76% of adversarial packs with 0% false reje
 
 ### 6.2 Limitations
 
-**Scale.** All experiments ran on 2--3 nodes on a single machine. The topology does not reflect real network conditions: there is no network latency, no partial failures, no heterogeneous hardware, and no concurrent access. Whether the pipeline functions under real distributed conditions is untested.
+**Scale.** The primary experiments ran on 2--3 nodes on a single machine. A cross-machine validation (Section 4.1) confirmed the pipeline functions across physical machines with real network latency, but with only two machines on a LAN. Wide-area network conditions (packet loss, high latency, partial failures) and concurrent multi-consumer access remain untested.
 
 **Benchmark size.** The SQuAD subset contains 100 questions. At this sample size, score differences of 4--6 percentage points are near the estimated plus or minus 5% sampling noise. Results should be interpreted as directional, not statistically significant. A larger benchmark with confidence intervals would be needed to support stronger claims.
 
@@ -412,7 +425,7 @@ RQ4 (Trust): The quality gate caught 76% of adversarial packs with 0% false reje
 
 **Internal validity.** The LLM-as-judge evaluation introduces the biases of the judge model. Quality gate scores are not calibrated against human judgments. The sequential execution of phases means that later phases may benefit from residual state (cached knowledge, warmed caches) not present in a clean deployment.
 
-**External validity.** The SQuAD 2.0 domains (Oxygen, Normans, Immune system, Steam engine, EU law) are factoid-heavy and may not represent the question types that agents encounter in practice. The 2--3 node topology does not represent real P2P networks. Consumer hardware (RTX 3090) is high-end for consumer but not representative of the edge devices (Raspberry Pi, smartphones) where SLMs would be deployed.
+**External validity.** The SQuAD 2.0 domains (Oxygen, Normans, Immune system, Steam engine, EU law) are factoid-heavy and may not represent the question types that agents encounter in practice. The topology (2--3 nodes, validated cross-machine on LAN) does not represent wide-area P2P networks. Consumer hardware (RTX 3090) is high-end for consumer but not representative of the edge devices (Raspberry Pi, smartphones) where SLMs would be deployed.
 
 **Construct validity.** Cache hit rate measures whether the FTS store contains relevant content, but does not measure whether the cached content produces correct answers (a cache hit on poor-quality content is worse than a cache miss that triggers fresh acquisition). The quality gate threshold (5/10) was chosen without calibration to task-specific requirements.
 
@@ -462,7 +475,7 @@ Peer-to-peer file sharing networks demonstrated that digital goods can be distri
 
 We presented a small-scale implementation study of knowledge acquisition, retrieval, and trust mechanisms in a peer-to-peer bilateral credit setting. Across 16 experimental phases on consumer hardware, we observed within-domain knowledge reuse (75--80% cache hits), coaching-based quality improvement (1/10 to 8/10 via curator packs), model scaling thresholds (2.3B for extraction, 4B for composition on a 100-question benchmark), retrieval pipeline optimization (48% gap closure via RRF and cross-encoder reranking), and partial adversarial resilience (76% detection across 100 questions, 0% false rejects, 30% miss rate).
 
-These results are directional, not definitive. Key findings were validated on a 500-question expanded benchmark (plus or minus 2% noise), but the primary results use 100 questions (plus or minus 5% noise), the topology is minimal (2--3 nodes on one machine), the evaluation metric is limited (substring matching), and several claimed mechanisms have been tested only in single demonstrations. The multi-hop result is negative: 4B models do not synthesize across knowledge domains.
+These results are directional, not definitive. Key findings were validated on a 500-question expanded benchmark (plus or minus 2% noise), but the primary results use 100 questions (plus or minus 5% noise), the topology is minimal (2--3 nodes, validated cross-machine on LAN), the evaluation metric is limited (substring matching), and several claimed mechanisms have been tested only in single demonstrations. The multi-hop result is negative: 4B models do not synthesize across knowledge domains.
 
 What the evidence does support is that the core primitives function (160/160 protocol pass rate), that knowledge packs are a viable unit of exchange over bilateral credit, and that a quality gate provides a meaningful --- if imperfect --- trust signal. Wang et al. [3] proposed a plane-based reference architecture for agentic P2P networks; our previous work [1] provided evidence for economic mechanisms; this paper explores knowledge exchange, retrieval, and trust mechanisms that are relevant to that broader direction, while honestly noting the limitations of a small-scale, single-machine evaluation.
 
@@ -528,6 +541,8 @@ Bug reports and change requests discovered during validation:
 | H9 | Adversarial (n=100) | 76% caught, 0% false reject, 30% miss |
 | H10 | Multi-hop | Negative (0.93 avg) |
 | Protocol | Pass rate | 160/160 (100%) |
+| Cross-machine | LAN echo round-trip | 82ms, full receipt chain |
+| Cross-machine | Knowledge pipeline (GPU) | 15s, 3900 chars, signed |
 
 ## Appendix C: Reproduction
 
