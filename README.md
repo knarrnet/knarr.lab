@@ -13,6 +13,7 @@ knarr.lab is the research arm of the [knarr protocol](https://github.com/knarrne
 | Paper | Experiment | DOI / Link | Key Claim |
 |-------|-----------|------------|-----------|
 | **Bilateral Credit, Signed Receipts, and 134 Autonomous Agents** | exp-150 | [DOI: 10.5281/zenodo.19417258](https://doi.org/10.5281/zenodo.19417258) | Bilateral credit isolates free-riders without reputation. 10,583 signed receipts. 35 Solana settlements. |
+| **Semantic Discovery, Quality Markets, and Multi-Rater Verifiability** | exp-201 | [paper](experiments/exp-201/paper/paper-semantic-discovery-quality-markets.md) | Vector retrieval +8.8 pp over BM25 on 296 skills (incl. Chinese). Argus LLM-judge lifts consumer success +30 pp. Three raters converge at rho > 0.94. |
 | **Distributed Intelligence Through Bilateral Credit** | exp-200 | [paper](experiments/200-distributed-intelligence/paper.md) | Knowledge compounds in P2P networks. 75% cache hit rate. Self-correction via iteration. Cross-orchestrator pollination. |
 | **100 Agents, 194,000 Skill Executions, and a Blockchain** | exp-101 | [report](experiments/101-hundred-agents/) | Bilateral credit flattens wealth distribution (Gini 0.161). 15,476:1 off-chain to on-chain settlement ratio. |
 
@@ -20,6 +21,10 @@ knarr.lab is the research arm of the [knarr protocol](https://github.com/knarrne
 
 | Finding | Evidence | Experiment |
 |---------|----------|------------|
+| Vector retrieval beats lexical and schema | recall@5 = 0.739 vs BM25 0.651 (+8.8 pp) vs AGNTCY 0.522 (+21.7 pp) on 296 skills incl. Mandarin | exp-201 |
+| Argus quality rating lifts consumer success | +30 pp (53% to 83%) with Spearman rho = 0.853 vs ground truth | exp-201 |
+| Multi-rater cross-verification converges | 3 raters, 2 model families, pairwise Spearman rho 0.943-0.975 | exp-201 |
+| Signed quality samples work end-to-end | 7/7 crypto round-trip tests incl. adversary-bound tamper detection | exp-201 |
 | Bilateral credit bounds free-riders | 97% of gamblers provide zero skills, bounded by credit limits | exp-150 |
 | Signed receipt chain per execution | 6-step Ed25519 chain (order_ack through mail_receive_receipt) | exp-150 |
 | On-chain settlement works | 35 autonomous Solana SPL transfers via bilateral netting | exp-150 |
@@ -44,7 +49,21 @@ knarr.lab is the research arm of the [knarr protocol](https://github.com/knarrne
 
 ---
 
-## Latest: Experiment 200 — Distributed Intelligence
+## Latest: Experiment 201 — Semantic Discovery, Quality Markets, and Multi-Rater Verifiability
+
+**[Read the paper](experiments/exp-201/paper/paper-semantic-discovery-quality-markets.md)** | **[PDF](experiments/exp-201/paper/paper-semantic-discovery-quality-markets.pdf)**
+
+Three claims tested on knarr v0.56.1 with 296 skills (including 28 Chinese-language entries), 274 NL queries (including 12 in Mandarin), and 30 adversarial skills across four quality tiers. All on local GPU compute (2x RTX 3090 via ollama), zero cloud API spend.
+
+| Claim | Result |
+|-------|--------|
+| **Semantic Discovery** | Vector (nomic-embed-text) recall@5 = 0.739, beating BM25 by +8.8 pp and AGNTCY-analog by +21.7 pp |
+| **Quality Market (Argus)** | LLM-judge rho = 0.853 vs ground truth; +30 pp consumer success uplift; signed-sample delivery 7/7 tests |
+| **Multi-Rater Verifiability** | 3 raters (Gemma4 26B, Gemma4 4B, Qwen3.5 27B) converge at rho > 0.94; trust via independent attestation |
+
+---
+
+## Experiment 200 — Distributed Intelligence
 
 **[Read the paper](experiments/200-distributed-intelligence/paper.md)**
 
@@ -103,6 +122,7 @@ A 9B model on one GPU orchestrates a knowledge pipeline: buy packs from speciali
 | 002 | [Creative economy](experiments/002-creative-economy/) | 10 | Agents produce and trade creative content |
 | 101 | [100 agents](experiments/101-hundred-agents/) | 101 | Bilateral credit flattens wealth (Gini 0.161); 15,476:1 settlement efficiency |
 | 150 | [Bilateral credit + receipts](experiments/150-bilateral-credit/) | 134 | Free-riding bounded; signed receipts; Solana settlement; [paper](experiments/150-bilateral-credit/paper.md) |
+| **201** | [**Semantic discovery + quality markets**](experiments/exp-201/paper/) | **3** | **Vector +8.8 pp over BM25; Argus +30 pp consumer uplift; multi-rater rho > 0.94; [paper](experiments/exp-201/paper/paper-semantic-discovery-quality-markets.md)** |
 | **200** | [**Distributed intelligence**](experiments/200-distributed-intelligence/) | **3** | **Knowledge compounding, self-correction, cross-pollination, marketplace; [paper](experiments/200-distributed-intelligence/paper.md)** |
 
 ---
@@ -119,7 +139,9 @@ A 9B model on one GPU orchestrates a knowledge pipeline: buy packs from speciali
 
 **Experiment 200** (3 nodes, focused): *Can agents compound intelligence through a knowledge marketplace?* Yes — 75% cache hits, self-correction, cross-pollination. The network gets smarter with every query.
 
-**Next**: Edge devices. A Raspberry Pi joins the network, gets profiled, receives optimized recipes, and contributes to problems that normally require a datacenter.
+**Experiment 201** (3 physical machines, 296 skills): *Can agents discover skills semantically, rate quality, and verify ratings without central trust?* Yes — vector retrieval +8.8 pp over BM25, Argus +30 pp consumer uplift, three independent raters converge at rho > 0.94. [Published](experiments/exp-201/paper/paper-semantic-discovery-quality-markets.md).
+
+**Next**: Tor transport. Agents communicate over hidden services, measuring the first Tor+agent latency data (exp-202).
 
 ---
 
@@ -133,7 +155,8 @@ knarr.lab/
 │   ├── 002-creative-economy/
 │   ├── 101-hundred-agents/
 │   ├── 150-bilateral-credit/    # Paper + 7 charts + 8 data files
-│   └── 200-distributed-intelligence/  # Paper + phase scripts
+│   ├── 200-distributed-intelligence/  # Paper + phase scripts
+│   └── exp-201/                      # Semantic discovery + quality markets paper + data
 ├── infrastructure/              # Shared Docker setup
 ├── scoring/                     # Metrics collector and analysis
 ├── results/                     # Cross-experiment summaries
