@@ -125,9 +125,9 @@ All three run on the same 30 adversarial skills, same 5 test inputs per skill, s
 | RRF (BM25 + vector) | 0.732 | [0.680, 0.783] | +8.1 pp |
 | **Vector (nomic-embed-text)** | **0.739** | **[0.688, 0.790]** | **+8.8 pp** |
 
-![Figure 1: Retrieval performance comparison (left) and Argus consumer uplift by weight alpha (right).](fig1-retrieval-and-argus.png)
+![Figure 1: Retrieval performance on 296 skills x 272 queries with 95% bootstrap CI.](fig1-retrieval-and-argus.png)
 
-Vector retrieval outperforms all baselines (Figure 1, left). The +21.7 pp gap over AGNTCY-analog is the cost of schema-only discovery in a heterogeneous, multilingual catalog: when a Mandarin user queries "能不能帮我把这段英文法律条文翻译成地道的中文" and the matching skill is named `tech-mandarin-english-lite`, no lexical overlap exists for schema matching or BM25 to exploit.
+Vector retrieval outperforms all baselines (Figure 1). The +21.7 pp gap over AGNTCY-analog is the cost of schema-only discovery in a heterogeneous, multilingual catalog: when a Mandarin user queries "能不能帮我把这段英文法律条文翻译成地道的中文" and the matching skill is named `tech-mandarin-english-lite`, no lexical overlap exists for schema matching or BM25 to exploit.
 
 **Complementary failure modes.** BM25 and vector retrieval fail on different classes. BM25 achieves 0% recall on `image_vision` (users say "generate an image" while skills are named `comfyui-flux-schnell-generate-lite`), where vector retrieval recovers 80%. Conversely, BM25 outperforms vector on `reasoning_llm` (43% vs. 57%) where query and skill descriptions share technical vocabulary. RRF captures the union but does not improve on the best individual ranker at this scale.
 
@@ -160,7 +160,9 @@ The 0.653 lower bound on gold reflects two skills (`math-word-problem-gold` and 
 | 4 | 0.533 | 0.833 | +30 pp |
 | 5 | 0.533 | 0.833 | +30 pp |
 
-The BM25-only baseline of 53.3% reflects that gold and broken skill variants have nearly identical descriptions -- BM25 cannot distinguish them and effectively picks randomly (Figure 1, right). This models real agent markets where low-quality providers plausibly copy high-quality descriptions.
+![Figure 2: Consumer success rate by Argus reranking weight alpha (n=30 queries).](fig2-argus-uplift.png)
+
+The BM25-only baseline of 53.3% reflects that gold and broken skill variants have nearly identical descriptions -- BM25 cannot distinguish them and effectively picks randomly (Figure 2). This models real agent markets where low-quality providers plausibly copy high-quality descriptions.
 
 **Signed-sample delivery.** All 7 cryptographic round-trip tests pass, including adversary #10 (a sample copied from one skill's SkillSheet to another fails signature verification because the signature covers the `skill_name` field).
 
@@ -192,9 +194,9 @@ The BM25-only baseline of 53.3% reflects that gold and broken skill variants hav
 | Argus-B alone | 0.600 | +7 pp |
 | Ensemble mean(A,B,C) | 0.667 | +13 pp |
 
-**No ensemble improves over the best single rater.** Pairwise agreement ranges from rho = 0.943 to 0.975 across both family and size diversity axes (Figure 2); there is insufficient independent error for ensemble averaging to exploit.
+**No ensemble improves over the best single rater.** Pairwise agreement ranges from rho = 0.943 to 0.975 across both family and size diversity axes (Figure 3); there is insufficient independent error for ensemble averaging to exploit.
 
-![Figure 2: Pairwise inter-rater agreement (Spearman rho) across three raters from two model families.](fig2-multi-rater-agreement.png)
+![Figure 3: Pairwise inter-rater agreement (Spearman rho) across three raters from two model families.](fig3-multi-rater-agreement.png)
 
 **The trust-layer interpretation.** While the accuracy finding is null, the convergence finding is positive for trust. Three raters from two model families, spanning a 6.5x parameter range, independently arrive at nearly identical quality verdicts. This enables:
 
